@@ -1,0 +1,15 @@
+# Builds both images on Cloud Build (linux/amd64) and pushes them to Artifact Registry.
+#   gcloud builds submit --config deploy/cloudbuild.yaml --substitutions _REGION=europe-west2 .
+substitutions:
+  _REGION: europe-west2
+  _REPO: salespatriot
+steps:
+  - name: gcr.io/cloud-builders/docker
+    args: ["build", "-f", "deploy/web.Dockerfile",
+           "-t", "${_REGION}-docker.pkg.dev/$PROJECT_ID/${_REPO}/web:latest", "."]
+  - name: gcr.io/cloud-builders/docker
+    args: ["build", "-f", "deploy/api.Dockerfile",
+           "-t", "${_REGION}-docker.pkg.dev/$PROJECT_ID/${_REPO}/api:latest", "."]
+images:
+  - "${_REGION}-docker.pkg.dev/$PROJECT_ID/${_REPO}/web:latest"
+  - "${_REGION}-docker.pkg.dev/$PROJECT_ID/${_REPO}/api:latest"
