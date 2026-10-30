@@ -169,9 +169,7 @@ def in_focus(notice: dict[str, Any]) -> bool:
     return any(code.startswith("353") for code in texts(notice.get("classification-cpv")))
 
 
-def discover(
-    role: str, scan: int, count: int
-) -> list[dict[str, Any]]:
+def discover(role: str, scan: int, count: int) -> list[dict[str, Any]]:
     notices, _ = fetch(DISCOVERY_QUERIES[role], scan)
     scores: Counter[tuple[str, str]] = Counter()
     samples: dict[tuple[str, str], dict[str, Any]] = {}
@@ -182,17 +180,18 @@ def discover(
         scores[key] += 1
         samples.setdefault(key, notice)
 
-    picked: list[dict[str, Any]] = []
-    countries: set[str] = set()
-    for key, _ in scores.most_common():
+    # Round-robin across countries: every country's best organisation first,
+    # then every country's second best, and so on.
+    country_rank: Counter[str] = Counter()
+    ranked = []
+    for key, score in scores.most_common():
         country = first(samples[key].get(ROLE_FIELDS[role]["country"]))
-        if country in countries:
-            continue
-        countries.add(country)
-        picked.append({"identifier": key[0], "name": key[1], "sample": samples[key]})
-        if len(picked) == count:
-            break
-    return picked
+        ranked.append((country_rank[country], -score, key))
+        country_rank[country] += 1
+    return [
+        {"identifier": key[0], "name": key[1], "sample": samples[key]}
+        for _, _, key in sorted(ranked)[:count]
+    ]
 
 
 def history_query(role: str, identifier: str, name: str) -> str:
@@ -330,11 +329,18 @@ def build_profile(
     return profile
 
 
-def existing_summaries(path: Path) -> dict[str, str]:
+def existing_profiles(path: Path) -> dict[str, dict[str, Any]]:
     if not path.exists():
         return {}
     profiles = json.loads(path.read_text(encoding="utf-8"))
-    return {p["id"]: p.get("summary", "") for p in profiles}
+    return {p["id"]: p for p in profiles}
+
+
+def carry_over(profile: dict[str, Any], previous: dict[str, Any]) -> None:
+    """Keep the hand-written summary and fields added by other enrichment scripts."""
+    profile["summary"] = previous.get("summary", "")
+    for key, value in previous.items():
+        profile.setdefault(key, value)
 
 
 def main() -> int:
@@ -345,13 +351,25 @@ def main() -> int:
         )
     )
     parser.add_argument(
-        "--count", type=int, default=5, help="profiles per role (default: 5)"
+        "--buyers",
+        type=int,
+        default=5,
+        help="buyer profiles to build; 0 leaves buyers.json untouched (default: 5)",
+    )
+    parser.add_argument(
+        "--suppliers",
+        type=int,
+        default=20,
+        help=(
+            "supplier profiles to build; 0 leaves suppliers.json untouched "
+            "(default: 20)"
+        ),
     )
     parser.add_argument(
         "--scan",
         type=int,
-        default=500,
-        help="recent notices scanned per role to find candidates (default: 500)",
+        default=1000,
+        help="recent notices scanned per role to find candidates (default: 1000)",
     )
     parser.add_argument(
         "--history",
@@ -366,18 +384,26 @@ def main() -> int:
         help="knowledge base directory (default: knowledge_base)",
     )
     args = parser.parse_args()
-    if min(args.count, args.scan, args.history) < 1:
-        parser.error("--count, --scan and --history must be positive integers")
+    if min(args.buyers, args.suppliers) < 0:
+        parser.error("--buyers and --suppliers must not be negative")
+    if min(args.scan, args.history) < 1:
+        parser.error("--scan and --history must be positive integers")
 
     cpv_labels = load_cpv(args.kb_dir / "cpv_codes.csv")
     out_dir = args.kb_dir / "profiles"
     out_dir.mkdir(parents=True, exist_ok=True)
 
-    for role, filename in (("buyer", "buyers.json"), ("supplier", "suppliers.json")):
+    roles = (
+        ("buyer", "buyers.json", args.buyers),
+        ("supplier", "suppliers.json", args.suppliers),
+    )
+    for role, filename, count in roles:
+        if count == 0:
+            continue
         path = out_dir / filename
-        summaries = existing_summaries(path)
+        previous = existing_profiles(path)
         try:
-            candidates = discover(role, args.scan, args.count)
+            candidates = discover(role, args.scan, count)
             profiles = [
                 build_profile(role, c, args.history, cpv_labels)
                 for c in candidates
@@ -391,7 +417,7 @@ def main() -> int:
             return 1
 
         for profile in profiles:
-            profile["summary"] = summaries.get(profile["id"], "")
+            carry_over(profile, previous.get(profile["id"], {}))
         path.write_text(
             json.dumps(profiles, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
         )
