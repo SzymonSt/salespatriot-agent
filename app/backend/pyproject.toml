@@ -29,3 +29,6 @@ package = false
 asyncio_mode = "auto"
 pythonpath = ["../.."]
 testpaths = ["tests"]
+markers = [
+    "supabase: live checks against Supabase; skipped unless DATABASE_URL is configured",
+]

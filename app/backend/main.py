@@ -17,6 +17,8 @@ from app.backend.agents.runtime import (
     run_structured_agent,
 )
 from app.backend.database import check_database_connection, create_database_engine
+from app.backend.knowledge.client import KnowledgeClient
+from app.backend.knowledge.embeddings import QueryEmbedder
 from app.backend.profiles import CompanyProfile, ProfileRegistry
 from app.backend.settings import Settings, get_settings
 
@@ -69,6 +71,12 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         app.state.profiles = ProfileRegistry.load(app_settings.profiles_dir)
         app.state.buyer_agent_directory = BuyerAgentDirectory(app.state.profiles)
         app.state.database_engine = create_database_engine(app_settings)
+        app.state.knowledge_client = (
+            KnowledgeClient(app.state.database_engine)
+            if app.state.database_engine is not None
+            else None
+        )
+        app.state.query_embedder = QueryEmbedder.from_settings(app_settings)
         if app_settings.google_api_key is not None:
             configure_gemini(app_settings)
         try:
@@ -84,9 +92,11 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     )
     from app.backend.demo import router as demo_router
     from app.backend.agents.peer import BuyerAgentDirectory, router as peer_agent_router
+    from app.backend.knowledge.routes import router as knowledge_router
 
     app.include_router(demo_router)
     app.include_router(peer_agent_router)
+    app.include_router(knowledge_router)
 
     def request_settings(request: Request) -> Settings:
         return request.app.state.settings

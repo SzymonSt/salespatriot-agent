@@ -50,6 +50,20 @@ The synthetic flow uses non-controlled goods, organizations, references, and
 quotes. It sends no external messages, submits no bid, and does not persist to
 Supabase. It makes up to three Gemini API calls and may incur API usage charges.
 
+## Context, RAG, memory and persisted conversations
+
+`app/backend/knowledge/` adds the context, knowledge, memory and conversation
+routes of `docs/agent-context-rag-implementation.md` §3.6, the ADK knowledge
+tools, the conversation orchestrator and `POST /api/demo/run-live`. They need
+`DATABASE_URL` (and `GOOGLE_API_KEY` for agent turns). See
+[`docs/agent-workflow.md`](../../docs/agent-workflow.md) and
+[`docs/backend-api.md`](../../docs/backend-api.md). Load the knowledge base into
+the RAG store with:
+
+```bash
+uv run --project app/backend python -m app.backend.knowledge.load_kb_docs
+```
+
 ## Agent previews
 
 The supplier preview endpoint requires an explicit `agent_settings.enabled`

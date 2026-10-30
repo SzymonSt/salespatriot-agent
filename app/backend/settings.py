@@ -2,7 +2,7 @@ from functools import lru_cache
 from pathlib import Path
 from typing import Self
 
-from pydantic import SecretStr, model_validator
+from pydantic import Field, SecretStr, model_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 from sqlalchemy.engine import URL, make_url
 
@@ -20,12 +20,17 @@ class Settings(BaseSettings):
     database_url: SecretStr | None = None
     google_api_key: SecretStr | None = None
     gemini_model: str = "gemini-2.5-flash"
+    embedding_model: str = "gemini-embedding-001"
+    embedding_timeout_seconds: float = Field(default=3.0, gt=0, le=30)
     profiles_dir: Path = REPOSITORY_ROOT / "data" / "profiles"
+    knowledge_base_dir: Path = REPOSITORY_ROOT / "knowledge_base"
 
     @model_validator(mode="after")
     def validate_model_name(self) -> Self:
         if not self.gemini_model.strip():
             raise ValueError("GEMINI_MODEL must not be empty")
+        if not self.embedding_model.strip():
+            raise ValueError("EMBEDDING_MODEL must not be empty")
         return self
 
     def async_database_url(self) -> URL | None:

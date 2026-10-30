@@ -15,7 +15,9 @@ Create `app/backend/.env` from the tracked `app/backend/.env.example` and set:
 |---|---|
 | `GOOGLE_API_KEY` | Gemini Developer API key for the Google Cloud project used by the backend. |
 | `GEMINI_MODEL` | Model ID passed to ADK; defaults to `gemini-2.5-flash` when omitted. |
-| `DATABASE_URL` | Optional Supabase/PostgreSQL connection string used by the readiness probe. |
+| `DATABASE_URL` | Supabase/PostgreSQL connection string (session pooler, `postgres` user) for the readiness probe, the knowledge and conversation routes and `load_kb_docs`. |
+| `EMBEDDING_MODEL` | Query embedding model; defaults to `gemini-embedding-001` (768 dimensions are fixed by the database contract). |
+| `EMBEDDING_TIMEOUT_SECONDS` | Timeout of one query embedding; defaults to `3`. On timeout, search falls back to full text. |
 
 Keep `.env` local and never commit or share its contents. The service is
 unauthenticated in this development slice; keep it bound to `127.0.0.1`.
@@ -41,6 +43,36 @@ The same page also has a **Run synthetic demo** button. It uses synthetic
 suppliers, diligence results, a simulated peer reference, and illustrative
 quotes. A successful run makes up to three Gemini API calls and may incur
 charges. It sends no external messages and persists nothing to Supabase.
+
+## Run the persisted demo on a real tender
+
+With `DATABASE_URL` and `GOOGLE_API_KEY` set, and `agent_context` deployed in
+Supabase:
+
+```bash
+curl -s -X POST http://127.0.0.1:8000/api/demo/run-live | python3 -m json.tool
+curl -s http://127.0.0.1:8000/v1/conversations/<conversation_id> | python3 -m json.tool
+```
+
+The run picks an open TED tender and a matched profiled supplier, then persists
+one conversation with `demo = true`. It makes 4 to 8 Gemini calls (more when the
+agents use tools). The buyer agent simulates the contracting authority. No
+message leaves the platform, and quotes are indicative and non-binding.
+
+## Load the knowledge base into the RAG store
+
+`knowledge_base/*.md` is split on `##` headings and upserted into `kb_chunks` as
+`kb_doc` chunks (`layer = 'platform'`, `visibility = 'public'`). The `kb-embed`
+job then embeds them.
+
+```bash
+uv run --project app/backend python -m app.backend.knowledge.load_kb_docs --dry-run
+uv run --project app/backend python -m app.backend.knowledge.load_kb_docs
+```
+
+The load is idempotent: unchanged sections are not touched, and sections that
+were removed are deleted (`--no-prune` keeps them). It exits with status 2 when
+`kb_chunks` does not exist yet.
 
 ## Gemini API subscription and billing are separate
 
@@ -75,12 +107,17 @@ request.
 ## Database readiness
 
 `GET /health/live` checks only that the process is running. `GET /health/ready`
-performs a read-only `SELECT 1` against Supabase/PostgreSQL. The current backend
-does not create tables, run migrations, or persist the demo or agent
-conversations.
+performs a read-only `SELECT 1` against Supabase/PostgreSQL. The backend does not
+create tables or run migrations. The database objects it uses are owned by the
+Supabase migrations (WS1–WS4). Persisted conversations and `load_kb_docs` write
+rows through those objects.
 
 Run the backend regression suite with:
 
 ```bash
 uv run --project app/backend python -m pytest app/backend/tests
 ```
+
+Tests marked `supabase` run against the live database. They are skipped unless
+`DATABASE_URL` is configured, and the context test is also skipped while
+`agent_context` is not deployed.
