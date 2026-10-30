@@ -29,6 +29,12 @@ Check types: **HARD** = gate (fail → deal blocked, or escalated to a human who
 | EU SAFE loans (Reg. (EU) 2025/1106) `[VERIFIED 2026-10-30]` | Non-EU control of contractors; ≤35% of component cost from outside EU/EEA-EFTA/Ukraine |
 
 ## Layer 1 — KYC at onboarding (static)
+**Implemented (dd-v1):** `../supplier_due_diligence.py` + `../dd_sources.py`. Score 1–10 in six
+categories: identity 15%, ownership 20%, track record 25%, financial 15%, defence credentials 15%,
+integrity 10%. Hard gates: sanctions match, RU/BY ownership, insolvency, dissolved company.
+Registers covered: CZ, PL, FR, RO, SK, DK, EE, LV + VIES, GLEIF, Wikidata, EU F&T, GDELT. Supplier
+documents go in `../data/supplier_evidence/`. The categories map to K1–K10 below; K11 (agent mandate) is still to build.
+
 | # | Category | What we check | Source | Type |
 |---|---|---|---|---|
 | K1 | Legal identity | Exists, active, legal form, address | Home-country register (adapter: PL KRS, CZ ARES, FR SIRENE…), VIES, GLEIF | HARD |

@@ -10,7 +10,7 @@ research runs **agentless**: plain code calls the APIs, and agents only interpre
 | **VIES** (EU VAT check) | VAT number valid; name and address where the member state shares them (Germany returns `---`) | `GET https://ec.europa.eu/taxation_customs/vies/rest-api/ms/{CC}/vat/{number}`, no key | `[VERIFIED 2026-10-30]` DE and IT tested |
 | **GLEIF** | LEI, legal name, address, status, **parent / ultimate parent** → foreign-control check | `https://api.gleif.org/api/v1/lei-records?...`, no key. An exact-name filter can hit a sister company → match on the LEI or on the address | `[VERIFIED 2026-10-30]` |
 | **TED award history** | Contracts won, buyers, CPVs, values, `winner-owner-nationality`, `winner-size` | TED Search API by `winner-identifier` / `winner-name` | `[VERIFIED 2026-10-30]` |
-| **Sanctions** — EU consolidated list (FSF), OpenSanctions | Sanctions and PEP screening | EU list: free download. OpenSanctions API needs a key (401 without one); its bulk data is free for non-commercial use | API 401 `[VERIFIED]`; rest `[OWN KNOWLEDGE]` |
+| **Sanctions**: EU FSF, UN, OFAC, UK FCDO lists | Name screening of company, owners, officers | Free downloads, implemented in `../dd_sources.py`. OpenSanctions needs a commercial licence (API returns 401 without a key) | `[VERIFIED 2026-10-30]` |
 | **NCAGE** (NSPA) | Company codified as a NATO supplier | Public lookup tool | `[OWN KNOWLEDGE — check URL]` |
 | **CERTIDER** (EU) | Companies certified under Directive 2009/43/EC (intra-EU defence transfers) | Public web register | `[OWN KNOWLEDGE]` |
 | IAF CertSearch / IAQG OASIS | Validity of ISO 9001 / EN 9100 certificates | Web | `[OWN KNOWLEDGE]` |

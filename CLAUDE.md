@@ -115,8 +115,6 @@ An empty `deadline` usually means the notice uses a request-to-participate deadl
 ## Repo layout
 
 - `ted_open_tenders.py` — exports TED notices for an expert query to CSV (`open_tenders.csv`)
-- `ted_company_profiles.py` — builds company/buyer profiles into `knowledge_base/profiles`
-- `cpv_codes.py`, `knowledge_base/cpv_codes.csv`, `knowledge_base/cpv_defence_codes.csv` — CPV reference data
 - `knowledge_base/README.md` — index of the team knowledge base (challenge rules, pain points, data sources,
   TED API, ePO ontology decision, agent design, demo plan). Each file is small; load only what the task needs.
   Respect the evidence labels (`VERIFIED`, `REPORTED`, `HYPOTHESIS`…) — don't present unverified numbers as fact.

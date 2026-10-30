@@ -70,5 +70,6 @@ framework (2 Nov) · 719421-2026 ES 155 mm ammunition · 688238-2026 CZ special-
 
 ## Where the data already lives in the repo
 - `../ted_open_tenders.py`: export of any expert query to CSV.
-- `../ted_company_profiles.py`: buyer and supplier profiles for this scope → `profiles/buyers.json`, `profiles/suppliers.json`.
+- `../ted_company_profiles.py`: buyer and supplier profiles for this scope → `../data/profiles/buyers.json`, `../data/profiles/suppliers.json`.
+- `../supplier_due_diligence.py` + `../dd_sources.py`: 1–10 supplier due-diligence score (dd-v1) from free open data, i.e. the KYC layer of [22](22-kyc-and-deal-due-diligence.md).
 - `../ted_supplier_contracts.py`: per-supplier won contracts (lot by lot) from notice XML.
