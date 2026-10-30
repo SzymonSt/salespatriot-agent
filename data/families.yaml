@@ -1,0 +1,1065 @@
+# Product taxonomy: CPV class (level 1) -> product family (level 2), with a fixed attribute
+# schema per family. Source of truth for the product_* tables in Supabase.
+# Design, evidence and rules: knowledge_base/25-product-families.md
+# Seed: python3 seed_product_taxonomy.py > seed.sql, then run seed.sql in Supabase (SQL editor, psql or MCP). Idempotent.
+#
+# Change rules
+# - Observations (new items, new values) never change this file.
+# - New families, attributes, enum values or keywords: open a proposal (product_taxonomy_proposals),
+#   a person approves it, then edit this file in a PR and bump taxonomy_version.
+# - Never rename a family id. Deprecate it (status: deprecated) and add a new one.
+
+taxonomy_version: 1
+released: "2026-10-30"
+notes: "First release: 4 focus CPV classes + out-of-scope bucket. Built from 4,840 TED notices, 339 catalogue items and the knowledge base."
+
+# ---------------------------------------------------------------------------------------------
+# Attribute dictionary. One meaning per key across all families.
+# type: text | number | integer | boolean | enum | enum_list | text_list | calibre
+# unit: code from the EU measurement-unit authority table (MMT mm, GRM g, KGM kg, MTR m, SEC s, JOU J, MTS m/s)
+#
+# Quantity is NOT an item attribute (ePO: Purpose.hasTotalQuantity / OrderLine.hasQuantity). It lives on the
+# line: product_items.quantity + product_items.unit, with unit in {H87 piece (rounds, pieces, sets), KGM, MTR, LTR}.
+# For frameworks store the maximum stated quantity and keep min/max in extra.
+# ---------------------------------------------------------------------------------------------
+attributes:
+  end_use:
+    label: End use
+    type: enum_list
+    values: [military, law_enforcement, border_guard, customs, prison_service, sport, hunting, training, ceremonial, eod, civil_protection]
+    description: Who uses the item, as stated or as implied by the buyer type.
+  condition:
+    label: Condition
+    type: enum
+    values: [new, surplus, refurbished, demilitarised]
+    description: New production or existing stock.
+  brand_model:
+    label: Brand and model
+    type: text
+    description: Manufacturer and model or designation as stated (e.g. "Rheinmetall DM159", "CZ P-10 C").
+  standards:
+    label: Standards
+    type: text_list
+    description: Standards and specifications named in the text (STANAG, MIL-STD, AQAP clause, EN, C.I.P., SAAMI, national spec).
+  nsn:
+    label: NATO Stock Number
+    type: text
+    description: 13-digit NSN (4-digit FSC + 9-digit NIIN) when stated.
+  part_number:
+    label: Part number
+    type: text
+    description: Manufacturer part number when stated.
+  compatible_platforms:
+    label: Compatible platforms
+    type: text_list
+    description: Weapons, vehicles or systems the item is for (e.g. "HK416", "Krab", "Carl Gustaf M4", "Leopard 2").
+  country_of_origin:
+    label: Country of origin
+    type: text
+    description: ISO 3166-1 alpha-3 country where the item is made, if stated (input for D7 supply-chain checks).
+  packaging:
+    label: Packaging
+    type: text
+    description: Packaging as stated (boxes of 50, clips, bandoleers, cans, pallets).
+  calibre:
+    label: Calibre
+    type: calibre
+    description: "Canonical calibre code from product_calibres: '5.56x45', '9x19', '12ga', '40x46', '155mm', '.338'. Normalise spelling; never guess it from the weapon name alone."
+  round_type:
+    label: Round type
+    type: enum_list
+    values: [ball, armour_piercing, armour_piercing_incendiary, tracer, incendiary, high_explosive, he_dual_purpose, he_fragmentation, programmable_airburst, smoke, illumination, practice, practice_tracer, blank, marking, reduced_range, frangible, subsonic, match, expanding, dummy_inert]
+    description: Functional type of the round(s). Several values for mixed belts or mixed lots.
+  projectile_designation:
+    label: Projectile designation
+    type: text
+    description: Bullet or projectile designation as stated (SS109, M855A1, M80, DM11, FMJ, JHP).
+  bullet_weight_g:
+    label: Bullet weight
+    type: number
+    unit: GRM
+    description: Bullet or projectile weight in grams (convert grains x 0.0648).
+  primer_type:
+    label: Primer type
+    type: enum
+    values: [boxer, berdan, rimfire, electric, percussion]
+    description: Primer system.
+  case_material:
+    label: Case material
+    type: enum
+    values: [brass, steel, aluminium, polymer, other]
+    description: Cartridge case material.
+  lead_free:
+    label: Lead-free
+    type: boolean
+    description: Lead-free bullet and/or primer required or offered.
+  link_type:
+    label: Link or belt type
+    type: text
+    description: Link or belt designation and mix (e.g. "M27 links, 4:1 ball/tracer", "DM6").
+  shotgun_load:
+    label: Shotgun load
+    type: enum
+    values: [buckshot, slug, birdshot, breaching, less_lethal, blank]
+    description: Load of a shotgun cartridge.
+  shell_length_mm:
+    label: Shell length
+    type: number
+    unit: MMT
+    description: Shotgun shell length (70, 76 mm).
+  fuze_type:
+    label: Fuze type
+    type: enum
+    values: [point_detonating, base_detonating, time, proximity, multi_option, programmable, impact_delay, self_destruct, none]
+    description: Fuze function.
+  component_type:
+    label: Component type
+    type: enum
+    values: [complete_round, projectile, unfilled_body, cartridge_case, primer, propellant, propelling_charge, fuze, booster, link, explosive_fill]
+    description: Which part of a munition the line covers.
+  net_explosive_quantity_g:
+    label: Net explosive quantity
+    type: number
+    unit: GRM
+    description: NEQ per unit in grams, if stated (drives ADR and storage limits).
+  un_number:
+    label: UN number
+    type: text
+    description: Dangerous-goods UN number if stated (e.g. "UN0012").
+  adr_classification:
+    label: ADR classification code
+    type: text
+    description: Hazard division and compatibility group if stated (e.g. "1.4S", "1.2E").
+  max_range_m:
+    label: Maximum range
+    type: number
+    unit: MTR
+    description: Maximum or effective range in metres, as stated.
+  grenade_type:
+    label: Grenade type
+    type: enum
+    values: [fragmentation, blast_offensive, smoke, illumination, incendiary, practice, rifle_grenade]
+    description: Type of a lethal or training hand/rifle grenade (stun and irritant grenades are less-lethal).
+  fuze_delay_s:
+    label: Fuze delay
+    type: number
+    unit: SEC
+    description: Hand-grenade fuze delay in seconds.
+  payload_type:
+    label: Less-lethal payload
+    type: enum_list
+    values: [impact_sponge, impact_baton, rubber_ball, bean_bag, irritant_oc, irritant_cs, marking, flash_bang, multi_effect]
+    description: Effect of a less-lethal munition.
+  ordnance_type:
+    label: Ordnance type
+    type: enum
+    values: [aerial_bomb, rocket, guided_missile, loitering_munition, torpedo, sea_mine, naval_decoy, land_mine_anti_tank, land_mine_anti_personnel, other]
+    description: Kind of heavy ordnance.
+  guidance:
+    label: Guidance
+    type: enum
+    values: [unguided, guided, course_corrected]
+    description: Guidance of rockets, bombs and projectiles.
+  signal_type:
+    label: Signal type
+    type: enum
+    values: [signal_flare, illumination_flare, smoke_signal, distress_signal, trip_flare, battlefield_simulator, thunderflash]
+    description: Kind of pyrotechnic signal or effect.
+  colour:
+    label: Colour
+    type: text
+    description: Colour of smoke, star or marking.
+  burn_time_s:
+    label: Burn time
+    type: number
+    unit: SEC
+    description: Burn time in seconds.
+  explosive_type:
+    label: Explosive type
+    type: text
+    description: Explosive as stated (TNT, PETN, RDX, PE4/C4, emulsion, black powder).
+  explosive_form:
+    label: Explosive form
+    type: enum
+    values: [block, sheet, cord, bulk, cartridge, shaped_charge, linear_cutting_charge, kit]
+    description: Physical form of explosives or charges.
+  initiation_system:
+    label: Initiation system
+    type: enum
+    values: [electric, non_electric_shock_tube, electronic, detonating_cord, safety_fuse, none]
+    description: Initiation system of detonators or charges.
+  propellant_type:
+    label: Propellant type
+    type: text
+    description: Propellant as stated (single-base, double-base, ball powder, modular charge).
+  material:
+    label: Material
+    type: text
+    description: Main material if it matters for the item (brass, steel, aluminium, polymer).
+  action:
+    label: Action
+    type: enum
+    values: [semi_automatic, select_fire, fully_automatic, bolt_action, pump_action, lever_action, single_shot, revolver, break_action]
+    description: Operating action of a firearm.
+  weapon_role:
+    label: Weapon role
+    type: enum
+    values: [service, compact, subcompact, competition, training, assault_rifle, carbine, battle_rifle, semi_auto_rifle, sniper, designated_marksman, anti_materiel, light_mg, general_purpose_mg, heavy_mg, underbarrel, standalone, multi_shot, automatic, less_lethal, recoilless, shoulder_rocket, commando, light, medium, heavy, vehicle_mounted, towed, self_propelled_wheeled, self_propelled_tracked, air_defence_gun, rocket_artillery, naval_gun]
+    description: Role of the weapon within its family (each family narrows the list).
+  barrel_length_mm:
+    label: Barrel length
+    type: number
+    unit: MMT
+    description: Barrel length in mm (convert inches x 25.4).
+  barrel_length_calibres:
+    label: Barrel length in calibres
+    type: text
+    description: Artillery barrel length as stated (L/39, L/52).
+  magazine_capacity:
+    label: Magazine capacity
+    type: integer
+    description: Rounds per standard magazine.
+  feed_type:
+    label: Feed type
+    type: enum
+    values: [box_magazine, belt, drum, tubular, cylinder, single]
+    description: How the weapon is fed.
+  rail_interface:
+    label: Rail interface
+    type: enum_list
+    values: [picatinny, m_lok, keymod, none]
+    description: Accessory rail standard.
+  optics_ready:
+    label: Optics ready
+    type: boolean
+    description: Slide or receiver cut for a sight.
+  mount_type:
+    label: Mount type
+    type: enum
+    values: [handheld, bipod, tripod, vehicle, naval, pintle, baseplate]
+    description: How the weapon is mounted.
+  accuracy_moa:
+    label: Accuracy
+    type: number
+    description: Required or guaranteed accuracy in minutes of angle.
+  firearms_directive_category:
+    label: Firearms Directive category
+    type: enum
+    values: [A, B, C]
+    description: Category under Directive (EU) 2021/555 Annex I for civilian-market firearms. Derived by rules; not for military-only items.
+  weight_kg:
+    label: Weight
+    type: number
+    unit: KGM
+    description: Weight in kg.
+  part_type:
+    label: Part type
+    type: enum
+    values: [barrel, bolt_or_breech, trigger_group, receiver, spring_kit, stock, handguard, grip, small_parts, repair_kit, magazine, suppressor, muzzle_device, mount, sling, holster, bipod, cleaning_kit, armourer_tool, gauge, sight, other]
+    description: Kind of part or accessory.
+  sight_technology:
+    label: Sight technology
+    type: enum
+    values: [iron, red_dot, holographic, prism, telescopic, night_image_intensifier, thermal, clip_on, laser_aiming_module, fire_control_system]
+    description: Technology of a weapon sight or aiming device.
+  magnification:
+    label: Magnification
+    type: text
+    description: Magnification as stated (1x, 1-6x, 3-18x).
+  oem_authorised:
+    label: OEM authorised
+    type: boolean
+    description: Original or OEM-authorised part required or offered.
+  weapon_class_served:
+    label: Weapon class served
+    type: enum
+    values: [small_arms, cannon, mortar, artillery, rocket_launcher]
+    description: Kind of weapon the part is for.
+  blade_type:
+    label: Blade type
+    type: enum
+    values: [sword, sabre, dagger, bayonet, lance, knife, machete]
+    description: Kind of bladed weapon.
+  ceremonial:
+    label: Ceremonial
+    type: boolean
+    description: For parade, honour guard or award use.
+  misc_weapon_type:
+    label: Weapon type
+    type: enum
+    values: [gas_pistol, gas_launcher, irritant_spray, signal_pistol, line_throwing_gun, conducted_energy_weapon, air_rifle, air_pistol, airsoft, paintball, crossbow, other]
+    description: Kind of miscellaneous weapon.
+  muzzle_energy_j:
+    label: Muzzle energy
+    type: number
+    unit: JOU
+    description: Muzzle energy in joules (air guns, less-lethal).
+
+# ---------------------------------------------------------------------------------------------
+# Classes (level 1) and families (level 2).
+# attributes: list of keys, or {key: {required, match_key, values}} to override.
+#   required: must be present on platform listings (agent-created offers/demands); never forced on TED extraction.
+#   match_key: hard filter when both demand and supply state it.
+# cpv: exact = the code alone decides; candidate = one of several, the text decides; related = outside our classes.
+# evidence: counts from the 2026-10-30 TED pull (competition / result notices or lots), see KB 25.
+# ---------------------------------------------------------------------------------------------
+classes:
+  - id: ammunition
+    name: Ammunition
+    description: CPV 35330000 Ammunition, plus explosives and pyrotechnics bought in the same notices.
+    cpv: {exact: ["35330000"]}
+    attributes: [end_use, condition, brand_model, standards, nsn, country_of_origin, packaging, un_number, adr_classification, net_explosive_quantity_g]
+    families:
+      - id: ammunition.small_calibre
+        name: Small-calibre cartridges
+        description: Fixed metallic cartridges for pistols, rifles and machine guns below 20 mm, up to and including 12.7 mm and 14.5 mm heavy machine-gun rounds.
+        includes: [pistol cartridges, rifle cartridges, machine-gun belts, match and subsonic ammunition, sport and hunting rifle cartridges]
+        excludes: [blanks and marking rounds (training_blank), less-lethal rounds (less_lethal), shotgun cartridges (shotgun), loose bullets cases primers powder (components)]
+        attributes:
+          calibre: {required: true, match_key: true}
+          round_type: {match_key: true}
+          projectile_designation: {}
+          bullet_weight_g: {}
+          primer_type: {}
+          case_material: {}
+          lead_free: {}
+          link_type: {}
+        cpv: {candidate: ["35331500", "35331000", "35331100"]}
+        keywords: ["n[aá]boj", "naboj", "patron", "cartridge", "cartouche", "cartucho", "munizion", "amunicj", "munici", "laskemoon", "šovin", "lőszer", "streljiv", "munitie", "ammunition", "боеприпас", "патрон"]
+        evidence: "Calibre found in 515 / 425 lot titles below 20 mm; top 5.56x45 (137/94), 9x19 (119/133), 7.62x51 (82/51); CPV 35331500 Cartridges in 440 / 426 notices."
+
+      - id: ammunition.shotgun
+        name: Shotgun cartridges
+        description: Lethal shotgun cartridges (12, 16, 20 gauge) for police, military, sport and hunting.
+        includes: [buckshot, slugs, birdshot, breaching rounds]
+        excludes: [rubber and bean-bag shotgun rounds (less_lethal), shotgun blanks (training_blank)]
+        attributes:
+          calibre: {required: true, match_key: true}
+          shotgun_load: {match_key: true}
+          shell_length_mm: {}
+          lead_free: {}
+        cpv: {candidate: ["35331500", "35331000"]}
+        keywords: ["brokov", "śrut", "srut", "schrot", "chevrotine", "perdig", "pallettone", "buckshot", "slug", "breneke", "kaliber 12", "kal\\. ?12", "12/70", "12/76", "gauge"]
+        evidence: "12-gauge in 32 / 16 lot titles; distinct attributes (gauge, load, shell length) and often outside the military list."
+
+      - id: ammunition.training_blank
+        name: Training, blank and marking ammunition
+        description: Blank, marking (FX, Simunition, UTM), reduced-range, frangible training and inert dummy or drill rounds.
+        excludes: [practice rounds of medium and large calibre (stay in their calibre family with round_type practice)]
+        attributes:
+          calibre: {required: true, match_key: true}
+          round_type: {match_key: true, values: [blank, marking, reduced_range, frangible, practice, dummy_inert]}
+          compatible_platforms: {}
+          colour: {}
+        cpv: {candidate: ["35331500", "35331000"]}
+        keywords: ["ślep", "slep", "cvičn", "ćwicz", "übung", "manöver", "exercice", "fogueo", "salve", "blank", "simunition", "utm", "marking", "znakuj", "treniņ", "trenin", "treening", "harjoitus", "addestr", "frangible", "dummy", "drill round", "atrap"]
+        evidence: "Training/blank keywords in 133 / 68 lot titles (96 / 52 notices)."
+
+      - id: ammunition.less_lethal
+        name: Less-lethal munitions
+        description: Impact rounds (sponge, baton, rubber), irritant projectiles and grenades, flash-bang and stun grenades, less-lethal shotgun and 37/40 mm rounds.
+        attributes:
+          calibre: {match_key: true}
+          payload_type: {required: true, match_key: true}
+          max_range_m: {}
+          compatible_platforms: {}
+        cpv: {candidate: ["35331300", "35331000", "35331500"], related: ["35200000"]}
+        keywords: ["less[- ]?lethal", "non[- ]?lethal", "nieśmierc", "nesmrt", "neletál", "non létal", "gumow", "gumov", "kummi", "rubber", "bean ?bag", "lacrimog", "reizstoff", "slzn", "irritant", "pepper", "hukow", "oszałam", "flash[- ]?bang", "blendgranat", "zábleskov", "stun", "granades sonores", "défense", "lbd", "sponge"]
+        evidence: "Catalogue: 34 of 339 items are less-lethal and police equipment; keyword hits 17 / 11 lot titles (undercount: many are in police notices outside the focus classes)."
+
+      - id: ammunition.medium_calibre
+        name: Medium-calibre cannon ammunition
+        description: Cannon ammunition from 20 mm to 57 mm (20, 23, 25, 27, 30, 35, 40 mm L70, 57 mm), not 40 mm grenades.
+        attributes:
+          calibre: {required: true, match_key: true}
+          round_type: {match_key: true}
+          fuze_type: {}
+          link_type: {}
+          compatible_platforms: {}
+        cpv: {candidate: ["35331000", "35331200", "35332000"]}
+        keywords: ["30 ?mm", "25 ?mm", "35 ?mm", "23 ?mm", "20 ?mm", "57 ?mm", "bushmaster", "kanon", "cannon", "canon", "kanone", "apfsds", "hei-t", "tp-t", "ahead", "airburst"]
+        evidence: "20-57 mm calibres (excl. 40 mm grenades) in about 120 / 40 lot titles; 30x173 and 25x137 also in catalogue items."
+
+      - id: ammunition.grenade_40mm
+        name: 40 mm grenade-launcher ammunition
+        description: 40x46 low-velocity and 40x53 high-velocity grenades (HE, HEDP, practice, smoke, illumination).
+        excludes: [40 mm less-lethal rounds (less_lethal), 40 mm L70 cannon rounds (medium_calibre)]
+        attributes:
+          calibre: {required: true, match_key: true, values: ["40x46", "40x53"]}
+          round_type: {match_key: true}
+          fuze_type: {}
+          max_range_m: {}
+          compatible_platforms: {}
+        cpv: {candidate: ["35331300", "35331000"]}
+        keywords: ["40 ?x ?46", "40 ?x ?53", "40 ?mm", "granat .*40", "gl ammunition", "granát.*40"]
+        evidence: "40x46 in 18 / 15 and 40x53 in 3 / 3 lot titles, plus '40 mm' in 39 / 16; separate launchers and buyers."
+
+      - id: ammunition.hand_grenade
+        name: Hand and rifle grenades
+        description: Fragmentation, offensive (blast), smoke, illumination, incendiary and practice hand grenades, and rifle grenades.
+        excludes: ["stun, flash-bang and irritant grenades (less_lethal)", "40 mm grenades (grenade_40mm)"]
+        attributes:
+          grenade_type: {required: true, match_key: true}
+          fuze_delay_s: {}
+          compatible_platforms: {}
+        cpv: {candidate: ["35331300"]}
+        keywords: ["granat ręczn", "ruční granát", "ruční granat", "handgranat", "grenade à main", "granada de mano", "bomba a mano", "kézigránát", "hand grenade", "rifle grenade", "granat nasadk", "granát", "granat", "grenad", "гранат"]
+        evidence: "CPV 35331300 Grenades in 119 / 146 notices; grenade keywords in 52 / 43 lot titles."
+
+      - id: ammunition.mortar
+        name: Mortar ammunition
+        description: Mortar bombs (60, 81, 82, 98, 120 mm) with their propelling charges and fuzes, all functional types.
+        attributes:
+          calibre: {required: true, match_key: true}
+          round_type: {match_key: true}
+          component_type: {}
+          fuze_type: {}
+          max_range_m: {}
+          compatible_platforms: {}
+        cpv: {candidate: ["35331200", "35331000"]}
+        keywords: ["moździerz", "mo[zź]dzierz", "minomet", "mörser", "mortier", "mortero", "mortaio", "mortar", "wurfgranat", "aknavet", "миномет", "mina moździerz"]
+        evidence: "Mortar keywords in 24 / 13 lot titles; 60, 81 and 120 mm in about 20 / 20 lot titles; CPV 35322400 Mortars (weapons) in 41 / 53 notices."
+
+      - id: ammunition.artillery
+        name: Artillery, tank and naval gun ammunition
+        description: Loaded projectiles, complete rounds and propelling charges for guns of 75 mm and above (artillery, tank, naval), not mortars.
+        excludes: [fuzes, unfilled shell bodies and bulk propellant (components)]
+        attributes:
+          calibre: {required: true, match_key: true}
+          round_type: {match_key: true}
+          component_type: {match_key: true, values: [complete_round, projectile, propelling_charge, cartridge_case]}
+          fuze_type: {}
+          compatible_platforms: {}
+          guidance: {}
+        cpv: {candidate: ["35331200", "35331000", "35332000"]}
+        keywords: ["155 ?mm", "105 ?mm", "122 ?mm", "152 ?mm", "120 ?x ?570", "125 ?mm", "76 ?mm", "artyler", "artiller", "dělostřel", "haubic", "howitz", "obus", "sprenggranat", "ładunek miotaj", "modular charge", "bmcs", "propelling charge"]
+        evidence: "155 mm in 66 / 22 lot titles; 75 mm+ calibres (excl. mortar) in about 110 / 55 lot titles; CPV 35331200 Shells in 36 / 31 notices."
+
+      - id: ammunition.heavy_ordnance
+        name: Bombs, rockets, missiles, torpedoes and mines
+        description: Air-delivered bombs, rockets, missiles and loitering munitions, torpedoes, sea mines, naval decoys and land mines.
+        attributes:
+          ordnance_type: {required: true, match_key: true}
+          calibre: {match_key: true}
+          guidance: {}
+          compatible_platforms: {}
+        cpv: {exact: ["35331400", "35332000", "35332100", "35332200", "35333000", "35333100", "35333200"]}
+        keywords: ["bomb", "rakiet", "raket", "rocket", "roquette", "cohete", "razzo", "missile", "misil", "torped", "mina morsk", "sea mine", "naval mine", "decoy", "przeciwpancern", "protitankov", "land[- ]?mine", "loitering", "amunicja krążąca"]
+        rules:
+          - "ordnance_type = land_mine_anti_personnel -> always ESCALATE to a human (Ottawa Convention obligations differ between EU states)."
+        evidence: "CPV bombs 37 / 37, rockets 12 / 15, land mines 24 / 15, naval 15 / 18, torpedoes 3 / 10, sea mines 4 / 5 notices."
+
+      - id: ammunition.pyrotechnics
+        name: Pyrotechnics and signals
+        description: Signal and illumination flares, smoke signals, distress signals, trip flares, battlefield effects simulators and thunderflashes, including signal-pistol cartridges.
+        excludes: [hand-thrown smoke grenades (hand_grenade), stun grenades (less_lethal)]
+        attributes:
+          signal_type: {required: true, match_key: true}
+          colour: {}
+          burn_time_s: {}
+          calibre: {}
+          max_range_m: {}
+        cpv: {candidate: ["35331000"], related: ["39225500", "24613000"]}
+        keywords: ["pyrotech", "pirotech", "sygnaliz", "signál", "signal", "flare", "raca", "leucht", "fumig", "fumog", "dymn", "dýmov", "smoke", "illumin", "oświetl", "osvětl", "symulator", "simulator", "imitac", "thunderflash", "distress"]
+        evidence: "Pyro/signal keywords in 94 / 53 lot titles; CPV 39225500 Pyrotechnics co-occurs in 66 and 24613000 Signalling flares in 50 notices."
+
+      - id: ammunition.explosives_demolition
+        name: Explosives, demolition and initiation
+        description: Bulk and plastic explosives, demolition and cutting charges, detonators, detonating cord, shock tube and initiation systems, EOD disposal explosives.
+        attributes:
+          explosive_form: {required: true, match_key: true}
+          explosive_type: {}
+          initiation_system: {match_key: true}
+          net_explosive_quantity_g: {}
+        cpv: {related: ["24600000", "24610000", "24615000"]}
+        keywords: ["explosiv", "wybuchow", "trhavin", "sprengstoff", "esplosiv", "detonat", "zapalnik", "rozbušk", "zünder", "détonateur", "lont", "bleskovic", "sprengschnur", "cordeau", "shock tube", "demolit", "ładunek wybuch", "ładunk", "plastic explosive", "pe4", "c-4", "semtex", "tnt"]
+        evidence: "Explosive/initiation keywords in 75 / 29 lot titles; CPV 24600000 Explosives co-occurs in 29 and 24615000 Fuses, caps, igniters and detonators in 20 notices; catalogue has 19 explosives items."
+
+      - id: ammunition.components
+        name: Ammunition components and energetic materials
+        description: Bullets and projectiles, cartridge cases, primers, propellant powders, fuzes, boosters, links and clips, unfilled shell bodies. Tier-2/3 inputs for ammunition makers.
+        attributes:
+          component_type: {required: true, match_key: true}
+          calibre: {match_key: true}
+          propellant_type: {}
+          material: {}
+          fuze_type: {}
+        cpv: {candidate: ["35331100", "35331000"], related: ["24615000"]}
+        keywords: ["łusk", "nábojnic", "hülse", "douille", "vaina", "bossolo", "spłonk", "zápalk", "zündhütch", "amorce", "primer", "proch", "prach", "pulver", "poudre", "pólvora", "polvere", "propellant", "zapalnik", "fuze", "fuse", "ogniw", "článk", "gurtglied", "link", "korpus pocisk", "shell bod", "pocisk", "bullet", "geschoss", "projektil", "střel"]
+        evidence: "Component keywords in 116 / 35 lot titles; CPV 35331100 Bullets in 21 / 19 notices. Matters for D7 (critical inputs: propellant, primers, explosives, brass)."
+
+  - id: firearms
+    name: Firearms
+    description: CPV 35320000 Firearms, which in CPV also covers artillery and mortars.
+    cpv: {exact: ["35320000"]}
+    attributes: [end_use, condition, brand_model, standards, nsn, country_of_origin, weight_kg]
+    families:
+      - id: firearms.handguns
+        name: Pistols and revolvers
+        attributes:
+          calibre: {required: true, match_key: true}
+          action: {match_key: true, values: [semi_automatic, select_fire, revolver, single_shot]}
+          weapon_role: {values: [service, compact, subcompact, competition, training]}
+          magazine_capacity: {}
+          barrel_length_mm: {}
+          optics_ready: {}
+          firearms_directive_category: {}
+        cpv: {exact: ["35321100"], candidate: ["35321000"]}
+        keywords: ["pistol", "pištol", "pistole", "pistola", "revolver", "rewolwer", "handgun", "пистолет", "pisztoly", "piștol"]
+        evidence: "CPV 35321100 Hand guns in 111 / 117 notices; pistol keywords in 104 / 76 lot titles."
+
+      - id: firearms.submachine_guns
+        name: Submachine guns and PDWs
+        attributes:
+          calibre: {required: true, match_key: true}
+          action: {values: [select_fire, fully_automatic, semi_automatic]}
+          magazine_capacity: {}
+          barrel_length_mm: {}
+          rail_interface: {}
+          firearms_directive_category: {}
+        cpv: {candidate: ["35321000", "35321200"]}
+        keywords: ["submachine", "machine pistol", "maschinenpistol", "pistolet maszynow", "samopal", "subfusil", "pistola mitragliatrice", "pdw", "mp5", "mp7", "4[.,]6 ?x ?30", "5[.,]7 ?x ?28"]
+        evidence: "4.6x30 in 15 / 30 lot titles; SMG keywords in 6 / 6 (undercounted: often named by model)."
+
+      - id: firearms.rifles_carbines
+        name: Rifles and carbines
+        description: Assault rifles, carbines, battle rifles, semi-automatic service rifles and training rifles.
+        attributes:
+          calibre: {required: true, match_key: true}
+          action: {match_key: true, values: [select_fire, semi_automatic, bolt_action, single_shot]}
+          weapon_role: {values: [assault_rifle, carbine, battle_rifle, semi_auto_rifle, training]}
+          barrel_length_mm: {}
+          magazine_capacity: {}
+          rail_interface: {}
+          optics_ready: {}
+          firearms_directive_category: {}
+        cpv: {candidate: ["35321200", "35321000"]}
+        keywords: ["karabinek", "karabin", "puška", "puska", "gewehr", "fusil", "fucile", "rifle", "carbine", "carabin", "karabín", "automat", "sturmgewehr", "автомат", "винтовк", "kivääri", "gevær", "pușc", "puşc"]
+        evidence: "CPV 35321200 Rifles in 82 / 76 notices; rifle keywords in 143 / 100 lot titles."
+
+      - id: firearms.precision_rifles
+        name: Sniper, marksman and anti-materiel rifles
+        attributes:
+          calibre: {required: true, match_key: true}
+          action: {match_key: true, values: [bolt_action, semi_automatic, single_shot]}
+          weapon_role: {match_key: true, values: [sniper, designated_marksman, anti_materiel]}
+          barrel_length_mm: {}
+          accuracy_moa: {}
+        cpv: {candidate: ["35321200", "35321000"]}
+        keywords: ["sniper", "wyborow", "odstřel", "ostrostrel", "scharfschütz", "précision", "precisión", "tiratore scelto", "marksman", "anti-materi", "wielkokalibrow", "8[.,]6 ?x ?70", "\\.338", "lapua"]
+        evidence: "Sniper keywords in 37 / 20 lot titles; .338 in 21 / 8 and 8.6x70 in 10 / 3."
+
+      - id: firearms.machine_guns
+        name: Machine guns
+        attributes:
+          calibre: {required: true, match_key: true}
+          weapon_role: {match_key: true, values: [light_mg, general_purpose_mg, heavy_mg]}
+          feed_type: {}
+          mount_type: {}
+          barrel_length_mm: {}
+        cpv: {exact: ["35321300"], candidate: ["35321000"]}
+        keywords: ["machine[- ]?gun", "karabin maszyn", "kulomet", "guľomet", "maschinengewehr", "mitrailleuse", "ametrallador", "mitragliatric", "mitralier", "пулемет", "géppuska", "konekivääri", "kulsprut"]
+        evidence: "CPV 35321300 Machine guns in 51 / 63 notices."
+
+      - id: firearms.shotguns
+        name: Shotguns
+        attributes:
+          calibre: {required: true, match_key: true}
+          action: {match_key: true, values: [pump_action, semi_automatic, break_action, single_shot]}
+          magazine_capacity: {}
+          barrel_length_mm: {}
+          firearms_directive_category: {}
+        cpv: {candidate: ["35321000", "35321200"]}
+        keywords: ["shotgun", "strzelb", "brokovnic", "flinte", "fusil à pompe", "escopeta", "fucile a pompa", "gładkolufow", "haulikko"]
+        evidence: "Shotgun keywords in 28 / 24 lot titles; pairs with ammunition.shotgun."
+
+      - id: firearms.launchers
+        name: Grenade launchers and shoulder-launched weapons
+        description: Underbarrel, stand-alone, multi-shot and automatic grenade launchers, less-lethal launchers (37/40 mm), recoilless rifles and shoulder-launched rocket weapons.
+        attributes:
+          calibre: {required: true, match_key: true}
+          weapon_role: {match_key: true, values: [underbarrel, standalone, multi_shot, automatic, less_lethal, recoilless, shoulder_rocket]}
+          mount_type: {}
+          max_range_m: {}
+        cpv: {candidate: ["35321000", "35322000"]}
+        keywords: ["launcher", "granatnik", "granátomet", "granatwerfer", "lance-grenade", "lanzagranad", "lanciagranat", "гранатомет", "carl gustaf", "rpg", "bezodrzut", "recoilless", "lbd"]
+        evidence: "Launcher keywords in 8 / 12 lot titles (undercounted: often named by model); pairs with grenade_40mm and less_lethal."
+
+      - id: firearms.mortars
+        name: Mortars
+        attributes:
+          calibre: {required: true, match_key: true}
+          weapon_role: {values: [commando, light, medium, heavy, vehicle_mounted]}
+          mount_type: {}
+          max_range_m: {}
+        cpv: {exact: ["35322400"]}
+        keywords: ["moździerz", "minomet", "mörser", "mortier", "mortero", "mortaio", "mortar"]
+        evidence: "CPV 35322400 Mortars in 41 / 53 notices."
+
+      - id: firearms.artillery_systems
+        name: Artillery systems
+        description: Towed and self-propelled guns and howitzers, anti-aircraft guns and rocket artillery.
+        attributes:
+          calibre: {required: true, match_key: true}
+          weapon_role: {match_key: true, values: [towed, self_propelled_wheeled, self_propelled_tracked, air_defence_gun, rocket_artillery, naval_gun]}
+          barrel_length_calibres: {}
+          max_range_m: {}
+          compatible_platforms: {}
+        cpv: {exact: ["35322100", "35322200", "35322300", "35322500"], candidate: ["35322000"]}
+        keywords: ["haubic", "howitzer", "haubitze", "obusier", "obús", "obice", "armatohaubic", "samobieżn", "self-propelled", "przeciwlotnic", "anti-aircraft", "wyrzutni", "rocket launcher", "mlrs"]
+        evidence: "CPV artillery codes in about 50 / 60 notices (35322000 14/23, 35322200 14/11, 35322100 9/13, 35322500 9/9, 35322300 3/4)."
+
+  - id: parts
+    name: Parts of firearms and ammunition
+    description: CPV 35340000 Parts of firearms and ammunition, including accessories and weapon sights bought under it.
+    cpv: {exact: ["35340000"]}
+    attributes: [end_use, condition, brand_model, nsn, part_number, country_of_origin]
+    families:
+      - id: parts.small_arms_parts
+        name: Small-arms spare parts and sub-assemblies
+        attributes:
+          part_type: {required: true, match_key: true, values: [barrel, bolt_or_breech, trigger_group, receiver, spring_kit, stock, handguard, grip, small_parts, repair_kit, other]}
+          compatible_platforms: {required: true, match_key: true}
+          calibre: {match_key: true}
+          oem_authorised: {}
+        cpv: {candidate: ["35341000"]}
+        keywords: ["część", "części", "części zamienn", "techniczn.* środk.* materiałow", "tśm", "náhradní díl", "náhradn", "ersatzteil", "pièces détachées", "repuesto", "ricambi", "piese de schimb", "spare part", "lufa", "hlaveň", "barrel", "zamek", "závěr", "verschluss", "podzespoł", "component"]
+        evidence: "CPV 35341000 Parts of light firearms in 75 / 123 notices; spare-part keywords in 101 / 97 lot titles."
+
+      - id: parts.accessories_tools
+        name: Weapon accessories and maintenance tools
+        description: Magazines, suppressors, muzzle devices, mounts and rails, slings, holsters, bipods, cleaning kits, armourer tools and gauges.
+        attributes:
+          part_type: {required: true, match_key: true, values: [magazine, suppressor, muzzle_device, mount, sling, holster, bipod, cleaning_kit, armourer_tool, gauge, other]}
+          compatible_platforms: {match_key: true}
+          calibre: {match_key: true}
+        cpv: {candidate: ["35341000"], related: ["18925200"]}
+        keywords: ["magazynek", "zásobník", "magazine", "chargeur", "cargador", "tłumik", "tlumič", "suppressor", "silencer", "schalldämpfer", "silencieux", "kabur", "pouzdr", "holster", "zawieszen", "sling", "dwójnóg", "bipod", "czyszcz", "čistic", "cleaning", "reinigung", "nettoyage", "rusznik", "zbrojíř", "armourer", "sprawdzian", "gauge set"]
+        evidence: "Holsters CPV 18925200 co-occurs in 19 notices; cleaning-equipment and armourer-tool lots seen in NO, CZ, PL notices."
+
+      - id: parts.sights_optics
+        name: Weapon sights and aiming devices
+        description: Red-dot, holographic, prism and telescopic sights, weapon-mounted night and thermal sights and clip-ons, laser aiming modules, fire-control sights for crew-served weapons.
+        excludes: [hand-held observation devices, goggles and thermal cameras (out_of_scope.optronics)]
+        attributes:
+          sight_technology: {required: true, match_key: true}
+          magnification: {}
+          compatible_platforms: {match_key: true}
+          rail_interface: {}
+        cpv: {candidate: ["35341000", "35340000"], related: ["38633000"]}
+        keywords: ["celownik", "kolimator", "zaměřovač", "puškohled", "zielfernrohr", "zieloptik", "lunette", "visor", "mirino", "red dot", "holograph", "sight", "scope", "fire control", "fcs", "noktowizyj", "termowizyj", "termovízn", "clip-on", "laser"]
+        evidence: "CPV 38633000 Telescopic sights co-occurs in 17 notices; catalogue has 28 optics and sights items; e.g. CKE-1N collimator sights (PL) and Carl Gustaf M4 FCS (DK) are bought under parts CPVs."
+
+      - id: parts.heavy_weapon_parts
+        name: Parts for mortars, artillery, cannons and rocket launchers
+        attributes:
+          weapon_class_served: {required: true, match_key: true}
+          part_type: {}
+          compatible_platforms: {required: true, match_key: true}
+          part_number: {}
+        cpv: {exact: ["35342000", "35343000"]}
+        keywords: ["homar", "krab", "regina", "rak", "moździerz", "mortar", "rocket launcher", "wyrzutni", "armat", "haubic", "cannon"]
+        evidence: "CPV 35343000 Parts of mortars in 12 / 14 and 35342000 Parts of rocket launchers in 6 / 11 notices (e.g. HOMAR-K, DMO REGINA)."
+
+  - id: misc_weapons
+    name: Miscellaneous weapons
+    description: CPV 35310000 Miscellaneous weapons. Thin and noisy in TED, so only two families.
+    cpv: {exact: ["35310000"]}
+    attributes: [end_use, condition, brand_model, country_of_origin]
+    families:
+      - id: misc_weapons.bladed
+        name: Swords, bayonets and knives
+        description: Swords and sabres (mostly ceremonial), daggers, bayonets, combat knives, machetes and lances.
+        attributes:
+          blade_type: {required: true, match_key: true}
+          ceremonial: {}
+          compatible_platforms: {}
+          material: {}
+        cpv: {exact: ["35311000", "35311100", "35311200", "35311300"], candidate: ["35311400"]}
+        keywords: ["szabl", "šavl", "säbel", "sabre", "sable", "sword", "miecz", "meč", "schwert", "épée", "espada", "spada", "ξίφος", "bagnet", "bajonet", "bayonet", "baïonnette", "nóż", "nůž", "messer", "couteau", "cuchillo", "coltello", "knife", "maczet", "machete", "kordzik", "dagger"]
+        evidence: "CPV 35311100 Swords in 18 / 18 notices, many ceremonial (e.g. Hellenic Air Force swords with tassel)."
+
+      - id: misc_weapons.other_weapons
+        name: Gas, signal, electric, air and other weapons
+        description: Gas pistols and launchers, irritant sprays, signal and flare pistols, line-throwing guns, conducted-energy weapons, air guns, airsoft and paintball trainers, crossbows.
+        attributes:
+          misc_weapon_type: {required: true, match_key: true}
+          calibre: {}
+          muzzle_energy_j: {}
+        cpv: {exact: ["35312000"]}
+        keywords: ["gazow", "plynov", "gas gun", "gas pistol", "reizgas", "taser", "paralyz", "paralizator", "elektrošok", "conducted energy", "wiatrówk", "vzduchov", "luftgewehr", "air rifle", "airsoft", "paintball", "kusz", "kuše", "armbrust", "crossbow", "spray", "pistolet sygnałow", "rakietnic", "signální pistol", "leuchtpistol", "signal pistol", "flare gun", "very pistol", "line[- ]throw"]
+        evidence: "CPV 35312000 Gas guns in 9 / 12 notices; tasers and irritant sprays appear in police lots under 35310000. Signal pistols are FSC 1095 and outside ML2.b and the Firearms Directive definition."
+
+  - id: out_of_scope
+    name: Out of scope
+    description: Items found in focus notices that are not weapons or ammunition. Classified and stored, not matched in the demo. Seeds for future classes (e.g. CPV 35800000).
+    in_focus: false
+    attributes: [brand_model]
+    families:
+      - id: out_of_scope.protective_equipment
+        name: Protective equipment
+        in_focus: false
+        description: Body armour, helmets, ballistic shields, protective clothing and gloves.
+        cpv: {related: ["35815100", "18143000", "35113400", "18424000"]}
+        keywords: ["kamizel", "vesta", "schutzweste", "gilet pare", "body armour", "helm", "hełm", "přilb", "casque", "tarcz balisty", "ballistic shield", "ochronn"]
+      - id: out_of_scope.law_enforcement_equipment
+        name: Law-enforcement equipment
+        in_focus: false
+        description: Handcuffs, batons, restraint and entry tools, police kits.
+        cpv: {related: ["35200000", "35230000"]}
+        keywords: ["kajdank", "pouta", "handschell", "menottes", "handcuff", "pałk", "obušek", "tonfa", "baton", "breaching tool", "taran"]
+      - id: out_of_scope.optronics
+        name: Optronics and electronics
+        in_focus: false
+        description: Hand-held observation devices, night-vision goggles, thermal cameras, detectors, radios.
+        keywords: ["pozorovac", "obserwac", "noktowizor", "nachtsicht", "vision nocturne", "thermal camera", "termowizj", "termovíz", "detektor", "detector", "radiostanic"]
+      - id: out_of_scope.uniforms_clothing
+        name: Uniforms and clothing
+        in_focus: false
+        cpv: {related: ["35811200", "18100000", "18230000", "18425000"]}
+        keywords: ["mundur", "uniform", "uniforme", "odzież", "oděv", "bekleidung", "vêtement", "obuw", "boots", "pas ", "belt", "medal"]
+      - id: out_of_scope.ranges_targets
+        name: Ranges, targets and simulators
+        in_focus: false
+        cpv: {related: ["35210000", "37462400"]}
+        keywords: ["tarcz", "terč", "zielscheib", "cible", "blanco", "target", "strzelnic", "střelnic", "schießstand", "stand de tir", "kulochwyt", "lapač", "bullet trap", "symulator strzelecki", "shooting simulator"]
+      - id: out_of_scope.services
+        name: Services
+        in_focus: false
+        description: Repair, maintenance, training, disposal and range services (our scope is supplies only).
+        cpv: {related: ["50620000"]}
+        keywords: ["usług", "služb", "dienstleist", "service", "naprawa", "oprava", "repair", "maintenance", "szkoleni", "školení", "training course", "utylizac", "likvidac", "disposal"]
+      - id: out_of_scope.noise
+        name: Not defence (CPV noise)
+        in_focus: false
+        description: Notices that carry a focus CPV by mistake or by analogy, e.g. fire-hose nozzles ('lances'), gunmetal pipe fittings, sports goods, building materials, medals.
+        cpv: {related: ["35341100", "35311400", "44167000", "44115210", "37400000"]}
+        keywords: ["hydrant", "lance à débit", "prądownic", "proudnic", "strahlrohr", "fire hose", "pompier", "feuerwehr", "hasič", "straż pożar", "water services", "pipe fitting", "armatura", "rury", "potrubí", "hockey", "ski"]
+
+# ---------------------------------------------------------------------------------------------
+# CPV codes that are noise when they are a notice's only focus code (checked 2026-10-30).
+# ---------------------------------------------------------------------------------------------
+noise_rules:
+  - cpv: "35341100"
+    label: Gunmetal pipe fittings
+    rule: Noise when it is the only focus code of a notice or lot (bronze plumbing). Classify as out_of_scope.noise.
+    evidence: "KB 21; 33 notices carry it as their only focus code."
+  - cpv: "35311400"
+    label: Lances
+    rule: Noise when it is the only focus code and the text is about fire-fighting or water (fire-hose nozzles are 'lances' in French). Classify as out_of_scope.noise.
+    evidence: "11 of 14 notices with 35311400 are fire-fighting or water tenders (TED pull 2026-10-30)."
+
+# ---------------------------------------------------------------------------------------------
+# CPV supplementary vocabulary tags (http://data.europa.eu/cpv/cpvsuppl/<code>) that an item may carry
+# as extra epo:hasItemClassification values. TED never publishes them; we derive them. (KB 25 §ePO)
+# ---------------------------------------------------------------------------------------------
+cpvsuppl_tags:
+  FB01: {label: For military use, when: "end_use contains military"}
+  FB02: {label: For weapons and ammunition, when: "class in ammunition, firearms, parts, misc_weapons"}
+  FB03: {label: For the police force, when: "end_use contains law_enforcement"}
+  FB13: {label: With military specifications, when: "standards contain a STANAG or MIL-STD"}
+  AA44: {label: Brass, when: "case_material = brass"}
+  AA11: {label: Steel, when: "case_material = steel"}
+  AB06: {label: Plastic, when: "case_material = polymer"}
+  DA44: {label: Spare parts, when: "family = parts.small_arms_parts or parts.heavy_weapon_parts"}
+
+# ---------------------------------------------------------------------------------------------
+# Calibre reference. code = canonical value stored in attrs.calibre.
+# ---------------------------------------------------------------------------------------------
+calibres:
+  - {code: "4.6x30", label: "4.6x30 mm", kind: pistol, bore_mm: 4.6, case_mm: 30, family: ammunition.small_calibre, aliases: ["4.6x30mm", "4,6x30"], standard: "STANAG 4820"}
+  - {code: "5.45x39", label: "5.45x39 mm", kind: rifle, bore_mm: 5.45, case_mm: 39, family: ammunition.small_calibre}
+  - {code: "5.56x45", label: "5.56x45 mm NATO", kind: rifle, bore_mm: 5.56, case_mm: 45, family: ammunition.small_calibre, related: [".223"], aliases: ["5.56nato", "5,56x45", "5.56mm", "5,56mm", "5.56x45nato", "ss109"], standard: "STANAG 4172"}
+  - {code: "5.7x28", label: "5.7x28 mm", kind: pistol, bore_mm: 5.7, case_mm: 28, family: ammunition.small_calibre, standard: "STANAG 4509"}
+  - {code: "6.5x55", label: "6.5x55 mm", kind: rifle, bore_mm: 6.5, case_mm: 55, family: ammunition.small_calibre}
+  - {code: "7.62x35", label: "7.62x35 mm (.300 AAC Blackout)", kind: rifle, bore_mm: 7.62, case_mm: 35, family: ammunition.small_calibre, aliases: [".300blackout", ".300blk", ".300aac", "300aacblackout"]}
+  - {code: "7.62x39", label: "7.62x39 mm", kind: rifle, bore_mm: 7.62, case_mm: 39, family: ammunition.small_calibre}
+  - {code: "7.62x51", label: "7.62x51 mm NATO", kind: rifle, bore_mm: 7.62, case_mm: 51, family: ammunition.small_calibre, related: [".308"], aliases: ["7.62nato", "7,62x51", "7.62x51nato", "7.62mmx51"], standard: "STANAG 2310"}
+  - {code: "7.62x54R", label: "7.62x54R", kind: rifle, bore_mm: 7.62, case_mm: 54, family: ammunition.small_calibre, aliases: ["7.62x54", "7.62x54r", "7,62x54r"]}
+  - {code: "7.65x17", label: "7.65x17 mm (.32 ACP)", kind: pistol, bore_mm: 7.65, case_mm: 17, family: ammunition.small_calibre, aliases: [".32acp", "7.65browning", "7.65mmbrowning"]}
+  - {code: "8x57", label: "8x57 mm IS", kind: rifle, bore_mm: 8, case_mm: 57, family: ammunition.small_calibre, aliases: ["8x57is", "8x57js"]}
+  - {code: "8.6x70", label: "8.6x70 mm (.338 Lapua Magnum)", kind: rifle, bore_mm: 8.6, case_mm: 70, family: ammunition.small_calibre, aliases: [".338lm", ".338lapua", ".338lapuamagnum", "8.6mm"]}
+  - {code: "9x17", label: "9x17 mm (.380 ACP)", kind: pistol, bore_mm: 9, case_mm: 17, family: ammunition.small_calibre, aliases: [".380acp", "9mmkurz", "9mmshort"]}
+  - {code: "9x18", label: "9x18 mm Makarov", kind: pistol, bore_mm: 9, case_mm: 18, family: ammunition.small_calibre, aliases: ["9mmmakarov", "9x18makarov"]}
+  - {code: "9x19", label: "9x19 mm (Luger / Parabellum)", kind: pistol, bore_mm: 9, case_mm: 19, family: ammunition.small_calibre, aliases: ["9mmluger", "9mmpara", "9mmparabellum", "9x19luger", "9x19parabellum", "9x19nato", "9mmnato", "9mm"], standard: "STANAG 4090"}
+  - {code: "11.43x23", label: "11.43x23 mm (.45 ACP)", kind: pistol, bore_mm: 11.43, case_mm: 23, family: ammunition.small_calibre, aliases: [".45acp"]}
+  - {code: "12.7x99", label: "12.7x99 mm NATO (.50 BMG)", kind: heavy_mg, bore_mm: 12.7, case_mm: 99, family: ammunition.small_calibre, aliases: [".50bmg", ".50", "12,7x99", "12.7mmnato"], standard: "STANAG 4383"}
+  - {code: "12.7x108", label: "12.7x108 mm", kind: heavy_mg, bore_mm: 12.7, case_mm: 108, family: ammunition.small_calibre}
+  - {code: "14.5x114", label: "14.5x114 mm", kind: heavy_mg, bore_mm: 14.5, case_mm: 114, family: ammunition.small_calibre}
+  - {code: ".22LR", label: ".22 Long Rifle", kind: rimfire, bore_mm: 5.6, family: ammunition.small_calibre, aliases: [".22", ".22lr", "22lr"]}
+  - {code: ".223", label: ".223 Remington", kind: rifle, bore_mm: 5.56, family: ammunition.small_calibre, related: ["5.56x45"], aliases: [".223rem", ".223remington"]}
+  - {code: ".308", label: ".308 Winchester", kind: rifle, bore_mm: 7.62, family: ammunition.small_calibre, related: ["7.62x51"], aliases: [".308win", ".308winchester"]}
+  - {code: ".338", label: ".338 (unspecified)", kind: rifle, bore_mm: 8.6, family: ammunition.small_calibre, related: ["8.6x70"]}
+  - {code: ".357", label: ".357 Magnum", kind: pistol, bore_mm: 9.1, family: ammunition.small_calibre, aliases: [".357mag", ".357magnum"]}
+  - {code: ".38", label: ".38 Special", kind: pistol, bore_mm: 9.1, family: ammunition.small_calibre, aliases: [".38spl", ".38special"]}
+  - {code: "12ga", label: "12 gauge", kind: shotgun, bore_mm: 18.5, family: ammunition.shotgun, aliases: ["12/70", "12/76", "12/67.5", "kal.12", "kaliber12", "12gauge", "12x70", "cal.12"]}
+  - {code: "20ga", label: "20 gauge", kind: shotgun, bore_mm: 15.6, family: ammunition.shotgun, aliases: ["20/70", "20/76", "20gauge"]}
+  - {code: "20mm", label: "20 mm (case unspecified)", kind: medium, bore_mm: 20, family: ammunition.medium_calibre}
+  - {code: "20x102", label: "20x102 mm", kind: medium, bore_mm: 20, case_mm: 102, family: ammunition.medium_calibre}
+  - {code: "23x152", label: "23x152 mm", kind: medium, bore_mm: 23, case_mm: 152, family: ammunition.medium_calibre, aliases: ["23mm", "23x152b"]}
+  - {code: "25x137", label: "25x137 mm", kind: medium, bore_mm: 25, case_mm: 137, family: ammunition.medium_calibre, aliases: ["25mm"], standard: "STANAG 4173 (secondary source)"}
+  - {code: "27x145", label: "27x145 mm", kind: medium, bore_mm: 27, case_mm: 145, family: ammunition.medium_calibre, standard: "STANAG 3820"}
+  - {code: "30x113", label: "30x113 mm", kind: medium, bore_mm: 30, case_mm: 113, family: ammunition.medium_calibre}
+  - {code: "30x165", label: "30x165 mm", kind: medium, bore_mm: 30, case_mm: 165, family: ammunition.medium_calibre}
+  - {code: "30x170", label: "30x170 mm", kind: medium, bore_mm: 30, case_mm: 170, family: ammunition.medium_calibre}
+  - {code: "30x173", label: "30x173 mm", kind: medium, bore_mm: 30, case_mm: 173, family: ammunition.medium_calibre, standard: "STANAG 4624"}
+  - {code: "30mm", label: "30 mm (case unspecified)", kind: medium, bore_mm: 30, family: ammunition.medium_calibre}
+  - {code: "35x228", label: "35x228 mm", kind: medium, bore_mm: 35, case_mm: 228, family: ammunition.medium_calibre}
+  - {code: "40x365R", label: "40 mm L70 (40x365R)", kind: medium, bore_mm: 40, case_mm: 365, family: ammunition.medium_calibre, aliases: ["40mml70", "40x365"]}
+  - {code: "57x438", label: "57 mm (57x438)", kind: medium, bore_mm: 57, case_mm: 438, family: ammunition.medium_calibre, aliases: ["57mm"]}
+  - {code: "40x46", label: "40x46 mm low velocity", kind: grenade, bore_mm: 40, case_mm: 46, family: ammunition.grenade_40mm, aliases: ["40mmlv", "40x46lv", "40x46mm"], standard: "STANAG 4599 (design safety only)"}
+  - {code: "40x53", label: "40x53 mm high velocity", kind: grenade, bore_mm: 40, case_mm: 53, family: ammunition.grenade_40mm, aliases: ["40mmhv", "40x53hv", "40x53mm"], standard: "STANAG 4599 (design safety only)"}
+  - {code: "37mm", label: "37 mm less-lethal", kind: less_lethal, bore_mm: 37, family: ammunition.less_lethal}
+  - {code: "26.5mm", label: "26.5 mm signal", kind: signal, bore_mm: 26.5, family: ammunition.pyrotechnics, aliases: ["26,5mm"]}
+  - {code: "60mm", label: "60 mm mortar", kind: mortar, bore_mm: 60, family: ammunition.mortar, standard: "STANAG 4425 / AOP-29 Part 2"}
+  - {code: "81mm", label: "81 mm mortar", kind: mortar, bore_mm: 81, family: ammunition.mortar, standard: "STANAG 4425 / AOP-29 Part 2"}
+  - {code: "82mm", label: "82 mm mortar", kind: mortar, bore_mm: 82, family: ammunition.mortar}
+  - {code: "98mm", label: "98 mm mortar", kind: mortar, bore_mm: 98, family: ammunition.mortar}
+  - {code: "120mm", label: "120 mm (mortar or tank: check context)", kind: mortar, bore_mm: 120, family: ammunition.mortar, standard: "STANAG 4425 / AOP-29 Part 2 (mortar)"}
+  - {code: "120x570", label: "120x570 mm tank", kind: tank, bore_mm: 120, case_mm: 570, family: ammunition.artillery, standard: "STANAG 4385 (status unverified)"}
+  - {code: "76mm", label: "76 mm naval", kind: naval, bore_mm: 76, family: ammunition.artillery}
+  - {code: "100mm", label: "100 mm", kind: artillery, bore_mm: 100, family: ammunition.artillery}
+  - {code: "105mm", label: "105 mm (howitzer or tank: check context)", kind: artillery, bore_mm: 105, family: ammunition.artillery, standard: "STANAG 4425 / AOP-29 Part 3"}
+  - {code: "122mm", label: "122 mm (howitzer or rocket: check context)", kind: artillery, bore_mm: 122, family: ammunition.artillery}
+  - {code: "125mm", label: "125 mm tank", kind: tank, bore_mm: 125, family: ammunition.artillery}
+  - {code: "152mm", label: "152 mm", kind: artillery, bore_mm: 152, family: ammunition.artillery}
+  - {code: "155mm", label: "155 mm", kind: artillery, bore_mm: 155, family: ammunition.artillery, aliases: ["155mml52", "155mml39"], standard: "STANAG 4425 / AOP-29 Part 1; JBMoU L/39, L/52"}
+
+# ---------------------------------------------------------------------------------------------
+# Sources for the crosswalk below (all opened 2026-10-30 unless noted). Key -> URL.
+# ---------------------------------------------------------------------------------------------
+sources:
+  CML26: "https://data.consilium.europa.eu/doc/document/ST-5828-2026-INIT/en/pdf"   # EU Common Military List, Council 23 Feb 2026 (OJ C/2026/1640)
+  PSC25: "https://www.acquisition.gov/sites/default/files/manual/PSC%20Manual%20April%202025.pdf"   # FSC groups 10/13 (US GSA, follows DLA H2)
+  CN26: "https://eur-lex.europa.eu/eli/reg_impl/2025/1926/oj"   # Combined Nomenclature 2026
+  FD: "https://eur-lex.europa.eu/eli/dir/2021/555/oj"   # Firearms Directive (EU) 2021/555
+  R2541: "http://data.europa.eu/eli/reg/2025/41/oj"   # Firearms import/export regulation (recast), applies from 12 Feb 2029
+  ADR25: "https://digitallibrary.un.org/record/4068196/files/ECE_TRANS_352-EN.pdf"   # ADR 2025 Table A
+  COS: "https://oos-data.army.cz/cos/cos/"   # Czech defence standards = public national adoptions of STANAGs
+  IT40: "https://www.difesa.it/assets/allegati/67605/20250326_granate_40x46mm_hedp_e_tp-m_con_pre_mer_all_tec.pdf"
+  BAE155: "https://www.baesystems.com/dam/jcr:2b61caee-8578-43ab-9899-33e6312a642f/155mm_brochure_February_2026.pdf"
+  CPVSUPPL: "http://data.europa.eu/cpv/cpvsuppl"
+  UNSPSC: "https://worldoftaxonomy.com/system/unspsc_v24/node/46100000"   # mirror (secondary)
+
+# ---------------------------------------------------------------------------------------------
+# Regulatory and standards crosswalk per family.
+# Row: [scheme, code, relation, status, source, note]
+#   status: V = verified in the source, V2 = secondary source only, I = our inference (verified = false).
+#   relation: exact = applies to the whole family; related = applies to some items (rule in the note).
+# Item-level rules (calibre bands, ML1 vs ML2) are in KB 25 section 7; ADR codes are "typical": the real
+# entry depends on the tested article (ADR 2.2.1.1.4).
+# ---------------------------------------------------------------------------------------------
+crosswalk:
+  ammunition:
+    - [unspsc, "46101600", broad, V2, UNSPSC, "Ammunition"]
+  firearms:
+    - [unspsc, "46101500", broad, V2, UNSPSC, "Firearms (small arms)"]
+  parts:
+    - [unspsc, "46101800", broad, V2, UNSPSC, "Arms and ammunition accessories"]
+  misc_weapons:
+    - [unspsc, "46101900", related, V2, UNSPSC, "Bladed weapons and accessories"]
+
+  ammunition.small_calibre:
+    - [eu_ml, ML3.a, exact, V, CML26, "Ammunition for ML1/ML2 weapons"]
+    - [fsc, "1305", exact, V, PSC25, "Ammunition, through 30mm"]
+    - [hs, "9306 30 10", related, V, CN26, "For pistols, revolvers and sub-machine guns"]
+    - [hs, "9306 30 30", related, V, CN26, "For military weapons"]
+    - [hs, "9306 30 90", related, V, CN26, "Other cartridges"]
+    - [adr, UN0012, related, I, ADR25, "Typical 1.4S (cartridges, small arms; calibre <= 19.1 mm). Also UN0339 1.4C, UN0417 1.3C, UN0328 1.2C"]
+    - [fd_2021_555, A4, related, V, FD, "Armour-piercing, explosive or incendiary ammunition. Ammunition otherwise follows its firearm (Art. 13(1)); not applied to armed forces, police, public authorities (Art. 2(2))"]
+    - [fd_2021_555, A5, related, V, FD, "Expanding ammunition for pistols and revolvers"]
+    - [stanag, "4608", related, V, COS, "Small-arms ammunition design safety"]
+    - [cpvsuppl, FB02, exact, V, CPVSUPPL, "For weapons and ammunition"]
+  ammunition.shotgun:
+    - [eu_ml, ML3.a, related, V, CML26, "Only for ML1.b weapons (military-designed, fully automatic, semi-auto or pump not for hunting/sport)"]
+    - [fsc, "1305", related, I, PSC25, "Calibre band"]
+    - [hs, "9306 21 00", exact, V, CN26, "Shotgun cartridges"]
+    - [adr, UN0012, related, V, ADR25, "Shotgun cartridges of any calibre count as small arms"]
+  ammunition.training_blank:
+    - [eu_ml, ML3.a, related, V, CML26, "ML3 Note 2 excludes crimped blanks, pierced dummies and blank/dummy without live components; practice ammunition with live parts stays ML3"]
+    - [fsc, "1305", related, V, PSC25, "Drill, dummy and practice ammunition stays in the ammunition classes (6920 excludes it)"]
+    - [hs, "9306 30 90", related, I, CN26, "Per item"]
+    - [adr, UN0014, related, V, ADR25, "Blank 1.4S; also UN0338 1.4C, UN0327 1.3C"]
+    - [adr, UN0362, related, V, ADR25, "Ammunition, practice 1.4G"]
+  ammunition.less_lethal:
+    - [eu_ml, ML4.a, related, V, CML26, "Stun and smoke grenades only if specially designed for military use"]
+    - [eu_ml, ML7.d, related, V, CML26, "Riot-control agent payloads; self-defence packs excluded"]
+    - [fsc, "1330", related, V2, PSC25, "Grenades incl. smoke; stun grenade M84 by NSN example"]
+    - [hs, "9306 90 90", related, I, CN26, "Ambiguous (9306 90 vs 3604 90 00); use the supplier's declared code"]
+    - [adr, UN0301, related, V, ADR25, "Ammunition, tear-producing 1.4G"]
+    - [adr, UN0297, related, V2, ADR25, "M84 stun grenade shipped as ammunition, illuminating 1.4G"]
+  ammunition.medium_calibre:
+    - [eu_ml, ML3.a, exact, V, CML26, ""]
+    - [fsc, "1305", related, V, PSC25, "Calibre <= 30 mm"]
+    - [fsc, "1310", related, V, PSC25, "Calibre > 30 mm and < 75 mm"]
+    - [hs, "9306 30 30", related, I, CN26, "For military weapons"]
+    - [adr, UN0328, related, V, ADR25, "Inert projectile (AP/TP) 1.2C; also UN0339 1.4C, UN0417 1.3C"]
+    - [adr, UN0348, related, V, ADR25, "With bursting charge, fuzed 1.4F; also UN0005 1.1F, UN0007 1.2F; unfuzed UN0006/0321/0412"]
+  ammunition.grenade_40mm:
+    - [eu_ml, ML3.a, exact, V, CML26, "ML4.a N.B. sends grenade ammunition for ML1/ML2 launchers to ML3"]
+    - [fsc, "1310", exact, V2, PSC25, "40 mm M433 NSN example"]
+    - [hs, "9306 30 30", related, I, CN26, "Ambiguous with 9306 90 10"]
+    - [adr, UN0348, related, I, ADR25, "Cartridges for weapons with bursting charge; not 'grenades, hand or rifle'"]
+    - [adr, UN0362, related, V, ADR25, "Practice 1.4G"]
+    - [stanag, "4599", related, V, IT40, "Weapon-launched grenade systems design safety"]
+  ammunition.hand_grenade:
+    - [eu_ml, ML4.a, exact, V, CML26, "Rifle grenades fired from ML1 rifles go to ML3 by the ML4.a N.B. (inference)"]
+    - [fsc, "1330", exact, V, PSC25, "Grenades: hand, rifle, smoke"]
+    - [hs, "9306 90 10", related, I, CN26, "For military purposes"]
+    - [adr, UN0284, related, V, ADR25, "Grenades with bursting charge 1.1D; also UN0285 1.2D, UN0292 1.1F, UN0293 1.2F"]
+    - [adr, UN0110, related, V, ADR25, "Practice grenades 1.4S"]
+  ammunition.mortar:
+    - [eu_ml, ML3.a, exact, V, CML26, ""]
+    - [fsc, "1310", related, V, PSC25, "60 mm"]
+    - [fsc, "1315", related, V, PSC25, "81 and 120 mm"]
+    - [hs, "9306 90 10", related, I, CN26, "For military purposes"]
+    - [adr, UN0348, related, I, ADR25, "HE fuzed; illuminating UN0171/0254/0297; smoke UN0015/0016/0303; practice UN0362/0488"]
+    - [stanag, "4425", exact, V, COS, "AOP-29 Part 2 mortar ammunition interchangeability"]
+    - [stanag, "4764", related, V, COS, "Safety and suitability testing of mortar cartridges"]
+  ammunition.artillery:
+    - [eu_ml, ML3.a, exact, V, CML26, "Fuzes ML3 Note 1(b); combustible cases Note 1(d)"]
+    - [fsc, "1315", related, V, PSC25, "75-125 mm (105, 120 tank)"]
+    - [fsc, "1320", related, V, PSC25, "Over 125 mm (152, 155)"]
+    - [hs, "9306 90 10", related, I, CN26, "For military purposes"]
+    - [adr, UN0168, related, V, ADR25, "Projectiles with bursting charge 1.1D; also UN0169 1.2D, UN0344 1.4D, fuzed UN0167/0324"]
+    - [adr, UN0279, related, V, ADR25, "Charges, propelling, for cannon 1.1C; also UN0414 1.2C, UN0242 1.3C"]
+    - [stanag, "4425", exact, V, COS, "AOP-29 Part 1 (155 mm), Part 3 (105 mm)"]
+    - [stanag, "2916", related, V2, BAE155, "Fuze cavities"]
+  ammunition.heavy_ordnance:
+    - [eu_ml, ML4.a, exact, V, CML26, "Bombs, torpedoes, rockets, missiles, mines specially designed for military use"]
+    - [fsc, "1325", related, V, PSC25, "Bombs"]
+    - [fsc, "1340", related, V, PSC25, "Rockets (unguided); guided missiles are FSC group 14 and CPV 35600000"]
+    - [fsc, "1345", related, V, PSC25, "Land mines incl. anti-personnel and anti-tank"]
+    - [fsc, "1351", related, V, PSC25, "Underwater mines, explosive"]
+    - [fsc, "1356", related, V, PSC25, "Torpedoes, explosive"]
+    - [hs, "9306 90 10", related, I, CN26, "For military purposes"]
+    - [adr, UN0034, related, V, ADR25, "Bombs 1.1D; rockets UN0181 1.1E; mines UN0137 1.1D; torpedoes UN0329 1.1E (see ADR Table A for variants)"]
+    - [fd_2021_555, A1, related, V, FD, "Explosive military missiles and launchers"]
+  ammunition.pyrotechnics:
+    - [eu_ml, ML4.a, related, V, CML26, "Pyrotechnic devices and simulators specially designed for military use; signalling cartridges are excluded from ML3 (Note 3)"]
+    - [fsc, "1370", exact, V, PSC25, "Pyrotechnics: flares, signals"]
+    - [hs, "3604 90 00", exact, V, CN26, "Chapter 93 note 1(a) sends signalling flares to chapter 36"]
+    - [adr, UN0373, related, V, ADR25, "Signal devices, hand 1.4S; also UN0191 1.4G"]
+    - [adr, UN0405, related, V, ADR25, "Cartridges, signal 1.4S; also UN0312 1.4G, UN0054 1.3G"]
+    - [adr, UN0403, related, V, ADR25, "Flares, aerial 1.4G; also UN0404 1.4S"]
+  ammunition.explosives_demolition:
+    - [eu_ml, ML4.a, related, V, CML26, "Demolition charges, devices and kits"]
+    - [eu_ml, ML8, related, V, CML26, "Energetic materials"]
+    - [fsc, "1375", exact, V, PSC25, "Demolition materials: charges, blasting caps, detonating cord"]
+    - [fsc, "1376", related, V, PSC25, "Bulk explosives"]
+    - [hs, "3602 00 00", related, V, CN26, "Prepared explosives"]
+    - [hs, "3603 40 00", related, V, CN26, "Detonating caps"]
+    - [hs, "3603 50 00", related, V, CN26, "Igniters"]
+  ammunition.components:
+    - [eu_ml, ML3.a, related, V, CML26, "ML3 Note 1: links, rotating bands, metal parts, fuzes, safing and arming devices"]
+    - [eu_ml, ML8, related, V, CML26, "Propellants"]
+    - [eu_ml, ML16, related, V, CML26, "Unfinished forgings and castings specially designed for ML1-ML4 items"]
+    - [fsc, "1305", related, V, PSC25, "Small-arms ammunition includes components"]
+    - [fsc, "1390", related, V, PSC25, "Fuzes and primers for 1310-1320 ammunition"]
+    - [fsc, "1395", related, V, PSC25, "Blanks, disks, slugs, cups, rotating bands"]
+    - [hs, "3601 00 00", related, V, CN26, "Propellent powders"]
+    - [hs, "3603 30 00", related, V, CN26, "Percussion caps"]
+    - [adr, UN0044, related, V, ADR25, "Primers, cap type 1.4S"]
+    - [adr, UN0055, related, V, ADR25, "Cases, cartridge, empty, with primer 1.4S"]
+    - [adr, UN0509, related, V, ADR25, "Powder, smokeless 1.4C; also UN0160 1.1C, UN0161 1.3C"]
+    - [adr, UN0367, related, V, ADR25, "Fuzes, detonating 1.4S; also UN0106/0107/0257"]
+
+  firearms.handguns:
+    - [eu_ml, ML1.a, exact, V, CML26, "Handguns"]
+    - [fsc, "1005", exact, I, PSC25, "Guns through 30 mm"]
+    - [hs, "9302 00 00", exact, V, CN26, "Revolvers and pistols"]
+    - [fd_2021_555, B, related, V, FD, "Civilian handguns: B1, B2, B3, B5; A2 if automatic; A7(a) with > 20-round loading device"]
+  firearms.submachine_guns:
+    - [eu_ml, ML1.a, exact, V, CML26, "Sub-machine guns"]
+    - [fsc, "1005", exact, I, PSC25, ""]
+    - [hs, "9301 90 00", exact, V, CN26, "SMGs are military weapons of 9301"]
+    - [fd_2021_555, A2, related, V, FD, "Automatic firearms"]
+  firearms.rifles_carbines:
+    - [eu_ml, ML1.a, exact, V, CML26, "Rifles"]
+    - [fsc, "1005", exact, V2, PSC25, "NSN 1005-01-128-9936 rifle 5.56 mm"]
+    - [hs, "9301 90 00", related, V, R2541, "Military and automatic rifles"]
+    - [hs, "9303 30 00", related, V, CN26, "Sporting, hunting or target rifles"]
+    - [fd_2021_555, A2, related, V, FD, "Automatic; A6 if converted to semi-automatic; A8 folding stock under 60 cm; civilian semi-auto and repeating types in B and C"]
+  firearms.precision_rifles:
+    - [eu_ml, ML1.a, related, V, CML26, "Calibre <= 12.7 mm"]
+    - [eu_ml, ML2.a, related, V, CML26, "Anti-materiel rifles > 12.7 mm"]
+    - [fsc, "1005", exact, V, PSC25, ""]
+    - [hs, "9301 90 00", related, I, CN26, "Military"]
+    - [hs, "9303 30 00", related, I, CN26, "Sporting"]
+    - [fd_2021_555, C, related, V, FD, "Civilian repeating or single-shot rifled long firearms: C1, C2"]
+  firearms.machine_guns:
+    - [eu_ml, ML1.a, related, V, CML26, "Calibre <= 12.7 mm; belt links are ML3 Note 1(a)"]
+    - [eu_ml, ML2.a, related, V, CML26, "Calibre > 12.7 mm (e.g. 14.5 mm)"]
+    - [fsc, "1005", exact, V, PSC25, "Includes machine guns"]
+    - [hs, "9301 90 00", exact, V, R2541, ""]
+    - [fd_2021_555, A2, exact, V, FD, "Automatic firearms"]
+  firearms.shotguns:
+    - [eu_ml, ML1.b, related, V, CML26, "Military-designed, fully automatic, semi-auto or pump; hunting/sporting smooth-bore excluded"]
+    - [fsc, "1005", related, I, PSC25, ""]
+    - [hs, "9303 20 95", related, V, CN26, "Sporting, hunting or target shotguns; 9303 20 10 single-barrel smooth bore"]
+    - [hs, "9301 90 00", related, I, CN26, "Military shotguns"]
+    - [fd_2021_555, B, related, I, FD, "Civilian shotguns fall in B or C by action and magazine (Annex I Part II); check per item"]
+  firearms.launchers:
+    - [eu_ml, ML2.a, exact, V, CML26, "Projectile launchers, anti-tank weapons, recoilless rifles"]
+    - [fsc, "1010", related, V, PSC25, "Grenade launchers for integral-cartridge grenades"]
+    - [fsc, "1055", related, V, PSC25, "Launchers, rocket and pyrotechnic (unguided)"]
+    - [hs, "9301 20 00", exact, V, CN26, "Rocket launchers, grenade launchers and similar projectors"]
+    - [fd_2021_555, A1, related, V, FD, "Explosive military missiles and launchers"]
+    - [stanag, "4599", related, V, IT40, "Weapon-launched grenade systems design safety"]
+  firearms.mortars:
+    - [eu_ml, ML2.a, exact, V, CML26, "Mortars"]
+    - [fsc, "1010", related, V, PSC25, "60 mm"]
+    - [fsc, "1015", related, V, PSC25, "81 and 120 mm"]
+    - [hs, "9301 10 00", exact, V, CN26, "Artillery weapons incl. mortars"]
+    - [fd_2021_555, A1, related, V, R2541, "CN 9301 10 00 is listed under A1 in Reg. 2025/41 Annex I"]
+  firearms.artillery_systems:
+    - [eu_ml, ML2.a, exact, V, CML26, "Guns, howitzers, cannon"]
+    - [fsc, "1015", related, V, PSC25, "75-125 mm"]
+    - [fsc, "1020", related, V, PSC25, "Over 125 through 150 mm"]
+    - [fsc, "1025", related, V, PSC25, "Over 150 through 200 mm (155 mm)"]
+    - [hs, "9301 10 00", exact, V, CN26, "Artillery weapons"]
+    - [hs, "8710 00 00", related, I, CN26, "Self-propelled on an armoured vehicle"]
+
+  parts.small_arms_parts:
+    - [eu_ml, ML1.a, related, V, CML26, "'Specially designed components therefor' in the ML1/ML2 headings"]
+    - [eu_ml, ML16, related, V, CML26, "Unfinished forgings and castings"]
+    - [fsc, "1005", related, I, PSC25, "Same class as the weapon"]
+    - [fsc, "1090", related, V, PSC25, "Assemblies interchangeable between weapons of two or more classes"]
+    - [hs, "9305 10 00", related, V, CN26, "Of revolvers or pistols"]
+    - [hs, "9305 20 00", related, V, CN26, "Of shotguns or rifles of 9303"]
+    - [hs, "9305 91 00", related, V, CN26, "Of military weapons of 9301"]
+    - [fd_2021_555, essential_component, related, V, FD, "Essential components take the category of their firearm (Art. 1(1)(2))"]
+    - [cpvsuppl, DA44, exact, V, CPVSUPPL, "Spare parts"]
+  parts.accessories_tools:
+    - [eu_ml, ML1.d, related, V, CML26, "Detachable magazines, sound suppressors, gun-mountings, flash suppressors (weapons <= 12.7 mm)"]
+    - [eu_ml, ML2.c, related, V, CML26, "Mountings and detachable magazines for ML2 weapons"]
+    - [fsc, "1005", related, I, PSC25, ""]
+    - [fsc, "8465", related, V, PSC25, "Ammunition belts, pistol belts"]
+    - [hs, "9305 99 00", related, I, CN26, "Parts and accessories; sound moderators ex 9305 10 00 (R2541)"]
+    - [fd_2021_555, A7, related, V, FD, "Loading devices > 20 rounds (short) or > 10 rounds (long) for centre-fire semi-autos need authorisation (Art. 13(1))"]
+  parts.sights_optics:
+    - [eu_ml, ML1.d, related, V, CML26, "ML1.d.5 sights with electronic image processing; ML1.d.6 sights specially designed for military use"]
+    - [eu_ml, ML2.c, related, V, CML26, "Weapon sights and sight mounts for ML2 weapons"]
+    - [fsc, "1240", exact, V, PSC25, "Optical sighting and ranging equipment, incl. telescopic sights"]
+    - [fsc, "5855", related, V, PSC25, "Night vision equipment"]
+    - [hs, "9013 10 90", related, V, CN26, "Telescopic sights, unless mounted on or presented with the firearm (chapter 93 note 1(d))"]
+  parts.heavy_weapon_parts:
+    - [eu_ml, ML2.a, related, V, CML26, "Specially designed components of ML2 weapons"]
+    - [fsc, "1055", related, V, PSC25, "Rocket launcher parts"]
+    - [fsc, "1015", related, I, PSC25, "Same class as the weapon (by bore)"]
+    - [hs, "9305 91 00", exact, V, CN26, "Parts of military weapons of 9301"]
+    - [cpvsuppl, DA44, exact, V, CPVSUPPL, "Spare parts"]
+
+  misc_weapons.bladed:
+    - [eu_ml, none, related, I, CML26, "Not listed in ML1-ML4; national law only (Firearms Directive Annex I Part I)"]
+    - [fsc, "1095", related, V, PSC25, "Bayonets"]
+    - [fsc, "8465", related, V, PSC25, "Swords with scabbards"]
+    - [fsc, "5110", related, V, PSC25, "Machetes"]
+    - [hs, "9307 00 00", exact, V, CN26, "Swords, cutlasses, bayonets, lances and similar arms"]
+  misc_weapons.other_weapons:
+    - [eu_ml, ML2.b, related, V, CML26, "Military gas/smoke canister projectors; ML2.b does not apply to signal pistols"]
+    - [eu_ml, ML7.d, related, V, CML26, "Riot-control agents; self-defence packs excluded"]
+    - [fsc, "1095", related, V, PSC25, "Signal guns, flare guns, line-throwing guns"]
+    - [hs, "9303 90 00", related, V, CN26, "Very pistols, blank-firing pistols, line-throwing guns"]
+    - [hs, "9304 00 00", related, V, CN26, "Spring, air or gas guns and pistols, truncheons"]
+    - [fd_2021_555, alarm_signal, related, V, FD, "Signal-only devices are not firearms; alarm and signal weapons are a separate class (Art. 1(1)(4))"]

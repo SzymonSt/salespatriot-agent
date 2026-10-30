@@ -168,6 +168,17 @@ An empty `deadline` usually means the notice uses a request-to-participate deadl
   advance_payment_pct, carrier, capacity_confirmed}})` — any TED notice works (looked up live if not in
   `ted_open_tenders`); `load_context()` caches sanctions/history once per process (~20 s cold, ~1 s per deal).
   CLI: `python3 deal_due_diligence.py --tender 671826-2026 --supplier supplier-ita-n0057381f --offer '{"total_value":128000,"delivery_date":"2027-04-30","incoterms":"DAP"}'`.
+- **Ontology** (product layer; company facts stay in the profile tables above):
+  - `data/families.yaml` + `seed_product_taxonomy.py` — the product taxonomy (4 CPV classes → 28 families + 7 out of
+    scope, attribute schemas, calibres, regulatory crosswalk) and the script that seeds the `product_*` tables. Change it
+    only through a proposal (`product_taxonomy_proposals`) and a reviewed PR with a `taxonomy_version` bump.
+  - Docs: `knowledge_base/25-product-families.md` (taxonomy), `knowledge_base/26-product-classification-pipeline.md`
+    (classification), `knowledge_base/27-ontology-integration-guide.md` (how profile tables, bridge, classifier and UI fit).
+  - Bridge rule: database triggers (`product_bridge_*`) copy `supplier_contracts`, `suppliers.catalogue`, `ted_notices`
+    and `ted_awards` into `product_items`. **If you change the profile tables or the catalogue JSON shape, update the
+    `product_bridge_*` functions in the same change** and re-run the backfill; see `knowledge_base/27-ontology-integration-guide.md` §4.
+  - The UI reads families, calibres and regulatory badges from the `ui_*` views via `web/ontology.js`; never re-implement
+    classification or calibre normalisation in JavaScript (`calibreKeys` / `isWeapons` in `web/agents.js` are fallback only).
 
 ## Supabase (project `hackathon`, org SalesPatriot)
 

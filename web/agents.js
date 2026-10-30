@@ -74,6 +74,61 @@
     return score;
   }
 
+  /* ---------- product-ontology matches (optional) ----------
+   * `onto` = { rowsFor(publicationNumber) → ui_match_tender rows or undefined,
+   *            itemFor(supplierId, catalogueIndex, product) → classified ui_items row or null }.
+   * When the ontology has ranked a tender its matches come first and carry `ontology` (the row, with reasons);
+   * local matches it did not rank are kept. Without `onto`, or without rows, the local matching decides alone. */
+  const CLASS_OF_CPV = { "3533": "ammunition", "3532": "firearms", "3534": "parts", "3531": "misc_weapons" };
+  const ontologyRows = (onto, notice) => (onto && notice.notice_number && onto.rowsFor(notice.notice_number)) || [];
+
+  /** The supplier's catalogue item for an ontology row: classified in the same family, or (if unclassified)
+   *  same calibre within the same CPV class. Inferred items never count, as in scoreMatch. */
+  function itemForRow(supplier, row, onto) {
+    const rowClass = String(row.family_id || "").split(".")[0];
+    let best = null;
+    (supplier.catalogue?.items || []).forEach((item, index) => {
+      const status = item.evidence?.verification_status;
+      if (status === "inferred") return;
+      const classified = onto?.itemFor ? onto.itemFor(supplier.id, index, item.product) : null;
+      const sameFamilyId = Boolean(row.family_id && classified?.family_id === row.family_id);
+      if (classified?.family_id && !sameFamilyId) return;
+      const cpvClass = CLASS_OF_CPV[CATEGORY_FAMILY[item.category] || String(item.cpv || "").slice(0, 4)];
+      const sameCalibre = Boolean(row.calibre && (classified?.calibre === row.calibre ||
+        (cpvClass === rowClass && calibreKeys(itemText(item)).has(row.calibre))));
+      if (!sameFamilyId && !sameCalibre) return;
+      const score = (sameFamilyId ? 4 : 0) + (sameCalibre ? 3 : 0) + (status === "document_verified" ? 2 : 0) +
+        (parsePrice(item.commercial?.derived_unit_price) ? 1 : 0);
+      if (!best || score > best.score) best = { score, item };
+    });
+    return best?.item || null;
+  }
+
+  /** A negotiable match from one ontology row: the supplier must be on the platform with a matching catalogue item. */
+  function ontologyMatch(buyer, notice, row, supplier, onto) {
+    if (!supplier) return null;
+    const local = bestOfSupplier(buyer, notice, supplier);
+    const item = local?.item || itemForRow(supplier, row, onto);
+    if (!item) return null;
+    const score = 50 + 2 * (row.key_matches || 0) + Math.min(row.proven_lots || 0, 10) + (local?.score || 0);
+    return { score, buyer, supplier, notice, item, ontology: row };
+  }
+
+  /** Negotiable ontology matches for one tender, in the ontology's order. */
+  function ontologyRanked(buyer, notice, suppliers, onto) {
+    const rows = ontologyRows(onto, notice);
+    if (!rows.length) return [];
+    const byId = new Map(suppliers.map((s) => [s.id, s]));
+    const seen = new Set();
+    const ranked = [];
+    for (const row of rows) {
+      if (!row.supplier_id || seen.has(row.supplier_id)) continue;
+      const m = ontologyMatch(buyer, notice, row, byId.get(row.supplier_id), onto);
+      if (m) { ranked.push(m); seen.add(m.supplier.id); }
+    }
+    return ranked;
+  }
+
   /** Best (notice, item) match for every buyer/supplier pair, best first. */
   function findMatches(buyers, suppliers) {
     const best = new Map();
@@ -95,8 +150,10 @@
     return [...best.values()].sort((a, b) => b.score - a.score);
   }
 
-  /** Best supplier item for one tender, or null. */
-  function bestForNotice(buyer, notice, suppliers) {
+  /** Best supplier item for one tender, or null. The ontology's first negotiable match wins when `onto` has one. */
+  function bestForNotice(buyer, notice, suppliers, onto) {
+    const ranked = ontologyRanked(buyer, notice, suppliers, onto);
+    if (ranked.length) return ranked[0];
     let best = null;
     for (const supplier of suppliers) {
       for (const item of supplier.catalogue?.items || []) {
@@ -107,12 +164,16 @@
     return best;
   }
 
-  /** All suppliers that match one tender, best first, one item per supplier. */
-  function rankForNotice(buyer, notice, suppliers) {
-    return suppliers
+  /** All suppliers that match one tender, best first, one item per supplier (ontology matches first when `onto` has them). */
+  function rankForNotice(buyer, notice, suppliers, onto) {
+    const local = suppliers
       .map((supplier) => bestOfSupplier(buyer, notice, supplier))
       .filter(Boolean)
       .sort((a, b) => b.score - a.score || (b.supplier.due_diligence?.total_score ?? 0) - (a.supplier.due_diligence?.total_score ?? 0));
+    const ranked = ontologyRanked(buyer, notice, suppliers, onto);
+    if (!ranked.length) return local;
+    const seen = new Set(ranked.map((m) => m.supplier.id));
+    return ranked.concat(local.filter((m) => !seen.has(m.supplier.id)));
   }
 
   /** The supplier's best item for one tender, or null. */
@@ -125,10 +186,14 @@
     return best;
   }
 
-  /** Open tenders from all buyers that one supplier can answer, best first. */
-  function opportunitiesFor(supplier, buyers) {
+  /** Open tenders from all buyers that one supplier can answer, best first (ontology-confirmed ones first). */
+  function opportunitiesFor(supplier, buyers, onto) {
+    const viaOntology = (buyer, notice) => {
+      const row = ontologyRows(onto, notice).find((r) => r.supplier_id === supplier.id);
+      return row ? ontologyMatch(buyer, notice, row, supplier, onto) : null;
+    };
     return buyers
-      .flatMap((buyer) => (buyer.recent_notices || []).map((notice) => bestOfSupplier(buyer, notice, supplier)))
+      .flatMap((buyer) => (buyer.recent_notices || []).map((notice) => viaOntology(buyer, notice) || bestOfSupplier(buyer, notice, supplier)))
       .filter(Boolean)
       .sort((a, b) => b.score - a.score || (b.notice.published > a.notice.published ? 1 : -1));
   }
@@ -182,7 +247,7 @@
   }
 
   /* ---------- conversation scripts ---------- */
-  function buildDeal({ buyer, supplier, notice, item }) {
+  function buildDeal({ buyer, supplier, notice, item, ontology }) {
     const buyerShort = shortName(buyer.name);
     const supplierShort = shortName(supplier.name);
     const anchor = parsePrice(item.commercial.derived_unit_price);
@@ -230,7 +295,9 @@
     }
 
     const brand = item.brand_model ? ` (${item.brand_model})` : "";
-    say("supplier", `Hi, sales agent of ${supplier.name} here. We can supply: ${item.product}${brand}.`);
+    // Matches found by the product ontology show the family (and calibre) they were matched on.
+    const family = ontology?.family_name ? [{ label: `Product family: ${ontology.family_name}${ontology.calibre ? ` · ${ontology.calibre}` : ""}` }] : null;
+    say("supplier", `Hi, sales agent of ${supplier.name} here. We can supply: ${item.product}${brand}.`, family ? { evidence: family } : {});
     if (item.evidence.verification_status === "document_verified") {
       const largest = itr.largest_order ? ` Largest order so far: ${itr.largest_order}.` : "";
       say("supplier", `Not just a claim: we were awarded this ${itr.deliveries || 1}× on TED, most recently ${itr.last_awarded || "recently"}.${largest}`, {

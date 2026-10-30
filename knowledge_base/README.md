@@ -54,6 +54,10 @@ user or judge. If a fact is missing, say it is missing — do not invent it.
 - [15-agent-due-diligence-network.md](15-agent-due-diligence-network.md) — agent-to-agent reference checks
 - [23-self-learning-rag.md](23-self-learning-rag.md) — **self-learning RAG: TED + platform + uploaded deals as deal cards, learning-to-rank, backtest recall@5, live sync**
 - [22-kyc-and-deal-due-diligence.md](22-kyc-and-deal-due-diligence.md) — **KYC on onboarding (K1–K11), monitoring, per-deal checks (D1–D14 incl. licences, transport)**
+- [25-product-families.md](25-product-families.md) — **product taxonomy: 4 CPV classes → 28 families (+7 out of scope), attribute schemas, ePO mapping, EU Military List / FSC / HS / ADR crosswalk**; source of truth [`../data/families.yaml`](../data/families.yaml), deployed in Supabase (`product_*` tables)
+- [26-product-classification-pipeline.md](26-product-classification-pipeline.md) — **how every new TED lot, offer and demand gets a family and attributes live**: cascade CPV → rules → LLM, claims, taxonomy versions, agent tools, backlog T1–T12
+- [27-ontology-integration-guide.md](27-ontology-integration-guide.md) — **how the company-profile tables and the web UI plug into the product ontology**: bridge triggers, classifier, `ui_*` read API, rules for changing either side, verification SQL, object map, FAQ
+- [`research/`](research/) — full source notes behind 25: ePO/eForms item model, defence taxonomies (EU Military List, NATO FSC, CN 2026, ADR, STANAG)
 
 ### Execution
 - Diagrams (FigJam): https://www.figma.com/board/NjisKpwdfdBz797zpUDJeQ/Untitled — A solution logic, B autonomous deal flow, C KYC on joining vs per-deal due diligence (with K1–K11 / D1–D14 tables)

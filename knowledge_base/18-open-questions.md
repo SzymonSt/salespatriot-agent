@@ -35,5 +35,5 @@ about these, say the data is missing instead of guessing.
 
 ## Product questions
 - Which non-controlled item/service do we use for the autonomous demo deal?
-- Which capability taxonomy do we start with (own list vs. mapped from CPV)?
+- ~~Which capability taxonomy do we start with (own list vs. mapped from CPV)?~~ → resolved: two levels, CPV class → product family with attribute schemas, see [25](25-product-families.md).
 - What does a supplier agent share in reference checks by default?

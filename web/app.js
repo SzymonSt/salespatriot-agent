@@ -4,6 +4,8 @@
   "use strict";
 
   const A = window.Agents;
+  // Optional product-ontology layer (ontology.js, Supabase). Without it every page renders from the profile files alone.
+  const O = window.Ontology?.enabled ? window.Ontology : null;
   const DATA_URL = "/data/profiles/";
   const MAX_OPEN = () => (window.innerWidth < 760 ? 1 : window.innerWidth < 1240 ? 2 : 3);
   const COUNTRIES = {
@@ -22,7 +24,7 @@
   const PREVIEW = 6;
 
   const state = { suppliers: [], buyers: [], byId: new Map(), logos: {}, matches: [], demo: [], convs: new Map(), open: [],
-    sessionId: null, liveViews: [], requests: {}, requestsSeeded: new Set() };
+    sessionId: null, liveViews: [], requests: {}, requestsSeeded: new Set(), ontViews: [], expanded: new Set() };
 
   /* ---------- DOM helpers ---------- */
   function h(tag, props, ...children) {
@@ -78,6 +80,173 @@
     state.logos = await fetch("/logos/logos.json").then((r) => (r.ok ? r.json() : {})).catch(() => ({}));
     state.matches = A.findMatches(buyers, suppliers);
     state.demo = A.demoMatches(state.matches, 6);
+    // The ontology loads in the background (never awaited); pages redraw their ontology parts when it arrives.
+    if (O) {
+      O.onChange(refreshOntology);
+      O.load({ publicationNumbers: buyers.flatMap((b) => (b.recent_notices || []).map((n) => n.notice_number)) }).catch(() => {});
+    }
+  }
+
+  /* ---------- product ontology (optional; see ontology.js) ---------- */
+  // Ontology parts render from what has arrived so far: hidden slots stay empty and local matching decides
+  // until data comes, so a page first renders exactly as without Supabase, then only these parts redraw.
+  function ontFill(el, build, hideEmpty) {
+    const draw = () => {
+      const nodes = [build()].flat(Infinity).filter((n) => n != null && n !== false && n !== "");
+      el.replaceChildren(...nodes);
+      if (hideEmpty) el.hidden = !nodes.length;
+    };
+    draw();
+    state.ontViews.push(draw);
+    return el;
+  }
+  const ontSlot = (build) => ontFill(h("div", { class: "ont" }), () => (O ? build() : null), true);
+  const ontView = (build) => ontFill(h("div", {}), build, false);
+  const refreshOntology = () => state.ontViews.forEach((draw) => draw());
+  // What agents.js needs to rank with ui_match_tender rows (null: local matching only).
+  const ONTO = O ? { rowsFor: (pub) => O.cachedMatch(pub), itemFor: (id, index, product) => O.itemForCatalogue(id, index, product) } : null;
+  const matchTenders = (notices) => { if (O) for (const n of notices) if (n.notice_number) O.matchTender(n.notice_number); };
+
+  const calibreText = (code) => (O?.calibreLabel(code) || String(code || "")).replace(/(\d)x(\d)/g, "$1×$2");
+  const calibreBadge = (code) => (code ? h("span", { class: "badge" }, calibreText(code)) : null);
+  const plural = (n, word) => `${n} ${word}${n === 1 ? "" : "s"}`;
+
+  /** A family name that opens its regulatory panel (interactive, so it uses the accent colour). */
+  function familyChip(familyId, name, calibre, how, plain) {
+    const label = name || O?.family(familyId)?.name || familyId;
+    if (!familyId) return label ? h("span", {}, label) : null;
+    return h("button", { class: plain ? "link-btn" : "chip", type: "button", title: "Export-control and transport codes",
+      "aria-haspopup": "dialog", onclick: () => showRegulatory(familyId, label, calibre, how) }, label);
+  }
+
+  function howClassified(r) {
+    const method = { cpv: "CPV code", rules: "keyword rules", llm: "language model", agent: "agent", manual: "a person" }[r.classification_method] || r.classification_method;
+    return [method && `Classified by ${method}`, typeof r.confidence === "number" && `confidence ${Math.round(r.confidence * 100)}%`,
+      r.needs_review ? "needs review" : null].filter(Boolean).join(" · ");
+  }
+
+  /** Family chip + calibre badge for one classified item (ui_items row), or nothing. */
+  function itemChips(r) {
+    if (!r || (!r.family_id && !r.class_id)) return null;
+    return h("div", { class: "chips" },
+      r.family_id ? familyChip(r.family_id, r.family_name, r.calibre, howClassified(r))
+        : h("span", { class: "badge" }, r.class_name || O.family(r.class_id)?.name || r.class_id),
+      calibreBadge(r.calibre),
+      r.needs_review || !r.family_id ? status("Unconfirmed", "neutral") : null);
+  }
+
+  /** Families and calibres of one tender (ui_tender_families), or nothing. */
+  function tenderChips(pub) {
+    const fams = O.familiesForTender(pub).filter((f) => f.family_id);
+    if (!fams.length) return null;
+    const calibres = [...new Set(fams.flatMap((f) => f.calibres || []).filter(Boolean))];
+    return h("div", { class: "chips" },
+      fams.slice(0, 4).map((f) => familyChip(f.family_id, f.family_name, f.calibres?.length === 1 ? f.calibres[0] : null, howClassified(f))),
+      calibres.slice(0, 4).map(calibreBadge));
+  }
+
+  /** Why the ontology matched a tender and a supplier (ui_match_tender reasons). */
+  function matchReasons(m) {
+    const r = m?.ontology;
+    if (!r) return null;
+    const what = [r.family_name, r.calibre && calibreText(r.calibre)].filter(Boolean).join(", ");
+    const reasons = (r.reasons || []).filter(Boolean).slice(0, 3);
+    return h("div", { class: "row-sub wrap" }, `Matched on product family${what ? ` (${what})` : ""}`, reasons.length ? `: ${reasons.join("; ")}` : "");
+  }
+
+  /** Companies proven on TED for this tender's family that are not on the platform yet. */
+  function offPlatform(pub) {
+    const names = [...new Set((O.cachedMatch(pub) || []).filter((r) => !r.supplier_id).map((r) => r.org_name || r.org_ref).filter(Boolean))];
+    return names.length ? h("div", { class: "row-sub wrap" }, `Also proven on TED, not on the platform: ${names.slice(0, 3).map((n) => A.shortName(n, 40)).join(", ")}`) : null;
+  }
+
+  function supplierFamilies(s) {
+    const fams = O.familiesForSupplier(s.id);
+    if (!fams.length) return null;
+    return section(`Product families (${fams.length})`, group(
+      h("ul", { class: "rows" }, fams.map((f) => h("li", { class: "row" },
+        h("div", { class: "row-main" },
+          h("div", { class: "row-title wrap" }, familyChip(f.family_id, f.family_name, f.calibres?.length === 1 ? f.calibres[0] : null, null, true)),
+          h("div", { class: "row-sub wrap" }, [f.class_name, f.last_award && `last award ${f.last_award}`].filter(Boolean).join(" · ")),
+          f.calibres?.length ? h("div", { class: "chips" }, f.calibres.slice(0, 8).map(calibreBadge)) : null,
+          f.best_evidence ? h("div", { class: "row-sub wrap" }, f.best_evidence) : null),
+        h("div", { class: "row-end" },
+          f.proven_lots ? status(`Proven · ${plural(f.proven_lots, "TED lot")}`, "verified") : status("Declared only", "neutral"),
+          f.declared_items ? h("span", { class: "caption" }, plural(f.declared_items, "catalogue item")) : null)))),
+      h("p", { class: "caption pad" }, "From the product ontology: TED contracts and catalogue items classified into product families. Select a family for its export-control and transport codes.")));
+  }
+
+  /* Regulatory panel: one modal sheet, filled from ui_regulatory_profile. */
+  const REG_SECTIONS = [["eu_ml", "EU Military List"], ["fsc", "NATO Supply Classification (FSC)"], ["hs", "HS / CN customs code"],
+    ["adr", "ADR dangerous goods (transport)"], ["fd_2021_555", "Firearms Directive (EU) 2021/555"], ["stanag", "NATO STANAG"]];
+  let regSheet = null;
+
+  function showRegulatory(familyId, label, calibre, how) {
+    if (!regSheet) {
+      regSheet = h("dialog", { class: "sheet", "aria-labelledby": "reg-title" });
+      // A click on the backdrop (the dialog element itself, outside its content) closes it.
+      regSheet.addEventListener("click", (e) => { if (e.target === regSheet) regSheet.close(); });
+      document.body.append(regSheet);
+    }
+    if (typeof regSheet.showModal !== "function") return; // very old browser: no panel
+    const fam = O.family(familyId);
+    const body = h("div", { class: "sheet-body" }, h("p", { class: "secondary" }, "Loading codes…"));
+    regSheet.replaceChildren(h("div", { class: "sheet-inner" },
+      h("div", { class: "sheet-head" },
+        h("div", { style: "min-width:0" },
+          h("h2", { id: "reg-title" }, label),
+          h("p", { class: "caption" }, [fam?.class_name, calibre && calibreText(calibre), how].filter(Boolean).join(" · "))),
+        h("button", { class: "btn btn-quiet", type: "button", onclick: () => regSheet.close() }, "Done")),
+      body));
+    if (!regSheet.open) regSheet.showModal();
+    const token = (regSheet.dataset.token = `${familyId}|${calibre || ""}|${Date.now()}`);
+    O.regulatory(familyId, calibre).then((p) => {
+      if (regSheet.dataset.token === token) body.replaceChildren(...regulatoryBody(p));
+    });
+  }
+
+  // Crosswalk notes start with the knowledge-base evidence tag: [V] verified, [V2] secondary source, [I] inference.
+  const TAG = /^\[(V2?|I)\]\s*/;
+  /** One code: {code, label, note, relation, verified, source_url}. Anything not marked verified is our inference. */
+  function codeRow(e) {
+    const tag = (TAG.exec(e.note || "") || [])[1];
+    const verified = e.verified === true;
+    const label = verified ? (tag === "V2" ? "Verified · secondary source" : "Verified") : "Inference";
+    return h("li", { class: "row" },
+      h("div", { class: "row-main" },
+        h("div", { class: "row-title wrap" }, [String(e.code), e.label].filter(Boolean).join(" · ")),
+        h("div", { class: "row-sub wrap" }, [e.relation === "exact" ? "Exact match" : null, String(e.note || "").replace(TAG, "")].filter(Boolean).join(" · "))),
+      h("div", { class: "row-end" }, status(label, verified ? "verified" : "neutral"), e.source_url ? external(e.source_url, "Source ›") : null));
+  }
+
+  /** Codes that follow from the item's calibre (KB 25 §7 item rules), applied by us: always shown as inference. */
+  function derivedRows(d, stanags) {
+    if (!d) return [];
+    const listed = (code) => stanags.some((e) => String(code).includes(String(e.code)));
+    const rule = (x) => [x.label, x.basis, x.rule].filter(Boolean).join(" · ");
+    return [
+      d.ml_by_calibre?.code ? { code: `EU Military List ${d.ml_by_calibre.code}`, note: rule(d.ml_by_calibre) } : null,
+      d.fsc_by_bore?.code ? { code: `NATO FSC ${d.fsc_by_bore.code}`, note: rule(d.fsc_by_bore) } : null,
+      d.adr_typical?.un_number ? { code: `ADR ${[d.adr_typical.un_number, d.adr_typical.classification].filter(Boolean).join(" ")}`,
+        note: [d.adr_typical.name, d.adr_typical.transport_category != null && `transport category ${d.adr_typical.transport_category}`, d.adr_typical.note].filter(Boolean).join(" · ") } : null,
+      d.calibre_standard && !listed(d.calibre_standard) ? { code: d.calibre_standard, note: "Calibre standard" } : null,
+    ].filter(Boolean).map(codeRow);
+  }
+
+  function regulatoryBody(p) {
+    if (!p) return [h("p", { class: "secondary" }, "Regulatory codes aren't available right now. Try again in a moment.")];
+    const list = (v) => (Array.isArray(v) ? v.filter((e) => e && e.code != null) : []);
+    const derived = derivedRows(p.derived, list(p.stanag));
+    const sections = REG_SECTIONS.map(([key, title]) => [title, list(p[key])]).filter(([, e]) => e.length);
+    const notes = (Array.isArray(p.notes) ? p.notes : []).filter((n) => typeof n === "string" && n);
+    if (!derived.length && !sections.length) return [h("p", { class: "secondary" }, "No regulatory codes are recorded for this family yet.")];
+    return [
+      derived.length ? h("div", { class: "reg" }, h("h3", {}, `For ${p.derived.calibre_label || calibreText(p.derived.calibre) || "this calibre"}`),
+        h("ul", { class: "rows" }, derived)) : null,
+      ...sections.map(([title, e]) => h("div", { class: "reg" }, h("h3", {}, title), h("ul", { class: "rows" }, e.map(codeRow)))),
+      notes.length ? h("div", { class: "reg" }, h("h3", {}, "Notes"), h("ul", { class: "bullets caption" }, notes.map((n) => h("li", {}, n)))) : null,
+      h("p", { class: "caption" }, "Verified: stated in the cited source. Inference: our reading of the rules. These are the family's typical codes; the item, its calibre and the buyer decide the final classification."),
+    ].filter(Boolean);
   }
 
   /* ---------- routing ---------- */
@@ -87,6 +256,8 @@
     const company = isCompany && id ? state.byId.get(`${section}-${decodeURIComponent(id)}`) : null;
     const page = isCompany ? `${section}s` : section === "signin" ? "workspace" : section;
     state.liveViews = [];
+    state.ontViews = [];
+    state.expanded = new Set();
     document.querySelectorAll(".nav nav a").forEach((a) => {
       if (a.dataset.route === page) a.setAttribute("aria-current", "page");
       else a.removeAttribute("aria-current");
@@ -221,17 +392,18 @@
   const group = (...children) => h("div", { class: "group" }, ...children);
   const stat = (value, label) => h("div", { class: "stat" }, h("b", {}, value), h("span", {}, label));
 
-  /** A list that shows the first PREVIEW rows and a "Show all" button for the rest. */
-  function expandable(items, render) {
+  /** A list that shows the first PREVIEW rows and a "Show all" button for the rest.
+   *  `key` keeps a list open across redraws (lists that redraw when ontology data arrives). */
+  function expandable(items, render, key) {
     const ul = h("ul", { class: "rows" });
-    let all = items.length <= PREVIEW;
+    let all = items.length <= PREVIEW || (key != null && state.expanded.has(key));
     const more = h("button", { class: "btn btn-quiet show-all", type: "button" });
     const draw = () => {
       ul.replaceChildren(...(all ? items : items.slice(0, PREVIEW)).map(render));
       more.hidden = all;
       more.textContent = `Show all ${items.length}`;
     };
-    more.addEventListener("click", () => { all = true; draw(); });
+    more.addEventListener("click", () => { all = true; if (key != null) state.expanded.add(key); draw(); });
     draw();
     return group(ul, more);
   }
@@ -242,6 +414,7 @@
     const flags = cap.risk_flags || [];
     const dd = s.due_diligence;
     const items = s.catalogue?.items || [];
+    O?.loadSupplierItems(s.id);
     return h("div", { class: "page" },
       pageHeader(s, { href: "/suppliers", label: "Suppliers" }, [country(s.country), s.city, businessModel(s), s.company_size && `${s.company_size} company`]),
       flags.length ? h("div", { class: "notice risk" }, h("b", {}, flags.length > 1 ? "Risk flags" : "Risk flag"),
@@ -257,13 +430,14 @@
         group(h("div", { class: "split" },
           h("div", {}, h("h3", {}, "Proven on TED contracts"), h("ul", { class: "bullets" }, (cap.proven || []).map((x) => h("li", {}, x)))),
           h("div", {}, h("h3", {}, "Offered by the company"), h("ul", { class: "bullets" }, (cap.offered || []).map((x) => h("li", {}, x))))))),
-      section(`Products (${items.length})`, expandable(items, productRow)),
+      ontSlot(() => supplierFamilies(s)),
+      section(`Products (${items.length})`, expandable(items, (i) => productRow(i, s.id, items.indexOf(i)))),
       dd ? section("Due diligence", dueDiligence(dd)) : null,
-      section(`Contract awards (${s.contracts?.length || 0})`, expandable(s.contracts || [], contractRow)),
+      section(`Contract awards (${s.contracts?.length || 0})`, expandable(s.contracts || [], (k) => contractRow(k, s.id))),
       s.offering ? section("About the company", about(s.offering)) : null);
   }
 
-  function productRow(i) {
+  function productRow(i, supplierId, index) {
     const [label, tone] = EVIDENCE[i.evidence.verification_status] || ["", "neutral"];
     const specs = Object.entries(i.specs || {}).filter(([, v]) => String(v).length < 60).slice(0, 3).map(([, v]) => v);
     const tr = i.track_record || {};
@@ -272,19 +446,21 @@
         h("div", { class: "row-title wrap" }, i.product),
         h("div", { class: "row-sub wrap" }, [i.brand_model, ...specs].filter(Boolean).join(" · ")),
         tr.largest_order ? h("div", { class: "row-sub wrap" }, `Largest order: ${tr.largest_order}`) : null,
-        i.commercial?.derived_unit_price ? h("div", { class: "row-sub wrap" }, `Awarded price: ${i.commercial.derived_unit_price}`) : null),
+        i.commercial?.derived_unit_price ? h("div", { class: "row-sub wrap" }, `Awarded price: ${i.commercial.derived_unit_price}`) : null,
+        supplierId ? ontSlot(() => itemChips(O.itemForCatalogue(supplierId, index, i.product))) : null),
       h("div", { class: "row-end" }, status(label, tone),
         tr.deliveries ? h("span", { class: "caption" }, `${tr.deliveries} award${tr.deliveries > 1 ? "s" : ""}`) : null));
   }
 
-  function contractRow(k) {
+  function contractRow(k, supplierId) {
     const v = k.awarded_value && k.awarded_value.value > 0 ? money(k.awarded_value.value, k.awarded_value.currency) : null;
     return h("li", { class: "row" },
       h("div", { class: "row-main" },
         h("div", { class: "row-title wrap" }, k.title && k.title.length > 14 ? k.title : k.notice_title),
         h("div", { class: "row-sub wrap" }, [k.buyer, country(k.buyer_country), k.published,
           k.tenders_received ? `${k.tenders_received} bid${k.tenders_received > 1 ? "s" : ""}` : null,
-          k.framework_agreement ? "framework" : null].filter(Boolean).join(" · "))),
+          k.framework_agreement ? "framework" : null].filter(Boolean).join(" · ")),
+        supplierId ? ontSlot(() => itemChips(O.itemForContract(supplierId, k.notice_number, k.lot_id))) : null),
       h("div", { class: "row-end" }, v ? h("span", {}, v) : null, external(k.ted_url, "TED ›")));
   }
 
@@ -315,27 +491,32 @@
 
   function buyerPage(b) {
     const notices = b.recent_notices || [];
-    const noticeMatch = new Map(notices.map((n) => [n.notice_number, A.bestForNotice(b, n, state.suppliers)]));
-    const matched = [...noticeMatch.values()].filter(Boolean);
+    matchTenders(notices);
+    // Ontology matches (ui_match_tender) once they arrive, local matching until then and as fallback.
+    const matchFor = (n) => A.bestForNotice(b, n, state.suppliers, ONTO);
     const bySupplierName = new Map(state.suppliers.flatMap((s) => [[s.name, s], [s.legal_name, s]]));
     return h("div", { class: "page" },
       pageHeader(b, { href: "/buyers", label: "Buyers" }, [country(b.country), b.city, b.main_activity && `main activity: ${b.main_activity}`]),
       h("p", { class: "lead" }, b.summary),
-      h("div", { class: "stats" },
-        stat(b.ted_activity?.notices_total ?? 0, "notices on TED"),
-        stat(notices.length, "recent weapons and ammunition tenders"),
-        stat(matched.length, "tenders with a supplier match"),
-        stat(new Set(matched.map((m) => m.supplier.id)).size, "matching suppliers")),
-      section(`Recent weapons and ammunition tenders (${notices.length})`, expandable(notices, (n) => {
-        const match = noticeMatch.get(n.notice_number);
-        return h("li", { class: "row" },
-          h("div", { class: "row-main" },
-            h("div", { class: "row-title wrap" }, n.title),
-            h("div", { class: "row-sub wrap" }, [n.published, n.value ? money(Number(n.value), n.currency || "EUR") : null].filter(Boolean).join(" · "), " · ", external(n.ted_url, "TED ›"))),
-          h("div", { class: "row-end" }, match
+      ontView(() => {
+        const matched = notices.map(matchFor).filter(Boolean);
+        return h("div", { class: "stats" },
+          stat(b.ted_activity?.notices_total ?? 0, "notices on TED"),
+          stat(notices.length, "recent weapons and ammunition tenders"),
+          stat(matched.length, "tenders with a supplier match"),
+          stat(new Set(matched.map((m) => m.supplier.id)).size, "matching suppliers"));
+      }),
+      section(`Recent weapons and ammunition tenders (${notices.length})`, expandable(notices, (n) => h("li", { class: "row" },
+        h("div", { class: "row-main" },
+          h("div", { class: "row-title wrap" }, n.title),
+          h("div", { class: "row-sub wrap" }, [n.published, n.value ? money(Number(n.value), n.currency || "EUR") : null].filter(Boolean).join(" · "), " · ", external(n.ted_url, "TED ›")),
+          ontSlot(() => [tenderChips(n.notice_number), matchReasons(matchFor(n)), offPlatform(n.notice_number)])),
+        ontFill(h("div", { class: "row-end" }), () => {
+          const match = matchFor(n);
+          return match
             ? h("button", { class: "btn btn-quiet", type: "button", onclick: () => openMatch(match) }, `Match: ${A.shortName(match.supplier.name, 22)}`)
-            : status("No match yet", "neutral")));
-      })),
+            : status("No match yet", "neutral");
+        })))),
       section("What they buy most", group(h("ul", { class: "rows" }, (b.top_cpv || []).slice(0, 6).map((c) =>
         h("li", { class: "row" }, h("div", { class: "row-main" }, h("div", { class: "row-title" }, c.label || c.code)),
           h("div", { class: "row-end" }, h("span", { class: "caption" }, `${c.notices} notices`))))))),
@@ -428,29 +609,36 @@
   }
 
   function supplierWorkspace(s) {
-    const opps = A.opportunitiesFor(s, state.buyers);
+    // Ontology matches (ui_match_tender) for every buyer tender once they arrive; local matching until then and as fallback.
+    O?.loadSupplierItems(s.id);
+    matchTenders(state.buyers.flatMap((b) => b.recent_notices || []));
+    const oppsNow = () => A.opportunitiesFor(s, state.buyers, ONTO);
     const counts = s.catalogue?.item_counts || {};
     const dd = s.due_diligence;
     const categories = [...new Set((s.catalogue?.items || []).filter((i) => i.evidence.verification_status === "document_verified").map((i) => i.category))];
     return h("div", { class: "page" },
       workspaceHeader(s, `your agent answers tenders that match your ${counts.document_verified || 0} TED-verified products`),
-      h("div", { class: "stats" },
-        stat(opps.length, "matching open tenders"),
+      ontView(() => h("div", { class: "stats" },
+        stat(oppsNow().length, "matching open tenders"),
         stat(counts.document_verified || 0, "products verified on TED"),
         stat(counts.declared || 0, "declared, not yet proven"),
-        dd ? stat(dd.total_score.toFixed(1), `due diligence · ${dd.verdict}`) : null),
+        dd ? stat(dd.total_score.toFixed(1), `due diligence · ${dd.verdict}`) : null)),
       liveSection("Needs your attention", () => [
         ...(s.capabilities?.risk_flags || []).map((f) => row(`Risk flag on your profile: ${f.flag}`, "Buyers' agents see this and send deals to a person for approval. You can respond with documents.", status("Visible to buyers", "risk"))),
         ...kycItems(s),
       ], "Nothing right now."),
       liveSection("Requests from buyers", () => supplierRequestRows(s),
         "No new requests. When a buyer posts a requirement that matches your products, it pops up here with your deal check."),
-      section(`Opportunities your agent found (${opps.length})`, opps.length ? expandable(opps, (m) => row(
-        m.notice.title,
-        [`${m.buyer.name} · ${country(m.buyer.country)} · ${m.notice.published} · `, external(m.notice.ted_url, "TED ›"),
-          h("br"), `Your match: ${m.item.product} `, status(EVIDENCE[m.item.evidence.verification_status][0], EVIDENCE[m.item.evidence.verification_status][1])],
-        h("button", { class: "btn btn-quiet", type: "button", onclick: () => openMatch(m) },
-          m.item.evidence.verification_status === "document_verified" ? "Let agent respond" : "Respond (needs you)"))) : rowsGroup([], "No open tender matches your proven products yet. Your agent keeps watching new TED notices.")),
+      ontView(() => {
+        const opps = oppsNow();
+        return section(`Opportunities your agent found (${opps.length})`, opps.length ? expandable(opps, (m) => row(
+          m.notice.title,
+          [`${m.buyer.name} · ${country(m.buyer.country)} · ${m.notice.published} · `, external(m.notice.ted_url, "TED ›"),
+            h("br"), `Your match: ${m.item.product} `, status(EVIDENCE[m.item.evidence.verification_status][0], EVIDENCE[m.item.evidence.verification_status][1]),
+            O ? [tenderChips(m.notice.notice_number), matchReasons(m)] : null],
+          h("button", { class: "btn btn-quiet", type: "button", onclick: () => openMatch(m) },
+            m.item.evidence.verification_status === "document_verified" ? "Let agent respond" : "Respond (needs you)")), "opportunities") : rowsGroup([], "No open tender matches your proven products yet. Your agent keeps watching new TED notices."));
+      }),
       liveSection("Conversations", () => conversationRows(s), "No conversations yet. Your agent starts one when it responds to a tender."),
       section("Your agent's mandate", mandate([
         ["Sells", categories.join(", ") || "Nothing proven yet"],
@@ -463,42 +651,60 @@
 
   function buyerWorkspace(b) {
     const notices = b.recent_notices || [];
-    const ranked = new Map(notices.map((n) => [n.notice_number, A.rankForNotice(b, n, state.suppliers)]));
-    const bySupplier = new Map();
-    for (const list of ranked.values()) for (const m of list) {
-      const entry = bySupplier.get(m.supplier.id) || { supplier: m.supplier, best: m, tenders: 0 };
-      entry.tenders += 1;
-      bySupplier.set(m.supplier.id, entry);
-    }
-    const recommended = [...bySupplier.values()].sort((x, y) => y.tenders - x.tenders || (y.supplier.due_diligence?.total_score ?? 0) - (x.supplier.due_diligence?.total_score ?? 0));
+    matchTenders(notices);
+    // Ontology ranking (ui_match_tender) once it arrives, local matching until then and as fallback.
+    const rankOf = (n) => A.rankForNotice(b, n, state.suppliers, ONTO);
+    const rankAll = () => new Map(notices.map((n) => [n.notice_number, rankOf(n)]));
+    const recommendedFrom = (ranked) => {
+      const bySupplier = new Map();
+      for (const list of ranked.values()) for (const m of list) {
+        const entry = bySupplier.get(m.supplier.id) || { supplier: m.supplier, best: m, tenders: 0 };
+        entry.tenders += 1;
+        bySupplier.set(m.supplier.id, entry);
+      }
+      return [...bySupplier.values()].sort((x, y) => y.tenders - x.tenders || (y.supplier.due_diligence?.total_score ?? 0) - (x.supplier.due_diligence?.total_score ?? 0));
+    };
     const buys = (b.top_cpv || []).filter((c) => c.code.startsWith("353")).map((c) => c.label).slice(0, 3);
     return h("div", { class: "page" },
       workspaceHeader(b, "your agent sources suppliers for your tenders and negotiates inside your mandate"),
-      h("div", { class: "stats" },
-        stat(notices.length, "open tenders"),
-        stat([...ranked.values()].filter((l) => l.length).length, "with a proven supplier"),
-        stat(recommended.length, "suppliers to consider")),
+      ontView(() => {
+        const ranked = rankAll();
+        return h("div", { class: "stats" },
+          stat(notices.length, "open tenders"),
+          stat([...ranked.values()].filter((l) => l.length).length, "with a proven supplier"),
+          stat(recommendedFrom(ranked).length, "suppliers to consider"));
+      }),
       liveSection("Needs your attention", () => [...state.convs.values()]
         .filter((v) => v.people.buyer.id === b.id && v.waiting)
         .map((v) => row(`Approve deal with ${v.people.supplier.name}`, `${v.topic}. Your mandate needs a person for suppliers with risk flags or low due diligence.`,
           h("button", { class: "btn", type: "button", onclick: () => showConv(v.id) }, "Review"))), "Nothing to approve right now."),
       section("Post a requirement", requirementForm(b)),
       liveSection("Your posted requests", () => buyerRequestRows(b), "Nothing posted yet. Post a requirement above; matched suppliers see it immediately."),
-      section(`Your open tenders (${notices.length})`, expandable(notices, (n) => {
-        const best = ranked.get(n.notice_number)[0];
-        return row(n.title, [`${n.published} · `, external(n.ted_url, "TED ›"),
-          best ? [h("br"), `Best proven supplier: ${best.supplier.name} (${best.item.product})`] : null],
-          best ? h("button", { class: "btn btn-quiet", type: "button", onclick: () => openMatch(best) }, "Negotiate") : status("No proven supplier", "neutral"));
-      })),
-      section("Suppliers to consider", recommended.length ? expandable(recommended, (r) => {
-        const dd = r.supplier.due_diligence;
-        return h("li", { class: "row" },
-          h("div", { class: "row-main row-with-avatar" }, avatar(r.supplier, "sm"),
-            h("div", { style: "min-width:0" },
-              h("div", { class: "row-title wrap" }, link(pathFor(r.supplier), {}, r.supplier.name)),
-              h("div", { class: "row-sub wrap" }, `${country(r.supplier.country)} · proven for ${r.tenders} of your tenders`, dd ? [" · ", status(`${dd.total_score.toFixed(1)} ${dd.verdict}`, verdictTone(dd.verdict))] : null))),
-          h("div", { class: "row-end" }, h("button", { class: "btn btn-quiet", type: "button", onclick: () => openMatch(r.best) }, "Negotiate")));
-      }) : rowsGroup([], "No supplier has proven a match yet.")),
+      section(`Your open tenders (${notices.length})`, expandable(notices, (n) => h("li", { class: "row" },
+        h("div", { class: "row-main" },
+          h("div", { class: "row-title wrap" }, n.title),
+          ontFill(h("div", { class: "row-sub wrap" }), () => {
+            const best = rankOf(n)[0];
+            return [`${n.published} · `, external(n.ted_url, "TED ›"),
+              best ? [h("br"), `Best proven supplier: ${best.supplier.name} (${best.item.product})`] : null];
+          }),
+          ontSlot(() => [tenderChips(n.notice_number), matchReasons(rankOf(n)[0]), offPlatform(n.notice_number)])),
+        ontFill(h("div", { class: "row-end" }), () => {
+          const best = rankOf(n)[0];
+          return best ? h("button", { class: "btn btn-quiet", type: "button", onclick: () => openMatch(best) }, "Negotiate") : status("No proven supplier", "neutral");
+        })))),
+      ontView(() => {
+        const recommended = recommendedFrom(rankAll());
+        return section("Suppliers to consider", recommended.length ? expandable(recommended, (r) => {
+          const dd = r.supplier.due_diligence;
+          return h("li", { class: "row" },
+            h("div", { class: "row-main row-with-avatar" }, avatar(r.supplier, "sm"),
+              h("div", { style: "min-width:0" },
+                h("div", { class: "row-title wrap" }, link(pathFor(r.supplier), {}, r.supplier.name)),
+                h("div", { class: "row-sub wrap" }, `${country(r.supplier.country)} · proven for ${r.tenders} of your tenders`, dd ? [" · ", status(`${dd.total_score.toFixed(1)} ${dd.verdict}`, verdictTone(dd.verdict))] : null))),
+            h("div", { class: "row-end" }, h("button", { class: "btn btn-quiet", type: "button", onclick: () => openMatch(r.best) }, "Negotiate")));
+        }, "suppliers-to-consider") : rowsGroup([], "No supplier has proven a match yet."));
+      }),
       liveSection("Conversations", () => conversationRows(b), "No conversations yet. Start one from a tender or a supplier."),
       section("Your agent's mandate", mandate([
         ["Buys", buys.join(", ") || "Weapons and ammunition"],
