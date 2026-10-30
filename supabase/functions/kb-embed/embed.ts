@@ -6,7 +6,8 @@ export const MODEL = "gemini-embedding-001";
 export const DIM = 768;
 export const MODEL_TAG = `${MODEL}@${DIM}`;
 const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:batchEmbedContents`;
-const MAX_BATCH = 100;
+const MAX_BATCH = 100; // inputs per Gemini batchEmbedContents call
+const STORE_CHUNK = 25; // rows per kb_embed_store / memory_embed_store call
 const MAX_CHARS = 8000; // ~2,000 tokens, the model's input limit; kb_chunks content is <= 2,000 chars anyway
 
 export type Db = { url: string; key: string };
@@ -227,8 +228,21 @@ export async function run(db: Db, secret: ApiKey, options: RunOptions) {
           model: MODEL_TAG,
           embedding: normalise(embeddings[i].values),
         }));
-        const stored = await rpc<number>(db, source.store, { p_rows: payload });
-        result[source.counter] += stored;
+        // PostgREST requests run under an 8 s statement_timeout and every vector also goes into the HNSW index,
+        // so store in small chunks (one retry each) and count progress per chunk.
+        let stored = 0;
+        for (let i = 0; i < payload.length; i += STORE_CHUNK) {
+          const part = payload.slice(i, i + STORE_CHUNK);
+          let n: number;
+          try {
+            n = await rpc<number>(db, source.store, { p_rows: part });
+          } catch {
+            await new Promise((resolve) => setTimeout(resolve, 1500));
+            n = await rpc<number>(db, source.store, { p_rows: part });
+          }
+          stored += n;
+          result[source.counter] += n;
+        }
         result.batches += 1;
 
         if (stored === 0) break; // every row changed while embedding; they come back with the new hash next run
