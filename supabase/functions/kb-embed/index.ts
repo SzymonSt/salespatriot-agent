@@ -1,7 +1,8 @@
 // Edge Function: GET = embedding status (public), POST = embed pending chunks and memory (needs x-sync-secret
 // from Vault). Scheduled every 5 minutes by pg_cron + pg_net (supabase/migrations/*_kb_embed_rpc.sql).
-// Gemini key: Edge Function secret GOOGLE_API_KEY (set in the dashboard, never in git).
-import { checkSecret, run, status } from "./embed.ts";
+// Gemini key: Edge Function secret GOOGLE_API_KEY (set in the dashboard, never in git). Its value is never
+// logged or returned: errors pass through redactor() first.
+import { checkSecret, readApiKey, redactor, run, status } from "./embed.ts";
 
 function serviceKey(): string {
   const legacy = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
@@ -32,13 +33,17 @@ const clamp = (value: unknown, min: number, max: number, fallback: number) =>
 
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") return new Response(null, { headers: cors });
-  const apiKey = Deno.env.get("GOOGLE_API_KEY") ?? "";
+  const apiKey = readApiKey(Deno.env.get("GOOGLE_API_KEY"));
+  const redact = redactor(apiKey);
   try {
-    if (req.method === "GET") return json(await status(db, apiKey !== ""));
+    if (req.method === "GET") return json(await status(db, apiKey));
     if (req.method !== "POST") return json({ error: "method not allowed" }, 405);
 
     if (!(await checkSecret(db, req.headers.get("x-sync-secret")))) return json({ error: "unauthorized" }, 401);
-    if (!apiKey) return json({ status: "missing GOOGLE_API_KEY" });
+    if (apiKey.state === "missing") return json({ status: "missing GOOGLE_API_KEY" });
+    if (apiKey.state === "invalid format") {
+      return json({ status: "invalid GOOGLE_API_KEY: store only the bare key (one line, no spaces)" });
+    }
 
     const body = await req.json().catch(() => ({}));
     return json(
@@ -49,6 +54,6 @@ Deno.serve(async (req) => {
       }),
     );
   } catch (error) {
-    return json({ error: String(error) }, 500);
+    return json({ error: redact(String(error)) }, 500);
   }
 });

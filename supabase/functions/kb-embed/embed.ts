@@ -10,6 +10,35 @@ const MAX_BATCH = 100;
 const MAX_CHARS = 8000; // ~2,000 tokens, the model's input limit; kb_chunks content is <= 2,000 chars anyway
 
 export type Db = { url: string; key: string };
+
+// ---------- API key hygiene ----------
+// The secret must be the bare key. A pasted "KEY\nOTHER=..." or "GOOGLE_API_KEY=KEY" is reduced to the key; a value
+// that is still not a valid header value is rejected without echoing it (fetch errors would print the header).
+export type ApiKey = { key: string; state: "set" | "set (extra lines ignored)" | "missing" | "invalid format"; raw: string };
+
+export function readApiKey(raw: string | undefined): ApiKey {
+  const value = raw ?? "";
+  const lines = value.split(/\r?\n/).map((line) => line.trim()).filter((line) => line !== "");
+  if (!lines.length) return { key: "", state: "missing", raw: value };
+  const key = lines[0].replace(/^(export\s+)?[A-Z_]*API_KEY\s*=\s*/, "").replace(/^["']|["']$/g, "").trim();
+  if (!/^[\x21-\x7e]{20,200}$/.test(key)) return { key: "", state: "invalid format", raw: value };
+  return { key, state: lines.length > 1 ? "set (extra lines ignored)" : "set", raw: value };
+}
+
+// Removes any fragment of the secret from text that is logged or returned.
+export function redactor(apiKey: ApiKey): (text: string) => string {
+  const secrets = [apiKey.raw, apiKey.key, ...apiKey.raw.split(/\r?\n/)]
+    .map((s) => s.trim())
+    .filter((s) => s.length >= 8)
+    .sort((a, b) => b.length - a.length);
+  return (text: string) => {
+    let out = String(text);
+    for (const secret of secrets) out = out.split(secret).join("[redacted]");
+    // fetch() reports the offending header value verbatim; never keep it.
+    return out.replace(/(Invalid header value:?\s*)("[^"]*"|\S+)/gi, "$1[redacted]");
+  };
+}
+
 type Row = Record<string, unknown> & { id: string; content_hash: string | null };
 type Source = {
   name: "kb_chunks" | "agent_memory";
@@ -78,8 +107,10 @@ export async function checkSecret(db: Db, candidate: string | null): Promise<boo
   }
 }
 
-export async function status(db: Db, keyConfigured: boolean) {
-  return { google_api_key: keyConfigured ? "set" : "missing", ...(await rpc<object>(db, "kb_embed_status", {})) };
+export async function status(db: Db, apiKey: ApiKey) {
+  const redact = redactor(apiKey);
+  const body = JSON.parse(redact(JSON.stringify(await rpc<object>(db, "kb_embed_status", {}))));
+  return { google_api_key: apiKey.state, ...body };
 }
 
 // ---------- Gemini ----------
@@ -123,7 +154,9 @@ export function normalise(values: number[]): number[] {
 
 export type RunOptions = { mode: string; budgetSeconds: number; batchSize: number };
 
-export async function run(db: Db, apiKey: string, options: RunOptions) {
+export async function run(db: Db, secret: ApiKey, options: RunOptions) {
+  const apiKey = secret.key;
+  const redact = redactor(secret);
   const started = Date.now();
   const deadline = started + options.budgetSeconds * 1000;
   const batchSize = Math.min(Math.max(options.batchSize, 1), MAX_BATCH);
@@ -204,9 +237,11 @@ export async function run(db: Db, apiKey: string, options: RunOptions) {
     }
   } catch (error) {
     result.status = "error";
-    result.errors.push(String(error).slice(0, 300));
+    result.errors.push(String(error));
   }
 
+  // Redact before truncating, so a cut can never leave an unmatched fragment of the key.
+  result.errors = result.errors.map((error) => redact(error).slice(0, 400));
   const details = { seconds: Math.round((Date.now() - started) / 100) / 10, legacy_request_shape: legacy, skipped };
   const pending = await rpc<object>(db, "kb_embed_finish", { p_id: runId, p_result: { ...result, details } });
   return { run_id: runId, ...result, ...details, pending };
