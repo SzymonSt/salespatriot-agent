@@ -12,7 +12,7 @@ What the filters mean:
 
 | URL param | Value | Meaning |
 |---|---|---|
-| `notice-type` | `cn-standard`, `cn-social`, `cn-desg`, `pin-cfc-standard`, `pin-cfc-social`, `qu-sy`, `subco` | Contract notices (standard, social, defence directive), PINs used as call for competition, qualification systems, subcontracting notices — i.e. notices you can still bid on, no award/result notices |
+| `notice-type` | `cn-standard`, `cn-social`, `cn-desg`, `pin-cfc-standard`, `pin-cfc-social`, `qu-sy`, `subco` | Contract notices (standard, social), design contests (`cn-desg`), PINs used as call for competition, qualification systems, subcontracting notices (`subco`) — i.e. notices you can still bid on, no award/result notices. Defence-directive notices are `cn-standard` with `legal-basis=32009L0081`, not a separate type |
 | `facet.cpv` | `35000000`, `35300000`, `dese` | CPV 35 = security, fire-fighting, police and defence equipment; 353 = weapons, ammunition and associated parts. `dese` is a TED UI facet value with no known API equivalent |
 | `facet.contract-nature` | `supplies` | Supplies only (no works/services) |
 | `onlyLatestVersions` | `false` | Include superseded versions (corrigenda etc.) |
@@ -32,6 +32,30 @@ SORT BY publication-number DESC
 ```bash
 python3 ted_open_tenders.py --query "<expert query above>" --limit 100
 ```
+
+### Focus categories — exactly these four
+
+Within that search we work on exactly these CPV classes (TED UI facet counts = API counts, checked 2026-10-30):
+
+| Category | CPV | Notices |
+|---|---|---|
+| Ammunition | `35330000` | 1490 |
+| Firearms | `35320000` | 443 |
+| Parts of firearms and ammunition | `35340000` | 264 |
+| Miscellaneous weapons | `35310000` | 145 |
+
+```
+notice-type IN (qu-sy pin-cfc-standard subco cn-desg cn-social cn-standard pin-cfc-social)
+AND contract-nature IN (supplies)
+AND classification-cpv IN (35310000 35320000 35330000 35340000)
+```
+
+2,230 distinct notices; 38 open on 2026-10-30 (add
+`AND (deadline-receipt-tender-date-lot>=today(0) OR deadline-receipt-request>=today(0))`).
+Supplier side: the same CPVs with `notice-type IN (can-standard can-desg can-social can-tran)` → 2,610 award notices.
+Drop `35341100` (gunmetal *pipe* fittings — plumbing noise) when it is a notice's only focus code.
+Details, noise rules and samples: `knowledge_base/21-focus-scope.md`. API limits (250/page, 15k max in
+page mode, `ITERATION` mode for more): `knowledge_base/20-ted-api-reference.md`.
 
 `classification-cpv IN (35000000)` matches child codes too (e.g. 35110000, 35331500). It also matches
 notices where CPV 35 is only one of many lots, so expect some noise (e.g. a playground tender with 35261000).
@@ -87,3 +111,6 @@ An empty `deadline` usually means the notice uses a request-to-participate deadl
 - `ted_open_tenders.py` — exports TED notices for an expert query to CSV (`open_tenders.csv`)
 - `ted_company_profiles.py` — builds company/buyer profiles into `knowledge_base/profiles`
 - `cpv_codes.py`, `knowledge_base/cpv_codes.csv`, `knowledge_base/cpv_defence_codes.csv` — CPV reference data
+- `knowledge_base/README.md` — index of the team knowledge base (challenge rules, pain points, data sources,
+  TED API, ePO ontology decision, agent design, demo plan). Each file is small; load only what the task needs.
+  Respect the evidence labels (`VERIFIED`, `REPORTED`, `HYPOTHESIS`…) — don't present unverified numbers as fact.

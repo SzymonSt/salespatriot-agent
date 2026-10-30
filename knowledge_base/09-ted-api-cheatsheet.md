@@ -37,9 +37,9 @@ For graph queries in ePO (SPARQL), see [19-ted-epo-ontology.md](19-ted-epo-ontol
 
 ## Pagination
 - Small pulls: `"page": N`.
-- Large pulls: add `"paginationMode": "ITERATION"`; the response returns
-  `iterationNextToken` — pass it back to get the next batch. `[VERIFIED 2026-10-30]`
-  (exact request field name for the token: check TED docs before building the loop).
+- Large pulls (>15,000 notices): add `"paginationMode": "ITERATION"`; the response returns
+  `iterationNextToken` — send it back as `"iterationNextToken"` in the next request. Token
+  valid until next OJ S release + 24 h. Full limits: [20-ted-api-reference.md](20-ted-api-reference.md).
 
 ## Notes
 - Defence-directive notices still show `notice-type: cn-standard` / `can-standard`; use

@@ -26,7 +26,8 @@ about these, say the data is missing instead of guessing.
 - e-Zamówienia / BZP API: exact endpoints, parameters, rate limits (regulation PDF exists:
   `media.ezamowienia.gov.pl/pod/2023/01/Regulamin-korzystania-z-API.pdf`).
 - AU BIP / purchasing platform: URL, JSON vs HTML, pagination, update detection.
-- TED iteration pagination: exact request field for passing `iterationNextToken`.
+- ~~TED iteration pagination field~~ → resolved: request param `iterationNextToken`, see [20](20-ted-api-reference.md).
+- What the TED UI CPV facet value `dese` maps to in the API (unknown).
 - ~~TED RDF / SPARQL endpoint for notices in ePO~~ → resolved: `https://publications.europa.eu/webapi/rdf/sparql`, see [19](19-ted-epo-ontology.md).
 - NCAGE public lookup tool URL and terms.
 - VAT white-list daily limits.

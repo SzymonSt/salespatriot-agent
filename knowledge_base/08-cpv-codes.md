@@ -44,3 +44,6 @@ overwrites the English files.
    history (which winners win which CPVs) plus embeddings. See
    [10-ontology-data-model.md](10-ontology-data-model.md). `[HYPOTHESIS]`
 5. Notices repeat CPVs per lot — deduplicate.
+6. **`35341100` "Gunmetal pipe fittings"** sits under *Parts of firearms* but is used for bronze
+   plumbing (water-pipe tenders show up). Exclude it when it is a notice's only focus code.
+   `[VERIFIED 2026-10-30]` — see [21-focus-scope.md](21-focus-scope.md).
