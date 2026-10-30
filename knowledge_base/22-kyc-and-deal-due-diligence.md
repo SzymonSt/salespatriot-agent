@@ -76,6 +76,22 @@ Result per company: `kyc_status = verified | limited | blocked`, an evidence tab
 | Capacity statement older than N days | Supplier agent asked to refresh; until then capacity counts as unknown |
 
 ## Layer 3 — Due diligence per deal
+**Implemented (deal-v1):** `../deal_due_diligence.py` + `../deal_rules.py`, run on open tenders × proven
+suppliers. What each check uses today:
+D1 KYC age + live sanctions re-screen (company and corporate owners) · D2 CPV → Military List / Firearms
+Directive category, state vs non-state buyer (TED `main-activity`), EU arms-embargo list · D3 licence list for
+the flow (domestic / intra-EU transfer / non-EU export, transit countries from a land-border graph, end-user
+certificate, broker registration for traders) · D4 whole-word scan of the tender text for ITAR/EAR designations
+and classification markings in 8 languages + TED `security-clearance-lot` · D5 CPV match level + certificate
+validity at the estimated delivery date · D6 tender value vs largest past lot · D7 SAFE funding detection
+(TED `eu-funds-*`), supplier/owner origin · D8 ADR class from CPV, land route or sea/air, Channel Tunnel rule ·
+D9 award-value distribution in the same CPV from Supabase `ted_notices` · D10 value vs revenue + TED
+`guarantee-required-lot` · D11 framework/duration/penalties from the notice + standard clauses · D12 shared
+owners among candidates, trader flag, single-bid share, repeated small orders under the threshold · D13 prior
+deliveries to the same buyer / reference buyers · D14 Supabase `agent_mandates` or the default policy.
+Still missing: real offer price, quantity and delivery date from the negotiation (until then they are conditions),
+peer references, carrier marketplace.
+
 Output: **GO / GO WITH CONDITIONS / ESCALATE / NO-GO**, with evidence per category.
 
 | # | Category | What the deal agent checks | Why | Type |

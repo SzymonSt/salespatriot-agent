@@ -152,6 +152,13 @@ An empty `deadline` usually means the notice uses a request-to-participate deadl
   except `supplier_documents`.
   Pipeline: `ted_company_profiles.py` → `ted_supplier_contracts.py` → `supplier_due_diligence.py` →
   `translate_data.py` → `supplier_due_diligence.py --summary-only` → `supabase_sync.py`.
+- `deal_due_diligence.py` + `deal_rules.py` — per-deal checks D1–D14 for every open tender in Supabase
+  `ted_open_tenders` × up to 3 suppliers that delivered the same CPV/class. Decision GO / GO WITH CONDITIONS /
+  ESCALATE / NO-GO with evidence and contract conditions → `data/deals/deal_checks.json`,
+  `data/deals/deal_checks_summary.md`; `--push` upserts Supabase `deal_checks` + `deal_check_items`.
+  Mandates (K11/D14) come from Supabase `agent_mandates`, else a default policy (€250k autonomous limit,
+  score ≥ 6). `deal_rules.py` holds the rule tables (CPV → Military List / Firearms Directive / ADR class,
+  EU arms embargoes, land-border routing for transit, ITAR/classified keywords) — common practice, verify.
 
 ## Supabase (project `hackathon`, org SalesPatriot)
 
