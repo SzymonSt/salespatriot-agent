@@ -121,6 +121,7 @@ An empty `deadline` usually means the notice uses a request-to-participate deadl
   TED API, ePO ontology decision, agent design, demo plan). Each file is small; load only what the task needs.
   Respect the evidence labels (`VERIFIED`, `REPORTED`, `HYPOTHESIS`…) — don't present unverified numbers as fact.
   Due diligence design (KYC on onboarding vs per-deal checks): `knowledge_base/22-kyc-and-deal-due-diligence.md`.
+  Self-learning RAG over deals (TED + platform + uploaded): `knowledge_base/23-self-learning-rag.md`.
 - `ted_company_profiles.py` — builds company/buyer profiles into `data/profiles`
 - `cpv_codes.py`, `data/cpv_codes.csv`, `data/cpv_defence_codes.csv` — CPV reference data
 - `supplier_due_diligence.py` + `dd_sources.py` — 1–10 supplier due-diligence score from free open data,

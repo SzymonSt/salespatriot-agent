@@ -52,6 +52,7 @@ user or judge. If a fact is missing, say it is missing — do not invent it.
 - [13-architecture-pipeline.md](13-architecture-pipeline.md) — layers, collectors, Supabase schema
 - [14-agents-and-autonomy.md](14-agents-and-autonomy.md) — agent roles, bounded autonomy
 - [15-agent-due-diligence-network.md](15-agent-due-diligence-network.md) — agent-to-agent reference checks
+- [23-self-learning-rag.md](23-self-learning-rag.md) — **self-learning RAG: TED + platform + uploaded deals as deal cards, learning-to-rank, backtest recall@5, live sync**
 - [22-kyc-and-deal-due-diligence.md](22-kyc-and-deal-due-diligence.md) — **KYC on onboarding (K1–K11), monitoring, per-deal checks (D1–D14 incl. licences, transport)**
 
 ### Execution

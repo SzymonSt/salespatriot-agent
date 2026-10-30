@@ -40,3 +40,4 @@ Not one big RAG over every PDF. A hybrid:
 
 Pipeline: historical data → RAG retrieval → pattern detection → pattern classification →
 ontology / graph → agentic matching → new deals feed back in.
+Self-learning loop, deal cards and metrics: [23-self-learning-rag.md](23-self-learning-rag.md).

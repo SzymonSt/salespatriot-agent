@@ -57,6 +57,14 @@ Files go to Supabase Storage; the DB keeps metadata, path, hash and tender link.
 | `deals` | Final agreed terms, status |
 | `agent_messages` | Every agent-to-agent message |
 | `audit_log` | Every autonomous action, with the rule that allowed it |
+| `deal_outcomes` | Delivery on time, quality, final price — labels for learning ([23](23-self-learning-rag.md)) |
+| `match_events` | Every match shown: features, score, model version, outcome label |
+| `knowledge_chunks` | RAG store: `kind` (tender, award, deal, outcome, reference, kb), CPVs, country, date, `visibility`, text, `embedding vector(1024)`, full-text `tsvector` |
+
+Retrieval = hybrid search in one SQL function: pgvector cosine similarity (HNSW index) +
+full-text search, merged with reciprocal rank fusion and filtered by CPV prefix, country, kind
+and visibility. Agents call it through tools such as `find_similar_deals`, `buyer_history`,
+`supplier_profile` and `price_stats`.
 
 ## Legal and safety
 - Only publicly published resources. Respect site terms and rate limits; cache.
