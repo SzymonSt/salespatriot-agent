@@ -1,6 +1,6 @@
 // Edge Function: GET = sync status (public), POST = run a sync (needs x-sync-secret from Vault).
 // Scheduled hourly by pg_cron + pg_net (supabase/migrations/*_ted_sync_cron.sql).
-import { checkSecret, runBackfill, runIncremental, status } from "./sync.ts";
+import { checkSecret, redact, runBackfill, runIncremental, status } from "./sync.ts";
 
 function serviceKey(): string {
   const legacy = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
@@ -40,6 +40,6 @@ Deno.serve(async (req) => {
     }
     return json(await runIncremental(db, Math.min(Math.max(Number(body.days) || 2, 1), 30)));
   } catch (error) {
-    return json({ error: String(error) }, 500);
+    return json({ error: redact(String(error)) }, 500);
   }
 });

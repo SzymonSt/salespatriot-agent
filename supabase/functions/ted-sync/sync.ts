@@ -286,6 +286,16 @@ async function store(db: Db, notices: Notice[], kind: Kind) {
   return { notices: noticeRows.length, awards: awards.length };
 }
 
+// ted_sync_runs and the GET status are public: never store or return raw secrets from error text.
+export function redact(text: string): string {
+  return text
+    .replace(/(Bearer|apikey:?)\s+\S+/gi, "$1 [redacted]")
+    .replace(/eyJ[\w-]+\.[\w-]+\.[\w-]+/g, "[redacted jwt]")
+    .replace(/sb_(secret|publishable)_[\w-]+/g, "[redacted key]")
+    .replace(/AIza[\w-]{20,}/g, "[redacted key]")
+    .slice(0, 1000);
+}
+
 async function logRun(db: Db, run: Record<string, unknown>) {
   await fetch(`${db.url}/rest/v1/ted_sync_runs`, {
     method: "POST",
@@ -316,7 +326,7 @@ export async function runIncremental(db: Db, days = 2) {
     await logRun(db, { mode: "incremental", started_at: started, fetched: totals.fetched, notices_upserted: totals.notices, awards_upserted: totals.awards, done: true, details: { days } });
     return { mode: "incremental", days, ...totals };
   } catch (error) {
-    await logRun(db, { mode: "incremental", started_at: started, ...{ fetched: totals.fetched }, done: false, error: String(error) });
+    await logRun(db, { mode: "incremental", started_at: started, ...{ fetched: totals.fetched }, done: false, error: redact(String(error)) });
     throw error;
   }
 }
