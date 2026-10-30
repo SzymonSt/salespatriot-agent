@@ -67,7 +67,7 @@ def backend_call(method: str, path: str, body: bytes | None = None) -> tuple[int
 class LiveRequests:
     """Buyer requirements and the deal checks for each matched supplier."""
 
-    auto_agents = True  # every matched supplier agent starts after its deal check; --manual-agents waits for a click
+    auto_agents = True  # every matched supplier agent starts after its deal check
 
     def __init__(self, path: Path) -> None:
         self.path = path
@@ -141,8 +141,7 @@ class LiveRequests:
             with self.lock:
                 match["check"] = compact(result)
                 self._save()
-            # Each matched supplier's agent starts once its deal check is known. With --manual-agents it waits
-            # for the supplier's "Let agent respond" (POST /api/offers/<id>/respond).
+            # Each matched supplier's agent starts once its deal check is known.
             if self.auto_agents:
                 threading.Thread(target=self._start_agent, args=(request, match), daemon=True).start()
 
@@ -287,14 +286,11 @@ def main() -> int:
     parser.add_argument("--port", type=int, default=8765, help="default 8765; the agents backend uses 8000")
     parser.add_argument("--host", default="127.0.0.1")
     parser.add_argument("--backend", default=BACKEND, help=f"agents backend URL (default {BACKEND})")
-    parser.add_argument("--manual-agents", action="store_true",
-                        help="start a supplier agent only when the supplier clicks Let agent respond (default: automatic)")
     parser.add_argument("--reset-demo", action="store_true", help="clear posted requests (data/demo/live_requests.json) first")
     args = parser.parse_args()
     BACKEND = args.backend.rstrip("/")
     if args.reset_demo:
         REQUESTS_FILE.unlink(missing_ok=True)
-    LiveRequests.auto_agents = not args.manual_agents
     Handler.live = LiveRequests(REQUESTS_FILE)
     server = ThreadingHTTPServer((args.host, args.port), partial(Handler, directory=str(WEB)))
     print(f"Serving on http://{args.host}:{args.port}/", flush=True)
