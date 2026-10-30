@@ -1,0 +1,779 @@
+{
+  "AU": {
+    "pol": [
+      "Skarb Państwa - Jednostka Wojskowa Nr 2305"
+    ]
+  },
+  "BI": [
+    "NIP 9521818707"
+  ],
+  "BT-01-notice": "32009L0081",
+  "BT-02-notice": "can-standard",
+  "BT-03-notice": "result",
+  "BT-04-notice": "f1249740-8eb9-4433-91d9-9827a54647b5",
+  "BT-05(a)-notice": "2026-10-16Z",
+  "BT-05(b)-notice": "08:26:19Z",
+  "BT-105-Procedure": "restricted",
+  "BT-106-Procedure": "false",
+  "BT-137-Lot": [
+    "LOT-0002"
+  ],
+  "BT-13713-LotResult": [
+    "LOT-0002"
+  ],
+  "BT-13714-Tender": [
+    "LOT-0002"
+  ],
+  "BT-142-LotResult": [
+    "selec-w"
+  ],
+  "BT-145-Contract": [
+    "2026-10-07+02:00"
+  ],
+  "BT-1451-Contract": [
+    "2026-07-31+02:00"
+  ],
+  "BT-150-Contract": [
+    "117/ŚR.BOJ./2026"
+  ],
+  "BT-161-NoticeResult": "16974000",
+  "BT-161-NoticeResult-Currency": "PLN",
+  "BT-165-Organization-Company": [
+    "medium"
+  ],
+  "BT-21-Lot": {
+    "pol": [
+      "Dostawa amunicji 9 nb. pist. z poc. pełnopłaszczowym WS"
+    ]
+  },
+  "BT-21-Procedure": {
+    "pol": "Dostawa amunicji 9 nb. pist. z poc. pełnopłaszczowym WS"
+  },
+  "BT-22-Procedure": "ZP-21/DOiB/2026",
+  "BT-23-Lot": [
+    "supplies"
+  ],
+  "BT-23-Procedure": "supplies",
+  "BT-24-Lot": {
+    "pol": [
+      "Przedmiotem zamówienia jest dostawa amunicji 9 nb. z poc. pełnopłaszczowym WS z możliwością realizacji opcjonalnego. Wymogi oraz szczegółowy opis przedmiotu zamówienia wyszczególniono w załączniku do Specyfikacji Warunków Zamówienia, którą Zamawiający przekaże zaproszonym do składania ofert Wykonawcom, którzy spełniają warunki określone w ogłoszeniu."
+    ]
+  },
+  "BT-24-Procedure": {
+    "pol": "Przedmiotem zamówienia jest dostawa amunicji 9 nb. pist. z poc. pełnopłaszczowym WS"
+  },
+  "BT-26(m)-Lot": [
+    "cpv"
+  ],
+  "BT-26(m)-Procedure": "cpv",
+  "BT-262-Lot": [
+    "35331000"
+  ],
+  "BT-262-Procedure": [
+    "35331000"
+  ],
+  "BT-3202-Contract": [
+    "TEN-0001"
+  ],
+  "BT-36-Lot": [
+    {
+      "unit": "DAY",
+      "value": "100"
+    }
+  ],
+  "BT-36-Lot-Unit": [
+    "DAY"
+  ],
+  "BT-5071-Lot": [
+    "PL911"
+  ],
+  "BT-5071-Procedure": [
+    "PL911"
+  ],
+  "BT-5141-Lot": [
+    "POL"
+  ],
+  "BT-5141-Procedure": [
+    "POL"
+  ],
+  "BT-539-Lot": [
+    "price",
+    "quality"
+  ],
+  "BT-54-lot": {
+    "pol": [
+      "Zamawiający przewiduje skorzystanie z prawa opcji. Wymogi oraz szczegółowy opis przedmiotu zamówienia wyszczególniono w załączniku do Specyfikacji Warunków Zamówienia, którą Zamawiający przekaże zaproszonym do składania ofert Wykonawcom, którzy spełniają warunki określone w dokumentach postępowania."
+    ]
+  },
+  "BT-540-Lot": {
+    "pol": [
+      "Cena",
+      "Gwarancja"
+    ]
+  },
+  "BT-541-Lot": [
+    "60",
+    "40"
+  ],
+  "BT-5421-Lot": [
+    "per-exa",
+    "per-exa"
+  ],
+  "BT-634-Procedure": false,
+  "BT-701-notice": "82242d4d-e087-4787-8271-9238e40e1131",
+  "BT-702-notice": [
+    "POL"
+  ],
+  "BT-720-Tender": [
+    "16974000"
+  ],
+  "BT-720-Tender-Currency": [
+    "PLN"
+  ],
+  "BT-756-Procedure": false,
+  "BT-757-notice": 1,
+  "BT-759-LotResult": [
+    "5",
+    "5",
+    "5",
+    "0",
+    "0"
+  ],
+  "BT-760-LotResult": [
+    "tenders",
+    "t-esubm",
+    "t-sme",
+    "t-oth-eea",
+    "t-no-eea"
+  ],
+  "BT-765-Lot": [
+    "none"
+  ],
+  "BT-766-Lot": [
+    "none"
+  ],
+  "BT-767-Lot": [
+    false
+  ],
+  "BT-773-Tender": [
+    "no"
+  ],
+  "CY": [
+    "POL"
+  ],
+  "DI": [
+    "32009L0081"
+  ],
+  "DS": "2026-10-16Z",
+  "FT": [
+    {
+      "pol": "Skarb Państwa - Jednostka Wojskowa Nr 2305\nPrzedmiotem zamówienia jest dostawa amunicji 9 nb. z poc. pełnopłaszczowym WS z możliwością realizacji opcjonalnego. Wymogi oraz szczegółowy opis przedmiotu zamówienia wyszczególniono w załączniku do Specyfikacji Warunków Zamówienia, którą Zamawiający przekaże zaproszonym do składania ofert Wykonawcom, którzy spełniają warunki określone w ogłoszeniu.\nPublications Office of the European Union\nPrzedmiotem zamówienia jest dostawa amunicji 9 nb. pist. z poc. pełnopłaszczowym WS\nGwarancja\nCena\nKrajowa Izba Odwoławcza\nDostawa amunicji 9 nb. pist. z poc. pełnopłaszczowym WS\nZamawiający przewiduje skorzystanie z prawa opcji. Wymogi oraz szczegółowy opis przedmiotu zamówienia wyszczególniono w załączniku do Specyfikacji Warunków Zamówienia, którą Zamawiający przekaże zaproszonym do składania ofert Wykonawcom, którzy spełniają warunki określone w dokumentach postępowania.\nCENZIN Sp. z o.o.\n01\nZP-21/DOiB/2026\nWarszawa\nselec-w\n08:26:19Z\nt-sme\nnone\nt-oth-eea\nNIP 9521818707\nul. Czerniakowska 81/83\nLuxembourg\nsupplies\nprice\nPL911\nhttps://epuap.gov.pl/wps/portal/strefa-klienta/katalog-spraw/opis-uslugi/odwolanie-do-krajowej-izby-odwolawczej/UZP\nORG-0003\n82242d4d-e087-4787-8271-9238e40e1131\nt-esubm\nORG-0000\nORG-0001\nORG-0002\nhttps://grom.wp.mil.pl/pl/\n2026-10-19+02:00\nCON-0001\nPUBL\nPOL\nGrupa ds. Zamówień Publicznych\nOferta nr 1\nquality\n0\n04-520\nper-exa\n5\ncan-standard\n2026-10-07+02:00\n60\n2000-01-01Z\nno\nt-no-eea\nf1249740-8eb9-4433-91d9-9827a54647b5\neforms-sdk-1.14\nTEN-0001\nmedium\n2026-07-31+02:00\n+352 29291\nNIP 5262239325\n2026-10-16Z\nRES-0001\n00720852-2026\nLU000\n35331000\nPLN\nLOT-0002\nul. Postępu 17a\n+48 22 458 78 01\n202/2026\nTPA-0001\n+48 261895027\n2305.zamowienia@ron.mil.pl\nhttps://op.europa.eu\nted@publications.europa.eu\n31\n117/ŚR.BOJ./2026\nKrs@ms.gov.pl\n32009L0081\nfalse\n00-957\nLUX\n100\n16974000\n02-676\ntenders\nrestricted\nhttps://www.gov.pl/web/uzp/krajowa-izba-odwolawcza\n2.3\nNIP 5260251196\n40\nted-esen\n2417\n298201-2026"
+    }
+  ],
+  "IA": [
+    "https://grom.wp.mil.pl/pl/"
+  ],
+  "NC": [
+    "supplies",
+    "supplies"
+  ],
+  "ND": "720852-2026",
+  "NL": 1,
+  "OJ": "202/2026",
+  "OL": [
+    "POL"
+  ],
+  "OPA-36-Lot-Number": [
+    "100"
+  ],
+  "OPP-010-notice": "720852-2026",
+  "OPP-011-notice": "202/2026",
+  "OPP-012-notice": "2026-10-19+02:00",
+  "OPP-070-notice": "31",
+  "OPP-090-Procedure": [
+    "298201-2026"
+  ],
+  "OPT-002-notice": "eforms-sdk-1.14",
+  "OPT-030-Procedure-SProvider": [
+    "ted-esen"
+  ],
+  "OPT-211-Tenderer": [
+    "CENZIN Sp. z o.o."
+  ],
+  "PC": [
+    "35331000",
+    "35331000"
+  ],
+  "PD": "2026-10-19+02:00",
+  "PR": "restricted",
+  "RC": [
+    "PL911",
+    "POL",
+    "PL911",
+    "POL"
+  ],
+  "TI": {
+    "hun": "Lengyelország – Lőszerek lőfegyverekhez és hadviseléshez – Dostawa amunicji 9 nb. pist. z poc. pełnopłaszczowym WS",
+    "lav": "Polija – Šaujamieroču munīcija – Dostawa amunicji 9 nb. pist. z poc. pełnopłaszczowym WS",
+    "swe": "Polen – Ammunition för eldvapen och krigföring – Dostawa amunicji 9 nb. pist. z poc. pełnopłaszczowym WS",
+    "gle": "An Pholainn – Ammunition for firearms and warfare – Dostawa amunicji 9 nb. pist. z poc. pełnopłaszczowym WS",
+    "ell": "Πολωνία – Πυρομαχικά για πυροβόλα και πολεμικές επιχειρήσεις – Dostawa amunicji 9 nb. pist. z poc. pełnopłaszczowym WS",
+    "spa": "Polonia – Municiones para armas de fuego y acciones de guerra – Dostawa amunicji 9 nb. pist. z poc. pełnopłaszczowym WS",
+    "est": "Poola – Tulirelvade ja sõjatehnika laskemoon – Dostawa amunicji 9 nb. pist. z poc. pełnopłaszczowym WS",
+    "nld": "Polen – Munitie voor vuurwapens en oorlogvoering – Dostawa amunicji 9 nb. pist. z poc. pełnopłaszczowym WS",
+    "fin": "Puola – Ampumatarvikkeet tuliaseita ja sodankäyntiä varten – Dostawa amunicji 9 nb. pist. z poc. pełnopłaszczowym WS",
+    "pol": "Polska – Amunicja do broni palnej i amunicja bojowa – Dostawa amunicji 9 nb. pist. z poc. pełnopłaszczowym WS",
+    "hrv": "Poljska – Streljivo za vatreno oružje i borbu – Dostawa amunicji 9 nb. pist. z poc. pełnopłaszczowym WS",
+    "ces": "Polsko – Munice pro střelné zbraně – Dostawa amunicji 9 nb. pist. z poc. pełnopłaszczowym WS",
+    "dan": "Polen – Ammunition til skydevåben og krigsførelse – Dostawa amunicji 9 nb. pist. z poc. pełnopłaszczowym WS",
+    "ron": "Polonia – Muniţie pentru arme de foc şi de război – Dostawa amunicji 9 nb. pist. z poc. pełnopłaszczowym WS",
+    "por": "Polónia – Munições para armas de fogo e de guerra – Dostawa amunicji 9 nb. pist. z poc. pełnopłaszczowym WS",
+    "slk": "Poľsko – Strelivo do strelných zbraní a vojnové prostriedky – Dostawa amunicji 9 nb. pist. z poc. pełnopłaszczowym WS",
+    "fra": "Pologne – Munitions d'armes à feu et de guerre – Dostawa amunicji 9 nb. pist. z poc. pełnopłaszczowym WS",
+    "mlt": "Il-Polonja – Munizzjon għal armi tan-nar u armi tal-gwerra – Dostawa amunicji 9 nb. pist. z poc. pełnopłaszczowym WS",
+    "deu": "Polen – Munition für Feuerwaffen und Kriegswaffen – Dostawa amunicji 9 nb. pist. z poc. pełnopłaszczowym WS",
+    "lit": "Lenkija – Šaunamųjų ginklų ir kariniai šaudmenys – Dostawa amunicji 9 nb. pist. z poc. pełnopłaszczowym WS",
+    "ita": "Polonia – Munizioni per armi da fuoco e da guerra – Dostawa amunicji 9 nb. pist. z poc. pełnopłaszczowym WS",
+    "bul": "Полша – Боеприпаси за огнестрелно оръжие и за водене на военни действия – Dostawa amunicji 9 nb. pist. z poc. pełnopłaszczowym WS",
+    "slv": "Poljska – Strelivo za ognjeno strelno orožje in bojevanje – Dostawa amunicji 9 nb. pist. z poc. pełnopłaszczowym WS",
+    "eng": "Poland – Ammunition for firearms and warfare – Dostawa amunicji 9 nb. pist. z poc. pełnopłaszczowym WS"
+  },
+  "TV": 16974000,
+  "TV_CUR": [
+    "PLN"
+  ],
+  "TW": {
+    "mul": [
+      "Warszawa"
+    ]
+  },
+  "award-criterion-description-lot": {
+    "pol": [
+      "Cena",
+      "Gwarancja"
+    ]
+  },
+  "award-criterion-number-lot": [
+    "60",
+    "40"
+  ],
+  "award-criterion-number-weight-lot": [
+    "per-exa",
+    "per-exa"
+  ],
+  "award-criterion-type-lot": [
+    "price",
+    "quality"
+  ],
+  "buyer-city": {
+    "mul": [
+      "Warszawa"
+    ]
+  },
+  "buyer-contact-point": [
+    "Grupa ds. Zamówień Publicznych"
+  ],
+  "buyer-country": [
+    "POL"
+  ],
+  "buyer-country-sub": [
+    "PL911"
+  ],
+  "buyer-email": [
+    "2305.zamowienia@ron.mil.pl"
+  ],
+  "buyer-identifier": [
+    "NIP 9521818707"
+  ],
+  "buyer-internet-address": [
+    "https://grom.wp.mil.pl/pl/"
+  ],
+  "buyer-name": {
+    "pol": [
+      "Skarb Państwa - Jednostka Wojskowa Nr 2305"
+    ]
+  },
+  "buyer-partname": [
+    "Grupa ds. Zamówień Publicznych"
+  ],
+  "buyer-post-code": [
+    "04-520"
+  ],
+  "classification-cpv": [
+    "35331000",
+    "35331000"
+  ],
+  "competition-termination-proc": false,
+  "contract-conclusion-date": [
+    "2026-10-07+02:00"
+  ],
+  "contract-duration-period-lot": [
+    {
+      "unit": "DAY",
+      "value": "100"
+    }
+  ],
+  "contract-identifier": [
+    "117/ŚR.BOJ./2026"
+  ],
+  "contract-nature": [
+    "supplies",
+    "supplies"
+  ],
+  "contract-nature-main-lot": [
+    "supplies"
+  ],
+  "contract-nature-main-proc": "supplies",
+  "contract-tender-id": [
+    "TEN-0001"
+  ],
+  "customization-id": "eforms-sdk-1.14",
+  "description-lot": {
+    "pol": [
+      "Przedmiotem zamówienia jest dostawa amunicji 9 nb. z poc. pełnopłaszczowym WS z możliwością realizacji opcjonalnego. Wymogi oraz szczegółowy opis przedmiotu zamówienia wyszczególniono w załączniku do Specyfikacji Warunków Zamówienia, którą Zamawiający przekaże zaproszonym do składania ofert Wykonawcom, którzy spełniają warunki określone w ogłoszeniu."
+    ]
+  },
+  "description-proc": {
+    "pol": "Przedmiotem zamówienia jest dostawa amunicji 9 nb. pist. z poc. pełnopłaszczowym WS"
+  },
+  "dispatch-date": "2026-10-16Z",
+  "dispatch-time": "08:26:19Z",
+  "dps-usage-lot": [
+    "none"
+  ],
+  "duration-period-unit-lot": [
+    "DAY"
+  ],
+  "duration-period-value-lot": [
+    "100"
+  ],
+  "electronic-auction-lot": [
+    false
+  ],
+  "form-type": "result",
+  "framework-agreement-lot": [
+    "none"
+  ],
+  "identifier-lot": [
+    "LOT-0002"
+  ],
+  "internal-identifier-proc": "ZP-21/DOiB/2026",
+  "legal-basis": [
+    "32009L0081"
+  ],
+  "legal-basis-notice": "32009L0081",
+  "links": {
+    "xml": {
+      "MUL": "https://ted.europa.eu/en/notice/720852-2026/xml"
+    },
+    "pdf": {
+      "ENG": "https://ted.europa.eu/en/notice/720852-2026/pdf"
+    },
+    "pdfs": {},
+    "html": {
+      "ENG": "https://ted.europa.eu/en/notice/-/detail/720852-2026"
+    },
+    "htmlDirect": {
+      "ENG": "https://ted.europa.eu/en/notice/720852-2026/html"
+    }
+  },
+  "main-classification-lot": [
+    "35331000"
+  ],
+  "main-classification-proc": [
+    "35331000"
+  ],
+  "main-classification-type-lot": [
+    "cpv"
+  ],
+  "main-classification-type-proc": "cpv",
+  "notice-identifier": "82242d4d-e087-4787-8271-9238e40e1131",
+  "notice-subtype": "31",
+  "notice-title": {
+    "hun": "Lengyelország – Lőszerek lőfegyverekhez és hadviseléshez – Dostawa amunicji 9 nb. pist. z poc. pełnopłaszczowym WS",
+    "lav": "Polija – Šaujamieroču munīcija – Dostawa amunicji 9 nb. pist. z poc. pełnopłaszczowym WS",
+    "swe": "Polen – Ammunition för eldvapen och krigföring – Dostawa amunicji 9 nb. pist. z poc. pełnopłaszczowym WS",
+    "gle": "An Pholainn – Ammunition for firearms and warfare – Dostawa amunicji 9 nb. pist. z poc. pełnopłaszczowym WS",
+    "ell": "Πολωνία – Πυρομαχικά για πυροβόλα και πολεμικές επιχειρήσεις – Dostawa amunicji 9 nb. pist. z poc. pełnopłaszczowym WS",
+    "spa": "Polonia – Municiones para armas de fuego y acciones de guerra – Dostawa amunicji 9 nb. pist. z poc. pełnopłaszczowym WS",
+    "est": "Poola – Tulirelvade ja sõjatehnika laskemoon – Dostawa amunicji 9 nb. pist. z poc. pełnopłaszczowym WS",
+    "nld": "Polen – Munitie voor vuurwapens en oorlogvoering – Dostawa amunicji 9 nb. pist. z poc. pełnopłaszczowym WS",
+    "fin": "Puola – Ampumatarvikkeet tuliaseita ja sodankäyntiä varten – Dostawa amunicji 9 nb. pist. z poc. pełnopłaszczowym WS",
+    "pol": "Polska – Amunicja do broni palnej i amunicja bojowa – Dostawa amunicji 9 nb. pist. z poc. pełnopłaszczowym WS",
+    "hrv": "Poljska – Streljivo za vatreno oružje i borbu – Dostawa amunicji 9 nb. pist. z poc. pełnopłaszczowym WS",
+    "ces": "Polsko – Munice pro střelné zbraně – Dostawa amunicji 9 nb. pist. z poc. pełnopłaszczowym WS",
+    "dan": "Polen – Ammunition til skydevåben og krigsførelse – Dostawa amunicji 9 nb. pist. z poc. pełnopłaszczowym WS",
+    "ron": "Polonia – Muniţie pentru arme de foc şi de război – Dostawa amunicji 9 nb. pist. z poc. pełnopłaszczowym WS",
+    "por": "Polónia – Munições para armas de fogo e de guerra – Dostawa amunicji 9 nb. pist. z poc. pełnopłaszczowym WS",
+    "slk": "Poľsko – Strelivo do strelných zbraní a vojnové prostriedky – Dostawa amunicji 9 nb. pist. z poc. pełnopłaszczowym WS",
+    "fra": "Pologne – Munitions d'armes à feu et de guerre – Dostawa amunicji 9 nb. pist. z poc. pełnopłaszczowym WS",
+    "mlt": "Il-Polonja – Munizzjon għal armi tan-nar u armi tal-gwerra – Dostawa amunicji 9 nb. pist. z poc. pełnopłaszczowym WS",
+    "deu": "Polen – Munition für Feuerwaffen und Kriegswaffen – Dostawa amunicji 9 nb. pist. z poc. pełnopłaszczowym WS",
+    "lit": "Lenkija – Šaunamųjų ginklų ir kariniai šaudmenys – Dostawa amunicji 9 nb. pist. z poc. pełnopłaszczowym WS",
+    "ita": "Polonia – Munizioni per armi da fuoco e da guerra – Dostawa amunicji 9 nb. pist. z poc. pełnopłaszczowym WS",
+    "bul": "Полша – Боеприпаси за огнестрелно оръжие и за водене на военни действия – Dostawa amunicji 9 nb. pist. z poc. pełnopłaszczowym WS",
+    "slv": "Poljska – Strelivo za ognjeno strelno orožje in bojevanje – Dostawa amunicji 9 nb. pist. z poc. pełnopłaszczowym WS",
+    "eng": "Poland – Ammunition for firearms and warfare – Dostawa amunicji 9 nb. pist. z poc. pełnopłaszczowym WS"
+  },
+  "notice-type": "can-standard",
+  "notice-version": 1,
+  "official-language": [
+    "POL"
+  ],
+  "ojs-number": "202/2026",
+  "option-description-lot": {
+    "pol": [
+      "Zamawiający przewiduje skorzystanie z prawa opcji. Wymogi oraz szczegółowy opis przedmiotu zamówienia wyszczególniono w załączniku do Specyfikacji Warunków Zamówienia, którą Zamawiający przekaże zaproszonym do składania ofert Wykonawcom, którzy spełniają warunki określone w dokumentach postępowania."
+    ]
+  },
+  "organisation-city-addinfo-lot": [
+    "Warszawa"
+  ],
+  "organisation-city-buyer": [
+    "Warszawa"
+  ],
+  "organisation-city-reviewinfo-lot": [
+    "Warszawa"
+  ],
+  "organisation-city-revieworg-lot": [
+    "Warszawa"
+  ],
+  "organisation-city-signatory": [
+    "Warszawa"
+  ],
+  "organisation-city-ted-esen": [
+    "Luxembourg"
+  ],
+  "organisation-city-tenderer": [
+    "Warszawa"
+  ],
+  "organisation-contact-point-addinfo-lot": [
+    "Grupa ds. Zamówień Publicznych"
+  ],
+  "organisation-contact-point-buyer": [
+    "Grupa ds. Zamówień Publicznych"
+  ],
+  "organisation-contact-point-reviewinfo-lot": [
+    "Grupa ds. Zamówień Publicznych"
+  ],
+  "organisation-contact-point-signatory": [
+    "Grupa ds. Zamówień Publicznych"
+  ],
+  "organisation-country-addinfo-lot": [
+    "POL"
+  ],
+  "organisation-country-buyer": [
+    "POL"
+  ],
+  "organisation-country-reviewinfo-lot": [
+    "POL"
+  ],
+  "organisation-country-revieworg-lot": [
+    "POL"
+  ],
+  "organisation-country-signatory": [
+    "POL"
+  ],
+  "organisation-country-sub-addinfo-lot": [
+    "PL911"
+  ],
+  "organisation-country-sub-buyer": [
+    "PL911"
+  ],
+  "organisation-country-sub-reviewinfo-lot": [
+    "PL911"
+  ],
+  "organisation-country-sub-revieworg-lot": [
+    "PL911"
+  ],
+  "organisation-country-sub-signatory": [
+    "PL911"
+  ],
+  "organisation-country-sub-ted-esen": [
+    "LU000"
+  ],
+  "organisation-country-sub-tenderer": [
+    "PL911"
+  ],
+  "organisation-country-ted-esen": [
+    "LUX"
+  ],
+  "organisation-country-tenderer": [
+    "POL"
+  ],
+  "organisation-email-addinfo-lot": [
+    "2305.zamowienia@ron.mil.pl"
+  ],
+  "organisation-email-buyer": [
+    "2305.zamowienia@ron.mil.pl"
+  ],
+  "organisation-email-reviewinfo-lot": [
+    "2305.zamowienia@ron.mil.pl"
+  ],
+  "organisation-email-revieworg-lot": [
+    "Krs@ms.gov.pl"
+  ],
+  "organisation-email-signatory": [
+    "2305.zamowienia@ron.mil.pl"
+  ],
+  "organisation-email-ted-esen": [
+    "ted@publications.europa.eu"
+  ],
+  "organisation-gateway-revieworg-lot": [
+    "https://epuap.gov.pl/wps/portal/strefa-klienta/katalog-spraw/opis-uslugi/odwolanie-do-krajowej-izby-odwolawczej/UZP"
+  ],
+  "organisation-gateway-tenderer": [
+    "https://epuap.gov.pl/wps/portal/strefa-klienta/katalog-spraw/opis-uslugi/odwolanie-do-krajowej-izby-odwolawczej/UZP"
+  ],
+  "organisation-identifier-addinfo-lot": [
+    "NIP 9521818707"
+  ],
+  "organisation-identifier-buyer": [
+    "NIP 9521818707"
+  ],
+  "organisation-identifier-reviewinfo-lot": [
+    "NIP 9521818707"
+  ],
+  "organisation-identifier-revieworg-lot": [
+    "NIP 5262239325"
+  ],
+  "organisation-identifier-signatory": [
+    "NIP 9521818707"
+  ],
+  "organisation-identifier-ted-esen": [
+    "PUBL"
+  ],
+  "organisation-identifier-tenderer": [
+    "NIP 5260251196"
+  ],
+  "organisation-internet-address-addinfo-lot": [
+    "https://grom.wp.mil.pl/pl/"
+  ],
+  "organisation-internet-address-buyer": [
+    "https://grom.wp.mil.pl/pl/"
+  ],
+  "organisation-internet-address-reviewinfo-lot": [
+    "https://grom.wp.mil.pl/pl/"
+  ],
+  "organisation-internet-address-revieworg-lot": [
+    "https://www.gov.pl/web/uzp/krajowa-izba-odwolawcza"
+  ],
+  "organisation-internet-address-signatory": [
+    "https://grom.wp.mil.pl/pl/"
+  ],
+  "organisation-internet-address-ted-esen": [
+    "https://op.europa.eu"
+  ],
+  "organisation-internet-address-tenderer": [
+    "https://www.gov.pl/web/uzp/krajowa-izba-odwolawcza"
+  ],
+  "organisation-name-addinfo-lot": {
+    "pol": [
+      "Skarb Państwa - Jednostka Wojskowa Nr 2305"
+    ]
+  },
+  "organisation-name-buyer": {
+    "pol": [
+      "Skarb Państwa - Jednostka Wojskowa Nr 2305"
+    ]
+  },
+  "organisation-name-reviewinfo-lot": {
+    "pol": [
+      "Skarb Państwa - Jednostka Wojskowa Nr 2305"
+    ]
+  },
+  "organisation-name-revieworg-lot": {
+    "pol": [
+      "Krajowa Izba Odwoławcza"
+    ]
+  },
+  "organisation-name-signatory": {
+    "pol": [
+      "Skarb Państwa - Jednostka Wojskowa Nr 2305"
+    ]
+  },
+  "organisation-name-ted-esen": {
+    "pol": [
+      "Publications Office of the European Union"
+    ]
+  },
+  "organisation-name-tenderer": {
+    "pol": [
+      "CENZIN Sp. z o.o."
+    ]
+  },
+  "organisation-partname-addinfo-lot": [
+    "Grupa ds. Zamówień Publicznych"
+  ],
+  "organisation-partname-buyer": [
+    "Grupa ds. Zamówień Publicznych"
+  ],
+  "organisation-partname-reviewinfo-lot": [
+    "Grupa ds. Zamówień Publicznych"
+  ],
+  "organisation-partname-signatory": [
+    "Grupa ds. Zamówień Publicznych"
+  ],
+  "organisation-person-ted-esen": [
+    false
+  ],
+  "organisation-post-code-addinfo-lot": [
+    "04-520"
+  ],
+  "organisation-post-code-buyer": [
+    "04-520"
+  ],
+  "organisation-post-code-reviewinfo-lot": [
+    "04-520"
+  ],
+  "organisation-post-code-revieworg-lot": [
+    "02-676 "
+  ],
+  "organisation-post-code-signatory": [
+    "04-520"
+  ],
+  "organisation-post-code-ted-esen": [
+    "2417"
+  ],
+  "organisation-post-code-tenderer": [
+    "00-957"
+  ],
+  "organisation-street-revieworg-lot": [
+    "ul. Postępu 17a"
+  ],
+  "organisation-street-tenderer": [
+    "ul. Czerniakowska 81/83"
+  ],
+  "organisation-tel-addinfo-lot": [
+    "+48 261895027"
+  ],
+  "organisation-tel-buyer": [
+    "+48 261895027"
+  ],
+  "organisation-tel-reviewinfo-lot": [
+    "+48 261895027"
+  ],
+  "organisation-tel-revieworg-lot": [
+    "+48 22 458 78 01"
+  ],
+  "organisation-tel-signatory": [
+    "+48 261895027"
+  ],
+  "organisation-tel-ted-esen": [
+    "+352 29291"
+  ],
+  "place-of-performance": [
+    "PL911",
+    "POL",
+    "PL911",
+    "POL"
+  ],
+  "place-of-performance-country-lot": [
+    "POL"
+  ],
+  "place-of-performance-country-proc": [
+    "POL"
+  ],
+  "place-of-performance-subdiv-lot": [
+    "PL911"
+  ],
+  "place-of-performance-subdiv-proc": [
+    "PL911"
+  ],
+  "previous-notice-id-proc": [
+    "298201-2026"
+  ],
+  "procedure-accelerated": "false",
+  "procedure-identifier": "f1249740-8eb9-4433-91d9-9827a54647b5",
+  "procedure-type": "restricted",
+  "procurement-relaunch-proc": false,
+  "provided-service-type": [
+    "ted-esen"
+  ],
+  "publication-date": "2026-10-19+02:00",
+  "publication-number": "720852-2026",
+  "received-submissions-type-code": [
+    "tenders",
+    "t-esubm",
+    "t-sme",
+    "t-oth-eea",
+    "t-no-eea"
+  ],
+  "received-submissions-type-val": [
+    "5",
+    "5",
+    "5",
+    "0",
+    "0"
+  ],
+  "result-lot-identifier": [
+    "LOT-0002"
+  ],
+  "result-value-cur-notice": "PLN",
+  "result-value-notice": "16974000",
+  "subcontracting": [
+    "no"
+  ],
+  "tender-identifier": [
+    "Oferta nr 1"
+  ],
+  "tender-lot-identifier": [
+    "LOT-0002"
+  ],
+  "tender-value": [
+    "16974000"
+  ],
+  "tender-value-cur": [
+    "PLN"
+  ],
+  "tendering-party-name": [
+    "CENZIN Sp. z o.o."
+  ],
+  "title-lot": {
+    "pol": [
+      "Dostawa amunicji 9 nb. pist. z poc. pełnopłaszczowym WS"
+    ]
+  },
+  "title-proc": {
+    "pol": "Dostawa amunicji 9 nb. pist. z poc. pełnopłaszczowym WS"
+  },
+  "total-value": 16974000,
+  "total-value-cur": [
+    "PLN"
+  ],
+  "winner-city": [
+    "Warszawa"
+  ],
+  "winner-country": [
+    "POL"
+  ],
+  "winner-country-sub": [
+    "PL911"
+  ],
+  "winner-decision-date": [
+    "2026-07-31+02:00"
+  ],
+  "winner-gateway": [
+    "https://epuap.gov.pl/wps/portal/strefa-klienta/katalog-spraw/opis-uslugi/odwolanie-do-krajowej-izby-odwolawczej/UZP"
+  ],
+  "winner-identifier": [
+    "NIP 5260251196"
+  ],
+  "winner-internet-address": [
+    "https://www.gov.pl/web/uzp/krajowa-izba-odwolawcza"
+  ],
+  "winner-name": {
+    "pol": [
+      "CENZIN Sp. z o.o."
+    ]
+  },
+  "winner-post-code": [
+    "00-957"
+  ],
+  "winner-selection-status": [
+    "selec-w"
+  ],
+  "winner-size": [
+    "medium"
+  ]
+}

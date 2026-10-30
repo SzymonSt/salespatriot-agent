@@ -122,6 +122,8 @@ An empty `deadline` usually means the notice uses a request-to-participate deadl
   Self-learning RAG over deals (TED + platform + uploaded): `knowledge_base/23-self-learning-rag.md`.
 - `ted_company_profiles.py` — builds company/buyer profiles into `data/profiles`
 - `cpv_codes.py`, `data/cpv_codes.csv`, `data/cpv_defence_codes.csv` — CPV reference data
+- `ted_notice_sample.py` — saves full sample notices (every non-empty Search API field + eForms XML) to `data/samples/`;
+  field list in `data/ted_search_fields.txt`. Format explained in `knowledge_base/24-ted-notice-format.md`
 - `supplier_due_diligence.py` + `dd_sources.py` — 1–10 supplier due-diligence score from free open data,
   written to `due_diligence` in `suppliers.json` and to `data/profiles/due_diligence_summary.md`.
   Method is in the module docstring; supplier-uploaded documents go in `data/supplier_evidence/`

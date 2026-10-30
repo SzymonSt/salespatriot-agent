@@ -1,0 +1,858 @@
+{
+  "AA": [
+    "cga"
+  ],
+  "AU": {
+    "ces": [
+      "Ministerstvo vnitra"
+    ]
+  },
+  "BI": [
+    "00007064"
+  ],
+  "BT-01(e)-Procedure": [
+    "LocalLegalBasis"
+  ],
+  "BT-01(f)-Procedure": {
+    "ces": [
+      "Zákon č. 134/2016 Sb., o zadávání veřejných zakázek"
+    ]
+  },
+  "BT-01-notice": "32014L0024",
+  "BT-02-notice": "can-standard",
+  "BT-03-notice": "result",
+  "BT-04-notice": "ab168a34-e9aa-4016-87ac-69c85e28cb3c",
+  "BT-05(a)-notice": "2026-10-29+01:00",
+  "BT-05(b)-notice": "12:08:43+01:00",
+  "BT-06-Lot": [
+    "none"
+  ],
+  "BT-09(a)-Procedure": "CrossBorderLaw",
+  "BT-09(b)-Procedure": {
+    "ces": "Zákon č. 134/2016 Sb., o zadávání veřejných zakázek"
+  },
+  "BT-10-Procedure-Buyer": [
+    "pub-os"
+  ],
+  "BT-105-Procedure": "open",
+  "BT-106-Procedure": "false",
+  "BT-11-Procedure-Buyer": [
+    "cga"
+  ],
+  "BT-115-Lot": [
+    true
+  ],
+  "BT-118-NoticeResult": "30998000",
+  "BT-118-NoticeResult-Currency": "CZK",
+  "BT-137-Lot": [
+    "LOT-0001"
+  ],
+  "BT-13713-LotResult": [
+    "LOT-0001"
+  ],
+  "BT-13714-Tender": [
+    "LOT-0001"
+  ],
+  "BT-142-LotResult": [
+    "selec-w"
+  ],
+  "BT-145-Contract": [
+    "2026-08-17+02:00"
+  ],
+  "BT-1451-Contract": [
+    "2025-09-23+02:00"
+  ],
+  "BT-150-Contract": [
+    "PPR-51069-27/ČJ-2025-990630"
+  ],
+  "BT-161-NoticeResult": "1826340",
+  "BT-161-NoticeResult-Currency": "CZK",
+  "BT-165-Organization-Company": [
+    "large"
+  ],
+  "BT-171-Tender": [
+    "1"
+  ],
+  "BT-1711-Tender": [
+    false
+  ],
+  "BT-193-Tender": [
+    false
+  ],
+  "BT-21-Lot": {
+    "ces": [
+      "Rámcová dohoda - náboje 4,6x30 mm v provedení pro ozbrojené složky"
+    ]
+  },
+  "BT-21-Procedure": {
+    "ces": "Rámcová dohoda - náboje 4,6x30 mm v provedení pro ozbrojené složky"
+  },
+  "BT-22-Lot": [
+    "PPR-11357/ČJ-2025-990640"
+  ],
+  "BT-22-Procedure": "PPR-11357/ČJ-2025-990640",
+  "BT-23-Lot": [
+    "supplies"
+  ],
+  "BT-23-Procedure": "supplies",
+  "BT-24-Lot": {
+    "ces": [
+      "Náboje ráže 4,6x30 mm - celkové předpokládané množství: 3 000 000 kusů, z toho: • 2 800 000 kusů nábojů se střelou „FMJ“, zápalková slož nekorozivní a neerozivní. • 200 000 kusů nábojů se střelou „AP“, zápalková slož nekorozivní a neerozivní. Celkové množství nábojů může být zadavatelem zaokrouhleno na celá balení."
+    ]
+  },
+  "BT-24-Procedure": {
+    "ces": "Náboje ráže 4,6x30 mm - celkové předpokládané množství: 3 000 000 kusů, z toho: • 2 800 000 kusů nábojů se střelou „FMJ“, zápalková slož nekorozivní a neerozivní. • 200 000 kusů nábojů se střelou „AP“, zápalková slož nekorozivní a neerozivní. Celkové množství nábojů může být zadavatelem zaokrouhleno na celá balení."
+  },
+  "BT-26(m)-Lot": [
+    "cpv"
+  ],
+  "BT-26(m)-Procedure": "cpv",
+  "BT-262-Lot": [
+    "35331000"
+  ],
+  "BT-262-Procedure": [
+    "35331000"
+  ],
+  "BT-27-Lot": [
+    "30578512.4"
+  ],
+  "BT-27-Lot-Currency": [
+    "CZK"
+  ],
+  "BT-27-Procedure": "30578512.4",
+  "BT-27-Procedure-Currency": "CZK",
+  "BT-300-Lot": {
+    "ces": [
+      "Oznámení je uveřejněno souhrnně dle § 137 písm. b) zákona č. 134/2016 Sb., o zadávání veřejných zakázek, v platném znění. Za 3Q 2026 bylo 1 objednávkou čerpáno z RD 1.826.340,- Kč bez DPH."
+    ]
+  },
+  "BT-300-procedure": {
+    "ces": "Oznámení je uveřejněno souhrnně dle § 137 písm. b) zákona č. 134/2016 Sb., o zadávání veřejných zakázek, v platném znění. Za 3Q 2026 bylo 1 objednávkou čerpáno z RD 1.826.340,- Kč bez DPH."
+  },
+  "BT-3202-Contract": [
+    "TEN-0001",
+    "TEN-0001"
+  ],
+  "BT-36-Lot": [
+    {
+      "unit": "MONTH",
+      "value": "48"
+    }
+  ],
+  "BT-36-Lot-Unit": [
+    "MONTH"
+  ],
+  "BT-5071-Lot": [
+    "CZ064"
+  ],
+  "BT-5071-Procedure": [
+    "CZ064"
+  ],
+  "BT-508-Procedure-Buyer": [
+    "https://nen.nipez.cz/profil/MVCR"
+  ],
+  "BT-5141-Lot": [
+    "CZE"
+  ],
+  "BT-5141-Procedure": [
+    "CZE"
+  ],
+  "BT-536-Lot": [
+    "2025-10-10+02:00"
+  ],
+  "BT-539-Lot": [
+    "price"
+  ],
+  "BT-54-lot": {
+    "ces": [
+      "Zadavatel si v souladu s § 131 odst. 5 zákona ve spojení s § 100 odst. 1 zákona vyhrazuje následující možné změny závazku po dobu trvání rámcové dohody a smluv (objednávek) uzavřených na základě rámcové dohody. 11.1 Inflační doložka 11.1.1 Zadavatel si v souladu s § 100 odst. 1 zákona vyhrazuje právo na změnu ceny v průběhu plnění rámcové dohody za níže uvedených a specifikovaných podmínek. 11.1.2 Nabídnuté jednotkové ceny uvedené v rámcové dohodě lze na žádost vybraného dodavatele navýšit z důvodu inflace, a to každý kalendářní rok následující po roce, v němž uplyne 1 (jeden) rok od účinnosti rámcové dohody, až do doby konce účinnosti rámcové dohody. Žádost je povinen vybraný dodavatel doručit do 15. 2. příslušného roku (příklad: rámcová dohoda bude uzavřena 1. 6. 2025, jeden rok od účinnosti rámcové dohody je 1. 6. 2026, následující rok je rok 2027, dodavatel musí do 15. 2. 2027 zažádat o navýšení ceny). 11.1.3 Nabídnuté jednotkové ceny lze zvýšit pouze tehdy, když inflace přesáhne výši 2 %. Maximální navýšení cen o míru inflace v každém roce je 5 % a platí i v případě, že míra meziroční inflace bude vyšší. 11.1.4 Inflací se rozumí meziroční inflace měřená vzrůstem úhrnného indexu spotřebitelských cen zboží a služeb, kterou udává každým kalendářním rokem Český statistický úřad za rok předcházející, vyjádřená v procentech. 11.2 Změna sazby DPH 11.2.1 Zadavatel si v souladu s § 100 odst. 1 zákona vyhrazuje právo na změnu ceny v průběhu plnění rámcové dohody za níže uvedených a specifikovaných podmínek. 11.2.2 Nabídnuté jednotkové ceny uvedené v rámcové dohodě lze měnit v případě zvýšení či snížení zákonem stanovené sazby daně z přidané hodnoty podle zákona o dani. V takovém případě bude cena plnění změněna o příslušné navýšení nebo snížení sazby DPH a to ode dne účinnosti nové zákonné změny sazby DPH. 11.3 Prodloužení doby plnění a změna ceny plnění rámcové dohody 11.3.1 Zadavatel si na základě § 100 odst. 1 zákona vyhrazuje možnou změnu závazku v podobě prodloužení doby plnění rámcové dohody upravené v jejím čl. 4 odst. /3/, a to v případě, že dodavatel nebude schopen splnit předmět plnění rámcové dohody z důvodu vyšší moci upravené v čl. 12 rámcové dohody, která může nastat mimo jiné i v důsledku nouzového stavu či karanténními nebo jinými opatřeními veřejné moci na území ČR, ale i v důsledku mimořádných opatření v jiných zemích, které mohou mít vliv na dodávky dodavatele nebo jeho poddodavatelů. Doba plnění bude v takovém případě prodloužena pouze o dodavatelem řádně prokázané období trvání okolností vyšší moci, které brání realizaci dodávky ve smluvním termínu realizace. 11.3.2 Zadavatel si na základě § 100 odst. 1 zákona vyhrazuje možnou změnu závazku v podobě změny ceny upravené v jejím čl. 7 odst. /2/, a to v případě, že dodavatel nebude schopen splnit předmět plnění rámcové dohody z důvodu vyšší moci upravené v čl. 12 rámcové dohody, která může nastat mimo jiné i v důsledku nouzového stavu či karanténními nebo jinými opatřeními veřejné moci na území ČR, ale i v důsledku mimořádných opatření v jiných zemích, které mohou mít vliv na dodávky dodavatele nebo jeho poddodavatelů. Změna ceny bude v takovém případě upravena pouze o dodavatelem řádně prokázané okolnosti vyšší moci, které zapříčiňují změnu ceny."
+    ]
+  },
+  "BT-540-Lot": {
+    "ces": [
+      "Nabídky budou seřazeny dle celkové nabídkové ceny v Kč včetně DPH - nabídka s nejnižší celkovou nabídkovou cenou se umístí na 1. místě. V případě, že dva či více dodavatelů předloží naprosto stejnou nabídkovou cenu, bude přistoupeno k losování za účasti dotčených dodavatelů zadávacího řízení, kterým bude zadavatelem zaslána písemná pozvánka prostřednictvím elektronické komunikace v NEN."
+    ]
+  },
+  "BT-541-Lot": [
+    "100"
+  ],
+  "BT-5421-Lot": [
+    "per-exa"
+  ],
+  "BT-60-Lot": [
+    "no-eu-funds"
+  ],
+  "BT-634-Procedure": false,
+  "BT-701-notice": "6757b7b2-0f31-4ba4-9540-dd9b0e7b9423",
+  "BT-702-notice": [
+    "CES"
+  ],
+  "BT-709-LotResult": [
+    "30998000"
+  ],
+  "BT-709-LotResult-Currency": [
+    "CZK"
+  ],
+  "BT-712(a)-LotResult": [
+    "complainants"
+  ],
+  "BT-712(b)-LotResult": [
+    "0"
+  ],
+  "BT-720-Tender": [
+    "30998000"
+  ],
+  "BT-720-Tender-Currency": [
+    "CZK"
+  ],
+  "BT-721-Contract": {
+    "ces": [
+      "Objednávka č. 4 (1.826.340,- Kč bez DPH): PPR-51069-27/ČJ-2025-990630"
+    ]
+  },
+  "BT-734-Lot": {
+    "ces": [
+      "Celková nabídková cena v Kč včetně DPH za 3 000 000 ks nábojů ráže 4,6x30 mm"
+    ]
+  },
+  "BT-756-Procedure": false,
+  "BT-757-notice": 1,
+  "BT-759-LotResult": [
+    "1",
+    "1",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0"
+  ],
+  "BT-760-LotResult": [
+    "tenders",
+    "t-esubm",
+    "t-sme",
+    "t-oth-eea",
+    "t-no-eea",
+    "t-verif-inad-low",
+    "t-verif-inad",
+    "part-req"
+  ],
+  "BT-765-Lot": [
+    "fa-wo-rc"
+  ],
+  "BT-766-Lot": [
+    "none"
+  ],
+  "BT-767-Lot": [
+    false
+  ],
+  "BT-768-Contract": [
+    true
+  ],
+  "BT-773-Tender": [
+    "not-known"
+  ],
+  "BT-99-Lot": {
+    "ces": [
+      "Podmínkou pro podání návrhu k ÚOHS je podání námitek k Zadavateli, které je nutné doručit do 15 dnů ode dne, kdy se stěžovatel dozvěděl o domnělém porušení zákona Zadavatelem, nejpozději však do uzavření smlouvy nebo do chvíle, kdy se soutěž o návrh považuje po výběru návrhu za ukončenou. Námitky proti úkonům oznamovaným v dokumentech, které je Zadavatel povinen podle zákona uveřejnit či odeslat stěžovateli, musí být doručeny Zadavateli do 15 dnů od jejich uveřejnění či doručení stěžovateli. Pokud je v zadávacím řízení stanovena lhůta pro podání žádostí o účast, musí být námitky proti podmínkám vztahujícím se ke kvalifikaci dodavatele doručeny Zadavateli nejpozději do skončení této lhůty. Pokud je v zadávacím řízení stanovena lhůta pro podání nabídek, musí být námitky proti zadávacím podmínkám doručeny Zadavateli nejpozději do skončení této lhůty. Námitky proti obsahu výzvy k podání nabídek v dynamickém nákupním systému nebo při zadávání veřejné zakázky na základě rámcové dohody musí být zadavateli doručeny nejpozději do konce lhůty pro podání nabídek. V soutěži o návrh musí být námitky proti soutěžním podmínkám doručeny nejpozději do konce lhůty pro podání návrhů. Zadavatel může v zadávací dokumentaci nebo soutěžních podmínkách stanovit, že námitky podle § 242 odst. 3 nebo 4 zákona lze podat nejpozději 72 hodin před skončením lhůt podle § 242 odst. 3 nebo 4 zákona. Námitky proti dobrovolnému oznámení o záměru uzavřít smlouvu podle § 212 odst. 2 zákona musí být doručeny Zadavateli do 30 dnů od uveřejnění tohoto oznámení. Zadavatel je povinen námitky vyřídit do 15 dnů. Návrh je nutné doručit ÚOHS i Zadavateli do 10 dnů ode dne, v němž stěžovatel obdržel rozhodnutí, kterým Zadavatel námitky odmítnul nebo do 25 dnů od odeslání námitek, pokud Zadavatel o námitkách nerozhodl. Po uzavření smlouvy na veřejnou zakázku či rámcové dohody lze podat pouze návrh na uložení zákazu plnění smlouvy, a to i bez předchozího podání námitek. Návrh na uložení zákazu plnění smlouvy doručí navrhovatel ÚOHS a ve stejnopisu Zadavateli do 30 dnů ode dne, kdy Zadavatel uveřejnil oznámení o uzavření smlouvy způsobem podle § 212 odst. 2 zákona s uvedením důvodu pro zadání veřejné zakázky bez uveřejnění oznámení o zahájení zadávacího řízení, předběžného oznámení nebo výzvy k podání nabídek ve zjednodušeném podlimitním řízení, nejpozději však do 6 měsíců od uzavření této smlouvy. Návrh na uložení zákazu plnění smlouvy podle § 254 odstavce 1 písm. d) zákona doručí navrhovatel ÚOHS a ve stejnopisu Zadavateli do 30 dnů ode dne, kdy Zadavatel uveřejnil oznámení o uzavření smlouvy na základě rámcové dohody podle § 137 zákona nebo oznámení o uzavření smlouvy v dynamickém nákupním systému podle § 142 zákona, nejpozději však do 6 měsíců od uzavření této smlouvy. Ve lhůtě pro doručení návrhu je navrhovatel povinen složit na účet ÚOHS kauci ve výši 1 % z nabídkové ceny navrhovatele za celou dobu plnění veřejné zakázky nebo za dobu prvních čtyř let plnění v případě smluv na dobu neurčitou, nejméně však ve výši 50 000 Kč, nejvýše ve výši 10 000 000 Kč. V případě, že navrhovatel nemůže stanovit celkovou nabídkovou cenu, je povinen složit kauci ve výši 100 000 Kč. V případě návrhu na uložení zákazu plnění smlouvy je navrhovatel povinen složit kauci ve výši 200 000 Kč. Jde-li o řízení o přezkoumání postupu pro zadávání koncesí, je navrhovatel povinen ve lhůtě pro doručení návrhu složit na účet ÚOHS kauci ve výši 1 % z předpokládané hodnoty koncese uveřejněné ve Věstníku veřejných zakázek nebo na profilu Zadavatele, nejméně však ve výši 50 000 Kč, nejvýše ve výši 10 000 000 Kč. V případě, že Zadavatel neuveřejní ve Věstníku veřejných zakázek nebo na profilu Zadavatele předpokládanou hodnotu koncese, je navrhovatel povinen složit kauci ve výši 100 000 Kč. V případě návrhu na uložení zákazu plnění koncesní smlouvy je navrhovatel povinen složit kauci ve výši 200 000 Kč."
+    ]
+  },
+  "CY": [
+    "CZE"
+  ],
+  "DI": [
+    "32014L0024"
+  ],
+  "DS": "2026-10-29+01:00",
+  "FT": [
+    {
+      "ces": "Podmínkou pro podání návrhu k ÚOHS je podání námitek k Zadavateli, které je nutné doručit do 15 dnů ode dne, kdy se stěžovatel dozvěděl o domnělém porušení zákona Zadavatelem, nejpozději však do uzavření smlouvy nebo do chvíle, kdy se soutěž o návrh považuje po výběru návrhu za ukončenou. Námitky proti úkonům oznamovaným v dokumentech, které je Zadavatel povinen podle zákona uveřejnit či odeslat stěžovateli, musí být doručeny Zadavateli do 15 dnů od jejich uveřejnění či doručení stěžovateli. Pokud je v zadávacím řízení stanovena lhůta pro podání žádostí o účast, musí být námitky proti podmínkám vztahujícím se ke kvalifikaci dodavatele doručeny Zadavateli nejpozději do skončení této lhůty. Pokud je v zadávacím řízení stanovena lhůta pro podání nabídek, musí být námitky proti zadávacím podmínkám doručeny Zadavateli nejpozději do skončení této lhůty. Námitky proti obsahu výzvy k podání nabídek v dynamickém nákupním systému nebo při zadávání veřejné zakázky na základě rámcové dohody musí být zadavateli doručeny nejpozději do konce lhůty pro podání nabídek. V soutěži o návrh musí být námitky proti soutěžním podmínkám doručeny nejpozději do konce lhůty pro podání návrhů. Zadavatel může v zadávací dokumentaci nebo soutěžních podmínkách stanovit, že námitky podle § 242 odst. 3 nebo 4 zákona lze podat nejpozději 72 hodin před skončením lhůt podle § 242 odst. 3 nebo 4 zákona. Námitky proti dobrovolnému oznámení o záměru uzavřít smlouvu podle § 212 odst. 2 zákona musí být doručeny Zadavateli do 30 dnů od uveřejnění tohoto oznámení. Zadavatel je povinen námitky vyřídit do 15 dnů. Návrh je nutné doručit ÚOHS i Zadavateli do 10 dnů ode dne, v němž stěžovatel obdržel rozhodnutí, kterým Zadavatel námitky odmítnul nebo do 25 dnů od odeslání námitek, pokud Zadavatel o námitkách nerozhodl. Po uzavření smlouvy na veřejnou zakázku či rámcové dohody lze podat pouze návrh na uložení zákazu plnění smlouvy, a to i bez předchozího podání námitek. Návrh na uložení zákazu plnění smlouvy doručí navrhovatel ÚOHS a ve stejnopisu Zadavateli do 30 dnů ode dne, kdy Zadavatel uveřejnil oznámení o uzavření smlouvy způsobem podle § 212 odst. 2 zákona s uvedením důvodu pro zadání veřejné zakázky bez uveřejnění oznámení o zahájení zadávacího řízení, předběžného oznámení nebo výzvy k podání nabídek ve zjednodušeném podlimitním řízení, nejpozději však do 6 měsíců od uzavření této smlouvy. Návrh na uložení zákazu plnění smlouvy podle § 254 odstavce 1 písm. d) zákona doručí navrhovatel ÚOHS a ve stejnopisu Zadavateli do 30 dnů ode dne, kdy Zadavatel uveřejnil oznámení o uzavření smlouvy na základě rámcové dohody podle § 137 zákona nebo oznámení o uzavření smlouvy v dynamickém nákupním systému podle § 142 zákona, nejpozději však do 6 měsíců od uzavření této smlouvy. Ve lhůtě pro doručení návrhu je navrhovatel povinen složit na účet ÚOHS kauci ve výši 1 % z nabídkové ceny navrhovatele za celou dobu plnění veřejné zakázky nebo za dobu prvních čtyř let plnění v případě smluv na dobu neurčitou, nejméně však ve výši 50 000 Kč, nejvýše ve výši 10 000 000 Kč. V případě, že navrhovatel nemůže stanovit celkovou nabídkovou cenu, je povinen složit kauci ve výši 100 000 Kč. V případě návrhu na uložení zákazu plnění smlouvy je navrhovatel povinen složit kauci ve výši 200 000 Kč. Jde-li o řízení o přezkoumání postupu pro zadávání koncesí, je navrhovatel povinen ve lhůtě pro doručení návrhu složit na účet ÚOHS kauci ve výši 1 % z předpokládané hodnoty koncese uveřejněné ve Věstníku veřejných zakázek nebo na profilu Zadavatele, nejméně však ve výši 50 000 Kč, nejvýše ve výši 10 000 000 Kč. V případě, že Zadavatel neuveřejní ve Věstníku veřejných zakázek nebo na profilu Zadavatele předpokládanou hodnotu koncese, je navrhovatel povinen složit kauci ve výši 100 000 Kč. V případě návrhu na uložení zákazu plnění koncesní smlouvy je navrhovatel povinen složit kauci ve výši 200 000 Kč.\nCelková nabídková cena v Kč včetně DPH za 3 000 000 ks nábojů ráže 4,6x30 mm\nZadavatel si v souladu s § 131 odst. 5 zákona ve spojení s § 100 odst. 1 zákona vyhrazuje následující možné změny závazku po dobu trvání rámcové dohody a smluv (objednávek) uzavřených na základě rámcové dohody. 11.1 Inflační doložka 11.1.1 Zadavatel si v souladu s § 100 odst. 1 zákona vyhrazuje právo na změnu ceny v průběhu plnění rámcové dohody za níže uvedených a specifikovaných podmínek. 11.1.2 Nabídnuté jednotkové ceny uvedené v rámcové dohodě lze na žádost vybraného dodavatele navýšit z důvodu inflace, a to každý kalendářní rok následující po roce, v němž uplyne 1 (jeden) rok od účinnosti rámcové dohody, až do doby konce účinnosti rámcové dohody. Žádost je povinen vybraný dodavatel doručit do 15. 2. příslušného roku (příklad: rámcová dohoda bude uzavřena 1. 6. 2025, jeden rok od účinnosti rámcové dohody je 1. 6. 2026, následující rok je rok 2027, dodavatel musí do 15. 2. 2027 zažádat o navýšení ceny). 11.1.3 Nabídnuté jednotkové ceny lze zvýšit pouze tehdy, když inflace přesáhne výši 2 %. Maximální navýšení cen o míru inflace v každém roce je 5 % a platí i v případě, že míra meziroční inflace bude vyšší. 11.1.4 Inflací se rozumí meziroční inflace měřená vzrůstem úhrnného indexu spotřebitelských cen zboží a služeb, kterou udává každým kalendářním rokem Český statistický úřad za rok předcházející, vyjádřená v procentech. 11.2 Změna sazby DPH 11.2.1 Zadavatel si v souladu s § 100 odst. 1 zákona vyhrazuje právo na změnu ceny v průběhu plnění rámcové dohody za níže uvedených a specifikovaných podmínek. 11.2.2 Nabídnuté jednotkové ceny uvedené v rámcové dohodě lze měnit v případě zvýšení či snížení zákonem stanovené sazby daně z přidané hodnoty podle zákona o dani. V takovém případě bude cena plnění změněna o příslušné navýšení nebo snížení sazby DPH a to ode dne účinnosti nové zákonné změny sazby DPH. 11.3 Prodloužení doby plnění a změna ceny plnění rámcové dohody 11.3.1 Zadavatel si na základě § 100 odst. 1 zákona vyhrazuje možnou změnu závazku v podobě prodloužení doby plnění rámcové dohody upravené v jejím čl. 4 odst. /3/, a to v případě, že dodavatel nebude schopen splnit předmět plnění rámcové dohody z důvodu vyšší moci upravené v čl. 12 rámcové dohody, která může nastat mimo jiné i v důsledku nouzového stavu či karanténními nebo jinými opatřeními veřejné moci na území ČR, ale i v důsledku mimořádných opatření v jiných zemích, které mohou mít vliv na dodávky dodavatele nebo jeho poddodavatelů. Doba plnění bude v takovém případě prodloužena pouze o dodavatelem řádně prokázané období trvání okolností vyšší moci, které brání realizaci dodávky ve smluvním termínu realizace. 11.3.2 Zadavatel si na základě § 100 odst. 1 zákona vyhrazuje možnou změnu závazku v podobě změny ceny upravené v jejím čl. 7 odst. /2/, a to v případě, že dodavatel nebude schopen splnit předmět plnění rámcové dohody z důvodu vyšší moci upravené v čl. 12 rámcové dohody, která může nastat mimo jiné i v důsledku nouzového stavu či karanténními nebo jinými opatřeními veřejné moci na území ČR, ale i v důsledku mimořádných opatření v jiných zemích, které mohou mít vliv na dodávky dodavatele nebo jeho poddodavatelů. Změna ceny bude v takovém případě upravena pouze o dodavatelem řádně prokázané okolnosti vyšší moci, které zapříčiňují změnu ceny.\nMinisterstvo vnitra\nNáboje ráže 4,6x30 mm - celkové předpokládané množství: 3 000 000 kusů, z toho: • 2 800 000 kusů nábojů se střelou „FMJ“, zápalková slož nekorozivní a neerozivní. • 200 000 kusů nábojů se střelou „AP“, zápalková slož nekorozivní a neerozivní. Celkové množství nábojů může být zadavatelem zaokrouhleno na celá balení.\nObjednávka č. 4 (1.826.340,- Kč bez DPH): PPR-51069-27/ČJ-2025-990630\nÚřad pro ochranu hospodářské soutěže\nNabídky budou seřazeny dle celkové nabídkové ceny v Kč včetně DPH - nabídka s nejnižší celkovou nabídkovou cenou se umístí na 1. místě. V případě, že dva či více dodavatelů předloží naprosto stejnou nabídkovou cenu, bude přistoupeno k losování za účasti dotčených dodavatelů zadávacího řízení, kterým bude zadavatelem zaslána písemná pozvánka prostřednictvím elektronické komunikace v NEN.\nRámcová dohoda - náboje 4,6x30 mm v provedení pro ozbrojené složky\nSellier & Bellot Int. a.s\nZákon č. 134/2016 Sb., o zadávání veřejných zakázek\nOznámení je uveřejněno souhrnně dle § 137 písm. b) zákona č. 134/2016 Sb., o zadávání veřejných zakázek, v platném znění. Za 3Q 2026 bylo 1 objednávkou čerpáno z RD 1.826.340,- Kč bez DPH.\n01\n48\nselec-w\nt-verif-inad-low\npart-req\n19417772\n17000\nPPR-11357/ČJ-2025-990640\n2026-10-30+01:00\npub-os\nt-sme\nnone\nt-oth-eea\n12:08:43+01:00\nsupplies\nprice\nORG-0003\nt-esubm\nhttps://www.mvcr.cz\n1826340\nORG-0001\nORG-0002\nCZ010\n2025-09-23+02:00\nPraha\nlarge\nCON-0001\nNad štolou 936\npp.ovz@pcr.cz\n17315-2026\nBrno\nCZE\n+420 974835653\nno-eu-funds\n0\n32014L0024\nCES\n1\nper-exa\nLocalLegalBasis\nCZK\n60200\ncan-standard\ntrue\n2000-01-01Z\n6757b7b2-0f31-4ba4-9540-dd9b0e7b9423\n30998000\n+420 317891111\n30578512.4\n2026-10-29+01:00\nt-no-eea\nposta@uohs.cz\n29\n211/2026\nTEN-0001\nfa-wo-rc\neforms-sdk-1.13\nCrossBorderLaw\ntřída Kpt. Jaroše 1926/7\nCZ064\nCZ020\nRES-0001\nhttps://uohs.gov.cz\n25801\nLOT-0001\n35331000\nt-verif-inad\n65349423\nTPA-0001\n2026-08-17+02:00\n00007064\nab168a34-e9aa-4016-87ac-69c85e28cb3c\n00754712-2026\nPPR-51069-27/ČJ-2025-990630\ninfo@sellier-bellot.cz\ncomplainants\nfalse\n2025-10-10+02:00\n100\ntenders\n+420 542167111\nnot-known\n2.3\ncga\nhttps://nen.nipez.cz/profil/MVCR\nVlašim\nopen"
+    }
+  ],
+  "IA": [
+    "https://www.mvcr.cz"
+  ],
+  "MA": [
+    "pub-os"
+  ],
+  "NC": [
+    "supplies",
+    "supplies"
+  ],
+  "ND": "754712-2026",
+  "NL": 1,
+  "OJ": "211/2026",
+  "OL": [
+    "CES"
+  ],
+  "OPA-36-Lot-Number": [
+    "48"
+  ],
+  "OPP-010-notice": "754712-2026",
+  "OPP-011-notice": "211/2026",
+  "OPP-012-notice": "2026-10-30+01:00",
+  "OPP-051-Organization": [
+    false
+  ],
+  "OPP-052-Organization": [
+    false
+  ],
+  "OPP-070-notice": "29",
+  "OPT-002-notice": "eforms-sdk-1.13",
+  "OPT-100-Contract": [
+    "17315-2026"
+  ],
+  "PC": [
+    "35331000",
+    "35331000"
+  ],
+  "PD": "2026-10-30+01:00",
+  "PR": "open",
+  "RC": [
+    "CZ064",
+    "CZE",
+    "CZ064",
+    "CZE"
+  ],
+  "TI": {
+    "hun": "Csehország – Lőszerek lőfegyverekhez és hadviseléshez – Rámcová dohoda - náboje 4,6x30 mm v provedení pro ozbrojené složky",
+    "lav": "Čehija – Šaujamieroču munīcija – Rámcová dohoda - náboje 4,6x30 mm v provedení pro ozbrojené složky",
+    "swe": "Tjeckien – Ammunition för eldvapen och krigföring – Rámcová dohoda - náboje 4,6x30 mm v provedení pro ozbrojené složky",
+    "gle": "An tSeicia – Ammunition for firearms and warfare – Rámcová dohoda - náboje 4,6x30 mm v provedení pro ozbrojené složky",
+    "ell": "Τσεχία – Πυρομαχικά για πυροβόλα και πολεμικές επιχειρήσεις – Rámcová dohoda - náboje 4,6x30 mm v provedení pro ozbrojené složky",
+    "spa": "Chequia – Municiones para armas de fuego y acciones de guerra – Rámcová dohoda - náboje 4,6x30 mm v provedení pro ozbrojené složky",
+    "est": "Tšehhi – Tulirelvade ja sõjatehnika laskemoon – Rámcová dohoda - náboje 4,6x30 mm v provedení pro ozbrojené složky",
+    "nld": "Tsjechië – Munitie voor vuurwapens en oorlogvoering – Rámcová dohoda - náboje 4,6x30 mm v provedení pro ozbrojené složky",
+    "fin": "Tšekki – Ampumatarvikkeet tuliaseita ja sodankäyntiä varten – Rámcová dohoda - náboje 4,6x30 mm v provedení pro ozbrojené složky",
+    "pol": "Czechy – Amunicja do broni palnej i amunicja bojowa – Rámcová dohoda - náboje 4,6x30 mm v provedení pro ozbrojené složky",
+    "hrv": "Češka – Streljivo za vatreno oružje i borbu – Rámcová dohoda - náboje 4,6x30 mm v provedení pro ozbrojené složky",
+    "ces": "Česko – Munice pro střelné zbraně – Rámcová dohoda - náboje 4,6x30 mm v provedení pro ozbrojené složky",
+    "dan": "Tjekkiet – Ammunition til skydevåben og krigsførelse – Rámcová dohoda - náboje 4,6x30 mm v provedení pro ozbrojené složky",
+    "ron": "Cehia – Muniţie pentru arme de foc şi de război – Rámcová dohoda - náboje 4,6x30 mm v provedení pro ozbrojené složky",
+    "por": "Chéquia – Munições para armas de fogo e de guerra – Rámcová dohoda - náboje 4,6x30 mm v provedení pro ozbrojené složky",
+    "slk": "Česko – Strelivo do strelných zbraní a vojnové prostriedky – Rámcová dohoda - náboje 4,6x30 mm v provedení pro ozbrojené složky",
+    "fra": "Tchéquie – Munitions d'armes à feu et de guerre – Rámcová dohoda - náboje 4,6x30 mm v provedení pro ozbrojené složky",
+    "mlt": "Iċ-Ċekja – Munizzjon għal armi tan-nar u armi tal-gwerra – Rámcová dohoda - náboje 4,6x30 mm v provedení pro ozbrojené složky",
+    "deu": "Tschechien – Munition für Feuerwaffen und Kriegswaffen – Rámcová dohoda - náboje 4,6x30 mm v provedení pro ozbrojené složky",
+    "lit": "Čekija – Šaunamųjų ginklų ir kariniai šaudmenys – Rámcová dohoda - náboje 4,6x30 mm v provedení pro ozbrojené složky",
+    "ita": "Cechia – Munizioni per armi da fuoco e da guerra – Rámcová dohoda - náboje 4,6x30 mm v provedení pro ozbrojené složky",
+    "bul": "Чехия – Боеприпаси за огнестрелно оръжие и за водене на военни действия – Rámcová dohoda - náboje 4,6x30 mm v provedení pro ozbrojené složky",
+    "slv": "Češka – Strelivo za ognjeno strelno orožje in bojevanje – Rámcová dohoda - náboje 4,6x30 mm v provedení pro ozbrojené složky",
+    "eng": "Czechia – Ammunition for firearms and warfare – Rámcová dohoda - náboje 4,6x30 mm v provedení pro ozbrojené složky"
+  },
+  "TV": 1826340,
+  "TV_CUR": [
+    "CZK"
+  ],
+  "TW": {
+    "mul": [
+      "Praha"
+    ]
+  },
+  "acquiring-cpb-buyer": [
+    false
+  ],
+  "additional-info-proc": {
+    "ces": "Oznámení je uveřejněno souhrnně dle § 137 písm. b) zákona č. 134/2016 Sb., o zadávání veřejných zakázek, v platném znění. Za 3Q 2026 bylo 1 objednávkou čerpáno z RD 1.826.340,- Kč bez DPH."
+  },
+  "additional-information-lot": {
+    "ces": [
+      "Oznámení je uveřejněno souhrnně dle § 137 písm. b) zákona č. 134/2016 Sb., o zadávání veřejných zakázek, v platném znění. Za 3Q 2026 bylo 1 objednávkou čerpáno z RD 1.826.340,- Kč bez DPH."
+    ]
+  },
+  "authority-main-activity": [
+    "pub-os"
+  ],
+  "award-criterion-description-lot": {
+    "ces": [
+      "Nabídky budou seřazeny dle celkové nabídkové ceny v Kč včetně DPH - nabídka s nejnižší celkovou nabídkovou cenou se umístí na 1. místě. V případě, že dva či více dodavatelů předloží naprosto stejnou nabídkovou cenu, bude přistoupeno k losování za účasti dotčených dodavatelů zadávacího řízení, kterým bude zadavatelem zaslána písemná pozvánka prostřednictvím elektronické komunikace v NEN."
+    ]
+  },
+  "award-criterion-name-lot": {
+    "ces": [
+      "Celková nabídková cena v Kč včetně DPH za 3 000 000 ks nábojů ráže 4,6x30 mm"
+    ]
+  },
+  "award-criterion-number-lot": [
+    "100"
+  ],
+  "award-criterion-number-weight-lot": [
+    "per-exa"
+  ],
+  "award-criterion-type-lot": [
+    "price"
+  ],
+  "awarding-cpb-org": [
+    false
+  ],
+  "buyer-city": {
+    "mul": [
+      "Praha"
+    ]
+  },
+  "buyer-country": [
+    "CZE"
+  ],
+  "buyer-country-sub": [
+    "CZ010"
+  ],
+  "buyer-email": [
+    "pp.ovz@pcr.cz"
+  ],
+  "buyer-identifier": [
+    "00007064"
+  ],
+  "buyer-internet-address": [
+    "https://www.mvcr.cz"
+  ],
+  "buyer-legal-type": [
+    "cga"
+  ],
+  "buyer-name": {
+    "ces": [
+      "Ministerstvo vnitra"
+    ]
+  },
+  "buyer-post-code": [
+    "17000"
+  ],
+  "buyer-profile": [
+    "https://nen.nipez.cz/profil/MVCR"
+  ],
+  "buyer-review-compainants-code": [
+    "complainants"
+  ],
+  "buyer-review-compainants-val": [
+    "0"
+  ],
+  "classification-cpv": [
+    "35331000",
+    "35331000"
+  ],
+  "competition-termination-proc": false,
+  "contract-conclusion-date": [
+    "2026-08-17+02:00"
+  ],
+  "contract-duration-period-lot": [
+    {
+      "unit": "MONTH",
+      "value": "48"
+    }
+  ],
+  "contract-duration-start-date-lot": [
+    "2025-10-10+02:00"
+  ],
+  "contract-framework-agreement": [
+    true
+  ],
+  "contract-identifier": [
+    "PPR-51069-27/ČJ-2025-990630"
+  ],
+  "contract-nature": [
+    "supplies",
+    "supplies"
+  ],
+  "contract-nature-main-lot": [
+    "supplies"
+  ],
+  "contract-nature-main-proc": "supplies",
+  "contract-tender-id": [
+    "TEN-0001",
+    "TEN-0001"
+  ],
+  "contract-title": {
+    "ces": [
+      "Objednávka č. 4 (1.826.340,- Kč bez DPH): PPR-51069-27/ČJ-2025-990630"
+    ]
+  },
+  "cross-border-law-description-proc": {
+    "ces": "Zákon č. 134/2016 Sb., o zadávání veřejných zakázek"
+  },
+  "cross-border-law-identifier-proc": "CrossBorderLaw",
+  "customization-id": "eforms-sdk-1.13",
+  "description-lot": {
+    "ces": [
+      "Náboje ráže 4,6x30 mm - celkové předpokládané množství: 3 000 000 kusů, z toho: • 2 800 000 kusů nábojů se střelou „FMJ“, zápalková slož nekorozivní a neerozivní. • 200 000 kusů nábojů se střelou „AP“, zápalková slož nekorozivní a neerozivní. Celkové množství nábojů může být zadavatelem zaokrouhleno na celá balení."
+    ]
+  },
+  "description-proc": {
+    "ces": "Náboje ráže 4,6x30 mm - celkové předpokládané množství: 3 000 000 kusů, z toho: • 2 800 000 kusů nábojů se střelou „FMJ“, zápalková slož nekorozivní a neerozivní. • 200 000 kusů nábojů se střelou „AP“, zápalková slož nekorozivní a neerozivní. Celkové množství nábojů může být zadavatelem zaokrouhleno na celá balení."
+  },
+  "dispatch-date": "2026-10-29+01:00",
+  "dispatch-time": "12:08:43+01:00",
+  "dps-usage-lot": [
+    "none"
+  ],
+  "duration-period-unit-lot": [
+    "MONTH"
+  ],
+  "duration-period-value-lot": [
+    "48"
+  ],
+  "electronic-auction-lot": [
+    false
+  ],
+  "estimated-value-cur-lot": [
+    "CZK"
+  ],
+  "estimated-value-cur-proc": "CZK",
+  "estimated-value-lot": [
+    "30578512.4"
+  ],
+  "estimated-value-proc": "30578512.4",
+  "eu-fund-lot": [
+    "no-eu-funds"
+  ],
+  "form-type": "result",
+  "framework-agreement-lot": [
+    "fa-wo-rc"
+  ],
+  "framework-notice-id": [
+    "17315-2026"
+  ],
+  "framework-value-cur-notice": "CZK",
+  "framework-value-notice": "30998000",
+  "gpa-lot": [
+    true
+  ],
+  "identifier-lot": [
+    "LOT-0001"
+  ],
+  "internal-identifier-lot": [
+    "PPR-11357/ČJ-2025-990640"
+  ],
+  "internal-identifier-proc": "PPR-11357/ČJ-2025-990640",
+  "legal-basis": [
+    "32014L0024"
+  ],
+  "legal-basis-no-id": [
+    "LocalLegalBasis"
+  ],
+  "legal-basis-no-id-desc": {
+    "ces": [
+      "Zákon č. 134/2016 Sb., o zadávání veřejných zakázek"
+    ]
+  },
+  "legal-basis-notice": "32014L0024",
+  "links": {
+    "xml": {
+      "MUL": "https://ted.europa.eu/en/notice/754712-2026/xml"
+    },
+    "pdf": {
+      "ENG": "https://ted.europa.eu/en/notice/754712-2026/pdf"
+    },
+    "pdfs": {},
+    "html": {
+      "ENG": "https://ted.europa.eu/en/notice/-/detail/754712-2026"
+    },
+    "htmlDirect": {
+      "ENG": "https://ted.europa.eu/en/notice/754712-2026/html"
+    }
+  },
+  "main-activity": [
+    "pub-os"
+  ],
+  "main-classification-lot": [
+    "35331000"
+  ],
+  "main-classification-proc": [
+    "35331000"
+  ],
+  "main-classification-type-lot": [
+    "cpv"
+  ],
+  "main-classification-type-proc": "cpv",
+  "notice-identifier": "6757b7b2-0f31-4ba4-9540-dd9b0e7b9423",
+  "notice-subtype": "29",
+  "notice-title": {
+    "hun": "Csehország – Lőszerek lőfegyverekhez és hadviseléshez – Rámcová dohoda - náboje 4,6x30 mm v provedení pro ozbrojené složky",
+    "lav": "Čehija – Šaujamieroču munīcija – Rámcová dohoda - náboje 4,6x30 mm v provedení pro ozbrojené složky",
+    "swe": "Tjeckien – Ammunition för eldvapen och krigföring – Rámcová dohoda - náboje 4,6x30 mm v provedení pro ozbrojené složky",
+    "gle": "An tSeicia – Ammunition for firearms and warfare – Rámcová dohoda - náboje 4,6x30 mm v provedení pro ozbrojené složky",
+    "ell": "Τσεχία – Πυρομαχικά για πυροβόλα και πολεμικές επιχειρήσεις – Rámcová dohoda - náboje 4,6x30 mm v provedení pro ozbrojené složky",
+    "spa": "Chequia – Municiones para armas de fuego y acciones de guerra – Rámcová dohoda - náboje 4,6x30 mm v provedení pro ozbrojené složky",
+    "est": "Tšehhi – Tulirelvade ja sõjatehnika laskemoon – Rámcová dohoda - náboje 4,6x30 mm v provedení pro ozbrojené složky",
+    "nld": "Tsjechië – Munitie voor vuurwapens en oorlogvoering – Rámcová dohoda - náboje 4,6x30 mm v provedení pro ozbrojené složky",
+    "fin": "Tšekki – Ampumatarvikkeet tuliaseita ja sodankäyntiä varten – Rámcová dohoda - náboje 4,6x30 mm v provedení pro ozbrojené složky",
+    "pol": "Czechy – Amunicja do broni palnej i amunicja bojowa – Rámcová dohoda - náboje 4,6x30 mm v provedení pro ozbrojené složky",
+    "hrv": "Češka – Streljivo za vatreno oružje i borbu – Rámcová dohoda - náboje 4,6x30 mm v provedení pro ozbrojené složky",
+    "ces": "Česko – Munice pro střelné zbraně – Rámcová dohoda - náboje 4,6x30 mm v provedení pro ozbrojené složky",
+    "dan": "Tjekkiet – Ammunition til skydevåben og krigsførelse – Rámcová dohoda - náboje 4,6x30 mm v provedení pro ozbrojené složky",
+    "ron": "Cehia – Muniţie pentru arme de foc şi de război – Rámcová dohoda - náboje 4,6x30 mm v provedení pro ozbrojené složky",
+    "por": "Chéquia – Munições para armas de fogo e de guerra – Rámcová dohoda - náboje 4,6x30 mm v provedení pro ozbrojené složky",
+    "slk": "Česko – Strelivo do strelných zbraní a vojnové prostriedky – Rámcová dohoda - náboje 4,6x30 mm v provedení pro ozbrojené složky",
+    "fra": "Tchéquie – Munitions d'armes à feu et de guerre – Rámcová dohoda - náboje 4,6x30 mm v provedení pro ozbrojené složky",
+    "mlt": "Iċ-Ċekja – Munizzjon għal armi tan-nar u armi tal-gwerra – Rámcová dohoda - náboje 4,6x30 mm v provedení pro ozbrojené složky",
+    "deu": "Tschechien – Munition für Feuerwaffen und Kriegswaffen – Rámcová dohoda - náboje 4,6x30 mm v provedení pro ozbrojené složky",
+    "lit": "Čekija – Šaunamųjų ginklų ir kariniai šaudmenys – Rámcová dohoda - náboje 4,6x30 mm v provedení pro ozbrojené složky",
+    "ita": "Cechia – Munizioni per armi da fuoco e da guerra – Rámcová dohoda - náboje 4,6x30 mm v provedení pro ozbrojené složky",
+    "bul": "Чехия – Боеприпаси за огнестрелно оръжие и за водене на военни действия – Rámcová dohoda - náboje 4,6x30 mm v provedení pro ozbrojené složky",
+    "slv": "Češka – Strelivo za ognjeno strelno orožje in bojevanje – Rámcová dohoda - náboje 4,6x30 mm v provedení pro ozbrojené složky",
+    "eng": "Czechia – Ammunition for firearms and warfare – Rámcová dohoda - náboje 4,6x30 mm v provedení pro ozbrojené složky"
+  },
+  "notice-type": "can-standard",
+  "notice-version": 1,
+  "official-language": [
+    "CES"
+  ],
+  "ojs-number": "211/2026",
+  "option-description-lot": {
+    "ces": [
+      "Zadavatel si v souladu s § 131 odst. 5 zákona ve spojení s § 100 odst. 1 zákona vyhrazuje následující možné změny závazku po dobu trvání rámcové dohody a smluv (objednávek) uzavřených na základě rámcové dohody. 11.1 Inflační doložka 11.1.1 Zadavatel si v souladu s § 100 odst. 1 zákona vyhrazuje právo na změnu ceny v průběhu plnění rámcové dohody za níže uvedených a specifikovaných podmínek. 11.1.2 Nabídnuté jednotkové ceny uvedené v rámcové dohodě lze na žádost vybraného dodavatele navýšit z důvodu inflace, a to každý kalendářní rok následující po roce, v němž uplyne 1 (jeden) rok od účinnosti rámcové dohody, až do doby konce účinnosti rámcové dohody. Žádost je povinen vybraný dodavatel doručit do 15. 2. příslušného roku (příklad: rámcová dohoda bude uzavřena 1. 6. 2025, jeden rok od účinnosti rámcové dohody je 1. 6. 2026, následující rok je rok 2027, dodavatel musí do 15. 2. 2027 zažádat o navýšení ceny). 11.1.3 Nabídnuté jednotkové ceny lze zvýšit pouze tehdy, když inflace přesáhne výši 2 %. Maximální navýšení cen o míru inflace v každém roce je 5 % a platí i v případě, že míra meziroční inflace bude vyšší. 11.1.4 Inflací se rozumí meziroční inflace měřená vzrůstem úhrnného indexu spotřebitelských cen zboží a služeb, kterou udává každým kalendářním rokem Český statistický úřad za rok předcházející, vyjádřená v procentech. 11.2 Změna sazby DPH 11.2.1 Zadavatel si v souladu s § 100 odst. 1 zákona vyhrazuje právo na změnu ceny v průběhu plnění rámcové dohody za níže uvedených a specifikovaných podmínek. 11.2.2 Nabídnuté jednotkové ceny uvedené v rámcové dohodě lze měnit v případě zvýšení či snížení zákonem stanovené sazby daně z přidané hodnoty podle zákona o dani. V takovém případě bude cena plnění změněna o příslušné navýšení nebo snížení sazby DPH a to ode dne účinnosti nové zákonné změny sazby DPH. 11.3 Prodloužení doby plnění a změna ceny plnění rámcové dohody 11.3.1 Zadavatel si na základě § 100 odst. 1 zákona vyhrazuje možnou změnu závazku v podobě prodloužení doby plnění rámcové dohody upravené v jejím čl. 4 odst. /3/, a to v případě, že dodavatel nebude schopen splnit předmět plnění rámcové dohody z důvodu vyšší moci upravené v čl. 12 rámcové dohody, která může nastat mimo jiné i v důsledku nouzového stavu či karanténními nebo jinými opatřeními veřejné moci na území ČR, ale i v důsledku mimořádných opatření v jiných zemích, které mohou mít vliv na dodávky dodavatele nebo jeho poddodavatelů. Doba plnění bude v takovém případě prodloužena pouze o dodavatelem řádně prokázané období trvání okolností vyšší moci, které brání realizaci dodávky ve smluvním termínu realizace. 11.3.2 Zadavatel si na základě § 100 odst. 1 zákona vyhrazuje možnou změnu závazku v podobě změny ceny upravené v jejím čl. 7 odst. /2/, a to v případě, že dodavatel nebude schopen splnit předmět plnění rámcové dohody z důvodu vyšší moci upravené v čl. 12 rámcové dohody, která může nastat mimo jiné i v důsledku nouzového stavu či karanténními nebo jinými opatřeními veřejné moci na území ČR, ale i v důsledku mimořádných opatření v jiných zemích, které mohou mít vliv na dodávky dodavatele nebo jeho poddodavatelů. Změna ceny bude v takovém případě upravena pouze o dodavatelem řádně prokázané okolnosti vyšší moci, které zapříčiňují změnu ceny."
+    ]
+  },
+  "organisation-city-buyer": [
+    "Praha"
+  ],
+  "organisation-city-reviewinfo-lot": [
+    "Brno"
+  ],
+  "organisation-city-revieworg-lot": [
+    "Brno"
+  ],
+  "organisation-city-tenderer": [
+    "Vlašim"
+  ],
+  "organisation-country-buyer": [
+    "CZE"
+  ],
+  "organisation-country-reviewinfo-lot": [
+    "CZE"
+  ],
+  "organisation-country-revieworg-lot": [
+    "CZE"
+  ],
+  "organisation-country-sub-buyer": [
+    "CZ010"
+  ],
+  "organisation-country-sub-reviewinfo-lot": [
+    "CZ064"
+  ],
+  "organisation-country-sub-revieworg-lot": [
+    "CZ064"
+  ],
+  "organisation-country-sub-tenderer": [
+    "CZ020"
+  ],
+  "organisation-country-tenderer": [
+    "CZE"
+  ],
+  "organisation-email-buyer": [
+    "pp.ovz@pcr.cz"
+  ],
+  "organisation-email-reviewinfo-lot": [
+    "posta@uohs.cz"
+  ],
+  "organisation-email-revieworg-lot": [
+    "posta@uohs.cz"
+  ],
+  "organisation-email-tenderer": [
+    "info@sellier-bellot.cz"
+  ],
+  "organisation-identifier-buyer": [
+    "00007064"
+  ],
+  "organisation-identifier-reviewinfo-lot": [
+    "65349423"
+  ],
+  "organisation-identifier-revieworg-lot": [
+    "65349423"
+  ],
+  "organisation-identifier-tenderer": [
+    "19417772"
+  ],
+  "organisation-internet-address-buyer": [
+    "https://www.mvcr.cz"
+  ],
+  "organisation-internet-address-reviewinfo-lot": [
+    "https://uohs.gov.cz"
+  ],
+  "organisation-internet-address-revieworg-lot": [
+    "https://uohs.gov.cz"
+  ],
+  "organisation-name-buyer": {
+    "ces": [
+      "Ministerstvo vnitra"
+    ]
+  },
+  "organisation-name-reviewinfo-lot": {
+    "ces": [
+      "Úřad pro ochranu hospodářské soutěže"
+    ]
+  },
+  "organisation-name-revieworg-lot": {
+    "ces": [
+      "Úřad pro ochranu hospodářské soutěže"
+    ]
+  },
+  "organisation-name-tenderer": {
+    "ces": [
+      "Sellier & Bellot Int. a.s"
+    ]
+  },
+  "organisation-post-code-buyer": [
+    "17000"
+  ],
+  "organisation-post-code-reviewinfo-lot": [
+    "60200"
+  ],
+  "organisation-post-code-revieworg-lot": [
+    "60200"
+  ],
+  "organisation-post-code-tenderer": [
+    "25801"
+  ],
+  "organisation-street-buyer": [
+    "Nad štolou 936"
+  ],
+  "organisation-street-reviewinfo-lot": [
+    "třída Kpt. Jaroše 1926/7"
+  ],
+  "organisation-street-revieworg-lot": [
+    "třída Kpt. Jaroše 1926/7"
+  ],
+  "organisation-tel-buyer": [
+    "+420 974835653"
+  ],
+  "organisation-tel-reviewinfo-lot": [
+    "+420 542167111"
+  ],
+  "organisation-tel-revieworg-lot": [
+    "+420 542167111"
+  ],
+  "organisation-tel-tenderer": [
+    "+420 317891111"
+  ],
+  "place-of-performance": [
+    "CZ064",
+    "CZE",
+    "CZ064",
+    "CZE"
+  ],
+  "place-of-performance-country-lot": [
+    "CZE"
+  ],
+  "place-of-performance-country-proc": [
+    "CZE"
+  ],
+  "place-of-performance-subdiv-lot": [
+    "CZ064"
+  ],
+  "place-of-performance-subdiv-proc": [
+    "CZ064"
+  ],
+  "procedure-accelerated": "false",
+  "procedure-identifier": "ab168a34-e9aa-4016-87ac-69c85e28cb3c",
+  "procedure-type": "open",
+  "procurement-relaunch-proc": false,
+  "publication-date": "2026-10-30+01:00",
+  "publication-number": "754712-2026",
+  "received-submissions-type-code": [
+    "tenders",
+    "t-esubm",
+    "t-sme",
+    "t-oth-eea",
+    "t-no-eea",
+    "t-verif-inad-low",
+    "t-verif-inad",
+    "part-req"
+  ],
+  "received-submissions-type-val": [
+    "1",
+    "1",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0"
+  ],
+  "result-lot-identifier": [
+    "LOT-0001"
+  ],
+  "result-value-cur-lot": [
+    "CZK"
+  ],
+  "result-value-cur-notice": "CZK",
+  "result-value-lot": [
+    "30998000"
+  ],
+  "result-value-notice": "1826340",
+  "review-deadline-description-lot": {
+    "ces": [
+      "Podmínkou pro podání návrhu k ÚOHS je podání námitek k Zadavateli, které je nutné doručit do 15 dnů ode dne, kdy se stěžovatel dozvěděl o domnělém porušení zákona Zadavatelem, nejpozději však do uzavření smlouvy nebo do chvíle, kdy se soutěž o návrh považuje po výběru návrhu za ukončenou. Námitky proti úkonům oznamovaným v dokumentech, které je Zadavatel povinen podle zákona uveřejnit či odeslat stěžovateli, musí být doručeny Zadavateli do 15 dnů od jejich uveřejnění či doručení stěžovateli. Pokud je v zadávacím řízení stanovena lhůta pro podání žádostí o účast, musí být námitky proti podmínkám vztahujícím se ke kvalifikaci dodavatele doručeny Zadavateli nejpozději do skončení této lhůty. Pokud je v zadávacím řízení stanovena lhůta pro podání nabídek, musí být námitky proti zadávacím podmínkám doručeny Zadavateli nejpozději do skončení této lhůty. Námitky proti obsahu výzvy k podání nabídek v dynamickém nákupním systému nebo při zadávání veřejné zakázky na základě rámcové dohody musí být zadavateli doručeny nejpozději do konce lhůty pro podání nabídek. V soutěži o návrh musí být námitky proti soutěžním podmínkám doručeny nejpozději do konce lhůty pro podání návrhů. Zadavatel může v zadávací dokumentaci nebo soutěžních podmínkách stanovit, že námitky podle § 242 odst. 3 nebo 4 zákona lze podat nejpozději 72 hodin před skončením lhůt podle § 242 odst. 3 nebo 4 zákona. Námitky proti dobrovolnému oznámení o záměru uzavřít smlouvu podle § 212 odst. 2 zákona musí být doručeny Zadavateli do 30 dnů od uveřejnění tohoto oznámení. Zadavatel je povinen námitky vyřídit do 15 dnů. Návrh je nutné doručit ÚOHS i Zadavateli do 10 dnů ode dne, v němž stěžovatel obdržel rozhodnutí, kterým Zadavatel námitky odmítnul nebo do 25 dnů od odeslání námitek, pokud Zadavatel o námitkách nerozhodl. Po uzavření smlouvy na veřejnou zakázku či rámcové dohody lze podat pouze návrh na uložení zákazu plnění smlouvy, a to i bez předchozího podání námitek. Návrh na uložení zákazu plnění smlouvy doručí navrhovatel ÚOHS a ve stejnopisu Zadavateli do 30 dnů ode dne, kdy Zadavatel uveřejnil oznámení o uzavření smlouvy způsobem podle § 212 odst. 2 zákona s uvedením důvodu pro zadání veřejné zakázky bez uveřejnění oznámení o zahájení zadávacího řízení, předběžného oznámení nebo výzvy k podání nabídek ve zjednodušeném podlimitním řízení, nejpozději však do 6 měsíců od uzavření této smlouvy. Návrh na uložení zákazu plnění smlouvy podle § 254 odstavce 1 písm. d) zákona doručí navrhovatel ÚOHS a ve stejnopisu Zadavateli do 30 dnů ode dne, kdy Zadavatel uveřejnil oznámení o uzavření smlouvy na základě rámcové dohody podle § 137 zákona nebo oznámení o uzavření smlouvy v dynamickém nákupním systému podle § 142 zákona, nejpozději však do 6 měsíců od uzavření této smlouvy. Ve lhůtě pro doručení návrhu je navrhovatel povinen složit na účet ÚOHS kauci ve výši 1 % z nabídkové ceny navrhovatele za celou dobu plnění veřejné zakázky nebo za dobu prvních čtyř let plnění v případě smluv na dobu neurčitou, nejméně však ve výši 50 000 Kč, nejvýše ve výši 10 000 000 Kč. V případě, že navrhovatel nemůže stanovit celkovou nabídkovou cenu, je povinen složit kauci ve výši 100 000 Kč. V případě návrhu na uložení zákazu plnění smlouvy je navrhovatel povinen složit kauci ve výši 200 000 Kč. Jde-li o řízení o přezkoumání postupu pro zadávání koncesí, je navrhovatel povinen ve lhůtě pro doručení návrhu složit na účet ÚOHS kauci ve výši 1 % z předpokládané hodnoty koncese uveřejněné ve Věstníku veřejných zakázek nebo na profilu Zadavatele, nejméně však ve výši 50 000 Kč, nejvýše ve výši 10 000 000 Kč. V případě, že Zadavatel neuveřejní ve Věstníku veřejných zakázek nebo na profilu Zadavatele předpokládanou hodnotu koncese, je navrhovatel povinen složit kauci ve výši 100 000 Kč. V případě návrhu na uložení zákazu plnění koncesní smlouvy je navrhovatel povinen složit kauci ve výši 200 000 Kč."
+    ]
+  },
+  "strategic-procurement-lot": [
+    "none"
+  ],
+  "subcontracting": [
+    "not-known"
+  ],
+  "tender-identifier": [
+    "1"
+  ],
+  "tender-lot-identifier": [
+    "LOT-0001"
+  ],
+  "tender-rank": [
+    "1"
+  ],
+  "tender-ranked-res": [
+    false
+  ],
+  "tender-value": [
+    "30998000"
+  ],
+  "tender-value-cur": [
+    "CZK"
+  ],
+  "tender-variant": [
+    false
+  ],
+  "title-lot": {
+    "ces": [
+      "Rámcová dohoda - náboje 4,6x30 mm v provedení pro ozbrojené složky"
+    ]
+  },
+  "title-proc": {
+    "ces": "Rámcová dohoda - náboje 4,6x30 mm v provedení pro ozbrojené složky"
+  },
+  "total-value": 1826340,
+  "total-value-cur": [
+    "CZK"
+  ],
+  "winner-city": [
+    "Vlašim"
+  ],
+  "winner-country": [
+    "CZE"
+  ],
+  "winner-country-sub": [
+    "CZ020"
+  ],
+  "winner-decision-date": [
+    "2025-09-23+02:00"
+  ],
+  "winner-email": [
+    "info@sellier-bellot.cz"
+  ],
+  "winner-identifier": [
+    "19417772"
+  ],
+  "winner-name": {
+    "ces": [
+      "Sellier & Bellot Int. a.s",
+      "Sellier & Bellot Int. a.s"
+    ]
+  },
+  "winner-post-code": [
+    "25801"
+  ],
+  "winner-selection-status": [
+    "selec-w"
+  ],
+  "winner-size": [
+    "large"
+  ]
+}

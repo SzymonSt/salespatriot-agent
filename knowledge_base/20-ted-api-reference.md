@@ -3,7 +3,7 @@
 Sources: https://docs.ted.europa.eu/api/latest/index.html and the OpenAPI spec at
 `https://api.ted.europa.eu/api-v3.yaml` (Swagger UI: `https://api.ted.europa.eu/swagger-ui/index.html`).
 `[VERIFIED 2026-10-30]` unless marked. Tested queries: [09-ted-api-cheatsheet.md](09-ted-api-cheatsheet.md).
-Our focus scope: [21-focus-scope.md](21-focus-scope.md).
+Our focus scope: [21-focus-scope.md](21-focus-scope.md). Real sample notices and their exact format: [24-ted-notice-format.md](24-ted-notice-format.md).
 
 ## Which APIs exist
 | API | Purpose | Key needed? |

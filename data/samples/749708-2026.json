@@ -1,0 +1,779 @@
+{
+  "AA": [
+    "body-pl"
+  ],
+  "AU": {
+    "pol": [
+      "Agencja Uzbrojenia"
+    ]
+  },
+  "BI": [
+    "NIP:7010269523"
+  ],
+  "BT-01(c)-procedure": [
+    "art. 410 ust. 1 oraz art. 411 ustawy z dnia 11 września 2019 r. Prawo zamówień publicznych (t. j. Dz.U. z 2026 r. poz. 793) dalej \"ustawa Pzp\""
+  ],
+  "BT-01-notice": "32009L0081",
+  "BT-02-notice": "cn-standard",
+  "BT-03-notice": "competition",
+  "BT-04-notice": "311b04d9-66a8-4709-afe3-414d4e9d4558",
+  "BT-05(a)-notice": "2026-10-28Z",
+  "BT-05(b)-notice": "08:09:06Z",
+  "BT-10-Procedure-Buyer": [
+    "defence"
+  ],
+  "BT-105-Procedure": "restricted",
+  "BT-106-Procedure": "false",
+  "BT-11-Procedure-Buyer": [
+    "body-pl"
+  ],
+  "BT-1311(d)-Lot": [
+    "2026-12-03+01:00"
+  ],
+  "BT-1311(t)-Lot": [
+    "11:00:00+01:00"
+  ],
+  "BT-137-Lot": [
+    "LOT-0001"
+  ],
+  "BT-21-Lot": {
+    "pol": [
+      "Dostawa amunicji do okrętowych zestawów zakłóceń radioelektronicznych."
+    ]
+  },
+  "BT-21-Procedure": {
+    "pol": "Dostawa amunicji do okrętowych zestawów zakłóceń radioelektronicznych."
+  },
+  "BT-22-Lot": [
+    "Część 1/1"
+  ],
+  "BT-22-Procedure": "AU/165/XI/2026",
+  "BT-23-Lot": [
+    "supplies"
+  ],
+  "BT-23-Procedure": "supplies",
+  "BT-24-Lot": {
+    "pol": [
+      "Przedmiotem zamówienia jest dostawa amunicji do okrętowych zestawów zakłóceń radioelektronicznych, nabój 130 mm do zakłóceń pasywnych RF/IR BULLFIGHTER lub równoważny -1300 szt. Szczegółowe wymagania dotyczące przedmiotu zamówienia wraz z warunkami równoważności dla wyrobów równoważnych oraz kryteria oceny ofert zostaną przedstawione w Specyfikacji Warunków Zamówienia (dalej \"SWZ\"), która zostanie przekazana Wykonawcom zaproszonym do składania ofert. Postępowanie wiąże się z dostępem do informacji niejawnych oznaczonych klauzulą „ZASTRZEŻONE” i stanowiących jej zagraniczny odpowiednik (zgodnie z umową bilateralną)."
+    ]
+  },
+  "BT-24-Procedure": {
+    "pol": "Przedmiotem zamówienia jest dostawa amunicji do okrętowych zestawów zakłóceń radioelektronicznych, nabój 130 mm do zakłóceń pasywnych RF/IR BULLFIGHTER lub równoważny -1300 szt. Szczegółowe wymagania dotyczące przedmiotu zamówienia wraz z warunkami równoważności dla wyrobów równoważnych oraz kryteria oceny ofert zostaną przedstawione w Specyfikacji Warunków Zamówienia (dalej \"SWZ\"), która zostanie przekazana Wykonawcom zaproszonym do składania ofert. Postępowanie wiąże się z dostępem do informacji niejawnych oznaczonych klauzulą „ZASTRZEŻONE” i stanowiących jej zagraniczny odpowiednik (zgodnie z umową bilateralną)."
+  },
+  "BT-25-Lot": [
+    "1300"
+  ],
+  "BT-26(m)-Lot": [
+    "cpv"
+  ],
+  "BT-26(m)-Procedure": "cpv",
+  "BT-262-Lot": [
+    "35332000"
+  ],
+  "BT-262-Procedure": [
+    "35332000"
+  ],
+  "BT-300-Lot": {
+    "pol": [
+      "Warunki przyszłej Umowy zostaną określone w SWZ. Forma prawna, jaką musi przyjąć grupa oferentów, której udzielono zamówienia: Zgodnie z zapisami art. 58 ustawy Pzp Wykonawcy mogą wspólnie ubiegać się o udzielenie zamówienia. W takim przypadku Wykonawcy muszą: 1. Ustanowić pełnomocnika do reprezentowania ich w postępowaniu o udzielenie zamówienia albo reprezentowania w postępowaniu i zawarcia umowy w sprawie zamówienia publicznego i złożyć pełnomocnictwo. 2. Złożyć następujące dokumenty i oświadczenia: 1) wymienione w punkcie 2.1.6 ogłoszenia podstawy wykluczenia — osobno każdy z Wykonawców wspólnie ubiegających się o udzielenie zamówienia; 2) dokument, o którym mowa w punkcie 5.1.9 Kryteria kwalifikacji \"Wpis do odpowiedniego rejestru zawodowego\" — co najmniej jeden z Wykonawców wspólnie ubiegających się o udzielenie zamówienia z uwzględnieniem zapisów art. 117 ust. 2 ustawy Pzp; 3) dokumenty, o których mowa w punkcie 5.1.9 Kryteria kwalifikacji: \"Referencje dotyczące określonych dostaw\" i \"Odpowiednie kwalifikacje edukacyjne i zawodowe\" - odpowiednio, tak aby wspólnie spełniać warunki udziału w postępowaniu. 3. Zgodnie z art. 117 ust. 4 ustawy Pzp Wykonawcy wspólnie ubiegający się o udzielenie zamówienia dołączają do wniosku o dopuszczenie do udziału w postępowaniu oświadczenie, z którego wynika, które elementy zamówienia wykonają poszczególni Wykonawcy (Załącznik nr 5 do Ogłoszenia). 4. W przypadku, gdy za najkorzystniejszą zostanie wybrana oferta Wykonawców wspólnie ubiegających się o udzielenie zamówienia, Zamawiający będzie żądał przed zawarciem umowy w sprawie zamówienia publicznego kopii umowy regulującej współpracę tych Wykonawców."
+    ]
+  },
+  "BT-300-procedure": {
+    "pol": "1. Wzór Wniosku o dopuszczenie do udziału w postępowaniu - zwany dalej \"Wnioskiem\" (Załącznik nr 1 do Ogłoszenia) oraz wzory pozostałych załączników znajdują się na stronie internetowej Zamawiającego (https://au-bip.wp.mil.pl/pl/bip/zamowienia/). 2. W celu potwierdzenia, że osoba działająca w imieniu Wykonawcy, Wykonawców wspólnie ubiegających się o udzielenie zamówienia lub w imieniu podmiotu udostępniającego zasoby jest umocowana do jego reprezentowania, zamawiający żąda odpisu lub informacji z Krajowego Rejestru Sądowego, Centralnej Ewidencji i Informacji o Działalności Gospodarczej lub innego właściwego rejestru. Jeżeli w imieniu Wykonawcy, Wykonawców wspólnie ubiegających się o udzielenie zamówienia lub podmiotu udostępniającego zasoby działa osoba, której umocowanie do reprezentowania nie wynika z ww. dokumentów, Zamawiający żąda pełnomocnictwa lub innego dokumentu potwierdzającego umocowanie tej osoby. Pełnomocnictwo należy sporządzić w postaci papierowej opatrzyć własnoręcznym podpisem i złożyć w oryginale lub kopii, poświadczonej za zgodność z oryginałem przez mocodawcę lub notariusza. 3. Zamawiający dopuszcza następujące sposoby komunikacji z Wykonawcami 1) za pośrednictwem operatora pocztowego, w rozumieniu ustawy z dnia 23.11.2012 r. - Prawo pocztowe (Dz. U. 2026 r. poz. 558); 2) przy użyciu faksu numer: +48 261 873 444, Jeżeli Zamawiający lub Wykonawca komunikują się za pośrednictwem faksu, każda ze Stron na żądanie drugiej niezwłocznie potwierdza fakt otrzymania korespondencji); 3) drogą elektroniczną na adres email: au.stm@mon.gov.pl. Jeżeli Zamawiający lub Wykonawca komunikują się drogą elektroniczną, każda ze Stron na żądanie drugiej niezwłocznie potwierdza fakt otrzymania korespondencji); 4) osobiście; 5) przez posłańca. 4. Wniosek oraz oświadczenie, o którym mowa w artykule 125 ust. 1 ustawy z dnia 11 września 2019 r. Prawo Zamówień Publicznych (t. j. Dz. U. z 2026 r. poz. 793) zwana dalej \"ustawa Pzp\" (Załącznik nr 2 i 4 do Ogłoszenia) sporządzone w języku polskim w postaci papierowej opatrzone własnoręcznym podpisem przekazuje się w oryginale. Zamawiający nie dopuszcza możliwości składania Wniosku, wraz z załącznikami, w formie elektronicznej, w postaci dokumentu elektronicznego. Wniosek musi być podpisany przez osoby uprawnione do reprezentowania Wykonawcy/Wykonawców. Jeżeli osoba bądź osoby podpisujące ww. wniosek działają na podstawie pełnomocnictwa, to do Wniosku należy załączyć pełnomocnictwo. 5. Wniosek można składać w dni robocze (od poniedziałku do piątku), w godz. 8.00 - 15:00 w Kancelarii Jawnej w siedzibie Zamawiającego w Warszawie przy ul. Królewskiej 1/7 lub przesyłać na adres: Agencja Uzbrojenia, ul. Królewska 1/7, 00-909 Warszawa (00-065 Warszawa dla przesyłek kurierskich). 6. Wniosek wraz z dokumentami i oświadczeniami należy złożyć w zamkniętym opakowaniu (np. kopercie), uniemożliwiającym odczytanie zawartości bez uszkodzenie tego opakowania przed upływem terminu składania wniosków o dopuszczenie do udziału w postępowaniu. Opakowanie powinno zostać opatrzone napisem: ,,Wniosek o dopuszczenie do udziału w postępowaniu na dostawę \"Amunicji do okrętowych zestawów zakłóceń radioelektronicznych, nr postępowania AU/165/Xl/2026\" oraz nazwą Wykonawcy i jego danymi adresowymi. 7. Oświadczenie, o którym mowa w art. 117 ust. 4 ustawy Pzp ( Załącznik nr 5 do Ogłoszenia), zobowiązanie podmiotu udostępniającego zasoby, sporządzone w postaci papierowej i opatrzone własnoręcznym podpisem, przekazuje się w oryginale lub jako kopię poświadczoną za zgodność z oryginałem. 8. Podmiotowe środki dowodowe, przedmiotowe środki dowodowe oraz oświadczenia lub dokumenty inne niż Wniosek o dopuszczenie do udziału w postępowaniu i oświadczenie, o którym mowa w art. 125 ust. 1 ustawy Pzp, sporządzone w postaci papierowej przekazuje się w oryginale lub jako kopię poświadczoną za zgodność z oryginałem. 9. Poświadczenia za zgodność z oryginałem dokonuje się zgodnie z par. 9 Rozporządzenia z dnia 30 grudnia 2020 r. w sprawie sposobu sporządzania i przekazywania informacji oraz wymagań technicznych dla dokumentów elektronicznych oraz środków komunikacji elektronicznej w postępowaniu o udzielenie zamówienia publicznego lub konkursie (Dz. U. 2020 r, poz. 2452). 10. Podmiotowe środki dowodowe, przedmiotowe środki dowodowe oraz inne dokumenty lub oświadczenia sporządzone w języku obcym przekazuje się wraz z tłumaczeniem na język polski. Zamawiający zastrzega sobie prawo żądania przedstawienia oryginału lub notarialnie poświadczonej kopii, gdy złożona kopia jest nieczytelna lub budzi wątpliwości co do jej prawdziwości. 11. Postępowanie o udzielenie zamówienia jest jawne. Nie ujawnia się informacji stanowiących tajemnicę przedsiębiorstwa w rozumieniu przepisów ustawy z dnia 16 kwietnia 1993 r. o zwalczaniu nieuczciwej konkurencji (t. j. Dz.U. z 2026 r., poz. 85), jeżeli Wykonawca, wraz z przekazaniem takich informacji, zastrzegł, że nie mogą być one udostępniane oraz wykazał, że zastrzeżone informacje stanowią tajemnicę przedsiębiorstwa. Wykonawca nie może zastrzec informacji, o których mowa w art. 222 ust. 5. ustawy Pzp. Wykonawca w celu utrzymania poufności zastrzeżonych informacji przekazuje je wydzielone i odpowiednio oznaczone. 12. Zgodnie z zapisami art. 110 ust.1 ustawy Pzp Wykonawca może zostać wykluczony przez Zamawiającego na każdym etapie postępowania o udzielenie zamówienia. 13. Zamawiający unieważni postępowanie, jeżeli: 1) wystąpi odpowiednia przesłanka z art. 255 lub art. 256 lub art. 257 ustawy Pzp; 2) na podstawie art. 418 ust. 1 pkt 2 ustawy Pzp, w przypadku wystąpienia istotnej zmiany okoliczności realizacji zamówienia, rozumianej jako zmiana założeń polityki Rządu Rzeczypospolitej Polskiej, dotyczących obronności i bezpieczeństwa państwa lub zmiana związana z finansowaniem SZ RP, powodująca ograniczenie środków finansowych na realizację przedmiotu zamówienia, czego nie można było przewidzieć w chwili wszczęcia postępowania. 14. Zamawiający nie ogranicza liczby Wykonawców zaproszonych do składania ofert, których wnioski o dopuszczenie do udziału w postępowaniu nie będą podlegały odrzuceniu. 15. Przedmiot zamówienia będzie podlegał ocenie zgodności zgodnie z ustawą z dnia 17 listopada 2006 r. o systemie oceny zgodności wyrobów przeznaczonych na potrzeby obronności i bezpieczeństwa państwa (Dz.U. z 2022 r., poz. 747) na podstawie Rozporządzenia Ministra Obrony Narodowej z dnia 11 stycznia 2013 r. w sprawie szczegółowego wykazu wyrobów podlegających ocenie zgodności oraz sposobu i trybu przeprowadzenia oceny zgodności wyrobów przeznaczonych na potrzeby obronności państwa (Dz.U. z 2021 r., poz. 1628). 16. Przedmiot zamówienia musi być oznakowany kodem kreskowym, zgodnie z Decyzją Nr 3/MON Ministra Obrony Narodowej z dnia 3 stycznia 2014 r. w sprawie wytycznych określających wymagania w zakresie znakowania kodem kreskowym wyrobów dostarczanych do resortu obrony narodowej (Dz. Urz. Min. Obr. Nar. 2014 r. poz. 11). 17. Kryteria udzielenia zamówienia zostaną określone w Specyfikacji Warunków Zamówienia (SWZ) przekazanej Wykonawcom zaproszonym do kolejnego etapu postępowania. 18. Klauzula Informacyjna Administratora (Zamawiającego) w zakresie przetwarzania danych osobowych stanowi Załącznik nr 10 do Ogłoszenia."
+  },
+  "BT-36-Lot": [
+    {
+      "unit": "YEAR",
+      "value": "4"
+    }
+  ],
+  "BT-36-Lot-Unit": [
+    "YEAR"
+  ],
+  "BT-40-Lot": [
+    false,
+    false,
+    false
+  ],
+  "BT-5071-Lot": [
+    "PL633"
+  ],
+  "BT-5071-Procedure": [
+    "PL633"
+  ],
+  "BT-508-Procedure-Buyer": [
+    "https://au-bip.wp.mil.pl/pl/bip/zamowienia/"
+  ],
+  "BT-5101(a)-Lot": [
+    "1 Regionalna Baza Logistyczna,  Skład Gdynia"
+  ],
+  "BT-5101(a)-Procedure": [
+    "1 Regionalna Baza Logistyczna Wałcz, Skład Gdynia"
+  ],
+  "BT-5121-Lot": [
+    "81-904"
+  ],
+  "BT-5121-Procedure": [
+    "81-904"
+  ],
+  "BT-5131-Lot": [
+    "Gdynia"
+  ],
+  "BT-5131-Procedure": [
+    "Gdynia"
+  ],
+  "BT-5141-Lot": [
+    "POL"
+  ],
+  "BT-5141-Procedure": [
+    "POL"
+  ],
+  "BT-52-Lot": [
+    true
+  ],
+  "BT-58-Lot": [
+    "0"
+  ],
+  "BT-625-Lot": [
+    "H87"
+  ],
+  "BT-63-Lot": [
+    "not-allowed"
+  ],
+  "BT-634-Procedure": false,
+  "BT-65-Lot": [
+    "subc-chng"
+  ],
+  "BT-651-Lot": [
+    "shar-subc"
+  ],
+  "BT-661-Lot": [
+    false
+  ],
+  "BT-67(a)-Procedure": [
+    "exg-mis-prep-confl",
+    "exg-crim-corrpt",
+    "exg-crim-fraud",
+    "exg-mis-bre-lab-law",
+    "exg-mis-distortion",
+    "exg-crim-terror",
+    "exg-crim-laund",
+    "exg-crim-traffick",
+    "exg-crim-part",
+    "exg-natl-bre-nat-law",
+    "exg-pmt-bre-ssc",
+    "exg-pmt-bre-tax"
+  ],
+  "BT-67(b)-Procedure": {
+    "pol": [
+      "art. 108 ust. 1 pkt 6 ustawy Pzp",
+      "art. 108 ust. 1 pkt 1 i 2 ustawy Pzp",
+      "art. 108 ust. 1 pkt 1 i 2 ustawy Pzp",
+      "art. 108 ust. 1 pkt 1 i 2 ustawy Pzp",
+      "art. 108 ust. 1 pkt 5 ustawy Pzp",
+      "art. 108 ust. 1 pkt 1 i 2 ustawy Pzp",
+      "art. 108 ust. 1 pkt 1 i 2 ustawy Pzp",
+      "art. 108 ust. 1 pkt 1 i 2 ustawy Pzp",
+      "art. 108 ust. 1 pkt 1 i 2 ustawy Pzp",
+      "art. 108 ust. 1 pkt 1 lit. c i g, art. 108 ust. 1 pkt 4, art 405 ust. 1, 2 pkt 4 ustawy Pzp, art. 7 ust. 1 ustawy z dnia 13 kwietnia 2022 r. o szczególnych rozwiązaniach w zakresie przeciwdziałania wspieraniu agresji na Ukrainę oraz służących ochronie bezpieczeństwa narodowego (Dz.U. z 2024 r. poz. 507 z późn. zm.) i art. 5 k ust. 1 rozporządzenia Rady (UE) 833/2014 dotyczącego środków ograniczających w związku z działaniami Rosji destabilizującymi sytuację na Ukrainie (Dz. U. UE nr L 229 z dnia 31 lipca 2014 r. str. 1 z późn. zm.). Zamawiający żąda złożenia wraz z Wnioskiem (Załącznik nr 1 do Ogłoszenia): 1. Oświadczenia Wykonawcy potwierdzającego brak podstaw wykluczenia oraz spełnienie warunków udziału w postepowaniu (Załącznik nr 2 do Ogłoszenia); 2. Informacji z Krajowego Rejestru Karnego w zakresie określonym w art. 108 ust. 1 pkt 1, 2, 4 ustawy Pzp, wystawionej nie wcześniej, niż 6 miesię­cy przed upływem terminu składania wniosków o dopuszczenie do udziału w postępowaniu; 3. Informacji z Centralnego Rejestru Beneficjentów Rzeczywistych w zakresie art. 108 ust. 2 ustawy Pzp, jeżeli odrębne przepisy wymagają wpisu do tego rejestru, sporządzonej nie wcześniej niż 3 m­iesiące przed upływem terminu składania Wniosków. 4. Oświadczenia Wykonawcy, w zakresie art. 108 ust. 1 pkt 5 ustawy Pzp, o braku przynależności do tej samej grupy kapitałowej w rozumieniu ustawy z dnia 16 lutego 2007 r. o ochronie konkurencji i konsumentów (Dz. U. z 2026 r. poz. 85), z innym Wykonawcą, który złożył odrębny Wniosek, albo oświadczenia o przynależności do tej samej grupy kapitałowej wraz z dokumentami lub informacjami potwierdzającymi przygotowanie Wniosku niezależnie od innego Wykonawcy, należącego do tej samej grupy kapitałowej (Załącznik nr 3 do Ogłoszenia). 5. Jeżeli Wykonawca ma siedzibę lub miejsce zamieszkania poza granicami Rzeczypospolitej Polskiej, zamiast dokumentów, o których mowa: ­ w pkt 2 ­ składa informację z odpowiedniego rejestru, takiego jak rejestr sądowy albo w przypadku braku takiego rejestru, inny równoważny dokument wydany przez właściwy organ sądowy lub administracyjny kraju, w którym Wykonawca ma siedzibę lub miejsce zamieszkania lub miejsce zamieszkania ma osoba, której dotyczy informacja albo dokument w zakresie, o którym mowa w art. 108 ust. 1 pkt 1, 2, 4 ustawy Pzp ­ wystawiony nie wcześniej, niż 6 miesięcy przed upływem terminu składania Wniosków; w pkt 3 ­ składa informację z odpowiedniego rejestru zawierającego informację o jego beneficjentach rzeczywistych albo, w przypadku braku takiego rejestru, inny równoważny dokument wydany przez właściwy organ sądowy lub administracyjny kraju, w którym Wykonawca ma siedzibę lub miejsce zamieszkania, określający jego beneficjentów rzeczywistych ­ wystawione nie wcześniej, niż 3 miesią­ce przed upływem terminu składania Wniosków. 6. Jeżeli w kraju, w którym Wykonawca ma siedzibę lub miejsce zamieszkania lub miejsce zamieszkania ma osoba, której dokument dotyczy, nie wydaje się dokumentów, o których mowa w pkt 5. lub gdy dokumenty te nie odnoszą się do wszystkich przypadków, o których mowa w art. 108 ust. 1 pkt 1, 2, 4 ustawy Pzp, zastępuje się je odpowiednio w całości lub w części dokumentem zawierającym odpowiednio oświadczenie Wykonawcy, ze wskazaniem osoby albo osób uprawnionych do jego reprezentacji lub oświadczenie osoby, której dokument miał dotyczyć, złożone pod przysięgą, lub jeżeli w kraju, w którym Wykonawca ma siedzibę lub miejsce zamieszkania lub miejsce zamieszkania ma osoba, której dokument miał dotyczyć, nie ma przepisów o oświadczeniu pod przysięgą, złożone przed organem sądowym lub administracyjnym, notariuszem, organem samorządu zawodowego lub gospodarczego, właściwym ze względu na siedzibę lub miejsce zamieszkania Wykonawcy lub miejsce zamieszkania ma osoba, której dokument miał dotyczyć ­ przy zachowaniu terminów wystawienia wymaganych dla poszczególnych dokumentów, o których mowa w pkt 5. 7. Jeżeli złożone przez Wykonawcę oświadczenie, o którym mowa w art. 125 ust. 1 ustawy Pzp lub podmiotowe środki dowodowe budzą wątpliwości Zamawiającego, może on zwrócić się bezpośrednio do podmiotu, który jest w posiadaniu informacji lub dokumentów istotnych w tym zakresie dla oceny spełniania przez Wykonawcę warunków udziału w postępowaniu lub braku podstaw wykluczenia o przedstawienie takich informacji lub dokumentów.",
+      "art. 108 ust. 1 pkt 3 ustawy Pzp",
+      "art. 108 ust. 1 pkt 3 ustawy Pzp"
+    ]
+  },
+  "BT-70-Lot": {
+    "pol": [
+      "Szczegółowe warunki realizacji zamówienia zostaną określone w dokumentach zamówienia."
+    ]
+  },
+  "BT-701-notice": "a184902d-9661-4b05-949d-9b8cf6063450",
+  "BT-702-notice": [
+    "POL"
+  ],
+  "BT-71-Lot": [
+    "none"
+  ],
+  "BT-726-Lot": [
+    true
+  ],
+  "BT-736-Lot": [
+    "no"
+  ],
+  "BT-740-Procedure-Buyer": [
+    "cont-ent"
+  ],
+  "BT-743-Lot": [
+    "allowed"
+  ],
+  "BT-747-Lot": [
+    "slc-suit-reg-prof",
+    "slc-abil-ref-supply",
+    "slc-abil-staff-qual"
+  ],
+  "BT-75-Lot": {
+    "pol": [
+      "1. Wykonawcy zaproszeni do złożenia ofert będą zobowiązani do wniesienia wadium w wysokości 1 800 000,00 PLN (słownie: jeden milion osiemset tysięcy złotych 00/100) na cały okres związania ofertą. 2. Szczegółowe informacje w zakresie wadium zostaną przekazane Wykonawcom zaproszonym do składania ofert w SWZ. 3. Zamawiający przewiduje obowiązek wniesienia zabezpieczenia należytego wykonania umowy. 4. Zamawiający przewiduje możliwość udzielenia zaliczki na poczet realizacji Zamówienia. 5. Szczegóły dotyczące wniesienia zabezpieczenia należytego wykonania umowy oraz udzielenia zaliczki zostaną opisane w SWZ, która zostanie przekazana Wykonawcom zaproszonym do kolejnego etapu postępowania."
+    ]
+  },
+  "BT-750-Lot": {
+    "pol": [
+      "W celu wykazania spełniania przez Wykonawcę warunku udziału w postępowaniu, o którym mowa w art. 112 ust. 2 pkt 2 ustawy Pzp, Wykonawca zobowiązany jest przedłożyć aktualną koncesję wydaną na podstawie ustawy z dnia 13 czerwca 2019 r. o wykonywaniu działalności gospodarczej w zakresie wytwarzania i obrotu materiałami wybuchowymi, bronią, amunicja oraz wyrobami i technologią o przeznaczeniu wojskowym lub policyjnym (Dz.U. z 2023 r. poz 1743) w zakresie wytwarzania i obrotu lub obrotu wyrobami o przeznaczeniu wojskowym lub policyjnym określonymi w Części III Rodzaje broni i amunicji - BA pkt 16 załącznika do Rozporządzenia Rady Ministrów z dnia 17 września 2019 r w sprawie klasyfikacji rodzajów materiałów wybuchowych, broni, amunicji oraz wyrobów i technologii o przeznaczeniu wojskowym lub policyjnym, na których wytwarzanie lub obrót jest wymagana koncesja (Dz.U. z 2019 r. poz. 1888), lub zgodnie z art. 156 ust. 1 ww. ustawy - koncesję uzyskaną na podstawie ustawy z dnia 22 czerwca 2001 r. o wykonywaniu działalności gospodarczej w zakresie wytwarzania i obrotu materiałami wybuchowymi, bronią, amunicją oraz wyrobami i i technologią o przeznaczeniu wojskowym lub policyjnym (Dz.U. z 2018 r. poz. 2037 z poźn. zm.), która zachowuje ważność w zakresie określonym w BA pkt. 13 załącznika nr 1(Rodzaje broni i amunicji BA) do Rozporządzenia Rady Ministrów z dnia 3 grudnia 2001 r. w sprawie rodzajów broni ii amunicji oraz wykazu wyrobów i technologii o przeznaczeniu wojskowym lub policyjnym, na których wytwarzanie lub obrót jest wymagana koncesja (Dz. U. z 2001 r. nr 145 poz. 1625 z późn. zm.) lub odpowiedni dokument wystawiony przez organ państwa w którym Wykonawca ma siedzibę potwierdzający, że Wykonawca posiada uprawnienia do prowadzenia działalności w zakresie wytwarzania i obrotu lub obrotu wyrobami będącymi przedmiotem zamówienia. Ww. dokument Wykonawca zobowiązany jest złożyć wraz z Wnioskiem, w postaci kopii poświadczonej za zgodność z oryginałem.",
+      "1. W celu wykazania spełniania przez Wykonawcę warunku udziału w postępowaniu, o którym mowa w art. 112 ust. 2 pkt 4 ustawy Pzp, dotyczącego zdolności technicznych, Zamawiający wymaga, aby Wykonawca wykazał, że w okresie ostatnich 5 lat przed upływem terminu składania Wniosków (jeżeli okres prowadzenia działalności jest krótszy to w tym okresie) w sposób należyty wykonał co najmniej 3 (trzy) dostawy amunicji zakłócającej do obrony przed pociskami samonaprowadzającymi o wartości nie mniejszej niż 4 000 000,00 PLN (słownie: cztery miliony złotych 00/100). 2. W celu potwierdzenia spełniania powyższego warunku Wykonawca zobowiązany jest złożyć, wraz z Wnioskiem, wykaz wykonanych dostaw, o których mowa w pkt 1 (wzór - Załącznik nr 8 do Ogłoszenia), w okresie ostatnich 5 lat przed upływem terminu składania Wniosków, a jeżeli okres prowadzenia działalności jest krótszy – w tym okresie, wraz z podaniem wartości, przedmiotu dostawy, daty wykonania i podmiotu, na rzecz którego dostawa została wykonana oraz załączyć dowody określające, że dostawa została wykonana należycie. 3. Dowodami, o których mowa w pkt 2 są referencje bądź inne dokumenty sporządzone przez podmiot, na rzecz którego dostawy były wykonywane. 4. Jeżeli Wykonawca z przyczyn niezależnych od niego nie jest w stanie uzyskać dowodów, o których mowa w pkt 3, wówczas dopuszcza się złożenie oświadczenia Wykonawcy, które powinno jednoznacznie wskazywać na przyczyny braku możliwości pozyskania referencji od podmiotów, na rzecz których realizowane były dostawy. 5. Wykonawca, zgodnie z art. 118 ust. 1 ustawy Pzp w celu potwierdzenia spełniania warunku, o którym mowa w pkt 1, może polegać na zdolnościach technicznych podmiotów udostępniających zasoby, niezależnie od charakteru prawnego łączących go z nim stosunków prawnych. 6. Wykonawca, który polega na zdolnościach technicznych podmiotów udostępniających zasoby, składa, wraz z Wnioskiem o dopuszczenie do udziału w postępowaniu, zobowiązanie podmiotu udostępniającego zasoby do oddania mu do dyspozycji niezbędnych zasobów na potrzeby realizacji danego zamówienia lub inny podmiotowy środek dowodowy potwierdzający, że Wykonawca realizując zamówienie, będzie dysponował niezbędnymi zasobami tych podmiotów. 7. Zobowiązanie podmiotu udostępniającego zasoby, o którym mowa w pkt. 6, musi potwierdzać, że stosunek łączący Wykonawcę z podmiotami udostępniającymi zasoby gwarantuje rzeczywisty dostęp do tych zasobów oraz musi określać w szczególności: 1) zakres dostępnych Wykonawcy zasobów podmiotu udostępniającego zasoby; 2) sposób i okres udostępnienia Wykonawcy i wykorzystania przez niego zasobów podmiotu udostępniającego te zasoby przy wykonywaniu zamówienia; 8. Zamawiający oceni, czy udostępnione Wykonawcy przez podmioty udostępniające zasoby pozwalają na wykazanie przez Wykonawcę spełniania warunku udziału w postępowaniu, o którym mowa w pkt 1 oraz zbada, czy nie zachodzą wobec tego podmiotu podstawy wykluczenia wskazane przez Zamawiającego w 2.1.6 Podstawy wykluczenia. 9. Zamawiający żąda od Wykonawcy, który polega na zdolnościach technicznych podmiotów udostępniających zasoby, przedstawienia w odniesieniu do tych podmiotów: oświadczenia podmiotu udostępniającego zasoby, potwierdzającego brak podstaw wykluczenia tego podmiotu oraz odpowiednie spełnianie warunku udziału w postępowaniu w zakresie, w jakim Wykonawca powołuje się na jego zasoby (wzór - Załącznik nr 4 do Ogłoszenia) oraz dokumentów: - informacji z Krajowego Rejestru Karnego w zakresie określonym w art. 108 ust. 1 pkt 1, 2 i 4 ustawy Pzp, wystawionej nie wcześniej niż 6 miesięcy przed upływem terminu składania wniosków o dopuszczenie do udziału w postępowaniu; - informacji z Centralnego Rejestru Beneficjentów Rzeczywistych w zakresie art.108 ust. 2 ustawy Pzp, jeżeli odrębne przepisy wymagają wpisu do tego rejestru, wystawionej nie wcześniej niż 3 miesiące przed upływem terminu składania wniosków o dopuszczenie do udziału w postępowaniu. 10. Jeżeli zdolności techniczne podmiotu udostępniającego zasoby nie potwierdzają spełniania przez Wykonawcę warunku, o którym mowa w pkt 1 lub zachodzą wobec tego podmiotu podstawy wykluczenia, Zamawiający żąda, aby Wykonawca - w terminie określonym przez Zamawiającego - zastąpił ten podmiot innym podmiotem lub podmiotami albo wykazał, że samodzielnie spełnia ww. warunek udziału w postępowaniu. 11. Jeżeli Wykonawca powołuje się na doświadczenie w realizacji dostaw wykonywanych wspólnie z innymi Wykonawcami, wykaz, o którym mowa w pkt 2, dotyczy dostaw, w których wykonaniu Wykonawca ten bezpośrednio uczestniczył. 12. W przypadku Wykonawców którzy wykażą wartość dostaw w innych walutach niż PLN, Zamawiający przeliczy je na PLN. Do przeliczenia zostanie zastosowany średni kurs walut NBP obowiązujący w dniu wykonania dostawy. W przypadku braku publikacji kursów walut NBP obowiązujących w dniu o którym mowa powyżej zastosowanie ma kurs ostatnio ogłoszony przed tym dniem.",
+      "1. W celu wykazania spełniania przez Wykonawcę warunku udziału w postępowaniu, o którym mowa w art. 112 ust. 2 pkt 4 ustawy Pzp dotyczącego zdolności zawodowej Zamawiający wymaga, aby Wykonawca wykazał, że: 1) dysponuje co najmniej 1 (jedną) osobą zdolną do wykonania przedmiotu zamówienia, która posiada: a) ważne poświadczenie bezpieczeństwa lub jego zagraniczny odpowiednik, uprawniające do dostępu do informacji niejawnych, w rozumieniu ustawy ustawy z dnia 5 sierpnia 2010 r. o ochronie informacji niejawnych (Dz. U. z 2025 r. poz. 1209), zwana dalej „ustawą OIN” lub pisemne upoważnienie do dostępu do informacji niejawnych oznaczonych klauzulą „ZASTRZEŻONE\", wydane na podstawie art. 21 ust. 4 pkt 1 ustawy OIN; b) zaświadczenie stwierdzające odbycie szkolenia w zakresie ochrony informacji niejawnych zgodnie z art. 19 i 20 ustawy OIN – dotyczy osób posiadających obywatelstwo polskie i cudzoziemców zatrudnionych w podmiocie polskim, którzy odbyli takie szkolenie; 2) posiada zdolność do ochrony informacji niejawnych o klauzuli „ZASTRZEŻONE” lub stanowiącej jej zagraniczny odpowiednik w rozumieniu ustawy OIN, a w przypadku Wykonawcy zagranicznego – zgodnie z wymogami przepisów wewnętrznych danego kraju, w którym Wykonawca ma siedzibę lub miejsce zamieszkania oraz umowy bilateralnej o wzajemnej ochronie informacji niejawnych. 2. W celu potwierdzenia spełniania powyższych warunków Wykonawca zobowiązany jest złożyć wraz z Wnioskiem: 1) „Wykaz osób skierowanych do realizacji zamówienia”, posiadających ważne poświadczenie bezpieczeństwa lub jego zagraniczny odpowiednik, uprawniające do dostępu do informacji niejawnych, bądź pisemne upoważnienie do dostępu do informacji niejawnych oznaczonych klauzulą „ZASTRZEŻONE\", wydane przez Kierownika Jednostki Organizacyjnej, w rozumieniu ustawy OIN (wzór – Załącznik Nr 9 do Ogłoszenia). 2) Oświadczenie potwierdzające zdolność Wykonawcy do ochrony informacji niejawnych o klauzuli „ZASTRZEŻONE” lub stanowiącej jej zagraniczny odpowiednik, w rozumieniu ustawy OIN (wzór – Załącznik Nr 6 do Ogłoszenia – dla Wykonawców krajowych i Załącznik Nr 7 do Ogłoszenia – dla Wykonawców zagranicznych) lub kopię Świadectwa Bezpieczeństwa Przemysłowego co najmniej II (drugiego) stopnia o klauzuli \"POUFNE\" lub jego zagraniczny odpowiednik upoważniający do dostępu do informacji niejawnych. 3. Wykonawca, zgodnie z art. 118 ust. 1 ustawy Pzp w celu potwierdzenia spełniania warunków, o których mowa powyżej, może polegać na zdolnościach zawodowych podmiotów udostępniających zasoby, niezależnie od charakteru prawnego łączących go z nim stosunków prawnych. 4. Wykonawca, który polega na zdolnościach zawodowych podmiotów udostępniających zasoby, składa, wraz z Wnioskiem o dopuszczenie do udziału w postępowaniu, zobowiązanie podmiotu udostępniającego zasoby do oddania mu do dyspozycji niezbędnych zasobów na potrzeby realizacji danego zamówienia lub inny podmiotowy środek dowodowy potwierdzający, że Wykonawca realizując zamówienie, będzie dysponował niezbędnymi zasobami tych podmiotów. 5. Zobowiązanie podmiotu udostępniającego zasoby, o którym mowa w pkt. 6, musi potwierdzać, że stosunek łączący Wykonawcę z podmiotami udostępniającymi zasoby gwarantuje rzeczywisty dostęp do tych zasobów oraz musi określać w szczególności: 1) zakres dostępnych Wykonawcy zasobów podmiotu udostępniającego zasoby; 2) sposób i okres udostępnienia Wykonawcy i wykorzystania przez niego zasobów podmiotu udostępniającego te zasoby przy wykonywaniu zamówienia; 6. Zamawiający oceni, czy udostępnione Wykonawcy przez podmioty udostępniające zasoby pozwalają na wykazanie przez Wykonawcę spełniania warunku udziału w postępowaniu, o którym mowa w pkt 1 oraz zbada, czy nie zachodzą wobec tego podmiotu podstawy wykluczenia wskazane przez Zamawiającego w 2.1.6 Podstawy wykluczenia. 7. Zamawiający żąda od Wykonawcy, który polega na zdolnościach zawodowych podmiotów udostępniających zasoby, przedstawienia w odniesieniu do tych podmiotów: oświadczenia podmiotu udostępniającego zasoby, potwierdzającego brak podstaw wykluczenia tego podmiotu oraz odpowiednie spełnianie warunku udziału w postępowaniu w zakresie, w jakim Wykonawca powołuje się na jego zasoby (wzór - Załącznik nr 4 do Ogłoszenia) oraz dokumentów: - informacji z Krajowego Rejestru Karnego w zakresie określonym w art. 108 ust. 1 pkt 1, 2 i 4 ustawy Pzp, wystawionej nie wcześniej niż 6 miesięcy przed upływem terminu składania Wniosków; - Informacji z Centralnego Rejestru Beneficjentów Rzeczywistych w zakresie art.108 ust.2 ustawy Pzp, jeżeli odrębne przepisy wymagają wpisu do tego rejestru, wystawionej nie wcześniej niż 3 miesiące przed upływem terminu składania Wniosków. 8. Jeżeli zdolności zawodowe podmiotu udostępniającego zasoby nie potwierdzają spełniania przez Wykonawcę warunków lub zachodzą wobec tego podmiotu podstawy wykluczenia, Zamawiający żąda, aby Wykonawca - w terminie określonym przez Zamawiającego - zastąpił ten podmiot innym podmiotem lub podmiotami albo wykazał, że samodzielnie spełnia ww. warunek udziału w postępowaniu."
+    ]
+  },
+  "BT-751-Lot": [
+    "true"
+  ],
+  "BT-756-Procedure": false,
+  "BT-757-notice": 1,
+  "BT-761-Lot": [
+    "false"
+  ],
+  "BT-764-Lot": [
+    "not-allowed"
+  ],
+  "BT-765-Lot": [
+    "none"
+  ],
+  "BT-767-Lot": [
+    false
+  ],
+  "BT-77-Lot": {
+    "pol": [
+      "Zasady finansowania zawarte są Istotnych Postanowieniach Umowy (IPU) stanowiących załącznik do SWZ."
+    ]
+  },
+  "BT-806-Procedure": [
+    "epo-notice"
+  ],
+  "BT-809-Lot": [
+    "slc-suit-reg-prof",
+    "slc-abil-ref-supply",
+    "slc-abil-staff-qual"
+  ],
+  "BT-821-Lot": [
+    "epo-notice"
+  ],
+  "BT-97-Lot": [
+    "POL"
+  ],
+  "BT-99-Lot": {
+    "pol": [
+      "Terminy na wniesienie odwołania zgodnie z art. 515 ustawy Pzp."
+    ]
+  },
+  "CY": [
+    "POL"
+  ],
+  "DI": [
+    "32009L0081"
+  ],
+  "DS": "2026-10-28Z",
+  "DT": [
+    "2026-12-03T11:00:00+01:00"
+  ],
+  "FT": [
+    {
+      "pol": "Terminy na wniesienie odwołania zgodnie z art. 515 ustawy Pzp.\nart. 108 ust. 1 pkt 6 ustawy Pzp\n1. Wzór Wniosku o dopuszczenie do udziału w postępowaniu - zwany dalej \"Wnioskiem\" (Załącznik nr 1 do Ogłoszenia) oraz wzory pozostałych załączników znajdują się na stronie internetowej Zamawiającego (https://au-bip.wp.mil.pl/pl/bip/zamowienia/). 2. W celu potwierdzenia, że osoba działająca w imieniu Wykonawcy, Wykonawców wspólnie ubiegających się o udzielenie zamówienia lub w imieniu podmiotu udostępniającego zasoby jest umocowana do jego reprezentowania, zamawiający żąda odpisu lub informacji z Krajowego Rejestru Sądowego, Centralnej Ewidencji i Informacji o Działalności Gospodarczej lub innego właściwego rejestru. Jeżeli w imieniu Wykonawcy, Wykonawców wspólnie ubiegających się o udzielenie zamówienia lub podmiotu udostępniającego zasoby działa osoba, której umocowanie do reprezentowania nie wynika z ww. dokumentów, Zamawiający żąda pełnomocnictwa lub innego dokumentu potwierdzającego umocowanie tej osoby. Pełnomocnictwo należy sporządzić w postaci papierowej opatrzyć własnoręcznym podpisem i złożyć w oryginale lub kopii, poświadczonej za zgodność z oryginałem przez mocodawcę lub notariusza. 3. Zamawiający dopuszcza następujące sposoby komunikacji z Wykonawcami 1) za pośrednictwem operatora pocztowego, w rozumieniu ustawy z dnia 23.11.2012 r. - Prawo pocztowe (Dz. U. 2026 r. poz. 558); 2) przy użyciu faksu numer: +48 261 873 444, Jeżeli Zamawiający lub Wykonawca komunikują się za pośrednictwem faksu, każda ze Stron na żądanie drugiej niezwłocznie potwierdza fakt otrzymania korespondencji); 3) drogą elektroniczną na adres email: au.stm@mon.gov.pl. Jeżeli Zamawiający lub Wykonawca komunikują się drogą elektroniczną, każda ze Stron na żądanie drugiej niezwłocznie potwierdza fakt otrzymania korespondencji); 4) osobiście; 5) przez posłańca. 4. Wniosek oraz oświadczenie, o którym mowa w artykule 125 ust. 1 ustawy z dnia 11 września 2019 r. Prawo Zamówień Publicznych (t. j. Dz. U. z 2026 r. poz. 793) zwana dalej \"ustawa Pzp\" (Załącznik nr 2 i 4 do Ogłoszenia) sporządzone w języku polskim w postaci papierowej opatrzone własnoręcznym podpisem przekazuje się w oryginale. Zamawiający nie dopuszcza możliwości składania Wniosku, wraz z załącznikami, w formie elektronicznej, w postaci dokumentu elektronicznego. Wniosek musi być podpisany przez osoby uprawnione do reprezentowania Wykonawcy/Wykonawców. Jeżeli osoba bądź osoby podpisujące ww. wniosek działają na podstawie pełnomocnictwa, to do Wniosku należy załączyć pełnomocnictwo. 5. Wniosek można składać w dni robocze (od poniedziałku do piątku), w godz. 8.00 - 15:00 w Kancelarii Jawnej w siedzibie Zamawiającego w Warszawie przy ul. Królewskiej 1/7 lub przesyłać na adres: Agencja Uzbrojenia, ul. Królewska 1/7, 00-909 Warszawa (00-065 Warszawa dla przesyłek kurierskich). 6. Wniosek wraz z dokumentami i oświadczeniami należy złożyć w zamkniętym opakowaniu (np. kopercie), uniemożliwiającym odczytanie zawartości bez uszkodzenie tego opakowania przed upływem terminu składania wniosków o dopuszczenie do udziału w postępowaniu. Opakowanie powinno zostać opatrzone napisem: ,,Wniosek o dopuszczenie do udziału w postępowaniu na dostawę \"Amunicji do okrętowych zestawów zakłóceń radioelektronicznych, nr postępowania AU/165/Xl/2026\" oraz nazwą Wykonawcy i jego danymi adresowymi. 7. Oświadczenie, o którym mowa w art. 117 ust. 4 ustawy Pzp ( Załącznik nr 5 do Ogłoszenia), zobowiązanie podmiotu udostępniającego zasoby, sporządzone w postaci papierowej i opatrzone własnoręcznym podpisem, przekazuje się w oryginale lub jako kopię poświadczoną za zgodność z oryginałem. 8. Podmiotowe środki dowodowe, przedmiotowe środki dowodowe oraz oświadczenia lub dokumenty inne niż Wniosek o dopuszczenie do udziału w postępowaniu i oświadczenie, o którym mowa w art. 125 ust. 1 ustawy Pzp, sporządzone w postaci papierowej przekazuje się w oryginale lub jako kopię poświadczoną za zgodność z oryginałem. 9. Poświadczenia za zgodność z oryginałem dokonuje się zgodnie z par. 9 Rozporządzenia z dnia 30 grudnia 2020 r. w sprawie sposobu sporządzania i przekazywania informacji oraz wymagań technicznych dla dokumentów elektronicznych oraz środków komunikacji elektronicznej w postępowaniu o udzielenie zamówienia publicznego lub konkursie (Dz. U. 2020 r, poz. 2452). 10. Podmiotowe środki dowodowe, przedmiotowe środki dowodowe oraz inne dokumenty lub oświadczenia sporządzone w języku obcym przekazuje się wraz z tłumaczeniem na język polski. Zamawiający zastrzega sobie prawo żądania przedstawienia oryginału lub notarialnie poświadczonej kopii, gdy złożona kopia jest nieczytelna lub budzi wątpliwości co do jej prawdziwości. 11. Postępowanie o udzielenie zamówienia jest jawne. Nie ujawnia się informacji stanowiących tajemnicę przedsiębiorstwa w rozumieniu przepisów ustawy z dnia 16 kwietnia 1993 r. o zwalczaniu nieuczciwej konkurencji (t. j. Dz.U. z 2026 r., poz. 85), jeżeli Wykonawca, wraz z przekazaniem takich informacji, zastrzegł, że nie mogą być one udostępniane oraz wykazał, że zastrzeżone informacje stanowią tajemnicę przedsiębiorstwa. Wykonawca nie może zastrzec informacji, o których mowa w art. 222 ust. 5. ustawy Pzp. Wykonawca w celu utrzymania poufności zastrzeżonych informacji przekazuje je wydzielone i odpowiednio oznaczone. 12. Zgodnie z zapisami art. 110 ust.1 ustawy Pzp Wykonawca może zostać wykluczony przez Zamawiającego na każdym etapie postępowania o udzielenie zamówienia. 13. Zamawiający unieważni postępowanie, jeżeli: 1) wystąpi odpowiednia przesłanka z art. 255 lub art. 256 lub art. 257 ustawy Pzp; 2) na podstawie art. 418 ust. 1 pkt 2 ustawy Pzp, w przypadku wystąpienia istotnej zmiany okoliczności realizacji zamówienia, rozumianej jako zmiana założeń polityki Rządu Rzeczypospolitej Polskiej, dotyczących obronności i bezpieczeństwa państwa lub zmiana związana z finansowaniem SZ RP, powodująca ograniczenie środków finansowych na realizację przedmiotu zamówienia, czego nie można było przewidzieć w chwili wszczęcia postępowania. 14. Zamawiający nie ogranicza liczby Wykonawców zaproszonych do składania ofert, których wnioski o dopuszczenie do udziału w postępowaniu nie będą podlegały odrzuceniu. 15. Przedmiot zamówienia będzie podlegał ocenie zgodności zgodnie z ustawą z dnia 17 listopada 2006 r. o systemie oceny zgodności wyrobów przeznaczonych na potrzeby obronności i bezpieczeństwa państwa (Dz.U. z 2022 r., poz. 747) na podstawie Rozporządzenia Ministra Obrony Narodowej z dnia 11 stycznia 2013 r. w sprawie szczegółowego wykazu wyrobów podlegających ocenie zgodności oraz sposobu i trybu przeprowadzenia oceny zgodności wyrobów przeznaczonych na potrzeby obronności państwa (Dz.U. z 2021 r., poz. 1628). 16. Przedmiot zamówienia musi być oznakowany kodem kreskowym, zgodnie z Decyzją Nr 3/MON Ministra Obrony Narodowej z dnia 3 stycznia 2014 r. w sprawie wytycznych określających wymagania w zakresie znakowania kodem kreskowym wyrobów dostarczanych do resortu obrony narodowej (Dz. Urz. Min. Obr. Nar. 2014 r. poz. 11). 17. Kryteria udzielenia zamówienia zostaną określone w Specyfikacji Warunków Zamówienia (SWZ) przekazanej Wykonawcom zaproszonym do kolejnego etapu postępowania. 18. Klauzula Informacyjna Administratora (Zamawiającego) w zakresie przetwarzania danych osobowych stanowi Załącznik nr 10 do Ogłoszenia.\nart. 108 ust. 1 pkt 3 ustawy Pzp\nSzczegółowe warunki realizacji zamówienia zostaną określone w dokumentach zamówienia.\nart. 108 ust. 1 pkt 5 ustawy Pzp\nAgencja Uzbrojenia\nDostawa amunicji do okrętowych zestawów zakłóceń radioelektronicznych.\nart. 108 ust. 1 pkt 1 i 2 ustawy Pzp\n1. Wykonawcy zaproszeni do złożenia ofert będą zobowiązani do wniesienia wadium w wysokości 1 800 000,00 PLN (słownie: jeden milion osiemset tysięcy złotych 00/100) na cały okres związania ofertą. 2. Szczegółowe informacje w zakresie wadium zostaną przekazane Wykonawcom zaproszonym do składania ofert w SWZ. 3. Zamawiający przewiduje obowiązek wniesienia zabezpieczenia należytego wykonania umowy. 4. Zamawiający przewiduje możliwość udzielenia zaliczki na poczet realizacji Zamówienia. 5. Szczegóły dotyczące wniesienia zabezpieczenia należytego wykonania umowy oraz udzielenia zaliczki zostaną opisane w SWZ, która zostanie przekazana Wykonawcom zaproszonym do kolejnego etapu postępowania.\n1. W celu wykazania spełniania przez Wykonawcę warunku udziału w postępowaniu, o którym mowa w art. 112 ust. 2 pkt 4 ustawy Pzp, dotyczącego zdolności technicznych, Zamawiający wymaga, aby Wykonawca wykazał, że w okresie ostatnich 5 lat przed upływem terminu składania Wniosków (jeżeli okres prowadzenia działalności jest krótszy to w tym okresie) w sposób należyty wykonał co najmniej 3 (trzy) dostawy amunicji zakłócającej do obrony przed pociskami samonaprowadzającymi o wartości nie mniejszej niż 4 000 000,00 PLN (słownie: cztery miliony złotych 00/100). 2. W celu potwierdzenia spełniania powyższego warunku Wykonawca zobowiązany jest złożyć, wraz z Wnioskiem, wykaz wykonanych dostaw, o których mowa w pkt 1 (wzór - Załącznik nr 8 do Ogłoszenia), w okresie ostatnich 5 lat przed upływem terminu składania Wniosków, a jeżeli okres prowadzenia działalności jest krótszy – w tym okresie, wraz z podaniem wartości, przedmiotu dostawy, daty wykonania i podmiotu, na rzecz którego dostawa została wykonana oraz załączyć dowody określające, że dostawa została wykonana należycie. 3. Dowodami, o których mowa w pkt 2 są referencje bądź inne dokumenty sporządzone przez podmiot, na rzecz którego dostawy były wykonywane. 4. Jeżeli Wykonawca z przyczyn niezależnych od niego nie jest w stanie uzyskać dowodów, o których mowa w pkt 3, wówczas dopuszcza się złożenie oświadczenia Wykonawcy, które powinno jednoznacznie wskazywać na przyczyny braku możliwości pozyskania referencji od podmiotów, na rzecz których realizowane były dostawy. 5. Wykonawca, zgodnie z art. 118 ust. 1 ustawy Pzp w celu potwierdzenia spełniania warunku, o którym mowa w pkt 1, może polegać na zdolnościach technicznych podmiotów udostępniających zasoby, niezależnie od charakteru prawnego łączących go z nim stosunków prawnych. 6. Wykonawca, który polega na zdolnościach technicznych podmiotów udostępniających zasoby, składa, wraz z Wnioskiem o dopuszczenie do udziału w postępowaniu, zobowiązanie podmiotu udostępniającego zasoby do oddania mu do dyspozycji niezbędnych zasobów na potrzeby realizacji danego zamówienia lub inny podmiotowy środek dowodowy potwierdzający, że Wykonawca realizując zamówienie, będzie dysponował niezbędnymi zasobami tych podmiotów. 7. Zobowiązanie podmiotu udostępniającego zasoby, o którym mowa w pkt. 6, musi potwierdzać, że stosunek łączący Wykonawcę z podmiotami udostępniającymi zasoby gwarantuje rzeczywisty dostęp do tych zasobów oraz musi określać w szczególności: 1) zakres dostępnych Wykonawcy zasobów podmiotu udostępniającego zasoby; 2) sposób i okres udostępnienia Wykonawcy i wykorzystania przez niego zasobów podmiotu udostępniającego te zasoby przy wykonywaniu zamówienia; 8. Zamawiający oceni, czy udostępnione Wykonawcy przez podmioty udostępniające zasoby pozwalają na wykazanie przez Wykonawcę spełniania warunku udziału w postępowaniu, o którym mowa w pkt 1 oraz zbada, czy nie zachodzą wobec tego podmiotu podstawy wykluczenia wskazane przez Zamawiającego w 2.1.6 Podstawy wykluczenia. 9. Zamawiający żąda od Wykonawcy, który polega na zdolnościach technicznych podmiotów udostępniających zasoby, przedstawienia w odniesieniu do tych podmiotów: oświadczenia podmiotu udostępniającego zasoby, potwierdzającego brak podstaw wykluczenia tego podmiotu oraz odpowiednie spełnianie warunku udziału w postępowaniu w zakresie, w jakim Wykonawca powołuje się na jego zasoby (wzór - Załącznik nr 4 do Ogłoszenia) oraz dokumentów: - informacji z Krajowego Rejestru Karnego w zakresie określonym w art. 108 ust. 1 pkt 1, 2 i 4 ustawy Pzp, wystawionej nie wcześniej niż 6 miesięcy przed upływem terminu składania wniosków o dopuszczenie do udziału w postępowaniu; - informacji z Centralnego Rejestru Beneficjentów Rzeczywistych w zakresie art.108 ust. 2 ustawy Pzp, jeżeli odrębne przepisy wymagają wpisu do tego rejestru, wystawionej nie wcześniej niż 3 miesiące przed upływem terminu składania wniosków o dopuszczenie do udziału w postępowaniu. 10. Jeżeli zdolności techniczne podmiotu udostępniającego zasoby nie potwierdzają spełniania przez Wykonawcę warunku, o którym mowa w pkt 1 lub zachodzą wobec tego podmiotu podstawy wykluczenia, Zamawiający żąda, aby Wykonawca - w terminie określonym przez Zamawiającego - zastąpił ten podmiot innym podmiotem lub podmiotami albo wykazał, że samodzielnie spełnia ww. warunek udziału w postępowaniu. 11. Jeżeli Wykonawca powołuje się na doświadczenie w realizacji dostaw wykonywanych wspólnie z innymi Wykonawcami, wykaz, o którym mowa w pkt 2, dotyczy dostaw, w których wykonaniu Wykonawca ten bezpośrednio uczestniczył. 12. W przypadku Wykonawców którzy wykażą wartość dostaw w innych walutach niż PLN, Zamawiający przeliczy je na PLN. Do przeliczenia zostanie zastosowany średni kurs walut NBP obowiązujący w dniu wykonania dostawy. W przypadku braku publikacji kursów walut NBP obowiązujących w dniu o którym mowa powyżej zastosowanie ma kurs ostatnio ogłoszony przed tym dniem.\n1. W celu wykazania spełniania przez Wykonawcę warunku udziału w postępowaniu, o którym mowa w art. 112 ust. 2 pkt 4 ustawy Pzp dotyczącego zdolności zawodowej Zamawiający wymaga, aby Wykonawca wykazał, że: 1) dysponuje co najmniej 1 (jedną) osobą zdolną do wykonania przedmiotu zamówienia, która posiada: a) ważne poświadczenie bezpieczeństwa lub jego zagraniczny odpowiednik, uprawniające do dostępu do informacji niejawnych, w rozumieniu ustawy ustawy z dnia 5 sierpnia 2010 r. o ochronie informacji niejawnych (Dz. U. z 2025 r. poz. 1209), zwana dalej „ustawą OIN” lub pisemne upoważnienie do dostępu do informacji niejawnych oznaczonych klauzulą „ZASTRZEŻONE\", wydane na podstawie art. 21 ust. 4 pkt 1 ustawy OIN; b) zaświadczenie stwierdzające odbycie szkolenia w zakresie ochrony informacji niejawnych zgodnie z art. 19 i 20 ustawy OIN – dotyczy osób posiadających obywatelstwo polskie i cudzoziemców zatrudnionych w podmiocie polskim, którzy odbyli takie szkolenie; 2) posiada zdolność do ochrony informacji niejawnych o klauzuli „ZASTRZEŻONE” lub stanowiącej jej zagraniczny odpowiednik w rozumieniu ustawy OIN, a w przypadku Wykonawcy zagranicznego – zgodnie z wymogami przepisów wewnętrznych danego kraju, w którym Wykonawca ma siedzibę lub miejsce zamieszkania oraz umowy bilateralnej o wzajemnej ochronie informacji niejawnych. 2. W celu potwierdzenia spełniania powyższych warunków Wykonawca zobowiązany jest złożyć wraz z Wnioskiem: 1) „Wykaz osób skierowanych do realizacji zamówienia”, posiadających ważne poświadczenie bezpieczeństwa lub jego zagraniczny odpowiednik, uprawniające do dostępu do informacji niejawnych, bądź pisemne upoważnienie do dostępu do informacji niejawnych oznaczonych klauzulą „ZASTRZEŻONE\", wydane przez Kierownika Jednostki Organizacyjnej, w rozumieniu ustawy OIN (wzór – Załącznik Nr 9 do Ogłoszenia). 2) Oświadczenie potwierdzające zdolność Wykonawcy do ochrony informacji niejawnych o klauzuli „ZASTRZEŻONE” lub stanowiącej jej zagraniczny odpowiednik, w rozumieniu ustawy OIN (wzór – Załącznik Nr 6 do Ogłoszenia – dla Wykonawców krajowych i Załącznik Nr 7 do Ogłoszenia – dla Wykonawców zagranicznych) lub kopię Świadectwa Bezpieczeństwa Przemysłowego co najmniej II (drugiego) stopnia o klauzuli \"POUFNE\" lub jego zagraniczny odpowiednik upoważniający do dostępu do informacji niejawnych. 3. Wykonawca, zgodnie z art. 118 ust. 1 ustawy Pzp w celu potwierdzenia spełniania warunków, o których mowa powyżej, może polegać na zdolnościach zawodowych podmiotów udostępniających zasoby, niezależnie od charakteru prawnego łączących go z nim stosunków prawnych. 4. Wykonawca, który polega na zdolnościach zawodowych podmiotów udostępniających zasoby, składa, wraz z Wnioskiem o dopuszczenie do udziału w postępowaniu, zobowiązanie podmiotu udostępniającego zasoby do oddania mu do dyspozycji niezbędnych zasobów na potrzeby realizacji danego zamówienia lub inny podmiotowy środek dowodowy potwierdzający, że Wykonawca realizując zamówienie, będzie dysponował niezbędnymi zasobami tych podmiotów. 5. Zobowiązanie podmiotu udostępniającego zasoby, o którym mowa w pkt. 6, musi potwierdzać, że stosunek łączący Wykonawcę z podmiotami udostępniającymi zasoby gwarantuje rzeczywisty dostęp do tych zasobów oraz musi określać w szczególności: 1) zakres dostępnych Wykonawcy zasobów podmiotu udostępniającego zasoby; 2) sposób i okres udostępnienia Wykonawcy i wykorzystania przez niego zasobów podmiotu udostępniającego te zasoby przy wykonywaniu zamówienia; 6. Zamawiający oceni, czy udostępnione Wykonawcy przez podmioty udostępniające zasoby pozwalają na wykazanie przez Wykonawcę spełniania warunku udziału w postępowaniu, o którym mowa w pkt 1 oraz zbada, czy nie zachodzą wobec tego podmiotu podstawy wykluczenia wskazane przez Zamawiającego w 2.1.6 Podstawy wykluczenia. 7. Zamawiający żąda od Wykonawcy, który polega na zdolnościach zawodowych podmiotów udostępniających zasoby, przedstawienia w odniesieniu do tych podmiotów: oświadczenia podmiotu udostępniającego zasoby, potwierdzającego brak podstaw wykluczenia tego podmiotu oraz odpowiednie spełnianie warunku udziału w postępowaniu w zakresie, w jakim Wykonawca powołuje się na jego zasoby (wzór - Załącznik nr 4 do Ogłoszenia) oraz dokumentów: - informacji z Krajowego Rejestru Karnego w zakresie określonym w art. 108 ust. 1 pkt 1, 2 i 4 ustawy Pzp, wystawionej nie wcześniej niż 6 miesięcy przed upływem terminu składania Wniosków; - Informacji z Centralnego Rejestru Beneficjentów Rzeczywistych w zakresie art.108 ust.2 ustawy Pzp, jeżeli odrębne przepisy wymagają wpisu do tego rejestru, wystawionej nie wcześniej niż 3 miesiące przed upływem terminu składania Wniosków. 8. Jeżeli zdolności zawodowe podmiotu udostępniającego zasoby nie potwierdzają spełniania przez Wykonawcę warunków lub zachodzą wobec tego podmiotu podstawy wykluczenia, Zamawiający żąda, aby Wykonawca - w terminie określonym przez Zamawiającego - zastąpił ten podmiot innym podmiotem lub podmiotami albo wykazał, że samodzielnie spełnia ww. warunek udziału w postępowaniu.\nWarunki przyszłej Umowy zostaną określone w SWZ. Forma prawna, jaką musi przyjąć grupa oferentów, której udzielono zamówienia: Zgodnie z zapisami art. 58 ustawy Pzp Wykonawcy mogą wspólnie ubiegać się o udzielenie zamówienia. W takim przypadku Wykonawcy muszą: 1. Ustanowić pełnomocnika do reprezentowania ich w postępowaniu o udzielenie zamówienia albo reprezentowania w postępowaniu i zawarcia umowy w sprawie zamówienia publicznego i złożyć pełnomocnictwo. 2. Złożyć następujące dokumenty i oświadczenia: 1) wymienione w punkcie 2.1.6 ogłoszenia podstawy wykluczenia — osobno każdy z Wykonawców wspólnie ubiegających się o udzielenie zamówienia; 2) dokument, o którym mowa w punkcie 5.1.9 Kryteria kwalifikacji \"Wpis do odpowiedniego rejestru zawodowego\" — co najmniej jeden z Wykonawców wspólnie ubiegających się o udzielenie zamówienia z uwzględnieniem zapisów art. 117 ust. 2 ustawy Pzp; 3) dokumenty, o których mowa w punkcie 5.1.9 Kryteria kwalifikacji: \"Referencje dotyczące określonych dostaw\" i \"Odpowiednie kwalifikacje edukacyjne i zawodowe\" - odpowiednio, tak aby wspólnie spełniać warunki udziału w postępowaniu. 3. Zgodnie z art. 117 ust. 4 ustawy Pzp Wykonawcy wspólnie ubiegający się o udzielenie zamówienia dołączają do wniosku o dopuszczenie do udziału w postępowaniu oświadczenie, z którego wynika, które elementy zamówienia wykonają poszczególni Wykonawcy (Załącznik nr 5 do Ogłoszenia). 4. W przypadku, gdy za najkorzystniejszą zostanie wybrana oferta Wykonawców wspólnie ubiegających się o udzielenie zamówienia, Zamawiający będzie żądał przed zawarciem umowy w sprawie zamówienia publicznego kopii umowy regulującej współpracę tych Wykonawców.\nPublications Office of the European Union\nart. 108 ust. 1 pkt 1 lit. c i g, art. 108 ust. 1 pkt 4, art 405 ust. 1, 2 pkt 4 ustawy Pzp, art. 7 ust. 1 ustawy z dnia 13 kwietnia 2022 r. o szczególnych rozwiązaniach w zakresie przeciwdziałania wspieraniu agresji na Ukrainę oraz służących ochronie bezpieczeństwa narodowego (Dz.U. z 2024 r. poz. 507 z późn. zm.) i art. 5 k ust. 1 rozporządzenia Rady (UE) 833/2014 dotyczącego środków ograniczających w związku z działaniami Rosji destabilizującymi sytuację na Ukrainie (Dz. U. UE nr L 229 z dnia 31 lipca 2014 r. str. 1 z późn. zm.). Zamawiający żąda złożenia wraz z Wnioskiem (Załącznik nr 1 do Ogłoszenia): 1. Oświadczenia Wykonawcy potwierdzającego brak podstaw wykluczenia oraz spełnienie warunków udziału w postepowaniu (Załącznik nr 2 do Ogłoszenia); 2. Informacji z Krajowego Rejestru Karnego w zakresie określonym w art. 108 ust. 1 pkt 1, 2, 4 ustawy Pzp, wystawionej nie wcześniej, niż 6 miesię­cy przed upływem terminu składania wniosków o dopuszczenie do udziału w postępowaniu; 3. Informacji z Centralnego Rejestru Beneficjentów Rzeczywistych w zakresie art. 108 ust. 2 ustawy Pzp, jeżeli odrębne przepisy wymagają wpisu do tego rejestru, sporządzonej nie wcześniej niż 3 m­iesiące przed upływem terminu składania Wniosków. 4. Oświadczenia Wykonawcy, w zakresie art. 108 ust. 1 pkt 5 ustawy Pzp, o braku przynależności do tej samej grupy kapitałowej w rozumieniu ustawy z dnia 16 lutego 2007 r. o ochronie konkurencji i konsumentów (Dz. U. z 2026 r. poz. 85), z innym Wykonawcą, który złożył odrębny Wniosek, albo oświadczenia o przynależności do tej samej grupy kapitałowej wraz z dokumentami lub informacjami potwierdzającymi przygotowanie Wniosku niezależnie od innego Wykonawcy, należącego do tej samej grupy kapitałowej (Załącznik nr 3 do Ogłoszenia). 5. Jeżeli Wykonawca ma siedzibę lub miejsce zamieszkania poza granicami Rzeczypospolitej Polskiej, zamiast dokumentów, o których mowa: ­ w pkt 2 ­ składa informację z odpowiedniego rejestru, takiego jak rejestr sądowy albo w przypadku braku takiego rejestru, inny równoważny dokument wydany przez właściwy organ sądowy lub administracyjny kraju, w którym Wykonawca ma siedzibę lub miejsce zamieszkania lub miejsce zamieszkania ma osoba, której dotyczy informacja albo dokument w zakresie, o którym mowa w art. 108 ust. 1 pkt 1, 2, 4 ustawy Pzp ­ wystawiony nie wcześniej, niż 6 miesięcy przed upływem terminu składania Wniosków; w pkt 3 ­ składa informację z odpowiedniego rejestru zawierającego informację o jego beneficjentach rzeczywistych albo, w przypadku braku takiego rejestru, inny równoważny dokument wydany przez właściwy organ sądowy lub administracyjny kraju, w którym Wykonawca ma siedzibę lub miejsce zamieszkania, określający jego beneficjentów rzeczywistych ­ wystawione nie wcześniej, niż 3 miesią­ce przed upływem terminu składania Wniosków. 6. Jeżeli w kraju, w którym Wykonawca ma siedzibę lub miejsce zamieszkania lub miejsce zamieszkania ma osoba, której dokument dotyczy, nie wydaje się dokumentów, o których mowa w pkt 5. lub gdy dokumenty te nie odnoszą się do wszystkich przypadków, o których mowa w art. 108 ust. 1 pkt 1, 2, 4 ustawy Pzp, zastępuje się je odpowiednio w całości lub w części dokumentem zawierającym odpowiednio oświadczenie Wykonawcy, ze wskazaniem osoby albo osób uprawnionych do jego reprezentacji lub oświadczenie osoby, której dokument miał dotyczyć, złożone pod przysięgą, lub jeżeli w kraju, w którym Wykonawca ma siedzibę lub miejsce zamieszkania lub miejsce zamieszkania ma osoba, której dokument miał dotyczyć, nie ma przepisów o oświadczeniu pod przysięgą, złożone przed organem sądowym lub administracyjnym, notariuszem, organem samorządu zawodowego lub gospodarczego, właściwym ze względu na siedzibę lub miejsce zamieszkania Wykonawcy lub miejsce zamieszkania ma osoba, której dokument miał dotyczyć ­ przy zachowaniu terminów wystawienia wymaganych dla poszczególnych dokumentów, o których mowa w pkt 5. 7. Jeżeli złożone przez Wykonawcę oświadczenie, o którym mowa w art. 125 ust. 1 ustawy Pzp lub podmiotowe środki dowodowe budzą wątpliwości Zamawiającego, może on zwrócić się bezpośrednio do podmiotu, który jest w posiadaniu informacji lub dokumentów istotnych w tym zakresie dla oceny spełniania przez Wykonawcę warunków udziału w postępowaniu lub braku podstaw wykluczenia o przedstawienie takich informacji lub dokumentów.\nPrzedmiotem zamówienia jest dostawa amunicji do okrętowych zestawów zakłóceń radioelektronicznych, nabój 130 mm do zakłóceń pasywnych RF/IR BULLFIGHTER lub równoważny -1300 szt. Szczegółowe wymagania dotyczące przedmiotu zamówienia wraz z warunkami równoważności dla wyrobów równoważnych oraz kryteria oceny ofert zostaną przedstawione w Specyfikacji Warunków Zamówienia (dalej \"SWZ\"), która zostanie przekazana Wykonawcom zaproszonym do składania ofert. Postępowanie wiąże się z dostępem do informacji niejawnych oznaczonych klauzulą „ZASTRZEŻONE” i stanowiących jej zagraniczny odpowiednik (zgodnie z umową bilateralną).\nW celu wykazania spełniania przez Wykonawcę warunku udziału w postępowaniu, o którym mowa w art. 112 ust. 2 pkt 2 ustawy Pzp, Wykonawca zobowiązany jest przedłożyć aktualną koncesję wydaną na podstawie ustawy z dnia 13 czerwca 2019 r. o wykonywaniu działalności gospodarczej w zakresie wytwarzania i obrotu materiałami wybuchowymi, bronią, amunicja oraz wyrobami i technologią o przeznaczeniu wojskowym lub policyjnym (Dz.U. z 2023 r. poz 1743) w zakresie wytwarzania i obrotu lub obrotu wyrobami o przeznaczeniu wojskowym lub policyjnym określonymi w Części III Rodzaje broni i amunicji - BA pkt 16 załącznika do Rozporządzenia Rady Ministrów z dnia 17 września 2019 r w sprawie klasyfikacji rodzajów materiałów wybuchowych, broni, amunicji oraz wyrobów i technologii o przeznaczeniu wojskowym lub policyjnym, na których wytwarzanie lub obrót jest wymagana koncesja (Dz.U. z 2019 r. poz. 1888), lub zgodnie z art. 156 ust. 1 ww. ustawy - koncesję uzyskaną na podstawie ustawy z dnia 22 czerwca 2001 r. o wykonywaniu działalności gospodarczej w zakresie wytwarzania i obrotu materiałami wybuchowymi, bronią, amunicją oraz wyrobami i i technologią o przeznaczeniu wojskowym lub policyjnym (Dz.U. z 2018 r. poz. 2037 z poźn. zm.), która zachowuje ważność w zakresie określonym w BA pkt. 13 załącznika nr 1(Rodzaje broni i amunicji BA) do Rozporządzenia Rady Ministrów z dnia 3 grudnia 2001 r. w sprawie rodzajów broni ii amunicji oraz wykazu wyrobów i technologii o przeznaczeniu wojskowym lub policyjnym, na których wytwarzanie lub obrót jest wymagana koncesja (Dz. U. z 2001 r. nr 145 poz. 1625 z późn. zm.) lub odpowiedni dokument wystawiony przez organ państwa w którym Wykonawca ma siedzibę potwierdzający, że Wykonawca posiada uprawnienia do prowadzenia działalności w zakresie wytwarzania i obrotu lub obrotu wyrobami będącymi przedmiotem zamówienia. Ww. dokument Wykonawca zobowiązany jest złożyć wraz z Wnioskiem, w postaci kopii poświadczonej za zgodność z oryginałem.\nZasady finansowania zawarte są Istotnych Postanowieniach Umowy (IPU) stanowiących załącznik do SWZ.\n01\nWarszawa\nallowed\n1 Regionalna Baza Logistyczna, Skład Gdynia\nexg-crim-part\nGdynia\nnone\nexg-mis-prep-confl\nPL633\n311b04d9-66a8-4709-afe3-414d4e9d4558\nhttps://www.wojsko-polskie.pl/au/\nexg-mis-distortion\nKrólewska 1/7\nLuxembourg\nsupplies\n00-909\nPL911\ncn-standard\nORG-0000\nORG-0001\n210/2026\nexg-natl-bre-nat-law\nexg-crim-traffick\n18\nhttps://au-bip.wp.mil.pl/pl/bip/zamowienia/\nPUBL\nexg-crim-terror\nsubc-chng\nslc-suit-reg-prof\nPOL\nepo-notice\nexg-pmt-bre-tax\n0\nslc-abil-ref-supply\n08:09:06Z\n4\n1300\ntrue\nexg-crim-fraud\nCzęść 1/1\nAU/165/XI/2026\nslc-abil-staff-qual\n11:00:00+01:00\nno\nbody-pl\n2026-10-29+01:00\ncont-ent\ndefence\n+48261873444\na184902d-9661-4b05-949d-9b8cf6063450\neforms-sdk-1.14\n+48261879784\n+352 29291\nnot-allowed\n2026-10-28Z\nLOT-0001\nLU000\n2026-12-03+01:00\nhttps://op.europa.eu\nted@publications.europa.eu\n00749708-2026\nSzefostwo Techniki Morskiej\nau.stm@mon.gov.pl\nart. 410 ust. 1 oraz art. 411 ustawy z dnia 11 września 2019 r. Prawo zamówień publicznych (t. j. Dz.U. z 2026 r. poz. 793) dalej \"ustawa Pzp\"\n32009L0081\nshar-subc\nexg-pmt-bre-ssc\nfalse\nLUX\nexg-crim-laund\nexg-mis-bre-lab-law\n35332000\nperformance\nNIP:7010269523\nrestricted\n2.3\n1 Regionalna Baza Logistyczna Wałcz, Skład Gdynia\nexg-crim-corrpt\nted-esen\n81-904\n2417"
+    }
+  ],
+  "IA": [
+    "https://www.wojsko-polskie.pl/au/"
+  ],
+  "MA": [
+    "defence"
+  ],
+  "NC": [
+    "supplies",
+    "supplies"
+  ],
+  "ND": "749708-2026",
+  "NL": 1,
+  "OJ": "210/2026",
+  "OL": [
+    "POL"
+  ],
+  "OPA-36-Lot-Number": [
+    "4"
+  ],
+  "OPP-010-notice": "749708-2026",
+  "OPP-011-notice": "210/2026",
+  "OPP-012-notice": "2026-10-29+01:00",
+  "OPP-070-notice": "18",
+  "OPT-002-notice": "eforms-sdk-1.14",
+  "OPT-030-Procedure-SProvider": [
+    "ted-esen"
+  ],
+  "OPT-060-Lot": [
+    "performance"
+  ],
+  "PC": [
+    "35332000",
+    "35332000"
+  ],
+  "PD": "2026-10-29+01:00",
+  "PR": "restricted",
+  "RC": [
+    "PL633",
+    "POL",
+    "PL633",
+    "POL"
+  ],
+  "SUB_LG": [
+    "POL"
+  ],
+  "TI": {
+    "hun": "Lengyelország – Lőszerek tengeri hadviseléshez – Dostawa amunicji do okrętowych zestawów zakłóceń radioelektronicznych.",
+    "lav": "Polija – Militāro kuģu munīcija – Dostawa amunicji do okrętowych zestawów zakłóceń radioelektronicznych.",
+    "swe": "Polen – Ammunition för flottan – Dostawa amunicji do okrętowych zestawów zakłóceń radioelektronicznych.",
+    "gle": "An Pholainn – Ammunition for naval warfare – Dostawa amunicji do okrętowych zestawów zakłóceń radioelektronicznych.",
+    "ell": "Πολωνία – Πυρομαχικά για ναυτικές πολεμικές επιχειρήσεις – Dostawa amunicji do okrętowych zestawów zakłóceń radioelektronicznych.",
+    "spa": "Polonia – Municiones para acciones navales de guerra – Dostawa amunicji do okrętowych zestawów zakłóceń radioelektronicznych.",
+    "est": "Poola – Sõjalaevade laskemoon – Dostawa amunicji do okrętowych zestawów zakłóceń radioelektronicznych.",
+    "nld": "Polen – Munitie voor oorlogvoering te water – Dostawa amunicji do okrętowych zestawów zakłóceń radioelektronicznych.",
+    "fin": "Puola – Ampumatarvikkeet merisotaa varten – Dostawa amunicji do okrętowych zestawów zakłóceń radioelektronicznych.",
+    "pol": "Polska – Amunicja do morskich działań bojowych – Dostawa amunicji do okrętowych zestawów zakłóceń radioelektronicznych.",
+    "hrv": "Poljska – Streljivo za pomorsku bitku – Dostawa amunicji do okrętowych zestawów zakłóceń radioelektronicznych.",
+    "ces": "Polsko – Munice pro námořní vojsko – Dostawa amunicji do okrętowych zestawów zakłóceń radioelektronicznych.",
+    "dan": "Polen – Ammunition til søkrigsførelse – Dostawa amunicji do okrętowych zestawów zakłóceń radioelektronicznych.",
+    "ron": "Polonia – Muniţie pentru război naval – Dostawa amunicji do okrętowych zestawów zakłóceń radioelektronicznych.",
+    "por": "Polónia – Munições para guerra naval – Dostawa amunicji do okrętowych zestawów zakłóceń radioelektronicznych.",
+    "slk": "Poľsko – Strelivo pre námorné vojnové prostriedky – Dostawa amunicji do okrętowych zestawów zakłóceń radioelektronicznych.",
+    "fra": "Pologne – Munitions de guerre navale – Dostawa amunicji do okrętowych zestawów zakłóceń radioelektronicznych.",
+    "mlt": "Il-Polonja – Munizzjon għall-gwerra navali – Dostawa amunicji do okrętowych zestawów zakłóceń radioelektronicznych.",
+    "deu": "Polen – Munition für den Seekrieg – Dostawa amunicji do okrętowych zestawów zakłóceń radioelektronicznych.",
+    "lit": "Lenkija – Jūrų karo šaudmenys – Dostawa amunicji do okrętowych zestawów zakłóceń radioelektronicznych.",
+    "ita": "Polonia – Munizioni per guerra navale – Dostawa amunicji do okrętowych zestawów zakłóceń radioelektronicznych.",
+    "bul": "Полша – Боеприпаси за морски военни действия – Dostawa amunicji do okrętowych zestawów zakłóceń radioelektronicznych.",
+    "slv": "Poljska – Strelivo za pomorsko bojevanje – Dostawa amunicji do okrętowych zestawów zakłóceń radioelektronicznych.",
+    "eng": "Poland – Ammunition for naval warfare – Dostawa amunicji do okrętowych zestawów zakłóceń radioelektronicznych."
+  },
+  "TW": {
+    "mul": [
+      "Warszawa"
+    ]
+  },
+  "additional-info-proc": {
+    "pol": "1. Wzór Wniosku o dopuszczenie do udziału w postępowaniu - zwany dalej \"Wnioskiem\" (Załącznik nr 1 do Ogłoszenia) oraz wzory pozostałych załączników znajdują się na stronie internetowej Zamawiającego (https://au-bip.wp.mil.pl/pl/bip/zamowienia/). 2. W celu potwierdzenia, że osoba działająca w imieniu Wykonawcy, Wykonawców wspólnie ubiegających się o udzielenie zamówienia lub w imieniu podmiotu udostępniającego zasoby jest umocowana do jego reprezentowania, zamawiający żąda odpisu lub informacji z Krajowego Rejestru Sądowego, Centralnej Ewidencji i Informacji o Działalności Gospodarczej lub innego właściwego rejestru. Jeżeli w imieniu Wykonawcy, Wykonawców wspólnie ubiegających się o udzielenie zamówienia lub podmiotu udostępniającego zasoby działa osoba, której umocowanie do reprezentowania nie wynika z ww. dokumentów, Zamawiający żąda pełnomocnictwa lub innego dokumentu potwierdzającego umocowanie tej osoby. Pełnomocnictwo należy sporządzić w postaci papierowej opatrzyć własnoręcznym podpisem i złożyć w oryginale lub kopii, poświadczonej za zgodność z oryginałem przez mocodawcę lub notariusza. 3. Zamawiający dopuszcza następujące sposoby komunikacji z Wykonawcami 1) za pośrednictwem operatora pocztowego, w rozumieniu ustawy z dnia 23.11.2012 r. - Prawo pocztowe (Dz. U. 2026 r. poz. 558); 2) przy użyciu faksu numer: +48 261 873 444, Jeżeli Zamawiający lub Wykonawca komunikują się za pośrednictwem faksu, każda ze Stron na żądanie drugiej niezwłocznie potwierdza fakt otrzymania korespondencji); 3) drogą elektroniczną na adres email: au.stm@mon.gov.pl. Jeżeli Zamawiający lub Wykonawca komunikują się drogą elektroniczną, każda ze Stron na żądanie drugiej niezwłocznie potwierdza fakt otrzymania korespondencji); 4) osobiście; 5) przez posłańca. 4. Wniosek oraz oświadczenie, o którym mowa w artykule 125 ust. 1 ustawy z dnia 11 września 2019 r. Prawo Zamówień Publicznych (t. j. Dz. U. z 2026 r. poz. 793) zwana dalej \"ustawa Pzp\" (Załącznik nr 2 i 4 do Ogłoszenia) sporządzone w języku polskim w postaci papierowej opatrzone własnoręcznym podpisem przekazuje się w oryginale. Zamawiający nie dopuszcza możliwości składania Wniosku, wraz z załącznikami, w formie elektronicznej, w postaci dokumentu elektronicznego. Wniosek musi być podpisany przez osoby uprawnione do reprezentowania Wykonawcy/Wykonawców. Jeżeli osoba bądź osoby podpisujące ww. wniosek działają na podstawie pełnomocnictwa, to do Wniosku należy załączyć pełnomocnictwo. 5. Wniosek można składać w dni robocze (od poniedziałku do piątku), w godz. 8.00 - 15:00 w Kancelarii Jawnej w siedzibie Zamawiającego w Warszawie przy ul. Królewskiej 1/7 lub przesyłać na adres: Agencja Uzbrojenia, ul. Królewska 1/7, 00-909 Warszawa (00-065 Warszawa dla przesyłek kurierskich). 6. Wniosek wraz z dokumentami i oświadczeniami należy złożyć w zamkniętym opakowaniu (np. kopercie), uniemożliwiającym odczytanie zawartości bez uszkodzenie tego opakowania przed upływem terminu składania wniosków o dopuszczenie do udziału w postępowaniu. Opakowanie powinno zostać opatrzone napisem: ,,Wniosek o dopuszczenie do udziału w postępowaniu na dostawę \"Amunicji do okrętowych zestawów zakłóceń radioelektronicznych, nr postępowania AU/165/Xl/2026\" oraz nazwą Wykonawcy i jego danymi adresowymi. 7. Oświadczenie, o którym mowa w art. 117 ust. 4 ustawy Pzp ( Załącznik nr 5 do Ogłoszenia), zobowiązanie podmiotu udostępniającego zasoby, sporządzone w postaci papierowej i opatrzone własnoręcznym podpisem, przekazuje się w oryginale lub jako kopię poświadczoną za zgodność z oryginałem. 8. Podmiotowe środki dowodowe, przedmiotowe środki dowodowe oraz oświadczenia lub dokumenty inne niż Wniosek o dopuszczenie do udziału w postępowaniu i oświadczenie, o którym mowa w art. 125 ust. 1 ustawy Pzp, sporządzone w postaci papierowej przekazuje się w oryginale lub jako kopię poświadczoną za zgodność z oryginałem. 9. Poświadczenia za zgodność z oryginałem dokonuje się zgodnie z par. 9 Rozporządzenia z dnia 30 grudnia 2020 r. w sprawie sposobu sporządzania i przekazywania informacji oraz wymagań technicznych dla dokumentów elektronicznych oraz środków komunikacji elektronicznej w postępowaniu o udzielenie zamówienia publicznego lub konkursie (Dz. U. 2020 r, poz. 2452). 10. Podmiotowe środki dowodowe, przedmiotowe środki dowodowe oraz inne dokumenty lub oświadczenia sporządzone w języku obcym przekazuje się wraz z tłumaczeniem na język polski. Zamawiający zastrzega sobie prawo żądania przedstawienia oryginału lub notarialnie poświadczonej kopii, gdy złożona kopia jest nieczytelna lub budzi wątpliwości co do jej prawdziwości. 11. Postępowanie o udzielenie zamówienia jest jawne. Nie ujawnia się informacji stanowiących tajemnicę przedsiębiorstwa w rozumieniu przepisów ustawy z dnia 16 kwietnia 1993 r. o zwalczaniu nieuczciwej konkurencji (t. j. Dz.U. z 2026 r., poz. 85), jeżeli Wykonawca, wraz z przekazaniem takich informacji, zastrzegł, że nie mogą być one udostępniane oraz wykazał, że zastrzeżone informacje stanowią tajemnicę przedsiębiorstwa. Wykonawca nie może zastrzec informacji, o których mowa w art. 222 ust. 5. ustawy Pzp. Wykonawca w celu utrzymania poufności zastrzeżonych informacji przekazuje je wydzielone i odpowiednio oznaczone. 12. Zgodnie z zapisami art. 110 ust.1 ustawy Pzp Wykonawca może zostać wykluczony przez Zamawiającego na każdym etapie postępowania o udzielenie zamówienia. 13. Zamawiający unieważni postępowanie, jeżeli: 1) wystąpi odpowiednia przesłanka z art. 255 lub art. 256 lub art. 257 ustawy Pzp; 2) na podstawie art. 418 ust. 1 pkt 2 ustawy Pzp, w przypadku wystąpienia istotnej zmiany okoliczności realizacji zamówienia, rozumianej jako zmiana założeń polityki Rządu Rzeczypospolitej Polskiej, dotyczących obronności i bezpieczeństwa państwa lub zmiana związana z finansowaniem SZ RP, powodująca ograniczenie środków finansowych na realizację przedmiotu zamówienia, czego nie można było przewidzieć w chwili wszczęcia postępowania. 14. Zamawiający nie ogranicza liczby Wykonawców zaproszonych do składania ofert, których wnioski o dopuszczenie do udziału w postępowaniu nie będą podlegały odrzuceniu. 15. Przedmiot zamówienia będzie podlegał ocenie zgodności zgodnie z ustawą z dnia 17 listopada 2006 r. o systemie oceny zgodności wyrobów przeznaczonych na potrzeby obronności i bezpieczeństwa państwa (Dz.U. z 2022 r., poz. 747) na podstawie Rozporządzenia Ministra Obrony Narodowej z dnia 11 stycznia 2013 r. w sprawie szczegółowego wykazu wyrobów podlegających ocenie zgodności oraz sposobu i trybu przeprowadzenia oceny zgodności wyrobów przeznaczonych na potrzeby obronności państwa (Dz.U. z 2021 r., poz. 1628). 16. Przedmiot zamówienia musi być oznakowany kodem kreskowym, zgodnie z Decyzją Nr 3/MON Ministra Obrony Narodowej z dnia 3 stycznia 2014 r. w sprawie wytycznych określających wymagania w zakresie znakowania kodem kreskowym wyrobów dostarczanych do resortu obrony narodowej (Dz. Urz. Min. Obr. Nar. 2014 r. poz. 11). 17. Kryteria udzielenia zamówienia zostaną określone w Specyfikacji Warunków Zamówienia (SWZ) przekazanej Wykonawcom zaproszonym do kolejnego etapu postępowania. 18. Klauzula Informacyjna Administratora (Zamawiającego) w zakresie przetwarzania danych osobowych stanowi Załącznik nr 10 do Ogłoszenia."
+  },
+  "additional-information-lot": {
+    "pol": [
+      "Warunki przyszłej Umowy zostaną określone w SWZ. Forma prawna, jaką musi przyjąć grupa oferentów, której udzielono zamówienia: Zgodnie z zapisami art. 58 ustawy Pzp Wykonawcy mogą wspólnie ubiegać się o udzielenie zamówienia. W takim przypadku Wykonawcy muszą: 1. Ustanowić pełnomocnika do reprezentowania ich w postępowaniu o udzielenie zamówienia albo reprezentowania w postępowaniu i zawarcia umowy w sprawie zamówienia publicznego i złożyć pełnomocnictwo. 2. Złożyć następujące dokumenty i oświadczenia: 1) wymienione w punkcie 2.1.6 ogłoszenia podstawy wykluczenia — osobno każdy z Wykonawców wspólnie ubiegających się o udzielenie zamówienia; 2) dokument, o którym mowa w punkcie 5.1.9 Kryteria kwalifikacji \"Wpis do odpowiedniego rejestru zawodowego\" — co najmniej jeden z Wykonawców wspólnie ubiegających się o udzielenie zamówienia z uwzględnieniem zapisów art. 117 ust. 2 ustawy Pzp; 3) dokumenty, o których mowa w punkcie 5.1.9 Kryteria kwalifikacji: \"Referencje dotyczące określonych dostaw\" i \"Odpowiednie kwalifikacje edukacyjne i zawodowe\" - odpowiednio, tak aby wspólnie spełniać warunki udziału w postępowaniu. 3. Zgodnie z art. 117 ust. 4 ustawy Pzp Wykonawcy wspólnie ubiegający się o udzielenie zamówienia dołączają do wniosku o dopuszczenie do udziału w postępowaniu oświadczenie, z którego wynika, które elementy zamówienia wykonają poszczególni Wykonawcy (Załącznik nr 5 do Ogłoszenia). 4. W przypadku, gdy za najkorzystniejszą zostanie wybrana oferta Wykonawców wspólnie ubiegających się o udzielenie zamówienia, Zamawiający będzie żądał przed zawarciem umowy w sprawie zamówienia publicznego kopii umowy regulującej współpracę tych Wykonawców."
+    ]
+  },
+  "authority-main-activity": [
+    "defence"
+  ],
+  "buyer-city": {
+    "mul": [
+      "Warszawa"
+    ]
+  },
+  "buyer-contact-point": [
+    "Szefostwo Techniki Morskiej"
+  ],
+  "buyer-contracting-entity": [
+    "cont-ent"
+  ],
+  "buyer-country": [
+    "POL"
+  ],
+  "buyer-country-sub": [
+    "PL911"
+  ],
+  "buyer-email": [
+    "au.stm@mon.gov.pl"
+  ],
+  "buyer-identifier": [
+    "NIP:7010269523"
+  ],
+  "buyer-internet-address": [
+    "https://www.wojsko-polskie.pl/au/"
+  ],
+  "buyer-legal-type": [
+    "body-pl"
+  ],
+  "buyer-name": {
+    "pol": [
+      "Agencja Uzbrojenia"
+    ]
+  },
+  "buyer-post-code": [
+    "00-909"
+  ],
+  "buyer-profile": [
+    "https://au-bip.wp.mil.pl/pl/bip/zamowienia/"
+  ],
+  "classification-cpv": [
+    "35332000",
+    "35332000"
+  ],
+  "competition-termination-proc": false,
+  "contract-duration-period-lot": [
+    {
+      "unit": "YEAR",
+      "value": "4"
+    }
+  ],
+  "contract-nature": [
+    "supplies",
+    "supplies"
+  ],
+  "contract-nature-main-lot": [
+    "supplies"
+  ],
+  "contract-nature-main-proc": "supplies",
+  "customization-id": "eforms-sdk-1.14",
+  "deadline-receipt-request": [
+    "2026-12-03T11:00:00+01:00"
+  ],
+  "deadline-receipt-request-date-lot": [
+    "2026-12-03+01:00"
+  ],
+  "deadline-receipt-request-time-lot": [
+    "11:00:00+01:00"
+  ],
+  "description-lot": {
+    "pol": [
+      "Przedmiotem zamówienia jest dostawa amunicji do okrętowych zestawów zakłóceń radioelektronicznych, nabój 130 mm do zakłóceń pasywnych RF/IR BULLFIGHTER lub równoważny -1300 szt. Szczegółowe wymagania dotyczące przedmiotu zamówienia wraz z warunkami równoważności dla wyrobów równoważnych oraz kryteria oceny ofert zostaną przedstawione w Specyfikacji Warunków Zamówienia (dalej \"SWZ\"), która zostanie przekazana Wykonawcom zaproszonym do składania ofert. Postępowanie wiąże się z dostępem do informacji niejawnych oznaczonych klauzulą „ZASTRZEŻONE” i stanowiących jej zagraniczny odpowiednik (zgodnie z umową bilateralną)."
+    ]
+  },
+  "description-proc": {
+    "pol": "Przedmiotem zamówienia jest dostawa amunicji do okrętowych zestawów zakłóceń radioelektronicznych, nabój 130 mm do zakłóceń pasywnych RF/IR BULLFIGHTER lub równoważny -1300 szt. Szczegółowe wymagania dotyczące przedmiotu zamówienia wraz z warunkami równoważności dla wyrobów równoważnych oraz kryteria oceny ofert zostaną przedstawione w Specyfikacji Warunków Zamówienia (dalej \"SWZ\"), która zostanie przekazana Wykonawcom zaproszonym do składania ofert. Postępowanie wiąże się z dostępem do informacji niejawnych oznaczonych klauzulą „ZASTRZEŻONE” i stanowiących jej zagraniczny odpowiednik (zgodnie z umową bilateralną)."
+  },
+  "dispatch-date": "2026-10-28Z",
+  "dispatch-time": "08:09:06Z",
+  "duration-period-unit-lot": [
+    "YEAR"
+  ],
+  "duration-period-value-lot": [
+    "4"
+  ],
+  "ecatalog-allowed-lot": [
+    "not-allowed"
+  ],
+  "electronic-auction-lot": [
+    false
+  ],
+  "electronic-invoicing-lot": [
+    "allowed"
+  ],
+  "exclusion-grounds": [
+    "exg-mis-prep-confl",
+    "exg-crim-corrpt",
+    "exg-crim-fraud",
+    "exg-mis-bre-lab-law",
+    "exg-mis-distortion",
+    "exg-crim-terror",
+    "exg-crim-laund",
+    "exg-crim-traffick",
+    "exg-crim-part",
+    "exg-natl-bre-nat-law",
+    "exg-pmt-bre-ssc",
+    "exg-pmt-bre-tax"
+  ],
+  "exclusion-grounds-description": {
+    "pol": [
+      "art. 108 ust. 1 pkt 6 ustawy Pzp",
+      "art. 108 ust. 1 pkt 1 i 2 ustawy Pzp",
+      "art. 108 ust. 1 pkt 1 i 2 ustawy Pzp",
+      "art. 108 ust. 1 pkt 1 i 2 ustawy Pzp",
+      "art. 108 ust. 1 pkt 5 ustawy Pzp",
+      "art. 108 ust. 1 pkt 1 i 2 ustawy Pzp",
+      "art. 108 ust. 1 pkt 1 i 2 ustawy Pzp",
+      "art. 108 ust. 1 pkt 1 i 2 ustawy Pzp",
+      "art. 108 ust. 1 pkt 1 i 2 ustawy Pzp",
+      "art. 108 ust. 1 pkt 1 lit. c i g, art. 108 ust. 1 pkt 4, art 405 ust. 1, 2 pkt 4 ustawy Pzp, art. 7 ust. 1 ustawy z dnia 13 kwietnia 2022 r. o szczególnych rozwiązaniach w zakresie przeciwdziałania wspieraniu agresji na Ukrainę oraz służących ochronie bezpieczeństwa narodowego (Dz.U. z 2024 r. poz. 507 z późn. zm.) i art. 5 k ust. 1 rozporządzenia Rady (UE) 833/2014 dotyczącego środków ograniczających w związku z działaniami Rosji destabilizującymi sytuację na Ukrainie (Dz. U. UE nr L 229 z dnia 31 lipca 2014 r. str. 1 z późn. zm.). Zamawiający żąda złożenia wraz z Wnioskiem (Załącznik nr 1 do Ogłoszenia): 1. Oświadczenia Wykonawcy potwierdzającego brak podstaw wykluczenia oraz spełnienie warunków udziału w postepowaniu (Załącznik nr 2 do Ogłoszenia); 2. Informacji z Krajowego Rejestru Karnego w zakresie określonym w art. 108 ust. 1 pkt 1, 2, 4 ustawy Pzp, wystawionej nie wcześniej, niż 6 miesię­cy przed upływem terminu składania wniosków o dopuszczenie do udziału w postępowaniu; 3. Informacji z Centralnego Rejestru Beneficjentów Rzeczywistych w zakresie art. 108 ust. 2 ustawy Pzp, jeżeli odrębne przepisy wymagają wpisu do tego rejestru, sporządzonej nie wcześniej niż 3 m­iesiące przed upływem terminu składania Wniosków. 4. Oświadczenia Wykonawcy, w zakresie art. 108 ust. 1 pkt 5 ustawy Pzp, o braku przynależności do tej samej grupy kapitałowej w rozumieniu ustawy z dnia 16 lutego 2007 r. o ochronie konkurencji i konsumentów (Dz. U. z 2026 r. poz. 85), z innym Wykonawcą, który złożył odrębny Wniosek, albo oświadczenia o przynależności do tej samej grupy kapitałowej wraz z dokumentami lub informacjami potwierdzającymi przygotowanie Wniosku niezależnie od innego Wykonawcy, należącego do tej samej grupy kapitałowej (Załącznik nr 3 do Ogłoszenia). 5. Jeżeli Wykonawca ma siedzibę lub miejsce zamieszkania poza granicami Rzeczypospolitej Polskiej, zamiast dokumentów, o których mowa: ­ w pkt 2 ­ składa informację z odpowiedniego rejestru, takiego jak rejestr sądowy albo w przypadku braku takiego rejestru, inny równoważny dokument wydany przez właściwy organ sądowy lub administracyjny kraju, w którym Wykonawca ma siedzibę lub miejsce zamieszkania lub miejsce zamieszkania ma osoba, której dotyczy informacja albo dokument w zakresie, o którym mowa w art. 108 ust. 1 pkt 1, 2, 4 ustawy Pzp ­ wystawiony nie wcześniej, niż 6 miesięcy przed upływem terminu składania Wniosków; w pkt 3 ­ składa informację z odpowiedniego rejestru zawierającego informację o jego beneficjentach rzeczywistych albo, w przypadku braku takiego rejestru, inny równoważny dokument wydany przez właściwy organ sądowy lub administracyjny kraju, w którym Wykonawca ma siedzibę lub miejsce zamieszkania, określający jego beneficjentów rzeczywistych ­ wystawione nie wcześniej, niż 3 miesią­ce przed upływem terminu składania Wniosków. 6. Jeżeli w kraju, w którym Wykonawca ma siedzibę lub miejsce zamieszkania lub miejsce zamieszkania ma osoba, której dokument dotyczy, nie wydaje się dokumentów, o których mowa w pkt 5. lub gdy dokumenty te nie odnoszą się do wszystkich przypadków, o których mowa w art. 108 ust. 1 pkt 1, 2, 4 ustawy Pzp, zastępuje się je odpowiednio w całości lub w części dokumentem zawierającym odpowiednio oświadczenie Wykonawcy, ze wskazaniem osoby albo osób uprawnionych do jego reprezentacji lub oświadczenie osoby, której dokument miał dotyczyć, złożone pod przysięgą, lub jeżeli w kraju, w którym Wykonawca ma siedzibę lub miejsce zamieszkania lub miejsce zamieszkania ma osoba, której dokument miał dotyczyć, nie ma przepisów o oświadczeniu pod przysięgą, złożone przed organem sądowym lub administracyjnym, notariuszem, organem samorządu zawodowego lub gospodarczego, właściwym ze względu na siedzibę lub miejsce zamieszkania Wykonawcy lub miejsce zamieszkania ma osoba, której dokument miał dotyczyć ­ przy zachowaniu terminów wystawienia wymaganych dla poszczególnych dokumentów, o których mowa w pkt 5. 7. Jeżeli złożone przez Wykonawcę oświadczenie, o którym mowa w art. 125 ust. 1 ustawy Pzp lub podmiotowe środki dowodowe budzą wątpliwości Zamawiającego, może on zwrócić się bezpośrednio do podmiotu, który jest w posiadaniu informacji lub dokumentów istotnych w tym zakresie dla oceny spełniania przez Wykonawcę warunków udziału w postępowaniu lub braku podstaw wykluczenia o przedstawienie takich informacji lub dokumentów.",
+      "art. 108 ust. 1 pkt 3 ustawy Pzp",
+      "art. 108 ust. 1 pkt 3 ustawy Pzp"
+    ]
+  },
+  "exclusion-grounds-source-proc": [
+    "epo-notice"
+  ],
+  "execution-requirements-factor-lot": [
+    "performance"
+  ],
+  "form-type": "competition",
+  "framework-agreement-lot": [
+    "none"
+  ],
+  "guarantee-required-description-lot": {
+    "pol": [
+      "1. Wykonawcy zaproszeni do złożenia ofert będą zobowiązani do wniesienia wadium w wysokości 1 800 000,00 PLN (słownie: jeden milion osiemset tysięcy złotych 00/100) na cały okres związania ofertą. 2. Szczegółowe informacje w zakresie wadium zostaną przekazane Wykonawcom zaproszonym do składania ofert w SWZ. 3. Zamawiający przewiduje obowiązek wniesienia zabezpieczenia należytego wykonania umowy. 4. Zamawiający przewiduje możliwość udzielenia zaliczki na poczet realizacji Zamówienia. 5. Szczegóły dotyczące wniesienia zabezpieczenia należytego wykonania umowy oraz udzielenia zaliczki zostaną opisane w SWZ, która zostanie przekazana Wykonawcom zaproszonym do kolejnego etapu postępowania."
+    ]
+  },
+  "guarantee-required-lot": [
+    "true"
+  ],
+  "identifier-lot": [
+    "LOT-0001"
+  ],
+  "internal-identifier-lot": [
+    "Część 1/1"
+  ],
+  "internal-identifier-proc": "AU/165/XI/2026",
+  "legal-basis": [
+    "32009L0081"
+  ],
+  "legal-basis-notice": "32009L0081",
+  "legal-basis-proc": [
+    "art. 410 ust. 1 oraz art. 411 ustawy z dnia 11 września 2019 r. Prawo zamówień publicznych (t. j. Dz.U. z 2026 r. poz. 793) dalej \"ustawa Pzp\""
+  ],
+  "links": {
+    "xml": {
+      "MUL": "https://ted.europa.eu/en/notice/749708-2026/xml"
+    },
+    "pdf": {
+      "ENG": "https://ted.europa.eu/en/notice/749708-2026/pdf"
+    },
+    "pdfs": {},
+    "html": {
+      "ENG": "https://ted.europa.eu/en/notice/-/detail/749708-2026"
+    },
+    "htmlDirect": {
+      "ENG": "https://ted.europa.eu/en/notice/749708-2026/html"
+    }
+  },
+  "main-activity": [
+    "defence"
+  ],
+  "main-classification-lot": [
+    "35332000"
+  ],
+  "main-classification-proc": [
+    "35332000"
+  ],
+  "main-classification-type-lot": [
+    "cpv"
+  ],
+  "main-classification-type-proc": "cpv",
+  "maximum-candidates-id-lot": [
+    false
+  ],
+  "notice-identifier": "a184902d-9661-4b05-949d-9b8cf6063450",
+  "notice-subtype": "18",
+  "notice-title": {
+    "hun": "Lengyelország – Lőszerek tengeri hadviseléshez – Dostawa amunicji do okrętowych zestawów zakłóceń radioelektronicznych.",
+    "lav": "Polija – Militāro kuģu munīcija – Dostawa amunicji do okrętowych zestawów zakłóceń radioelektronicznych.",
+    "swe": "Polen – Ammunition för flottan – Dostawa amunicji do okrętowych zestawów zakłóceń radioelektronicznych.",
+    "gle": "An Pholainn – Ammunition for naval warfare – Dostawa amunicji do okrętowych zestawów zakłóceń radioelektronicznych.",
+    "ell": "Πολωνία – Πυρομαχικά για ναυτικές πολεμικές επιχειρήσεις – Dostawa amunicji do okrętowych zestawów zakłóceń radioelektronicznych.",
+    "spa": "Polonia – Municiones para acciones navales de guerra – Dostawa amunicji do okrętowych zestawów zakłóceń radioelektronicznych.",
+    "est": "Poola – Sõjalaevade laskemoon – Dostawa amunicji do okrętowych zestawów zakłóceń radioelektronicznych.",
+    "nld": "Polen – Munitie voor oorlogvoering te water – Dostawa amunicji do okrętowych zestawów zakłóceń radioelektronicznych.",
+    "fin": "Puola – Ampumatarvikkeet merisotaa varten – Dostawa amunicji do okrętowych zestawów zakłóceń radioelektronicznych.",
+    "pol": "Polska – Amunicja do morskich działań bojowych – Dostawa amunicji do okrętowych zestawów zakłóceń radioelektronicznych.",
+    "hrv": "Poljska – Streljivo za pomorsku bitku – Dostawa amunicji do okrętowych zestawów zakłóceń radioelektronicznych.",
+    "ces": "Polsko – Munice pro námořní vojsko – Dostawa amunicji do okrętowych zestawów zakłóceń radioelektronicznych.",
+    "dan": "Polen – Ammunition til søkrigsførelse – Dostawa amunicji do okrętowych zestawów zakłóceń radioelektronicznych.",
+    "ron": "Polonia – Muniţie pentru război naval – Dostawa amunicji do okrętowych zestawów zakłóceń radioelektronicznych.",
+    "por": "Polónia – Munições para guerra naval – Dostawa amunicji do okrętowych zestawów zakłóceń radioelektronicznych.",
+    "slk": "Poľsko – Strelivo pre námorné vojnové prostriedky – Dostawa amunicji do okrętowych zestawów zakłóceń radioelektronicznych.",
+    "fra": "Pologne – Munitions de guerre navale – Dostawa amunicji do okrętowych zestawów zakłóceń radioelektronicznych.",
+    "mlt": "Il-Polonja – Munizzjon għall-gwerra navali – Dostawa amunicji do okrętowych zestawów zakłóceń radioelektronicznych.",
+    "deu": "Polen – Munition für den Seekrieg – Dostawa amunicji do okrętowych zestawów zakłóceń radioelektronicznych.",
+    "lit": "Lenkija – Jūrų karo šaudmenys – Dostawa amunicji do okrętowych zestawów zakłóceń radioelektronicznych.",
+    "ita": "Polonia – Munizioni per guerra navale – Dostawa amunicji do okrętowych zestawów zakłóceń radioelektronicznych.",
+    "bul": "Полша – Боеприпаси за морски военни действия – Dostawa amunicji do okrętowych zestawów zakłóceń radioelektronicznych.",
+    "slv": "Poljska – Strelivo za pomorsko bojevanje – Dostawa amunicji do okrętowych zestawów zakłóceń radioelektronicznych.",
+    "eng": "Poland – Ammunition for naval warfare – Dostawa amunicji do okrętowych zestawów zakłóceń radioelektronicznych."
+  },
+  "notice-type": "cn-standard",
+  "notice-version": 1,
+  "official-language": [
+    "POL"
+  ],
+  "ojs-number": "210/2026",
+  "organisation-city-buyer": [
+    "Warszawa"
+  ],
+  "organisation-city-ted-esen": [
+    "Luxembourg"
+  ],
+  "organisation-contact-point-buyer": [
+    "Szefostwo Techniki Morskiej"
+  ],
+  "organisation-country-buyer": [
+    "POL"
+  ],
+  "organisation-country-sub-buyer": [
+    "PL911"
+  ],
+  "organisation-country-sub-ted-esen": [
+    "LU000"
+  ],
+  "organisation-country-ted-esen": [
+    "LUX"
+  ],
+  "organisation-email-buyer": [
+    "au.stm@mon.gov.pl"
+  ],
+  "organisation-email-ted-esen": [
+    "ted@publications.europa.eu"
+  ],
+  "organisation-fax-buyer": [
+    "+48261873444"
+  ],
+  "organisation-identifier-buyer": [
+    "NIP:7010269523"
+  ],
+  "organisation-identifier-ted-esen": [
+    "PUBL"
+  ],
+  "organisation-internet-address-buyer": [
+    "https://www.wojsko-polskie.pl/au/"
+  ],
+  "organisation-internet-address-ted-esen": [
+    "https://op.europa.eu"
+  ],
+  "organisation-name-buyer": {
+    "pol": [
+      "Agencja Uzbrojenia"
+    ]
+  },
+  "organisation-name-ted-esen": {
+    "pol": [
+      "Publications Office of the European Union"
+    ]
+  },
+  "organisation-post-code-buyer": [
+    "00-909"
+  ],
+  "organisation-post-code-ted-esen": [
+    "2417"
+  ],
+  "organisation-street-buyer": [
+    "Królewska 1/7"
+  ],
+  "organisation-tel-buyer": [
+    "+48261879784"
+  ],
+  "organisation-tel-ted-esen": [
+    "+352 29291"
+  ],
+  "place-of-performance": [
+    "PL633",
+    "POL",
+    "PL633",
+    "POL"
+  ],
+  "place-of-performance-city-lot": [
+    "Gdynia"
+  ],
+  "place-of-performance-city-proc": [
+    "Gdynia"
+  ],
+  "place-of-performance-country-lot": [
+    "POL"
+  ],
+  "place-of-performance-country-proc": [
+    "POL"
+  ],
+  "place-of-performance-post-code-lot": [
+    "81-904"
+  ],
+  "place-of-performance-post-code-proc": [
+    "81-904"
+  ],
+  "place-of-performance-subdiv-lot": [
+    "PL633"
+  ],
+  "place-of-performance-subdiv-proc": [
+    "PL633"
+  ],
+  "place-performance-street-lot": [
+    "1 Regionalna Baza Logistyczna,  Skład Gdynia"
+  ],
+  "place-performance-street-proc": [
+    "1 Regionalna Baza Logistyczna Wałcz, Skład Gdynia"
+  ],
+  "procedure-accelerated": "false",
+  "procedure-identifier": "311b04d9-66a8-4709-afe3-414d4e9d4558",
+  "procedure-type": "restricted",
+  "procurement-relaunch-proc": false,
+  "provided-service-type": [
+    "ted-esen"
+  ],
+  "publication-date": "2026-10-29+01:00",
+  "publication-number": "749708-2026",
+  "quantity-lot": [
+    "1300"
+  ],
+  "quantity-unit-lot": [
+    "H87"
+  ],
+  "renewal-maximum-lot": [
+    "0"
+  ],
+  "reserved-execution-lot": [
+    "no"
+  ],
+  "reserved-procurement-lot": [
+    "none"
+  ],
+  "review-deadline-description-lot": {
+    "pol": [
+      "Terminy na wniesienie odwołania zgodnie z art. 515 ustawy Pzp."
+    ]
+  },
+  "selection-criteria-second-stage-invite-lot": [
+    false,
+    false,
+    false
+  ],
+  "selection-criteria-source": [
+    "epo-notice"
+  ],
+  "selection-criterion-description-lot": {
+    "pol": [
+      "W celu wykazania spełniania przez Wykonawcę warunku udziału w postępowaniu, o którym mowa w art. 112 ust. 2 pkt 2 ustawy Pzp, Wykonawca zobowiązany jest przedłożyć aktualną koncesję wydaną na podstawie ustawy z dnia 13 czerwca 2019 r. o wykonywaniu działalności gospodarczej w zakresie wytwarzania i obrotu materiałami wybuchowymi, bronią, amunicja oraz wyrobami i technologią o przeznaczeniu wojskowym lub policyjnym (Dz.U. z 2023 r. poz 1743) w zakresie wytwarzania i obrotu lub obrotu wyrobami o przeznaczeniu wojskowym lub policyjnym określonymi w Części III Rodzaje broni i amunicji - BA pkt 16 załącznika do Rozporządzenia Rady Ministrów z dnia 17 września 2019 r w sprawie klasyfikacji rodzajów materiałów wybuchowych, broni, amunicji oraz wyrobów i technologii o przeznaczeniu wojskowym lub policyjnym, na których wytwarzanie lub obrót jest wymagana koncesja (Dz.U. z 2019 r. poz. 1888), lub zgodnie z art. 156 ust. 1 ww. ustawy - koncesję uzyskaną na podstawie ustawy z dnia 22 czerwca 2001 r. o wykonywaniu działalności gospodarczej w zakresie wytwarzania i obrotu materiałami wybuchowymi, bronią, amunicją oraz wyrobami i i technologią o przeznaczeniu wojskowym lub policyjnym (Dz.U. z 2018 r. poz. 2037 z poźn. zm.), która zachowuje ważność w zakresie określonym w BA pkt. 13 załącznika nr 1(Rodzaje broni i amunicji BA) do Rozporządzenia Rady Ministrów z dnia 3 grudnia 2001 r. w sprawie rodzajów broni ii amunicji oraz wykazu wyrobów i technologii o przeznaczeniu wojskowym lub policyjnym, na których wytwarzanie lub obrót jest wymagana koncesja (Dz. U. z 2001 r. nr 145 poz. 1625 z późn. zm.) lub odpowiedni dokument wystawiony przez organ państwa w którym Wykonawca ma siedzibę potwierdzający, że Wykonawca posiada uprawnienia do prowadzenia działalności w zakresie wytwarzania i obrotu lub obrotu wyrobami będącymi przedmiotem zamówienia. Ww. dokument Wykonawca zobowiązany jest złożyć wraz z Wnioskiem, w postaci kopii poświadczonej za zgodność z oryginałem.",
+      "1. W celu wykazania spełniania przez Wykonawcę warunku udziału w postępowaniu, o którym mowa w art. 112 ust. 2 pkt 4 ustawy Pzp, dotyczącego zdolności technicznych, Zamawiający wymaga, aby Wykonawca wykazał, że w okresie ostatnich 5 lat przed upływem terminu składania Wniosków (jeżeli okres prowadzenia działalności jest krótszy to w tym okresie) w sposób należyty wykonał co najmniej 3 (trzy) dostawy amunicji zakłócającej do obrony przed pociskami samonaprowadzającymi o wartości nie mniejszej niż 4 000 000,00 PLN (słownie: cztery miliony złotych 00/100). 2. W celu potwierdzenia spełniania powyższego warunku Wykonawca zobowiązany jest złożyć, wraz z Wnioskiem, wykaz wykonanych dostaw, o których mowa w pkt 1 (wzór - Załącznik nr 8 do Ogłoszenia), w okresie ostatnich 5 lat przed upływem terminu składania Wniosków, a jeżeli okres prowadzenia działalności jest krótszy – w tym okresie, wraz z podaniem wartości, przedmiotu dostawy, daty wykonania i podmiotu, na rzecz którego dostawa została wykonana oraz załączyć dowody określające, że dostawa została wykonana należycie. 3. Dowodami, o których mowa w pkt 2 są referencje bądź inne dokumenty sporządzone przez podmiot, na rzecz którego dostawy były wykonywane. 4. Jeżeli Wykonawca z przyczyn niezależnych od niego nie jest w stanie uzyskać dowodów, o których mowa w pkt 3, wówczas dopuszcza się złożenie oświadczenia Wykonawcy, które powinno jednoznacznie wskazywać na przyczyny braku możliwości pozyskania referencji od podmiotów, na rzecz których realizowane były dostawy. 5. Wykonawca, zgodnie z art. 118 ust. 1 ustawy Pzp w celu potwierdzenia spełniania warunku, o którym mowa w pkt 1, może polegać na zdolnościach technicznych podmiotów udostępniających zasoby, niezależnie od charakteru prawnego łączących go z nim stosunków prawnych. 6. Wykonawca, który polega na zdolnościach technicznych podmiotów udostępniających zasoby, składa, wraz z Wnioskiem o dopuszczenie do udziału w postępowaniu, zobowiązanie podmiotu udostępniającego zasoby do oddania mu do dyspozycji niezbędnych zasobów na potrzeby realizacji danego zamówienia lub inny podmiotowy środek dowodowy potwierdzający, że Wykonawca realizując zamówienie, będzie dysponował niezbędnymi zasobami tych podmiotów. 7. Zobowiązanie podmiotu udostępniającego zasoby, o którym mowa w pkt. 6, musi potwierdzać, że stosunek łączący Wykonawcę z podmiotami udostępniającymi zasoby gwarantuje rzeczywisty dostęp do tych zasobów oraz musi określać w szczególności: 1) zakres dostępnych Wykonawcy zasobów podmiotu udostępniającego zasoby; 2) sposób i okres udostępnienia Wykonawcy i wykorzystania przez niego zasobów podmiotu udostępniającego te zasoby przy wykonywaniu zamówienia; 8. Zamawiający oceni, czy udostępnione Wykonawcy przez podmioty udostępniające zasoby pozwalają na wykazanie przez Wykonawcę spełniania warunku udziału w postępowaniu, o którym mowa w pkt 1 oraz zbada, czy nie zachodzą wobec tego podmiotu podstawy wykluczenia wskazane przez Zamawiającego w 2.1.6 Podstawy wykluczenia. 9. Zamawiający żąda od Wykonawcy, który polega na zdolnościach technicznych podmiotów udostępniających zasoby, przedstawienia w odniesieniu do tych podmiotów: oświadczenia podmiotu udostępniającego zasoby, potwierdzającego brak podstaw wykluczenia tego podmiotu oraz odpowiednie spełnianie warunku udziału w postępowaniu w zakresie, w jakim Wykonawca powołuje się na jego zasoby (wzór - Załącznik nr 4 do Ogłoszenia) oraz dokumentów: - informacji z Krajowego Rejestru Karnego w zakresie określonym w art. 108 ust. 1 pkt 1, 2 i 4 ustawy Pzp, wystawionej nie wcześniej niż 6 miesięcy przed upływem terminu składania wniosków o dopuszczenie do udziału w postępowaniu; - informacji z Centralnego Rejestru Beneficjentów Rzeczywistych w zakresie art.108 ust. 2 ustawy Pzp, jeżeli odrębne przepisy wymagają wpisu do tego rejestru, wystawionej nie wcześniej niż 3 miesiące przed upływem terminu składania wniosków o dopuszczenie do udziału w postępowaniu. 10. Jeżeli zdolności techniczne podmiotu udostępniającego zasoby nie potwierdzają spełniania przez Wykonawcę warunku, o którym mowa w pkt 1 lub zachodzą wobec tego podmiotu podstawy wykluczenia, Zamawiający żąda, aby Wykonawca - w terminie określonym przez Zamawiającego - zastąpił ten podmiot innym podmiotem lub podmiotami albo wykazał, że samodzielnie spełnia ww. warunek udziału w postępowaniu. 11. Jeżeli Wykonawca powołuje się na doświadczenie w realizacji dostaw wykonywanych wspólnie z innymi Wykonawcami, wykaz, o którym mowa w pkt 2, dotyczy dostaw, w których wykonaniu Wykonawca ten bezpośrednio uczestniczył. 12. W przypadku Wykonawców którzy wykażą wartość dostaw w innych walutach niż PLN, Zamawiający przeliczy je na PLN. Do przeliczenia zostanie zastosowany średni kurs walut NBP obowiązujący w dniu wykonania dostawy. W przypadku braku publikacji kursów walut NBP obowiązujących w dniu o którym mowa powyżej zastosowanie ma kurs ostatnio ogłoszony przed tym dniem.",
+      "1. W celu wykazania spełniania przez Wykonawcę warunku udziału w postępowaniu, o którym mowa w art. 112 ust. 2 pkt 4 ustawy Pzp dotyczącego zdolności zawodowej Zamawiający wymaga, aby Wykonawca wykazał, że: 1) dysponuje co najmniej 1 (jedną) osobą zdolną do wykonania przedmiotu zamówienia, która posiada: a) ważne poświadczenie bezpieczeństwa lub jego zagraniczny odpowiednik, uprawniające do dostępu do informacji niejawnych, w rozumieniu ustawy ustawy z dnia 5 sierpnia 2010 r. o ochronie informacji niejawnych (Dz. U. z 2025 r. poz. 1209), zwana dalej „ustawą OIN” lub pisemne upoważnienie do dostępu do informacji niejawnych oznaczonych klauzulą „ZASTRZEŻONE\", wydane na podstawie art. 21 ust. 4 pkt 1 ustawy OIN; b) zaświadczenie stwierdzające odbycie szkolenia w zakresie ochrony informacji niejawnych zgodnie z art. 19 i 20 ustawy OIN – dotyczy osób posiadających obywatelstwo polskie i cudzoziemców zatrudnionych w podmiocie polskim, którzy odbyli takie szkolenie; 2) posiada zdolność do ochrony informacji niejawnych o klauzuli „ZASTRZEŻONE” lub stanowiącej jej zagraniczny odpowiednik w rozumieniu ustawy OIN, a w przypadku Wykonawcy zagranicznego – zgodnie z wymogami przepisów wewnętrznych danego kraju, w którym Wykonawca ma siedzibę lub miejsce zamieszkania oraz umowy bilateralnej o wzajemnej ochronie informacji niejawnych. 2. W celu potwierdzenia spełniania powyższych warunków Wykonawca zobowiązany jest złożyć wraz z Wnioskiem: 1) „Wykaz osób skierowanych do realizacji zamówienia”, posiadających ważne poświadczenie bezpieczeństwa lub jego zagraniczny odpowiednik, uprawniające do dostępu do informacji niejawnych, bądź pisemne upoważnienie do dostępu do informacji niejawnych oznaczonych klauzulą „ZASTRZEŻONE\", wydane przez Kierownika Jednostki Organizacyjnej, w rozumieniu ustawy OIN (wzór – Załącznik Nr 9 do Ogłoszenia). 2) Oświadczenie potwierdzające zdolność Wykonawcy do ochrony informacji niejawnych o klauzuli „ZASTRZEŻONE” lub stanowiącej jej zagraniczny odpowiednik, w rozumieniu ustawy OIN (wzór – Załącznik Nr 6 do Ogłoszenia – dla Wykonawców krajowych i Załącznik Nr 7 do Ogłoszenia – dla Wykonawców zagranicznych) lub kopię Świadectwa Bezpieczeństwa Przemysłowego co najmniej II (drugiego) stopnia o klauzuli \"POUFNE\" lub jego zagraniczny odpowiednik upoważniający do dostępu do informacji niejawnych. 3. Wykonawca, zgodnie z art. 118 ust. 1 ustawy Pzp w celu potwierdzenia spełniania warunków, o których mowa powyżej, może polegać na zdolnościach zawodowych podmiotów udostępniających zasoby, niezależnie od charakteru prawnego łączących go z nim stosunków prawnych. 4. Wykonawca, który polega na zdolnościach zawodowych podmiotów udostępniających zasoby, składa, wraz z Wnioskiem o dopuszczenie do udziału w postępowaniu, zobowiązanie podmiotu udostępniającego zasoby do oddania mu do dyspozycji niezbędnych zasobów na potrzeby realizacji danego zamówienia lub inny podmiotowy środek dowodowy potwierdzający, że Wykonawca realizując zamówienie, będzie dysponował niezbędnymi zasobami tych podmiotów. 5. Zobowiązanie podmiotu udostępniającego zasoby, o którym mowa w pkt. 6, musi potwierdzać, że stosunek łączący Wykonawcę z podmiotami udostępniającymi zasoby gwarantuje rzeczywisty dostęp do tych zasobów oraz musi określać w szczególności: 1) zakres dostępnych Wykonawcy zasobów podmiotu udostępniającego zasoby; 2) sposób i okres udostępnienia Wykonawcy i wykorzystania przez niego zasobów podmiotu udostępniającego te zasoby przy wykonywaniu zamówienia; 6. Zamawiający oceni, czy udostępnione Wykonawcy przez podmioty udostępniające zasoby pozwalają na wykazanie przez Wykonawcę spełniania warunku udziału w postępowaniu, o którym mowa w pkt 1 oraz zbada, czy nie zachodzą wobec tego podmiotu podstawy wykluczenia wskazane przez Zamawiającego w 2.1.6 Podstawy wykluczenia. 7. Zamawiający żąda od Wykonawcy, który polega na zdolnościach zawodowych podmiotów udostępniających zasoby, przedstawienia w odniesieniu do tych podmiotów: oświadczenia podmiotu udostępniającego zasoby, potwierdzającego brak podstaw wykluczenia tego podmiotu oraz odpowiednie spełnianie warunku udziału w postępowaniu w zakresie, w jakim Wykonawca powołuje się na jego zasoby (wzór - Załącznik nr 4 do Ogłoszenia) oraz dokumentów: - informacji z Krajowego Rejestru Karnego w zakresie określonym w art. 108 ust. 1 pkt 1, 2 i 4 ustawy Pzp, wystawionej nie wcześniej niż 6 miesięcy przed upływem terminu składania Wniosków; - Informacji z Centralnego Rejestru Beneficjentów Rzeczywistych w zakresie art.108 ust.2 ustawy Pzp, jeżeli odrębne przepisy wymagają wpisu do tego rejestru, wystawionej nie wcześniej niż 3 miesiące przed upływem terminu składania Wniosków. 8. Jeżeli zdolności zawodowe podmiotu udostępniającego zasoby nie potwierdzają spełniania przez Wykonawcę warunków lub zachodzą wobec tego podmiotu podstawy wykluczenia, Zamawiający żąda, aby Wykonawca - w terminie określonym przez Zamawiającego - zastąpił ten podmiot innym podmiotem lub podmiotami albo wykazał, że samodzielnie spełnia ww. warunek udziału w postępowaniu."
+    ]
+  },
+  "selection-criterion-lot": [
+    "slc-suit-reg-prof",
+    "slc-abil-ref-supply",
+    "slc-abil-staff-qual"
+  ],
+  "sme-lot": [
+    true
+  ],
+  "subcontracting-indication-lot": [
+    "shar-subc"
+  ],
+  "subcontracting-obligation-lot": [
+    "subc-chng"
+  ],
+  "submission-language": [
+    "POL"
+  ],
+  "successive-redution-lot": [
+    true
+  ],
+  "tenderer-legal-form-lot": [
+    "false"
+  ],
+  "term-performance-lot": {
+    "pol": [
+      "Szczegółowe warunki realizacji zamówienia zostaną określone w dokumentach zamówienia."
+    ]
+  },
+  "terms-financial-lot": {
+    "pol": [
+      "Zasady finansowania zawarte są Istotnych Postanowieniach Umowy (IPU) stanowiących załącznik do SWZ."
+    ]
+  },
+  "title-lot": {
+    "pol": [
+      "Dostawa amunicji do okrętowych zestawów zakłóceń radioelektronicznych."
+    ]
+  },
+  "title-proc": {
+    "pol": "Dostawa amunicji do okrętowych zestawów zakłóceń radioelektronicznych."
+  },
+  "variant-allowed-lot": [
+    "not-allowed"
+  ]
+}

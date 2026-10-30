@@ -1,0 +1,744 @@
+{
+  "AU": {
+    "lit": [
+      "Išteklių agentūra prie Lietuvos Respublikos vidaus reikalų ministerijos"
+    ]
+  },
+  "BI": [
+    "188729923"
+  ],
+  "BT-01-notice": "32009L0081",
+  "BT-02-notice": "can-standard",
+  "BT-03-notice": "result",
+  "BT-04-notice": "0c644f48-2706-4bb5-85b1-a9550d427329",
+  "BT-05(a)-notice": "2026-10-06+03:00",
+  "BT-05(b)-notice": "15:59:28+03:00",
+  "BT-105-Procedure": "neg-w-call",
+  "BT-106-Procedure": "false",
+  "BT-137-Lot": [
+    "LOT-0001"
+  ],
+  "BT-13713-LotResult": [
+    "LOT-0001"
+  ],
+  "BT-13714-Tender": [
+    "LOT-0001"
+  ],
+  "BT-142-LotResult": [
+    "selec-w"
+  ],
+  "BT-145-Contract": [
+    "2026-10-06+03:00"
+  ],
+  "BT-1451-Contract": [
+    "2026-09-23+03:00"
+  ],
+  "BT-150-Contract": [
+    "68133"
+  ],
+  "BT-161-NoticeResult": "126040.60",
+  "BT-161-NoticeResult-Currency": "EUR",
+  "BT-165-Organization-Company": [
+    "small",
+    "small"
+  ],
+  "BT-21-Lot": {
+    "lit": [
+      "5,56x45 kalibro garsiniai šoviniai (PPR-464)"
+    ]
+  },
+  "BT-21-Procedure": {
+    "lit": "5,56x45 kalibro garsiniai šoviniai (PPR-464)"
+  },
+  "BT-22-Lot": [
+    "0"
+  ],
+  "BT-23-Lot": [
+    "supplies"
+  ],
+  "BT-23-Procedure": "supplies",
+  "BT-24-Lot": {
+    "lit": [
+      "Pirkimas atliekamas pagal Lietuvos Respublikos viešųjų pirkimų, atliekamų gynybos ir saugumo srityje, įstatymą. 394 000 vnt."
+    ]
+  },
+  "BT-24-Procedure": {
+    "lit": "Pirkimas atliekamas pagal Lietuvos Respublikos viešųjų pirkimų, atliekamų gynybos ir saugumo srityje, įstatymą. 394 000 vnt."
+  },
+  "BT-26(m)-Lot": [
+    "cpv"
+  ],
+  "BT-26(m)-Procedure": "cpv",
+  "BT-262-Lot": [
+    "35331500"
+  ],
+  "BT-262-Procedure": [
+    "35331500"
+  ],
+  "BT-3202-Contract": [
+    "TEN-0001"
+  ],
+  "BT-5071-Lot": [
+    "LT011"
+  ],
+  "BT-5071-Procedure": [
+    "LT011"
+  ],
+  "BT-508-Procedure-Buyer": [
+    "https://ia.lrv.lt"
+  ],
+  "BT-5141-Lot": [
+    "LTU"
+  ],
+  "BT-5141-Procedure": [
+    "LTU"
+  ],
+  "BT-539-Lot": [
+    "price"
+  ],
+  "BT-540-Lot": {
+    "lit": [
+      "Mažiausia kaina"
+    ]
+  },
+  "BT-541-Lot": [
+    "100"
+  ],
+  "BT-5421-Lot": [
+    "per-exa"
+  ],
+  "BT-60-Lot": [
+    "no-eu-funds"
+  ],
+  "BT-634-Procedure": false,
+  "BT-701-notice": "364c4543-f391-4f78-93c9-83fe6fdc9aa0",
+  "BT-702-notice": [
+    "LIT"
+  ],
+  "BT-720-Tender": [
+    "126040.60"
+  ],
+  "BT-720-Tender-Currency": [
+    "EUR"
+  ],
+  "BT-756-Procedure": false,
+  "BT-757-notice": 1,
+  "BT-759-LotResult": [
+    "2"
+  ],
+  "BT-760-LotResult": [
+    "tenders"
+  ],
+  "BT-765-Lot": [
+    "none"
+  ],
+  "BT-766-Lot": [
+    "none"
+  ],
+  "BT-767-Lot": [
+    false
+  ],
+  "BT-773-Tender": [
+    "no"
+  ],
+  "BT-810-Lot": [
+    "false"
+  ],
+  "CY": [
+    "LTU"
+  ],
+  "DI": [
+    "32009L0081"
+  ],
+  "DS": "2026-10-06+03:00",
+  "FT": [
+    {
+      "lit": "Baltic Fox OÜ\nUAB DEFENSA\nIšteklių agentūra prie Lietuvos Respublikos vidaus reikalų ministerijos\n5,56x45 kalibro garsiniai šoviniai (PPR-464)\nVilniaus apygardos teismas\nPirkimas atliekamas pagal Lietuvos Respublikos viešųjų pirkimų, atliekamų gynybos ir saugumo srityje, įstatymą. 394 000 vnt.\nEuropean Dynamics S.A.\nMažiausia kaina\nhttps://ia.lrv.lt\n188729923\nsmall\n01\nEL301\n+30 2108094500\n11535997\nselec-w\nneg-w-call\nnone\n2026-09-23+03:00\nwww.defensa.lt\n35331500\nsupplies\nprice\nORG-0003\nORG-0004\nORG-0005\nLT011\nORG-0001\nORG-0002\nEUR\n364c4543-f391-4f78-93c9-83fe6fdc9aa0\nCON-0001\nUAB „DEFENSA“ kartu su Baltic Fox OÜ\nvilniaus.apygardos@teismas.lt\nAthens\n0c644f48-2706-4bb5-85b1-a9550d427329\nno-eu-funds\nL. Stuokos-Gucevičiaus g. 9-2, Vilniaus m., Vilniaus m. sav.\n0\n126040.60\n+37052553310\nper-exa\n2\n+370 52717230\ncan-standard\ntrue\nVilnius\nGRC\n2026-10-07+02:00\nno\nGedimino pr. 40\n01510\nevaldas.stadalius@vrm.lt\nTEN-0001\nTallinn\neforms-sdk-1.13\nLTU\neproc-esender@eurodyn.com\nRES-0001\nLOT-0001\nTPA-0001\n15125\n68133\n+37052655555\n31\n193312970\n194/2026\nLT01122\n000199269\nEST\n32009L0081\nfalse\nŠventaragio g. 2, Vilnius\ninfo@defensa.lt\n00692794-2026\n002024901000\n01501\n15:59:28+03:00\n100\ntenders\n+370 70668369\nLIT\n2.3\n9f09152b-6fdf-437d-b357-683309a143c7-01\n2026-10-06+03:00\n300005349\n10124\nEE001\nted-esen"
+    }
+  ],
+  "IA": [
+    "https://ia.lrv.lt"
+  ],
+  "NC": [
+    "supplies",
+    "supplies"
+  ],
+  "ND": "692794-2026",
+  "NL": 1,
+  "OJ": "194/2026",
+  "OL": [
+    "LIT"
+  ],
+  "OPP-010-notice": "692794-2026",
+  "OPP-011-notice": "194/2026",
+  "OPP-012-notice": "2026-10-07+02:00",
+  "OPP-070-notice": "31",
+  "OPP-090-Procedure": [
+    "9f09152b-6fdf-437d-b357-683309a143c7-01"
+  ],
+  "OPT-002-notice": "eforms-sdk-1.13",
+  "OPT-030-Procedure-SProvider": [
+    "ted-esen"
+  ],
+  "OPT-170-Tenderer": [
+    true,
+    false
+  ],
+  "OPT-211-Tenderer": [
+    "UAB „DEFENSA“ kartu su Baltic Fox OÜ"
+  ],
+  "PC": [
+    "35331500",
+    "35331500"
+  ],
+  "PD": "2026-10-07+02:00",
+  "PR": "neg-w-call",
+  "RC": [
+    "LT011",
+    "LTU",
+    "LT011",
+    "LTU"
+  ],
+  "TI": {
+    "hun": "Litvánia – Töltények – 5,56x45 kalibro garsiniai šoviniai (PPR-464)",
+    "lav": "Lietuva – Patronas – 5,56x45 kalibro garsiniai šoviniai (PPR-464)",
+    "swe": "Litauen – Patroner – 5,56x45 kalibro garsiniai šoviniai (PPR-464)",
+    "gle": "An Liotuáin – Cartridges – 5,56x45 kalibro garsiniai šoviniai (PPR-464)",
+    "ell": "Λιθουανία – Φυσίγγια – 5,56x45 kalibro garsiniai šoviniai (PPR-464)",
+    "spa": "Lituania – Cartuchos – 5,56x45 kalibro garsiniai šoviniai (PPR-464)",
+    "est": "Leedu – Padrunid – 5,56x45 kalibro garsiniai šoviniai (PPR-464)",
+    "nld": "Litouwen – Patronen – 5,56x45 kalibro garsiniai šoviniai (PPR-464)",
+    "fin": "Liettua – Patruunat – 5,56x45 kalibro garsiniai šoviniai (PPR-464)",
+    "pol": "Litwa – Naboje – 5,56x45 kalibro garsiniai šoviniai (PPR-464)",
+    "hrv": "Litva – Naboji – 5,56x45 kalibro garsiniai šoviniai (PPR-464)",
+    "ces": "Litva – Náboje – 5,56x45 kalibro garsiniai šoviniai (PPR-464)",
+    "dan": "Litauen – Patroner – 5,56x45 kalibro garsiniai šoviniai (PPR-464)",
+    "ron": "Lituania – Cartuşe – 5,56x45 kalibro garsiniai šoviniai (PPR-464)",
+    "por": "Lituânia – Cartuchos – 5,56x45 kalibro garsiniai šoviniai (PPR-464)",
+    "slk": "Litva – Náboje – 5,56x45 kalibro garsiniai šoviniai (PPR-464)",
+    "fra": "Lituanie – Cartouches – 5,56x45 kalibro garsiniai šoviniai (PPR-464)",
+    "mlt": "Il-Litwanja – Skrataċ – 5,56x45 kalibro garsiniai šoviniai (PPR-464)",
+    "deu": "Litauen – Patronen – 5,56x45 kalibro garsiniai šoviniai (PPR-464)",
+    "lit": "Lietuva – Šoviniai – 5,56x45 kalibro garsiniai šoviniai (PPR-464)",
+    "ita": "Lituania – Cartucce – 5,56x45 kalibro garsiniai šoviniai (PPR-464)",
+    "bul": "Литвa – Патрони – 5,56x45 kalibro garsiniai šoviniai (PPR-464)",
+    "slv": "Litva – Naboji – 5,56x45 kalibro garsiniai šoviniai (PPR-464)",
+    "eng": "Lithuania – Cartridges – 5,56x45 kalibro garsiniai šoviniai (PPR-464)"
+  },
+  "TV": 126040.6,
+  "TV_CUR": [
+    "EUR"
+  ],
+  "TW": {
+    "mul": [
+      "Vilnius"
+    ]
+  },
+  "award-criterion-description-lot": {
+    "lit": [
+      "Mažiausia kaina"
+    ]
+  },
+  "award-criterion-number-lot": [
+    "100"
+  ],
+  "award-criterion-number-weight-lot": [
+    "per-exa"
+  ],
+  "award-criterion-type-lot": [
+    "price"
+  ],
+  "buyer-city": {
+    "mul": [
+      "Vilnius"
+    ]
+  },
+  "buyer-country": [
+    "LTU"
+  ],
+  "buyer-country-sub": [
+    "LT011"
+  ],
+  "buyer-email": [
+    "evaldas.stadalius@vrm.lt"
+  ],
+  "buyer-identifier": [
+    "188729923"
+  ],
+  "buyer-internet-address": [
+    "https://ia.lrv.lt"
+  ],
+  "buyer-name": {
+    "lit": [
+      "Išteklių agentūra prie Lietuvos Respublikos vidaus reikalų ministerijos"
+    ]
+  },
+  "buyer-post-code": [
+    "01510"
+  ],
+  "buyer-profile": [
+    "https://ia.lrv.lt"
+  ],
+  "classification-cpv": [
+    "35331500",
+    "35331500"
+  ],
+  "competition-termination-proc": false,
+  "contract-conclusion-date": [
+    "2026-10-06+03:00"
+  ],
+  "contract-identifier": [
+    "68133"
+  ],
+  "contract-nature": [
+    "supplies",
+    "supplies"
+  ],
+  "contract-nature-main-lot": [
+    "supplies"
+  ],
+  "contract-nature-main-proc": "supplies",
+  "contract-tender-id": [
+    "TEN-0001"
+  ],
+  "customization-id": "eforms-sdk-1.13",
+  "description-lot": {
+    "lit": [
+      "Pirkimas atliekamas pagal Lietuvos Respublikos viešųjų pirkimų, atliekamų gynybos ir saugumo srityje, įstatymą. 394 000 vnt."
+    ]
+  },
+  "description-proc": {
+    "lit": "Pirkimas atliekamas pagal Lietuvos Respublikos viešųjų pirkimų, atliekamų gynybos ir saugumo srityje, įstatymą. 394 000 vnt."
+  },
+  "dispatch-date": "2026-10-06+03:00",
+  "dispatch-time": "15:59:28+03:00",
+  "dps-usage-lot": [
+    "none"
+  ],
+  "eed-applicable-lot": [
+    "false"
+  ],
+  "electronic-auction-lot": [
+    false
+  ],
+  "eu-fund-lot": [
+    "no-eu-funds"
+  ],
+  "form-type": "result",
+  "framework-agreement-lot": [
+    "none"
+  ],
+  "identifier-lot": [
+    "LOT-0001"
+  ],
+  "internal-identifier-lot": [
+    "0"
+  ],
+  "legal-basis": [
+    "32009L0081"
+  ],
+  "legal-basis-notice": "32009L0081",
+  "links": {
+    "xml": {
+      "MUL": "https://ted.europa.eu/en/notice/692794-2026/xml"
+    },
+    "pdf": {
+      "ENG": "https://ted.europa.eu/en/notice/692794-2026/pdf"
+    },
+    "pdfs": {},
+    "html": {
+      "ENG": "https://ted.europa.eu/en/notice/-/detail/692794-2026"
+    },
+    "htmlDirect": {
+      "ENG": "https://ted.europa.eu/en/notice/692794-2026/html"
+    }
+  },
+  "main-classification-lot": [
+    "35331500"
+  ],
+  "main-classification-proc": [
+    "35331500"
+  ],
+  "main-classification-type-lot": [
+    "cpv"
+  ],
+  "main-classification-type-proc": "cpv",
+  "notice-identifier": "364c4543-f391-4f78-93c9-83fe6fdc9aa0",
+  "notice-subtype": "31",
+  "notice-title": {
+    "hun": "Litvánia – Töltények – 5,56x45 kalibro garsiniai šoviniai (PPR-464)",
+    "lav": "Lietuva – Patronas – 5,56x45 kalibro garsiniai šoviniai (PPR-464)",
+    "swe": "Litauen – Patroner – 5,56x45 kalibro garsiniai šoviniai (PPR-464)",
+    "gle": "An Liotuáin – Cartridges – 5,56x45 kalibro garsiniai šoviniai (PPR-464)",
+    "ell": "Λιθουανία – Φυσίγγια – 5,56x45 kalibro garsiniai šoviniai (PPR-464)",
+    "spa": "Lituania – Cartuchos – 5,56x45 kalibro garsiniai šoviniai (PPR-464)",
+    "est": "Leedu – Padrunid – 5,56x45 kalibro garsiniai šoviniai (PPR-464)",
+    "nld": "Litouwen – Patronen – 5,56x45 kalibro garsiniai šoviniai (PPR-464)",
+    "fin": "Liettua – Patruunat – 5,56x45 kalibro garsiniai šoviniai (PPR-464)",
+    "pol": "Litwa – Naboje – 5,56x45 kalibro garsiniai šoviniai (PPR-464)",
+    "hrv": "Litva – Naboji – 5,56x45 kalibro garsiniai šoviniai (PPR-464)",
+    "ces": "Litva – Náboje – 5,56x45 kalibro garsiniai šoviniai (PPR-464)",
+    "dan": "Litauen – Patroner – 5,56x45 kalibro garsiniai šoviniai (PPR-464)",
+    "ron": "Lituania – Cartuşe – 5,56x45 kalibro garsiniai šoviniai (PPR-464)",
+    "por": "Lituânia – Cartuchos – 5,56x45 kalibro garsiniai šoviniai (PPR-464)",
+    "slk": "Litva – Náboje – 5,56x45 kalibro garsiniai šoviniai (PPR-464)",
+    "fra": "Lituanie – Cartouches – 5,56x45 kalibro garsiniai šoviniai (PPR-464)",
+    "mlt": "Il-Litwanja – Skrataċ – 5,56x45 kalibro garsiniai šoviniai (PPR-464)",
+    "deu": "Litauen – Patronen – 5,56x45 kalibro garsiniai šoviniai (PPR-464)",
+    "lit": "Lietuva – Šoviniai – 5,56x45 kalibro garsiniai šoviniai (PPR-464)",
+    "ita": "Lituania – Cartucce – 5,56x45 kalibro garsiniai šoviniai (PPR-464)",
+    "bul": "Литвa – Патрони – 5,56x45 kalibro garsiniai šoviniai (PPR-464)",
+    "slv": "Litva – Naboji – 5,56x45 kalibro garsiniai šoviniai (PPR-464)",
+    "eng": "Lithuania – Cartridges – 5,56x45 kalibro garsiniai šoviniai (PPR-464)"
+  },
+  "notice-type": "can-standard",
+  "notice-version": 1,
+  "official-language": [
+    "LIT"
+  ],
+  "ojs-number": "194/2026",
+  "organisation-city-addinfo-lot": [
+    "Vilnius"
+  ],
+  "organisation-city-buyer": [
+    "Vilnius"
+  ],
+  "organisation-city-docprovider-lot": [
+    "Vilnius"
+  ],
+  "organisation-city-reviewinfo-lot": [
+    "Vilnius"
+  ],
+  "organisation-city-revieworg-lot": [
+    "Vilnius"
+  ],
+  "organisation-city-ted-esen": [
+    "Athens"
+  ],
+  "organisation-city-tenderer": [
+    "Vilnius",
+    "Tallinn"
+  ],
+  "organisation-country-addinfo-lot": [
+    "LTU"
+  ],
+  "organisation-country-buyer": [
+    "LTU"
+  ],
+  "organisation-country-docprovider-lot": [
+    "LTU"
+  ],
+  "organisation-country-reviewinfo-lot": [
+    "LTU"
+  ],
+  "organisation-country-revieworg-lot": [
+    "LTU"
+  ],
+  "organisation-country-sub-addinfo-lot": [
+    "LT011"
+  ],
+  "organisation-country-sub-buyer": [
+    "LT011"
+  ],
+  "organisation-country-sub-docprovider-lot": [
+    "LT011"
+  ],
+  "organisation-country-sub-reviewinfo-lot": [
+    "LT011"
+  ],
+  "organisation-country-sub-revieworg-lot": [
+    "LT011"
+  ],
+  "organisation-country-sub-ted-esen": [
+    "EL301"
+  ],
+  "organisation-country-sub-tenderer": [
+    "LT011",
+    "EE001"
+  ],
+  "organisation-country-ted-esen": [
+    "GRC"
+  ],
+  "organisation-country-tenderer": [
+    "LTU",
+    "EST"
+  ],
+  "organisation-email-addinfo-lot": [
+    "evaldas.stadalius@vrm.lt"
+  ],
+  "organisation-email-buyer": [
+    "evaldas.stadalius@vrm.lt"
+  ],
+  "organisation-email-docprovider-lot": [
+    "evaldas.stadalius@vrm.lt"
+  ],
+  "organisation-email-reviewinfo-lot": [
+    "evaldas.stadalius@vrm.lt"
+  ],
+  "organisation-email-revieworg-lot": [
+    "vilniaus.apygardos@teismas.lt"
+  ],
+  "organisation-email-ted-esen": [
+    "eproc-esender@eurodyn.com"
+  ],
+  "organisation-email-tenderer": [
+    "info@defensa.lt"
+  ],
+  "organisation-fax-tenderer": [
+    "+37052553310"
+  ],
+  "organisation-identifier-addinfo-lot": [
+    "188729923"
+  ],
+  "organisation-identifier-buyer": [
+    "188729923"
+  ],
+  "organisation-identifier-docprovider-lot": [
+    "188729923"
+  ],
+  "organisation-identifier-reviewinfo-lot": [
+    "188729923"
+  ],
+  "organisation-identifier-revieworg-lot": [
+    "193312970"
+  ],
+  "organisation-identifier-ted-esen": [
+    "002024901000"
+  ],
+  "organisation-identifier-tenderer": [
+    "300005349",
+    "11535997"
+  ],
+  "organisation-internet-address-addinfo-lot": [
+    "https://ia.lrv.lt"
+  ],
+  "organisation-internet-address-buyer": [
+    "https://ia.lrv.lt"
+  ],
+  "organisation-internet-address-docprovider-lot": [
+    "https://ia.lrv.lt"
+  ],
+  "organisation-internet-address-reviewinfo-lot": [
+    "https://ia.lrv.lt"
+  ],
+  "organisation-internet-address-tenderer": [
+    "www.defensa.lt"
+  ],
+  "organisation-name-addinfo-lot": {
+    "lit": [
+      "Išteklių agentūra prie Lietuvos Respublikos vidaus reikalų ministerijos"
+    ]
+  },
+  "organisation-name-buyer": {
+    "lit": [
+      "Išteklių agentūra prie Lietuvos Respublikos vidaus reikalų ministerijos"
+    ]
+  },
+  "organisation-name-docprovider-lot": {
+    "lit": [
+      "Išteklių agentūra prie Lietuvos Respublikos vidaus reikalų ministerijos"
+    ]
+  },
+  "organisation-name-reviewinfo-lot": {
+    "lit": [
+      "Išteklių agentūra prie Lietuvos Respublikos vidaus reikalų ministerijos"
+    ]
+  },
+  "organisation-name-revieworg-lot": {
+    "lit": [
+      "Vilniaus apygardos teismas"
+    ]
+  },
+  "organisation-name-ted-esen": {
+    "lit": [
+      "European Dynamics S.A."
+    ]
+  },
+  "organisation-name-tenderer": {
+    "lit": [
+      "UAB DEFENSA",
+      "Baltic Fox OÜ"
+    ]
+  },
+  "organisation-partname-ted-esen": [
+    "European Dynamics S.A."
+  ],
+  "organisation-post-code-addinfo-lot": [
+    "01510"
+  ],
+  "organisation-post-code-buyer": [
+    "01510"
+  ],
+  "organisation-post-code-docprovider-lot": [
+    "01510"
+  ],
+  "organisation-post-code-reviewinfo-lot": [
+    "01510"
+  ],
+  "organisation-post-code-revieworg-lot": [
+    "01501"
+  ],
+  "organisation-post-code-ted-esen": [
+    "15125"
+  ],
+  "organisation-post-code-tenderer": [
+    "LT01122",
+    "10124"
+  ],
+  "organisation-street-addinfo-lot": [
+    "Šventaragio g. 2, Vilnius"
+  ],
+  "organisation-street-buyer": [
+    "Šventaragio g. 2, Vilnius"
+  ],
+  "organisation-street-docprovider-lot": [
+    "Šventaragio g. 2, Vilnius"
+  ],
+  "organisation-street-reviewinfo-lot": [
+    "Šventaragio g. 2, Vilnius"
+  ],
+  "organisation-street-revieworg-lot": [
+    "Gedimino pr. 40"
+  ],
+  "organisation-street-tenderer": [
+    "L. Stuokos-Gucevičiaus g. 9-2, Vilniaus m., Vilniaus m. sav."
+  ],
+  "organisation-tel-addinfo-lot": [
+    "+370 52717230"
+  ],
+  "organisation-tel-buyer": [
+    "+370 52717230"
+  ],
+  "organisation-tel-docprovider-lot": [
+    "+370 52717230"
+  ],
+  "organisation-tel-reviewinfo-lot": [
+    "+370 52717230"
+  ],
+  "organisation-tel-revieworg-lot": [
+    "+370 70668369"
+  ],
+  "organisation-tel-ted-esen": [
+    "+30 2108094500"
+  ],
+  "organisation-tel-tenderer": [
+    "+37052655555"
+  ],
+  "place-of-performance": [
+    "LT011",
+    "LTU",
+    "LT011",
+    "LTU"
+  ],
+  "place-of-performance-country-lot": [
+    "LTU"
+  ],
+  "place-of-performance-country-proc": [
+    "LTU"
+  ],
+  "place-of-performance-subdiv-lot": [
+    "LT011"
+  ],
+  "place-of-performance-subdiv-proc": [
+    "LT011"
+  ],
+  "previous-notice-id-proc": [
+    "9f09152b-6fdf-437d-b357-683309a143c7-01"
+  ],
+  "procedure-accelerated": "false",
+  "procedure-identifier": "0c644f48-2706-4bb5-85b1-a9550d427329",
+  "procedure-type": "neg-w-call",
+  "procurement-relaunch-proc": false,
+  "provided-service-type": [
+    "ted-esen"
+  ],
+  "publication-date": "2026-10-07+02:00",
+  "publication-number": "692794-2026",
+  "received-submissions-type-code": [
+    "tenders"
+  ],
+  "received-submissions-type-val": [
+    "2"
+  ],
+  "result-lot-identifier": [
+    "LOT-0001"
+  ],
+  "result-value-cur-notice": "EUR",
+  "result-value-notice": "126040.60",
+  "subcontracting": [
+    "no"
+  ],
+  "tender-identifier": [
+    "000199269"
+  ],
+  "tender-lot-identifier": [
+    "LOT-0001"
+  ],
+  "tender-value": [
+    "126040.60"
+  ],
+  "tender-value-cur": [
+    "EUR"
+  ],
+  "tendering-party-leader": [
+    true,
+    false
+  ],
+  "tendering-party-name": [
+    "UAB „DEFENSA“ kartu su Baltic Fox OÜ"
+  ],
+  "title-lot": {
+    "lit": [
+      "5,56x45 kalibro garsiniai šoviniai (PPR-464)"
+    ]
+  },
+  "title-proc": {
+    "lit": "5,56x45 kalibro garsiniai šoviniai (PPR-464)"
+  },
+  "total-value": 126040.6,
+  "total-value-cur": [
+    "EUR"
+  ],
+  "winner-city": [
+    "Vilnius",
+    "Tallinn"
+  ],
+  "winner-country": [
+    "LTU",
+    "EST"
+  ],
+  "winner-country-sub": [
+    "LT011",
+    "EE001"
+  ],
+  "winner-decision-date": [
+    "2026-09-23+03:00"
+  ],
+  "winner-email": [
+    "info@defensa.lt"
+  ],
+  "winner-identifier": [
+    "300005349",
+    "11535997"
+  ],
+  "winner-internet-address": [
+    "www.defensa.lt"
+  ],
+  "winner-name": {
+    "lit": [
+      "UAB DEFENSA",
+      "Baltic Fox OÜ"
+    ]
+  },
+  "winner-post-code": [
+    "LT01122",
+    "10124"
+  ],
+  "winner-selection-status": [
+    "selec-w"
+  ],
+  "winner-size": [
+    "small",
+    "small"
+  ]
+}

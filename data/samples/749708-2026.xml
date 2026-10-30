@@ -1,0 +1,412 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><ContractNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractNotice-2" xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1" xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1" xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2">
+   <ext:UBLExtensions>
+      <ext:UBLExtension>
+         <ext:ExtensionContent>
+            <efext:EformsExtension>
+               <efac:NoticeSubType>
+                  <cbc:SubTypeCode listName="notice-subtype">18</cbc:SubTypeCode>
+               </efac:NoticeSubType>
+               <efac:Organizations>
+                  <efac:Organization>
+                     <efac:Company>
+                        <cbc:WebsiteURI>https://www.wojsko-polskie.pl/au/</cbc:WebsiteURI>
+                        <cac:PartyIdentification>
+                           <cbc:ID schemeName="organization">ORG-0001</cbc:ID>
+                        </cac:PartyIdentification>
+                        <cac:PartyName>
+                           <cbc:Name languageID="POL">Agencja Uzbrojenia</cbc:Name>
+                        </cac:PartyName>
+                        <cac:PostalAddress>
+                           <cbc:StreetName>Królewska 1/7</cbc:StreetName>
+                           <cbc:CityName>Warszawa</cbc:CityName>
+                           <cbc:PostalZone>00-909</cbc:PostalZone>
+                           <cbc:CountrySubentityCode listName="nuts">PL911</cbc:CountrySubentityCode>
+                           <cac:Country>
+                              <cbc:IdentificationCode listName="country">POL</cbc:IdentificationCode>
+                           </cac:Country>
+                        </cac:PostalAddress>
+                        <cac:PartyLegalEntity>
+                           <cbc:CompanyID>NIP:7010269523</cbc:CompanyID>
+                        </cac:PartyLegalEntity>
+                        <cac:Contact>
+                           <cbc:Name>Szefostwo Techniki Morskiej</cbc:Name>
+                           <cbc:Telephone>+48261879784</cbc:Telephone>
+                           <cbc:Telefax>+48261873444</cbc:Telefax>
+                           <cbc:ElectronicMail>au.stm@mon.gov.pl</cbc:ElectronicMail>
+                        </cac:Contact>
+                     </efac:Company>
+                  </efac:Organization>
+                  <efac:Organization>
+                     <efac:Company>
+                        <cbc:WebsiteURI>https://op.europa.eu</cbc:WebsiteURI>
+                        <cac:PartyIdentification>
+                           <cbc:ID schemeName="organization">ORG-0000</cbc:ID>
+                        </cac:PartyIdentification>
+                        <cac:PartyName>
+                           <cbc:Name languageID="POL">Publications Office of the European Union</cbc:Name>
+                        </cac:PartyName>
+                        <cac:PostalAddress>
+                           <cbc:CityName>Luxembourg</cbc:CityName>
+                           <cbc:PostalZone>2417</cbc:PostalZone>
+                           <cbc:CountrySubentityCode listName="nuts">LU000</cbc:CountrySubentityCode>
+                           <cac:Country>
+                              <cbc:IdentificationCode listName="country">LUX</cbc:IdentificationCode>
+                           </cac:Country>
+                        </cac:PostalAddress>
+                        <cac:PartyLegalEntity>
+                           <cbc:CompanyID>PUBL</cbc:CompanyID>
+                        </cac:PartyLegalEntity>
+                        <cac:Contact>
+                           <cbc:Telephone>+352 29291</cbc:Telephone>
+                           <cbc:ElectronicMail>ted@publications.europa.eu</cbc:ElectronicMail>
+                        </cac:Contact>
+                     </efac:Company>
+                  </efac:Organization>
+               </efac:Organizations>
+            <efac:Publication><efbc:NoticePublicationID schemeName="ojs-notice-id">00749708-2026</efbc:NoticePublicationID><efbc:GazetteID schemeName="ojs-id">210/2026</efbc:GazetteID><efbc:PublicationDate>2026-10-29+01:00</efbc:PublicationDate></efac:Publication></efext:EformsExtension>
+         </ext:ExtensionContent>
+      </ext:UBLExtension>
+   </ext:UBLExtensions>
+   <cbc:UBLVersionID>2.3</cbc:UBLVersionID>
+   <cbc:CustomizationID>eforms-sdk-1.14</cbc:CustomizationID>
+   <cbc:ID schemeName="notice-id">a184902d-9661-4b05-949d-9b8cf6063450</cbc:ID>
+   <cbc:ContractFolderID>311b04d9-66a8-4709-afe3-414d4e9d4558</cbc:ContractFolderID>
+   <cbc:IssueDate>2026-10-28Z</cbc:IssueDate>
+   <cbc:IssueTime>08:09:06Z</cbc:IssueTime>
+   <cbc:VersionID>01</cbc:VersionID>
+   <cbc:RegulatoryDomain>32009L0081</cbc:RegulatoryDomain>
+   <cbc:NoticeTypeCode listName="competition">cn-standard</cbc:NoticeTypeCode>
+   <cbc:NoticeLanguageCode listName="language">POL</cbc:NoticeLanguageCode>
+   <cac:ContractingParty>
+      <cbc:BuyerProfileURI>https://au-bip.wp.mil.pl/pl/bip/zamowienia/</cbc:BuyerProfileURI>
+      <cac:ContractingPartyType>
+         <cbc:PartyTypeCode listName="buyer-legal-type">body-pl</cbc:PartyTypeCode>
+      </cac:ContractingPartyType>
+      <cac:ContractingPartyType>
+         <cbc:PartyTypeCode listName="buyer-contracting-type">cont-ent</cbc:PartyTypeCode>
+      </cac:ContractingPartyType>
+      <cac:ContractingActivity>
+         <cbc:ActivityTypeCode listName="authority-activity">defence</cbc:ActivityTypeCode>
+      </cac:ContractingActivity>
+      <cac:Party>
+         <cac:PartyIdentification>
+            <cbc:ID schemeName="organization">ORG-0001</cbc:ID>
+         </cac:PartyIdentification>
+         <cac:ServiceProviderParty>
+            <cbc:ServiceTypeCode listName="organisation-role">ted-esen</cbc:ServiceTypeCode>
+            <cac:Party>
+               <cac:PartyIdentification>
+                  <cbc:ID schemeName="organization">ORG-0000</cbc:ID>
+               </cac:PartyIdentification>
+            </cac:Party>
+         </cac:ServiceProviderParty>
+      </cac:Party>
+   </cac:ContractingParty>
+   <cac:TenderingTerms>
+      <cac:ProcurementLegislationDocumentReference>
+         <cbc:ID>art. 410 ust. 1 oraz art. 411 ustawy z dnia 11 września 2019 r. Prawo zamówień publicznych (t. j. Dz.U. z 2026 r. poz. 793) dalej "ustawa Pzp"</cbc:ID>
+      </cac:ProcurementLegislationDocumentReference>
+      <cac:TendererQualificationRequest>
+         <cac:SpecificTendererRequirement>
+            <cbc:TendererRequirementTypeCode listName="exclusion-grounds-source">epo-notice</cbc:TendererRequirementTypeCode>
+         </cac:SpecificTendererRequirement>
+      </cac:TendererQualificationRequest>
+      <cac:TendererQualificationRequest>
+         <cac:SpecificTendererRequirement>
+            <cbc:TendererRequirementTypeCode listName="exclusion-ground">exg-mis-prep-confl</cbc:TendererRequirementTypeCode>
+            <cbc:Description languageID="POL"> art. 108 ust. 1 pkt 6 ustawy Pzp</cbc:Description>
+         </cac:SpecificTendererRequirement>
+      </cac:TendererQualificationRequest>
+      <cac:TendererQualificationRequest>
+         <cac:SpecificTendererRequirement>
+            <cbc:TendererRequirementTypeCode listName="exclusion-ground">exg-crim-corrpt</cbc:TendererRequirementTypeCode>
+            <cbc:Description languageID="POL"> art. 108 ust. 1 pkt 1 i 2 ustawy Pzp</cbc:Description>
+         </cac:SpecificTendererRequirement>
+      </cac:TendererQualificationRequest>
+      <cac:TendererQualificationRequest>
+         <cac:SpecificTendererRequirement>
+            <cbc:TendererRequirementTypeCode listName="exclusion-ground">exg-crim-fraud</cbc:TendererRequirementTypeCode>
+            <cbc:Description languageID="POL"> art. 108 ust. 1 pkt 1 i 2 ustawy Pzp</cbc:Description>
+         </cac:SpecificTendererRequirement>
+      </cac:TendererQualificationRequest>
+      <cac:TendererQualificationRequest>
+         <cac:SpecificTendererRequirement>
+            <cbc:TendererRequirementTypeCode listName="exclusion-ground">exg-mis-bre-lab-law</cbc:TendererRequirementTypeCode>
+            <cbc:Description languageID="POL"> art. 108 ust. 1 pkt 1 i 2 ustawy Pzp</cbc:Description>
+         </cac:SpecificTendererRequirement>
+      </cac:TendererQualificationRequest>
+      <cac:TendererQualificationRequest>
+         <cac:SpecificTendererRequirement>
+            <cbc:TendererRequirementTypeCode listName="exclusion-ground">exg-mis-distortion</cbc:TendererRequirementTypeCode>
+            <cbc:Description languageID="POL"> art. 108 ust. 1 pkt 5 ustawy Pzp</cbc:Description>
+         </cac:SpecificTendererRequirement>
+      </cac:TendererQualificationRequest>
+      <cac:TendererQualificationRequest>
+         <cac:SpecificTendererRequirement>
+            <cbc:TendererRequirementTypeCode listName="exclusion-ground">exg-crim-terror</cbc:TendererRequirementTypeCode>
+            <cbc:Description languageID="POL"> art. 108 ust. 1 pkt 1 i 2 ustawy Pzp</cbc:Description>
+         </cac:SpecificTendererRequirement>
+      </cac:TendererQualificationRequest>
+      <cac:TendererQualificationRequest>
+         <cac:SpecificTendererRequirement>
+            <cbc:TendererRequirementTypeCode listName="exclusion-ground">exg-crim-laund</cbc:TendererRequirementTypeCode>
+            <cbc:Description languageID="POL"> art. 108 ust. 1 pkt 1 i 2 ustawy Pzp</cbc:Description>
+         </cac:SpecificTendererRequirement>
+      </cac:TendererQualificationRequest>
+      <cac:TendererQualificationRequest>
+         <cac:SpecificTendererRequirement>
+            <cbc:TendererRequirementTypeCode listName="exclusion-ground">exg-crim-traffick</cbc:TendererRequirementTypeCode>
+            <cbc:Description languageID="POL"> art. 108 ust. 1 pkt 1 i 2 ustawy Pzp</cbc:Description>
+         </cac:SpecificTendererRequirement>
+      </cac:TendererQualificationRequest>
+      <cac:TendererQualificationRequest>
+         <cac:SpecificTendererRequirement>
+            <cbc:TendererRequirementTypeCode listName="exclusion-ground">exg-crim-part</cbc:TendererRequirementTypeCode>
+            <cbc:Description languageID="POL"> art. 108 ust. 1 pkt 1 i 2 ustawy Pzp</cbc:Description>
+         </cac:SpecificTendererRequirement>
+      </cac:TendererQualificationRequest>
+      <cac:TendererQualificationRequest>
+         <cac:SpecificTendererRequirement>
+            <cbc:TendererRequirementTypeCode listName="exclusion-ground">exg-natl-bre-nat-law</cbc:TendererRequirementTypeCode>
+            <cbc:Description languageID="POL">art. 108 ust. 1 pkt 1 lit. c i g, art. 108 ust. 1 pkt 4,  art 405 ust. 1, 2 pkt 4 ustawy Pzp, art. 7 ust. 1 ustawy z dnia 13 kwietnia 2022 r. o szczególnych rozwiązaniach w zakresie przeciwdziałania wspieraniu agresji na Ukrainę oraz służących ochronie bezpieczeństwa narodowego (Dz.U. z 2024 r. poz. 507 z późn. zm.) i art. 5 k ust. 1 rozporządzenia Rady (UE) 833/2014 dotyczącego środków ograniczających w związku z działaniami Rosji destabilizującymi sytuację na Ukrainie (Dz. U. UE nr L 229 z dnia 31 lipca 2014 r. str. 1 z późn. zm.). 
+Zamawiający żąda złożenia wraz z Wnioskiem (Załącznik nr 1 do Ogłoszenia): 
+1. Oświadczenia Wykonawcy potwierdzającego brak podstaw wykluczenia oraz spełnienie warunków udziału w postepowaniu (Załącznik nr 2 do Ogłoszenia);
+2. Informacji z Krajowego Rejestru Karnego w zakresie określonym w art. 108 ust. 1 pkt 1, 2, 4 ustawy Pzp, wystawionej nie wcześniej, niż 6 miesię­cy przed upływem terminu składania wniosków o dopuszczenie do udziału w postępowaniu; 
+3. Informacji z Centralnego Rejestru Beneficjentów Rzeczywistych w zakresie art. 108 ust. 2 ustawy Pzp, jeżeli odrębne przepisy wymagają wpisu do tego rejestru, sporządzonej nie wcześniej niż 3 m­iesiące przed upływem terminu składania Wniosków. 
+4. Oświadczenia Wykonawcy, w zakresie art. 108 ust. 1 pkt 5 ustawy Pzp, o braku przynależności do tej samej grupy kapitałowej w rozumieniu ustawy z dnia 16 lutego 2007 r. o ochronie konkurencji i konsumentów (Dz. U. z 2026 r. poz. 85), z innym Wykonawcą, który złożył odrębny Wniosek, albo oświadczenia o przynależności do tej samej grupy kapitałowej wraz z dokumentami lub informacjami potwierdzającymi przygotowanie Wniosku  niezależnie od innego Wykonawcy, należącego do tej samej grupy kapitałowej (Załącznik nr 3 do Ogłoszenia).
+5. Jeżeli Wykonawca ma siedzibę lub miejsce zamieszkania poza granicami Rzeczypospolitej Polskiej, zamiast dokumentów, o których mowa: ­ w pkt 2 ­ składa informację z odpowiedniego rejestru, takiego jak rejestr sądowy albo w przypadku braku takiego rejestru, inny równoważny dokument wydany przez właściwy organ sądowy lub administracyjny kraju, w którym Wykonawca ma siedzibę lub miejsce zamieszkania lub miejsce zamieszkania ma osoba, której dotyczy informacja albo dokument w zakresie, o którym mowa w art. 108 ust. 1 pkt 1, 2, 4 ustawy Pzp ­ wystawiony nie wcześniej, niż 6 miesięcy przed upływem terminu składania Wniosków; w pkt 3 ­ składa informację z odpowiedniego rejestru zawierającego informację o jego beneficjentach rzeczywistych albo, w przypadku braku takiego rejestru, inny równoważny dokument wydany przez właściwy organ sądowy lub administracyjny kraju, w którym Wykonawca ma siedzibę lub miejsce zamieszkania, określający jego beneficjentów rzeczywistych ­ wystawione nie wcześniej, niż 3 miesią­ce przed upływem terminu składania Wniosków.
+6. Jeżeli w kraju, w którym Wykonawca ma siedzibę lub miejsce zamieszkania lub miejsce zamieszkania ma osoba, której dokument dotyczy, nie wydaje się dokumentów, o których mowa w pkt 5. lub gdy dokumenty te nie odnoszą się do wszystkich przypadków, o których mowa w art. 108 ust. 1 pkt 1, 2, 4 ustawy Pzp, zastępuje się je odpowiednio w całości lub w części dokumentem zawierającym odpowiednio oświadczenie Wykonawcy, ze wskazaniem osoby albo osób uprawnionych do jego reprezentacji lub oświadczenie osoby, której dokument miał dotyczyć, złożone pod przysięgą, lub jeżeli w kraju, w którym Wykonawca ma siedzibę lub miejsce zamieszkania lub miejsce zamieszkania ma osoba, której dokument miał dotyczyć, nie ma przepisów o oświadczeniu pod przysięgą, złożone przed organem sądowym lub administracyjnym, notariuszem, organem samorządu zawodowego lub gospodarczego, właściwym ze względu na siedzibę lub miejsce zamieszkania Wykonawcy lub miejsce zamieszkania ma osoba, której dokument miał dotyczyć ­ przy zachowaniu terminów wystawienia wymaganych dla poszczególnych dokumentów, o których mowa w pkt 5. 
+7. Jeżeli złożone przez Wykonawcę oświadczenie, o którym mowa w art. 125 ust. 1 ustawy Pzp lub podmiotowe środki dowodowe budzą wątpliwości Zamawiającego, może on zwrócić się bezpośrednio do podmiotu, który jest w posiadaniu informacji lub dokumentów istotnych w tym zakresie dla oceny spełniania przez Wykonawcę warunków udziału w postępowaniu lub braku podstaw wykluczenia o przedstawienie takich informacji lub dokumentów.</cbc:Description>
+         </cac:SpecificTendererRequirement>
+      </cac:TendererQualificationRequest>
+      <cac:TendererQualificationRequest>
+         <cac:SpecificTendererRequirement>
+            <cbc:TendererRequirementTypeCode listName="exclusion-ground">exg-pmt-bre-ssc</cbc:TendererRequirementTypeCode>
+            <cbc:Description languageID="POL">art. 108 ust. 1 pkt 3 ustawy Pzp</cbc:Description>
+         </cac:SpecificTendererRequirement>
+      </cac:TendererQualificationRequest>
+      <cac:TendererQualificationRequest>
+         <cac:SpecificTendererRequirement>
+            <cbc:TendererRequirementTypeCode listName="exclusion-ground">exg-pmt-bre-tax</cbc:TendererRequirementTypeCode>
+            <cbc:Description languageID="POL">art. 108 ust. 1 pkt 3 ustawy Pzp</cbc:Description>
+         </cac:SpecificTendererRequirement>
+      </cac:TendererQualificationRequest>
+   </cac:TenderingTerms>
+   <cac:TenderingProcess>
+      <cbc:ProcedureCode listName="procurement-procedure-type">restricted</cbc:ProcedureCode>
+      <cac:ProcessJustification>
+         <cbc:ProcessReasonCode listName="accelerated-procedure">false</cbc:ProcessReasonCode>
+      </cac:ProcessJustification>
+   </cac:TenderingProcess>
+   <cac:ProcurementProject>
+      <cbc:ID schemeName="InternalID">AU/165/XI/2026</cbc:ID>
+      <cbc:Name languageID="POL">Dostawa amunicji do okrętowych zestawów zakłóceń radioelektronicznych.</cbc:Name>
+      <cbc:Description languageID="POL">Przedmiotem zamówienia jest dostawa amunicji do okrętowych zestawów zakłóceń radioelektronicznych, nabój 130 mm do zakłóceń pasywnych RF/IR BULLFIGHTER lub równoważny -1300 szt. Szczegółowe wymagania dotyczące przedmiotu zamówienia wraz z warunkami równoważności dla wyrobów równoważnych oraz kryteria oceny ofert zostaną przedstawione w Specyfikacji Warunków Zamówienia (dalej "SWZ"), która zostanie przekazana Wykonawcom zaproszonym do składania ofert. Postępowanie wiąże się z dostępem do informacji niejawnych oznaczonych klauzulą „ZASTRZEŻONE” i stanowiących jej zagraniczny odpowiednik (zgodnie z umową bilateralną).</cbc:Description>
+      <cbc:ProcurementTypeCode listName="contract-nature">supplies</cbc:ProcurementTypeCode>
+      <cbc:Note languageID="POL">1. Wzór Wniosku o dopuszczenie do udziału w postępowaniu - zwany dalej "Wnioskiem" (Załącznik nr 1 do Ogłoszenia) oraz wzory pozostałych załączników znajdują się na stronie internetowej Zamawiającego (https://au-bip.wp.mil.pl/pl/bip/zamowienia/). 
+2. W celu potwierdzenia, że osoba działająca w imieniu Wykonawcy, Wykonawców wspólnie ubiegających się o udzielenie zamówienia lub w imieniu podmiotu udostępniającego zasoby jest umocowana do jego reprezentowania, zamawiający żąda odpisu lub informacji z Krajowego Rejestru Sądowego, Centralnej Ewidencji i Informacji o Działalności Gospodarczej lub innego właściwego rejestru. Jeżeli w imieniu Wykonawcy, Wykonawców wspólnie ubiegających się o udzielenie zamówienia lub podmiotu udostępniającego zasoby działa osoba, której umocowanie do reprezentowania nie wynika z ww. dokumentów, Zamawiający żąda pełnomocnictwa lub innego dokumentu potwierdzającego umocowanie tej osoby.
+Pełnomocnictwo należy sporządzić w postaci papierowej opatrzyć własnoręcznym podpisem i złożyć w oryginale lub kopii, poświadczonej za zgodność z oryginałem przez mocodawcę lub notariusza. 
+3. Zamawiający dopuszcza następujące sposoby komunikacji z Wykonawcami 
+1) za pośrednictwem operatora pocztowego, w rozumieniu ustawy z dnia 23.11.2012 r. - Prawo pocztowe (Dz. U. 2026 r. poz. 558);
+2) przy użyciu faksu numer: +48 261 873 444, Jeżeli Zamawiający lub Wykonawca komunikują się za pośrednictwem faksu, każda ze Stron na żądanie drugiej niezwłocznie potwierdza fakt otrzymania korespondencji);
+3) drogą elektroniczną na adres email: au.stm@mon.gov.pl. Jeżeli Zamawiający lub Wykonawca komunikują się drogą elektroniczną, każda ze Stron na żądanie drugiej niezwłocznie potwierdza fakt otrzymania korespondencji);
+4) osobiście;
+5) przez posłańca. 
+4. Wniosek oraz oświadczenie, o którym mowa w artykule 125 ust. 1 ustawy z dnia 11 września 2019 r. Prawo Zamówień Publicznych (t. j. Dz. U. z 2026 r. poz. 793) zwana dalej "ustawa Pzp" (Załącznik nr 2 i 4 do Ogłoszenia) sporządzone w języku polskim w postaci papierowej opatrzone własnoręcznym podpisem przekazuje się w oryginale. Zamawiający nie dopuszcza możliwości składania Wniosku, wraz z załącznikami, w formie elektronicznej, w postaci dokumentu elektronicznego. Wniosek musi być podpisany przez osoby uprawnione do reprezentowania Wykonawcy/Wykonawców. Jeżeli osoba bądź osoby podpisujące ww. wniosek działają na podstawie pełnomocnictwa, to do Wniosku należy załączyć pełnomocnictwo.
+5. Wniosek można składać w dni robocze (od poniedziałku do piątku), w godz. 8.00 -	15:00 w Kancelarii Jawnej w siedzibie Zamawiającego w Warszawie przy ul. Królewskiej 1/7 lub przesyłać na adres: Agencja Uzbrojenia, ul. Królewska 1/7, 00-909 Warszawa (00-065 Warszawa dla przesyłek kurierskich).
+6. Wniosek wraz z dokumentami i oświadczeniami należy złożyć w zamkniętym opakowaniu (np. kopercie), uniemożliwiającym odczytanie zawartości bez uszkodzenie tego opakowania przed upływem terminu składania wniosków o dopuszczenie do udziału w postępowaniu. Opakowanie powinno zostać opatrzone napisem: ,,Wniosek o dopuszczenie do udziału w postępowaniu na dostawę "Amunicji do okrętowych zestawów zakłóceń radioelektronicznych, nr postępowania AU/165/Xl/2026" oraz nazwą Wykonawcy i jego danymi adresowymi.
+7. Oświadczenie, o którym mowa w art. 117 ust. 4 ustawy Pzp ( Załącznik nr 5 do Ogłoszenia), zobowiązanie podmiotu udostępniającego zasoby, sporządzone w postaci papierowej i opatrzone własnoręcznym podpisem, przekazuje się w oryginale lub jako kopię poświadczoną za zgodność z oryginałem.
+8. Podmiotowe środki dowodowe, przedmiotowe środki dowodowe oraz oświadczenia lub dokumenty inne niż Wniosek o dopuszczenie do udziału w postępowaniu i oświadczenie, o którym mowa w art. 125 ust. 1 ustawy Pzp, sporządzone w postaci papierowej przekazuje się w oryginale lub jako kopię poświadczoną za zgodność z oryginałem.
+9. Poświadczenia za zgodność z oryginałem dokonuje się zgodnie z par. 9 Rozporządzenia z dnia 30 grudnia 2020 r. w sprawie sposobu sporządzania i przekazywania informacji oraz wymagań technicznych dla dokumentów elektronicznych oraz środków komunikacji elektronicznej w postępowaniu o udzielenie zamówienia publicznego lub konkursie (Dz. U. 2020 r, poz. 2452). 10. Podmiotowe środki dowodowe, przedmiotowe środki dowodowe oraz inne dokumenty lub oświadczenia sporządzone w języku obcym przekazuje się wraz z tłumaczeniem na język polski. Zamawiający zastrzega sobie prawo żądania przedstawienia oryginału lub notarialnie poświadczonej kopii, gdy złożona kopia jest nieczytelna lub budzi wątpliwości co do jej prawdziwości. 
+11. Postępowanie o udzielenie zamówienia jest jawne. Nie ujawnia się informacji stanowiących tajemnicę przedsiębiorstwa w rozumieniu przepisów ustawy z dnia 16 kwietnia 1993 r. o zwalczaniu nieuczciwej konkurencji (t. j. Dz.U. z 2026 r., poz. 85), jeżeli Wykonawca, wraz z przekazaniem takich informacji, zastrzegł, że nie mogą być one udostępniane oraz wykazał, że zastrzeżone informacje stanowią tajemnicę przedsiębiorstwa. Wykonawca nie może zastrzec informacji, o których mowa w art. 222 ust. 5. ustawy Pzp. Wykonawca w celu utrzymania poufności zastrzeżonych informacji przekazuje je wydzielone i odpowiednio oznaczone. 
+12. Zgodnie z zapisami art. 110 ust.1 ustawy Pzp Wykonawca może zostać wykluczony przez Zamawiającego na każdym etapie postępowania o udzielenie zamówienia. 
+13. Zamawiający unieważni postępowanie, jeżeli: 
+1) wystąpi odpowiednia przesłanka z art. 255 lub art. 256 lub art. 257 ustawy Pzp;
+2) na podstawie art. 418 ust. 1 pkt 2 ustawy Pzp, w przypadku wystąpienia istotnej zmiany okoliczności realizacji zamówienia, rozumianej jako zmiana założeń polityki Rządu Rzeczypospolitej Polskiej, dotyczących obronności i bezpieczeństwa państwa lub zmiana związana z finansowaniem SZ RP, powodująca ograniczenie środków finansowych na realizację przedmiotu zamówienia, czego nie można było przewidzieć w chwili wszczęcia postępowania. 
+14. Zamawiający nie ogranicza liczby Wykonawców zaproszonych do składania ofert, których wnioski o dopuszczenie do udziału w postępowaniu nie będą podlegały odrzuceniu.
+15. Przedmiot zamówienia będzie podlegał ocenie zgodności zgodnie z ustawą z dnia 17 listopada 2006 r. o systemie oceny zgodności wyrobów przeznaczonych na potrzeby obronności i bezpieczeństwa państwa (Dz.U. z 2022 r., poz. 747) na podstawie Rozporządzenia Ministra Obrony Narodowej z dnia 11 stycznia 2013 r. w sprawie szczegółowego wykazu wyrobów podlegających ocenie zgodności oraz sposobu i trybu przeprowadzenia oceny zgodności wyrobów przeznaczonych na potrzeby obronności państwa (Dz.U. z 2021 r., poz. 1628).
+16. Przedmiot zamówienia musi być oznakowany kodem kreskowym, zgodnie z Decyzją Nr 3/MON Ministra Obrony Narodowej z dnia 3 stycznia 2014 r. w sprawie wytycznych określających wymagania w zakresie znakowania kodem kreskowym wyrobów dostarczanych do resortu obrony narodowej (Dz. Urz. Min. Obr. Nar. 2014 r. poz. 11).
+17. Kryteria udzielenia zamówienia zostaną określone w Specyfikacji Warunków Zamówienia (SWZ) przekazanej Wykonawcom zaproszonym do kolejnego etapu postępowania.
+18. Klauzula Informacyjna Administratora (Zamawiającego) w zakresie przetwarzania danych osobowych stanowi Załącznik nr 10 do Ogłoszenia.
+</cbc:Note>
+      <cac:MainCommodityClassification>
+         <cbc:ItemClassificationCode listName="cpv">35332000</cbc:ItemClassificationCode>
+      </cac:MainCommodityClassification>
+      <cac:RealizedLocation>
+         <cac:Address>
+            <cbc:StreetName>1 Regionalna Baza Logistyczna Wałcz, Skład Gdynia</cbc:StreetName>
+            <cbc:CityName>Gdynia</cbc:CityName>
+            <cbc:PostalZone>81-904</cbc:PostalZone>
+            <cbc:CountrySubentityCode listName="nuts">PL633</cbc:CountrySubentityCode>
+            <cac:Country>
+               <cbc:IdentificationCode listName="country">POL</cbc:IdentificationCode>
+            </cac:Country>
+         </cac:Address>
+      </cac:RealizedLocation>
+   </cac:ProcurementProject>
+   <cac:ProcurementProjectLot>
+      <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
+      <cac:TenderingTerms>
+         <ext:UBLExtensions>
+            <ext:UBLExtension>
+               <ext:ExtensionContent>
+                  <efext:EformsExtension>
+                     <efac:SelectionCriteria>
+                        <cbc:TendererRequirementTypeCode listName="selection-criterion">slc-suit-reg-prof</cbc:TendererRequirementTypeCode>
+                        <cbc:Description languageID="POL">W celu wykazania spełniania przez Wykonawcę warunku udziału w postępowaniu, o którym mowa w art. 112 ust. 2 pkt 2 ustawy Pzp,  Wykonawca zobowiązany jest przedłożyć aktualną koncesję wydaną na podstawie ustawy z dnia 13 czerwca 2019 r. o wykonywaniu działalności gospodarczej w zakresie wytwarzania i obrotu materiałami wybuchowymi, bronią, amunicja oraz wyrobami i technologią o przeznaczeniu wojskowym lub policyjnym (Dz.U. z 2023 r. poz 1743) w zakresie wytwarzania i obrotu lub obrotu wyrobami o przeznaczeniu wojskowym lub policyjnym określonymi w Części III Rodzaje broni i amunicji - BA pkt 16 załącznika do Rozporządzenia Rady Ministrów z dnia 17 września 2019 r w sprawie klasyfikacji rodzajów materiałów wybuchowych, broni, amunicji oraz wyrobów i technologii o przeznaczeniu wojskowym lub policyjnym, na których wytwarzanie lub obrót jest wymagana koncesja (Dz.U. z 2019 r. poz. 1888), lub zgodnie z art. 156 ust. 1 ww. ustawy - koncesję uzyskaną na podstawie ustawy z dnia 22 czerwca 2001 r. o wykonywaniu działalności gospodarczej w zakresie wytwarzania i obrotu materiałami wybuchowymi, bronią, amunicją oraz wyrobami i i technologią o przeznaczeniu wojskowym lub policyjnym (Dz.U. z 2018 r. poz. 2037 z poźn. zm.), która zachowuje ważność w zakresie określonym w BA pkt. 13 załącznika nr 1(Rodzaje broni i amunicji BA) do Rozporządzenia Rady Ministrów z dnia 3 grudnia 2001 r. w sprawie rodzajów broni ii amunicji oraz wykazu wyrobów i technologii o przeznaczeniu wojskowym lub policyjnym, na których wytwarzanie lub obrót jest wymagana koncesja (Dz. U. z 2001 r. nr 145 poz. 1625 z późn. zm.) lub odpowiedni dokument wystawiony przez organ państwa w którym Wykonawca ma siedzibę potwierdzający, że Wykonawca posiada uprawnienia do prowadzenia działalności w zakresie wytwarzania i obrotu lub obrotu wyrobami będącymi przedmiotem zamówienia. Ww. dokument Wykonawca zobowiązany jest złożyć wraz z Wnioskiem, w postaci kopii poświadczonej za zgodność z oryginałem.</cbc:Description>
+                        <efbc:SecondStageIndicator>false</efbc:SecondStageIndicator>
+                     </efac:SelectionCriteria>
+                     <efac:SelectionCriteria>
+                        <cbc:TendererRequirementTypeCode listName="selection-criterion">slc-abil-ref-supply</cbc:TendererRequirementTypeCode>
+                        <cbc:Description languageID="POL">1. W celu wykazania spełniania przez Wykonawcę warunku udziału w postępowaniu, o którym mowa w art. 112 ust. 2 pkt 4 ustawy Pzp, dotyczącego zdolności technicznych, Zamawiający wymaga, aby Wykonawca wykazał, że w okresie ostatnich 5 lat przed upływem terminu składania Wniosków (jeżeli okres prowadzenia działalności jest krótszy to w tym okresie) w sposób należyty wykonał co najmniej 3 (trzy) dostawy amunicji zakłócającej do obrony przed pociskami samonaprowadzającymi o wartości nie mniejszej niż 4 000 000,00 PLN (słownie: cztery miliony złotych 00/100). 
+2. W celu potwierdzenia spełniania powyższego warunku Wykonawca zobowiązany jest złożyć, wraz z Wnioskiem, wykaz wykonanych dostaw, o których mowa w pkt 1 (wzór - Załącznik nr 8 do Ogłoszenia), w okresie ostatnich 5 lat przed upływem terminu składania Wniosków, a jeżeli okres prowadzenia działalności jest krótszy – w tym okresie, wraz z podaniem wartości, przedmiotu dostawy, daty wykonania i podmiotu, na rzecz którego dostawa została wykonana oraz załączyć dowody określające, że dostawa została wykonana należycie.
+3. Dowodami, o których mowa w pkt 2 są referencje bądź inne dokumenty sporządzone przez podmiot, na rzecz którego dostawy były wykonywane. 
+4. Jeżeli Wykonawca z przyczyn niezależnych od niego nie jest w stanie uzyskać dowodów, o których mowa w pkt 3, wówczas dopuszcza się złożenie oświadczenia Wykonawcy, które powinno jednoznacznie wskazywać na przyczyny braku możliwości pozyskania referencji od podmiotów, na rzecz których realizowane były dostawy. 
+5. Wykonawca, zgodnie z art. 118 ust. 1 ustawy Pzp w celu potwierdzenia spełniania warunku, o którym mowa w pkt 1, może polegać na zdolnościach technicznych podmiotów udostępniających zasoby, niezależnie od charakteru prawnego łączących go z nim stosunków prawnych. 
+6. Wykonawca, który polega na zdolnościach technicznych podmiotów udostępniających zasoby, składa, wraz z Wnioskiem o dopuszczenie do udziału w postępowaniu, zobowiązanie podmiotu udostępniającego zasoby do oddania mu do dyspozycji niezbędnych zasobów na potrzeby realizacji danego zamówienia lub inny podmiotowy środek dowodowy potwierdzający, że Wykonawca realizując zamówienie, będzie dysponował niezbędnymi zasobami tych podmiotów. 
+7. Zobowiązanie podmiotu udostępniającego zasoby, o którym mowa w pkt. 6, musi potwierdzać, że stosunek łączący Wykonawcę z podmiotami udostępniającymi zasoby gwarantuje rzeczywisty dostęp do tych zasobów oraz musi określać w szczególności: 
+1) zakres dostępnych Wykonawcy zasobów podmiotu udostępniającego zasoby; 
+2) sposób i okres udostępnienia Wykonawcy i wykorzystania przez niego zasobów podmiotu udostępniającego te zasoby przy wykonywaniu zamówienia; 
+8. Zamawiający oceni, czy udostępnione Wykonawcy przez podmioty udostępniające zasoby pozwalają na wykazanie przez Wykonawcę spełniania warunku udziału w postępowaniu, o którym mowa w pkt 1 oraz zbada, czy nie zachodzą wobec tego podmiotu podstawy wykluczenia wskazane przez Zamawiającego w 2.1.6 Podstawy wykluczenia.
+ 9. Zamawiający żąda od Wykonawcy, który polega na zdolnościach technicznych podmiotów udostępniających zasoby, przedstawienia w odniesieniu do tych podmiotów: oświadczenia podmiotu udostępniającego zasoby, potwierdzającego brak podstaw wykluczenia tego podmiotu oraz odpowiednie spełnianie warunku udziału w postępowaniu w zakresie, w jakim Wykonawca powołuje się na jego zasoby (wzór - Załącznik nr 4 do Ogłoszenia) oraz dokumentów: 
+- informacji z Krajowego Rejestru Karnego w zakresie określonym w art. 108 ust. 1 pkt 1, 2 i 4 ustawy Pzp, wystawionej nie wcześniej niż 6 miesięcy przed upływem terminu składania wniosków o dopuszczenie do udziału w postępowaniu;
+ - informacji z Centralnego Rejestru Beneficjentów Rzeczywistych w zakresie art.108 ust. 2 ustawy Pzp, jeżeli odrębne przepisy wymagają wpisu do tego rejestru, wystawionej nie wcześniej niż 3 miesiące przed upływem terminu składania wniosków o dopuszczenie do udziału w postępowaniu. 
+10. Jeżeli zdolności techniczne podmiotu udostępniającego zasoby nie potwierdzają spełniania przez Wykonawcę warunku, o którym mowa w pkt 1 lub zachodzą wobec tego podmiotu podstawy wykluczenia, Zamawiający żąda,
+aby Wykonawca - w terminie określonym przez Zamawiającego - zastąpił ten podmiot innym podmiotem lub podmiotami albo wykazał, że samodzielnie spełnia ww. warunek udziału w postępowaniu. 
+11. Jeżeli Wykonawca powołuje się na doświadczenie w realizacji dostaw wykonywanych wspólnie z innymi Wykonawcami, wykaz, o którym mowa w pkt 2, dotyczy dostaw, w których wykonaniu Wykonawca ten bezpośrednio uczestniczył. 
+12. W przypadku Wykonawców którzy wykażą wartość dostaw w innych walutach niż PLN, Zamawiający przeliczy je na PLN. Do przeliczenia zostanie zastosowany średni kurs walut NBP obowiązujący w dniu wykonania dostawy. W przypadku braku publikacji kursów walut NBP obowiązujących w dniu o którym mowa powyżej zastosowanie ma kurs ostatnio ogłoszony przed tym dniem. 
+</cbc:Description>
+                        <efbc:SecondStageIndicator>false</efbc:SecondStageIndicator>
+                     </efac:SelectionCriteria>
+                     <efac:SelectionCriteria>
+                        <cbc:TendererRequirementTypeCode listName="selection-criterion">slc-abil-staff-qual</cbc:TendererRequirementTypeCode>
+                        <cbc:Description languageID="POL">1.	W celu wykazania spełniania przez Wykonawcę warunku udziału w postępowaniu, o którym mowa w art. 112 ust. 2 pkt 4 ustawy Pzp dotyczącego zdolności zawodowej Zamawiający wymaga, aby Wykonawca wykazał, że:
+1)	dysponuje co najmniej 1 (jedną) osobą zdolną do wykonania przedmiotu zamówienia, która posiada: 
+a)	ważne poświadczenie bezpieczeństwa lub jego zagraniczny odpowiednik, uprawniające do dostępu do informacji niejawnych, w rozumieniu ustawy ustawy z dnia 5 sierpnia 2010 r. o ochronie informacji niejawnych (Dz. U. z 2025 r. poz. 1209), zwana dalej „ustawą OIN” lub pisemne upoważnienie do dostępu do informacji niejawnych oznaczonych klauzulą „ZASTRZEŻONE", wydane na podstawie art. 21 ust. 4 pkt 1 ustawy OIN;
+b)	zaświadczenie stwierdzające odbycie szkolenia w zakresie ochrony informacji niejawnych zgodnie z art. 19 i 20 ustawy OIN – dotyczy osób posiadających obywatelstwo polskie i cudzoziemców zatrudnionych w podmiocie polskim, którzy odbyli takie szkolenie;
+2)	posiada zdolność do ochrony informacji niejawnych o klauzuli „ZASTRZEŻONE” lub stanowiącej jej zagraniczny odpowiednik  w rozumieniu ustawy OIN, a w przypadku Wykonawcy zagranicznego – zgodnie z wymogami przepisów wewnętrznych danego kraju, w którym Wykonawca ma siedzibę lub miejsce zamieszkania oraz umowy bilateralnej o wzajemnej ochronie informacji niejawnych.
+2.	W celu potwierdzenia spełniania powyższych warunków Wykonawca zobowiązany jest złożyć wraz z Wnioskiem:
+1)	„Wykaz osób skierowanych do realizacji zamówienia”, posiadających ważne poświadczenie bezpieczeństwa lub jego zagraniczny odpowiednik, uprawniające do dostępu do informacji niejawnych, bądź pisemne upoważnienie do dostępu do informacji niejawnych oznaczonych klauzulą „ZASTRZEŻONE", wydane przez Kierownika Jednostki Organizacyjnej, w rozumieniu ustawy OIN (wzór – Załącznik Nr 9 do Ogłoszenia).
+2)	Oświadczenie potwierdzające zdolność Wykonawcy do ochrony informacji niejawnych o klauzuli „ZASTRZEŻONE” lub stanowiącej jej zagraniczny odpowiednik, w rozumieniu ustawy OIN (wzór – Załącznik Nr 6 do Ogłoszenia – dla Wykonawców krajowych i Załącznik Nr 7 do Ogłoszenia – dla Wykonawców zagranicznych) lub kopię Świadectwa Bezpieczeństwa Przemysłowego co najmniej II (drugiego) stopnia o klauzuli "POUFNE" lub jego zagraniczny odpowiednik upoważniający do dostępu do informacji niejawnych.
+3. Wykonawca, zgodnie z art. 118 ust. 1 ustawy Pzp w celu potwierdzenia spełniania warunków, o których mowa powyżej, może polegać na zdolnościach zawodowych podmiotów udostępniających zasoby, niezależnie od charakteru prawnego łączących go z nim stosunków prawnych. 
+4. Wykonawca, który polega na zdolnościach zawodowych podmiotów udostępniających zasoby, składa, wraz z Wnioskiem o dopuszczenie do udziału w postępowaniu, zobowiązanie podmiotu udostępniającego zasoby do oddania mu do dyspozycji niezbędnych zasobów na potrzeby realizacji danego zamówienia lub inny podmiotowy środek dowodowy potwierdzający, że Wykonawca realizując zamówienie, będzie dysponował niezbędnymi zasobami tych podmiotów. 
+5. Zobowiązanie podmiotu udostępniającego zasoby, o którym mowa w pkt. 6, musi potwierdzać, że stosunek łączący Wykonawcę z podmiotami udostępniającymi zasoby gwarantuje rzeczywisty dostęp do tych zasobów oraz musi określać w szczególności: 1) zakres dostępnych Wykonawcy zasobów podmiotu udostępniającego zasoby; 2) sposób i okres udostępnienia Wykonawcy i wykorzystania przez niego zasobów podmiotu udostępniającego te zasoby przy wykonywaniu zamówienia; 
+6. Zamawiający oceni, czy udostępnione Wykonawcy przez podmioty udostępniające zasoby pozwalają na wykazanie przez Wykonawcę spełniania warunku udziału w postępowaniu, o którym mowa w pkt 1 oraz zbada, czy nie zachodzą wobec tego podmiotu podstawy wykluczenia wskazane przez Zamawiającego w 2.1.6 Podstawy
+wykluczenia. 
+7. Zamawiający żąda od Wykonawcy, który polega na zdolnościach zawodowych podmiotów udostępniających zasoby, przedstawienia w odniesieniu do tych podmiotów: oświadczenia podmiotu udostępniającego zasoby, potwierdzającego brak podstaw wykluczenia tego podmiotu oraz odpowiednie spełnianie warunku udziału w postępowaniu w zakresie, w jakim Wykonawca powołuje się na jego zasoby (wzór - Załącznik nr 4 do Ogłoszenia) oraz dokumentów: - informacji z Krajowego Rejestru Karnego w zakresie określonym w art. 108 ust. 1 pkt 1, 2 i 4 ustawy Pzp, wystawionej nie wcześniej niż 6 miesięcy przed upływem terminu składania Wniosków; - Informacji z Centralnego Rejestru Beneficjentów Rzeczywistych w zakresie art.108 ust.2 ustawy Pzp, jeżeli odrębne przepisy wymagają wpisu do tego rejestru, wystawionej nie wcześniej niż 3 miesiące przed upływem terminu składania Wniosków. 
+8. Jeżeli zdolności zawodowe podmiotu udostępniającego zasoby nie potwierdzają spełniania przez Wykonawcę warunków lub zachodzą wobec tego podmiotu podstawy wykluczenia, Zamawiający żąda, aby Wykonawca - w terminie określonym przez Zamawiającego - zastąpił ten podmiot innym podmiotem lub podmiotami albo wykazał, że samodzielnie spełnia ww. warunek udziału w postępowaniu. </cbc:Description>
+                        <efbc:SecondStageIndicator>false</efbc:SecondStageIndicator>
+                     </efac:SelectionCriteria>
+                     <efac:TenderSubcontractingRequirements>
+                        <efbc:TenderSubcontractingRequirementsCode listName="subcontracting-indication">shar-subc</efbc:TenderSubcontractingRequirementsCode>
+                     </efac:TenderSubcontractingRequirements>
+                  </efext:EformsExtension>
+               </ext:ExtensionContent>
+            </ext:UBLExtension>
+         </ext:UBLExtensions>
+         <cbc:VariantConstraintCode listName="permission">not-allowed</cbc:VariantConstraintCode>
+         <cac:RequiredFinancialGuarantee>
+            <cbc:GuaranteeTypeCode listName="tender-guarantee-required">true</cbc:GuaranteeTypeCode>
+            <cbc:Description languageID="POL">1. Wykonawcy zaproszeni do złożenia ofert będą zobowiązani do wniesienia wadium w wysokości 1 800 000,00 PLN (słownie: jeden milion osiemset tysięcy złotych 00/100) na cały okres związania ofertą. 
+2. Szczegółowe informacje w zakresie wadium zostaną przekazane Wykonawcom zaproszonym do  składania ofert w SWZ. 
+3. Zamawiający przewiduje obowiązek wniesienia zabezpieczenia należytego wykonania umowy. 
+4. Zamawiający przewiduje możliwość udzielenia zaliczki na poczet realizacji Zamówienia. 
+5. Szczegóły dotyczące wniesienia zabezpieczenia należytego wykonania umowy oraz udzielenia zaliczki zostaną opisane w SWZ, która zostanie przekazana Wykonawcom zaproszonym do kolejnego etapu postępowania.</cbc:Description>
+         </cac:RequiredFinancialGuarantee>
+         <cac:PaymentTerms>
+            <cbc:Note languageID="POL">Zasady finansowania zawarte są Istotnych Postanowieniach Umowy (IPU) stanowiących załącznik do SWZ.</cbc:Note>
+         </cac:PaymentTerms>
+         <cac:TendererQualificationRequest>
+            <cac:SpecificTendererRequirement>
+               <cbc:TendererRequirementTypeCode listName="selection-criteria-source">epo-notice</cbc:TendererRequirementTypeCode>
+            </cac:SpecificTendererRequirement>
+         </cac:TendererQualificationRequest>
+         <cac:TendererQualificationRequest>
+            <cbc:CompanyLegalFormCode listName="required">false</cbc:CompanyLegalFormCode>
+         </cac:TendererQualificationRequest>
+         <cac:TendererQualificationRequest>
+            <cac:SpecificTendererRequirement>
+               <cbc:TendererRequirementTypeCode listName="reserved-procurement">none</cbc:TendererRequirementTypeCode>
+            </cac:SpecificTendererRequirement>
+         </cac:TendererQualificationRequest>
+         <cac:AllowedSubcontractTerms>
+            <cbc:SubcontractingConditionsCode listName="subcontracting-obligation">subc-chng</cbc:SubcontractingConditionsCode>
+         </cac:AllowedSubcontractTerms>
+         <cac:ContractExecutionRequirement>
+            <cbc:ExecutionRequirementCode listName="reserved-execution">no</cbc:ExecutionRequirementCode>
+         </cac:ContractExecutionRequirement>
+         <cac:ContractExecutionRequirement>
+            <cbc:ExecutionRequirementCode listName="conditions">performance</cbc:ExecutionRequirementCode>
+            <cbc:Description languageID="POL">Szczegółowe warunki realizacji zamówienia zostaną określone w dokumentach zamówienia.</cbc:Description>
+         </cac:ContractExecutionRequirement>
+         <cac:ContractExecutionRequirement>
+            <cbc:ExecutionRequirementCode listName="einvoicing">allowed</cbc:ExecutionRequirementCode>
+         </cac:ContractExecutionRequirement>
+         <cac:ContractExecutionRequirement>
+            <cbc:ExecutionRequirementCode listName="ecatalog-submission">not-allowed</cbc:ExecutionRequirementCode>
+         </cac:ContractExecutionRequirement>
+         <cac:AppealTerms>
+            <cac:PresentationPeriod>
+               <cbc:Description languageID="POL">Terminy na wniesienie odwołania zgodnie z art. 515 ustawy Pzp.</cbc:Description>
+            </cac:PresentationPeriod>
+         </cac:AppealTerms>
+         <cac:Language>
+            <cbc:ID>POL</cbc:ID>
+         </cac:Language>
+      </cac:TenderingTerms>
+      <cac:TenderingProcess>
+         <cbc:CandidateReductionConstraintIndicator>true</cbc:CandidateReductionConstraintIndicator>
+         <cac:ParticipationRequestReceptionPeriod>
+            <cbc:EndDate>2026-12-03+01:00</cbc:EndDate>
+            <cbc:EndTime>11:00:00+01:00</cbc:EndTime>
+         </cac:ParticipationRequestReceptionPeriod>
+         <cac:EconomicOperatorShortList>
+            <cbc:LimitationDescription>false</cbc:LimitationDescription>
+         </cac:EconomicOperatorShortList>
+         <cac:AuctionTerms>
+            <cbc:AuctionConstraintIndicator>false</cbc:AuctionConstraintIndicator>
+         </cac:AuctionTerms>
+         <cac:ContractingSystem>
+            <cbc:ContractingSystemTypeCode listName="framework-agreement">none</cbc:ContractingSystemTypeCode>
+         </cac:ContractingSystem>
+      </cac:TenderingProcess>
+      <cac:ProcurementProject>
+         <cbc:ID schemeName="InternalID">Część 1/1</cbc:ID>
+         <cbc:Name languageID="POL">Dostawa amunicji do okrętowych zestawów zakłóceń radioelektronicznych.</cbc:Name>
+         <cbc:Description languageID="POL">Przedmiotem zamówienia jest dostawa amunicji do okrętowych zestawów zakłóceń radioelektronicznych, nabój 130 mm do zakłóceń pasywnych RF/IR BULLFIGHTER lub równoważny -1300 szt. Szczegółowe wymagania dotyczące przedmiotu zamówienia wraz z warunkami równoważności dla wyrobów równoważnych oraz kryteria oceny ofert zostaną przedstawione w Specyfikacji Warunków Zamówienia (dalej "SWZ"), która zostanie przekazana Wykonawcom zaproszonym do składania ofert. Postępowanie wiąże się z dostępem do informacji niejawnych oznaczonych klauzulą „ZASTRZEŻONE” i stanowiących jej zagraniczny odpowiednik (zgodnie z umową bilateralną).</cbc:Description>
+         <cbc:ProcurementTypeCode listName="contract-nature">supplies</cbc:ProcurementTypeCode>
+         <cbc:EstimatedOverallContractQuantity unitCode="H87">1300</cbc:EstimatedOverallContractQuantity>
+         <cbc:Note languageID="POL">Warunki przyszłej Umowy zostaną określone w SWZ. Forma prawna, jaką musi przyjąć grupa
+oferentów, której udzielono zamówienia: Zgodnie z zapisami art. 58 ustawy Pzp Wykonawcy mogą wspólnie ubiegać
+się o udzielenie zamówienia. W takim przypadku Wykonawcy muszą: 
+1. Ustanowić pełnomocnika do reprezentowania ich w postępowaniu o udzielenie zamówienia albo reprezentowania w postępowaniu i zawarcia umowy w sprawie zamówienia publicznego i złożyć pełnomocnictwo. 
+2. Złożyć następujące dokumenty i oświadczenia:
+1) wymienione w punkcie 2.1.6 ogłoszenia podstawy wykluczenia — osobno każdy z Wykonawców wspólnie ubiegających się o udzielenie zamówienia; 
+2) dokument, o którym mowa w punkcie 5.1.9 Kryteria kwalifikacji "Wpis do odpowiedniego rejestru zawodowego" — co najmniej jeden z Wykonawców wspólnie ubiegających się o udzielenie zamówienia z uwzględnieniem zapisów art. 117 ust. 2 ustawy Pzp; 
+3) dokumenty, o których mowa w punkcie 5.1.9 Kryteria kwalifikacji: "Referencje dotyczące określonych dostaw" i "Odpowiednie kwalifikacje edukacyjne i zawodowe" - odpowiednio, tak aby wspólnie spełniać warunki udziału w postępowaniu. 
+3. Zgodnie z art. 117 ust. 4 ustawy Pzp Wykonawcy wspólnie ubiegający się o udzielenie zamówienia dołączają do wniosku o dopuszczenie do udziału w postępowaniu oświadczenie, z którego wynika, które elementy zamówienia wykonają poszczególni Wykonawcy (Załącznik nr 5 do Ogłoszenia). 
+4. W przypadku, gdy za najkorzystniejszą zostanie wybrana oferta Wykonawców wspólnie ubiegających się o udzielenie zamówienia, Zamawiający będzie żądał przed zawarciem umowy w sprawie zamówienia publicznego kopii umowy regulującej współpracę tych Wykonawców.</cbc:Note>
+         <cbc:SMESuitableIndicator>true</cbc:SMESuitableIndicator>
+         <cac:MainCommodityClassification>
+            <cbc:ItemClassificationCode listName="cpv">35332000</cbc:ItemClassificationCode>
+         </cac:MainCommodityClassification>
+         <cac:RealizedLocation>
+            <cac:Address>
+               <cbc:StreetName>1 Regionalna Baza Logistyczna,  Skład Gdynia</cbc:StreetName>
+               <cbc:CityName>Gdynia</cbc:CityName>
+               <cbc:PostalZone>81-904</cbc:PostalZone>
+               <cbc:CountrySubentityCode listName="nuts">PL633</cbc:CountrySubentityCode>
+               <cac:Country>
+                  <cbc:IdentificationCode listName="country">POL</cbc:IdentificationCode>
+               </cac:Country>
+            </cac:Address>
+         </cac:RealizedLocation>
+         <cac:PlannedPeriod>
+            <cbc:DurationMeasure unitCode="YEAR">4</cbc:DurationMeasure>
+         </cac:PlannedPeriod>
+         <cac:ContractExtension>
+            <cbc:MaximumNumberNumeric>0</cbc:MaximumNumberNumeric>
+         </cac:ContractExtension>
+      </cac:ProcurementProject>
+   </cac:ProcurementProjectLot>
+</ContractNotice>
