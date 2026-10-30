@@ -129,6 +129,13 @@ An empty `deadline` usually means the notice uses a request-to-participate deadl
   Method is in the module docstring; supplier-uploaded documents go in `data/supplier_evidence/`
   (see its README). Source responses are cached in `.cache/dd/`; `--offline` re-scores from the cache.
 
+## Supabase (project `hackathon`, org SalesPatriot)
+
+Live TED data for our scope is synced **hourly** (pg_cron → Edge Function `ted-sync`) into
+`ted_notices`, `ted_awards` and the view `ted_open_tenders`, all publicly readable via PostgREST.
+Status: `GET https://aodxjmjnsqvadxcrepfr.supabase.co/functions/v1/ted-sync`. Code in `supabase/`;
+details, API examples and limits in `knowledge_base/25-supabase-ted-sync.md`. Never deploy to the eJazdy projects.
+
 ## Due diligence sources (free, no key, checked 2026-10-30)
 
 | Scope | Source | Gives |

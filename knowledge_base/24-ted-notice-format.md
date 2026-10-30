@@ -45,6 +45,11 @@ On macOS with python.org Python, set `SSL_CERT_FILE` to certifi's bundle if you 
 - **Restricted procedures** have no `deadline-receipt-tender-date-lot`, only `deadline-receipt-request`.
 - **Consortia:** `winner-name` lists each member and `tendering-party-name` holds the joint name (692794).
 
+## Caveat: notices before eForms (pre late 2023)
+In the Search API, older notices (back to 2016 in our scope) have no `winner-*`, `title-proc` or
+`description-proc` fields, only legacy ones such as `total-value`, `TI` and `FT`. Winners for that period
+exist only in the full text or the legacy TED XML. Example: `6027-2018` has 62 fields and no winner.
+
 ## Caveat: lots
 In the JSON every per-lot field is a flat list. **On multi-lot notices you cannot reliably pair
 winner ↔ lot ↔ value from the JSON.** For lot-level truth, read the XML `NoticeResult` (as
