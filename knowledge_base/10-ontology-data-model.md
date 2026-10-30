@@ -21,6 +21,7 @@ added automatically; changes to the *schema* go through validation (human-approv
 
 Reuse the EU **eProcurement Ontology (ePO)** for procurement entities (buyer, notice, lot,
 award, contract) and extend it with capabilities, facilities and business relationships.
+Decision, gaps and implementation: [19-ted-epo-ontology.md](19-ted-epo-ontology.md).
 
 ## Entities
 | Entity | Key attributes |

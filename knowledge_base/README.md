@@ -39,6 +39,7 @@ user or judge. If a fact is missing, say it is missing — do not invent it.
 
 ### Design
 - [10-ontology-data-model.md](10-ontology-data-model.md) — entities, relations, evidence and confidence fields
+- [19-ted-epo-ontology.md](19-ted-epo-ontology.md) — **decision: reuse EU ePO (OP-TED) + our `sp:` extension**, tested SPARQL, TED → KRS chain
 - [11-rag-embeddings-graph.md](11-rag-embeddings-graph.md) — when to use vectors, graph or SQL
 - [12-historical-intelligence.md](12-historical-intelligence.md) — what past tenders tell us, pattern library
 - [13-architecture-pipeline.md](13-architecture-pipeline.md) — layers, collectors, Supabase schema

@@ -20,7 +20,11 @@ Reference implementation: `../ted_open_tenders.py`.
 ## Fields confirmed to return data
 `publication-number`, `ND`, `PD` (published), `TI` (title, dict by language), `DT` (tender
 deadline), `DD` (participation deadline), `notice-type`, `buyer-name`, `buyer-country`,
-`winner-name`, `winner-country`, `classification-cpv`, `result-value-notice`.
+`winner-name`, `winner-country`, `winner-identifier` (free-text NIP/REGON/VAT, e.g.
+`"NIP: 6630002096; Regon: 290539889"`), `organisation-identifier-tenderer`,
+`classification-cpv`, `result-value-notice`.
+
+For graph queries in ePO (SPARQL), see [19-ted-epo-ontology.md](19-ted-epo-ontology.md).
 
 ## Response shape
 ```json

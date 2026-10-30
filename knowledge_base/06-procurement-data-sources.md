@@ -16,8 +16,9 @@ Rule from the brief: real public data only; respect site terms; don't hammer ser
   winner, contract value, **subcontracting info**, recurrence. `[OWN KNOWLEDGE]` +
   `[REPORTED]` (TED eForms docs)
 - Linked data: CPV is available via the EU Publications Office SPARQL endpoint (used by
-  `../cpv_codes.py`). TED also publishes notices as RDF using the **eProcurement Ontology
-  (ePO)** — reuse it instead of designing an ontology from zero. `[OWN KNOWLEDGE — check endpoint]`
+  `../cpv_codes.py`). The same endpoint serves TED notices as RDF in the **eProcurement
+  Ontology (ePO)** — reuse it instead of designing an ontology from zero.
+  `[VERIFIED 2026-10-30]` — see [19-ted-epo-ontology.md](19-ted-epo-ontology.md).
 
 ## e-Zamówienia (Poland)
 - National platform run by the Public Procurement Office (UZP). Hosts the **Biuletyn Zamówień

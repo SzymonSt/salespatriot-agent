@@ -27,7 +27,7 @@ about these, say the data is missing instead of guessing.
   `media.ezamowienia.gov.pl/pod/2023/01/Regulamin-korzystania-z-API.pdf`).
 - AU BIP / purchasing platform: URL, JSON vs HTML, pagination, update detection.
 - TED iteration pagination: exact request field for passing `iterationNextToken`.
-- TED RDF / SPARQL endpoint for notices in ePO.
+- ~~TED RDF / SPARQL endpoint for notices in ePO~~ → resolved: `https://publications.europa.eu/webapi/rdf/sparql`, see [19](19-ted-epo-ontology.md).
 - NCAGE public lookup tool URL and terms.
 - VAT white-list daily limits.
 - EDF results: format of participant lists (for the consortium graph).
