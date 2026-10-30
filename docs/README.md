@@ -1,5 +1,7 @@
 # SalesPatriot documentation
 
+Project overview: the [root README](../README.md).
+
 These documents describe the backend as it is implemented today and identify
 parts of the intended supplier/buyer workflow that are not implemented yet.
 
