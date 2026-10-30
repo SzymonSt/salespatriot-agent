@@ -114,3 +114,4 @@ An empty `deadline` usually means the notice uses a request-to-participate deadl
 - `knowledge_base/README.md` — index of the team knowledge base (challenge rules, pain points, data sources,
   TED API, ePO ontology decision, agent design, demo plan). Each file is small; load only what the task needs.
   Respect the evidence labels (`VERIFIED`, `REPORTED`, `HYPOTHESIS`…) — don't present unverified numbers as fact.
+  Due diligence design (KYC on onboarding vs per-deal checks): `knowledge_base/22-kyc-and-deal-due-diligence.md`.

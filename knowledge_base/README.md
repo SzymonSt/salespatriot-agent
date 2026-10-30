@@ -42,13 +42,14 @@ user or judge. If a fact is missing, say it is missing — do not invent it.
 - `cpv_defence_codes.csv` — defence-related CPV subset with `category` and `root_code`
 
 ### Design
-- [10-ontology-data-model.md](10-ontology-data-model.md) — entities, relations, evidence and confidence fields
+- [10-ontology-data-model.md](10-ontology-data-model.md) — compact graph: 9 entities, claims and evidence levels
 - [19-ted-epo-ontology.md](19-ted-epo-ontology.md) — **decision: reuse EU ePO (OP-TED) + our `sp:` extension**, tested SPARQL, TED → KRS chain
 - [11-rag-embeddings-graph.md](11-rag-embeddings-graph.md) — when to use vectors, graph or SQL
 - [12-historical-intelligence.md](12-historical-intelligence.md) — what past tenders tell us, pattern library
 - [13-architecture-pipeline.md](13-architecture-pipeline.md) — layers, collectors, Supabase schema
 - [14-agents-and-autonomy.md](14-agents-and-autonomy.md) — agent roles, bounded autonomy
-- [15-agent-due-diligence-network.md](15-agent-due-diligence-network.md) — public-data checks + agent-to-agent reference checks
+- [15-agent-due-diligence-network.md](15-agent-due-diligence-network.md) — agent-to-agent reference checks
+- [22-kyc-and-deal-due-diligence.md](22-kyc-and-deal-due-diligence.md) — **KYC on onboarding (K1–K11), monitoring, per-deal checks (D1–D14 incl. licences, transport)**
 
 ### Execution
 - [16-demo-plan.md](16-demo-plan.md) — what we show on stage, build priorities

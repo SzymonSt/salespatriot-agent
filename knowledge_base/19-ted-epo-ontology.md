@@ -76,10 +76,9 @@ document-verified supplier profile with no LLM involved.
 - Storage: Postgres (Supabase). Tables are named after ePO classes (`procedure`, `lot`,
   `organisation`, `award_outcome`…), columns after ePO properties (`legal_name`,
   `business_size`, `legal_basis`…). No triple store.
-- Extension namespace `sp:` (SalesPatriot): `CanonicalCompany`, `Capability`, `Facility`,
-  `CapacityStatement`, `Demand`, `Offer`, `Deal`, `AgentMessage`, `Claim` (evidence level),
-  `PeerAttestation`.
-- `sp:CanonicalCompany` ←`owl:sameAs`→ each per-notice ePO organisation.
+- Extension namespace `sp:` (SalesPatriot): `Company` (canonical), `Capability`, `Credential`,
+  `Demand`, `Offer`, `Deal`, `Check`, `Claim`. See the compact graph in [10](10-ontology-data-model.md).
+- `sp:Company` ←`owl:sameAs`→ each per-notice ePO organisation.
 - EU authority tables (legal-basis, buyer-legal-type, main-activity, economic-operator-size,
   winner-selection-status) are used as enums. ESPD-EDM criterion codes describe qualification requirements.
 
@@ -90,7 +89,7 @@ document-verified supplier profile with no LLM involved.
    awards (2,703 notices). Use iteration pagination. Cache in Supabase.
 3. **Identifier normaliser**: regex the free text into typed ids (`PL:NIP`, `PL:REGON`, `PL:KRS`,
    `DE:VAT`, `IT:VAT`/fiscal code…). Resolve Polish ids via VAT white list → KRS; EU VAT via
-   VIES. Output: `CanonicalCompany` + claims marked `document_verified`.
+   VIES. Output: canonical `Company` + claims marked `document_verified`.
 4. **Enrichment over SPARQL** (per notice, cached): business size, beneficial owners,
    procedure type, subcontractors.
 5. **Capability layer**: build `sp:Capability` from the winner's CPVs, KRS PKD codes and supplier input.

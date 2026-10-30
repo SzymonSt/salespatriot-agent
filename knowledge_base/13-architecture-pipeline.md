@@ -50,6 +50,8 @@ Files go to Supabase Storage; the DB keeps metadata, path, hash and tender link.
 | `companies` | Canonical company + identifiers (KRS, NIP, VAT, LEI, NCAGE) |
 | `capabilities` | Capability taxonomy, CPV mapping |
 | `claims` | Evidence-backed graph edges (see [10](10-ontology-data-model.md)) |
+| `credentials` | Licences and certificates with `valid_to` |
+| `checks` | KYC (K1–K11) and per-deal (D1–D14) check results, HARD/SCORE, evidence ([22](22-kyc-and-deal-due-diligence.md)) |
 | `demands` | Buyer needs (spec, qty, deadline, budget, limits) |
 | `offers` | Supplier quotes |
 | `deals` | Final agreed terms, status |

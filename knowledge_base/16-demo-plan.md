@@ -11,8 +11,9 @@ Fictitious buyer and demand (clearly labelled); real public data for profiles an
    TED awards) → profile with evidence levels appears.
 2. **Add an offer/capability to an existing company** → supplier agent re-matches against
    open demand and tenders.
-3. **Research agent / due diligence** — public check + agent-to-agent reference
-   ([15](15-agent-due-diligence-network.md)).
+3. **Due diligence** — KYC on onboarding, then per-deal checks (licences, capacity, transport,
+   price, references) with verdict GO / GO WITH CONDITIONS / ESCALATE / NO-GO
+   ([22](22-kyc-and-deal-due-diligence.md), [15](15-agent-due-diligence-network.md)).
 4. **Autonomous deal** — buyer agent posts demand → matching → RFQ → supplier agents quote
    (find partners if needed) → negotiation inside mandates → **deal closed, no human click** →
    transaction record + audit trail.

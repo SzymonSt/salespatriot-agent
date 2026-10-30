@@ -1,57 +1,32 @@
 # Agent due-diligence network
 
-## Team decision (from the brainstorm) `[TEAM DECISION]`
-1. Agents talk to each other **on the platform**.
-2. Due diligence runs in two steps:
-   - **first on public data** — collected agentless (registries, public results, online
-     ratings, company history) — see [07-company-data-sources.md](07-company-data-sources.md);
-   - **then through other agents** that have dealt with the company before — like calling
-     someone who bought from them ("reference call").
-3. The buyer's agent can ask the agent of a company that previously bought from a supplier
-   what that experience was like.
+`[TEAM DECISION]` Agents talk to each other on the platform. Due diligence runs in three layers;
+the full category list is in [22-kyc-and-deal-due-diligence.md](22-kyc-and-deal-due-diligence.md):
+1. **KYC on joining**: agentless checks on public data and registries (K1–K11).
+2. **Monitoring**: registry, sanctions and licence changes between deals.
+3. **Per deal** (D1–D14): includes **agent-to-agent reference checks**. The buyer's agent asks
+   the agents of the supplier's past customers how the cooperation went, like making a
+   reference phone call.
 
-## Step 1 — public-data check (agentless)
-Plain code, runs on onboarding and on schedule:
-KRS (exists, active, board, bankruptcy) → VAT white list (active VAT, bank account) → TED
-awards (past performance) → GLEIF (parent company) → sanctions screening → certificates
-lookup → website / reviews (low confidence).
-Output: claims with `document_verified` or `declared` status and a short risk summary.
-
-## Step 2 — agent-to-agent reference check
+## Reference check protocol (D13)
 ```
-Buyer agent ──"reference request about Supplier S"──> Platform
-Platform ──finds agents of past counterparties of S (from deals on platform / public awards)──>
-Reference agent(s) ──structured answer──> Buyer agent
+Buyer agent → platform: "reference request about supplier S"
+Platform → agents of S's past counterparties (deals on the platform / public TED awards)
+Reference agent → structured answer → stored as Claim(peer_attested)
 ```
-Structured questions (no free-form gossip):
-- delivered on time? (yes / late by N days / no)
-- quality issues? (none / minor / major)
-- quantity met? price changed after award?
-- communication / responsiveness (1–5)
-- would work again? (yes / no)
-
-Stored as claims with `verification_status = peer_attested`, `source = agent:<id>`,
-`observed_at`, and a link to the deal they refer to.
+Questions are structured, not free-form gossip: delivered on time? (yes / late N days / no) ·
+quality issues? (none / minor / major) · full quantity delivered? · price changed after
+award? · responsiveness 1–5 · would work again?
 
 ## Guardrails `[OWN KNOWLEDGE]`
-- **Deal-anchored only**: an agent can attest only about a counterparty it has a recorded deal
-  with (on the platform) or a public award linking them. Stops fake reviews and Sybil agents.
-- **Consent and scope**: the reference agent answers under its owner's sharing policy; it
-  never shares prices, specs or other confidential terms of its own deals. No customer data
-  (challenge rule).
-- **Weighting**: weight answers by the reference's own evidence level and by recency; decay
-  over time.
-- **Conflicts of interest**: ignore references from companies linked to the supplier (same
-  parent in GLEIF/KRS).
-- **Show, don't hide**: the buyer sees each reference with its source, not just a score.
-- **Right of reply**: the supplier agent can respond to negative references.
+- **Tied to a real deal**: an agent may vouch only for a counterparty it has a recorded deal or a
+  public award with. This blocks fake reviews and fake (Sybil) agents.
+- **Consent and scope**: the reference agent answers under its owner's sharing policy. It
+  never shares prices, specs or customer data.
+- **Weighting**: by the reference's own evidence level and by recency; references lose weight over time.
+- **Conflicts of interest**: ignore references from companies linked to the supplier (same owner).
+- **Transparency**: the buyer sees each reference with its source; the supplier gets a right of reply.
 
-## Why it matters
-Public data shows what a firm *did*; references show *how well*. This is the closest
-software equivalent of the phone calls buyers make today — and it gets better with every
-deal on the platform (network effect).
-
-## Demo idea
-Onboard a supplier → public check runs (live KRS + TED) → buyer agent asks for references →
-one seeded "past customer" agent answers → evidence panel updates → deal proceeds.
-Clearly label seeded/fictitious actors in the demo.
+## Demo
+Onboard a supplier → KYC runs live (KRS + VAT white list + TED) → a deal starts → the deal
+check runs, including one seeded and clearly labelled reference → verdict → the deal closes.
