@@ -1,0 +1,1575 @@
+[
+  {
+    "id": "Q01",
+    "purpose": "assess_tender",
+    "role": "supplier",
+    "viewer": "supplier-ita-n0057381f",
+    "subject": {
+      "publication_number": "730745-2026",
+      "supplier_id": "supplier-ita-n0057381f"
+    },
+    "question": "Fiocchi looks at the Polish Police 7.62x39 framework (730745-2026): who has won Polish small-calibre ammunition tenders before?",
+    "query_text": "Polish police small calibre ammunition awards winners",
+    "gt_scope": "POL buyers, CPV 3533*, title/description mentions ammunition or cartridges, artillery/grenades/rockets excluded",
+    "ground_truth": {
+      "template": "procedures",
+      "params": {
+        "country": "POL",
+        "cpv_re": "^3533",
+        "txt_re": "(amunic|nab[oó]j|cartridge|ammunition)",
+        "not_re": "(granat|grenade|mortar|moździerz|artyler|artiller|155|120 ?mm|30 ?mm|35 ?mm|rakiet|rocket)",
+        "buyer_re": null,
+        "buyer_ident": null
+      }
+    },
+    "proxy_embedding_pub": "730745-2026",
+    "quote": null,
+    "expected": [
+      {
+        "label": "Cenzin",
+        "re": "cenzin",
+        "type": "text",
+        "kind": "winner"
+      },
+      {
+        "label": "FAM-Pionki",
+        "re": "pionki",
+        "type": "text",
+        "kind": "winner"
+      },
+      {
+        "label": "Mildat",
+        "re": "mildat",
+        "type": "text",
+        "kind": "winner"
+      },
+      {
+        "label": "Archangelus",
+        "re": "archangelus",
+        "type": "text",
+        "kind": "winner"
+      },
+      {
+        "label": "DMA Puchalski",
+        "re": "puchalski",
+        "type": "text",
+        "kind": "winner"
+      },
+      {
+        "label": "Works 11",
+        "re": "works 11",
+        "type": "text",
+        "kind": "winner"
+      }
+    ],
+    "ground_truth_sql": "with prm(id, country, cpv_re, txt_re, not_re, buyer_re, buyer_ident) as (values\n  ('Q01', 'POL'::text, '^3533', '(amunic|nab[oó]j|cartridge|ammunition)', '(granat|grenade|mortar|moździerz|artyler|artiller|155|120 ?mm|30 ?mm|35 ?mm|rakiet|rocket)', null, null)\n),\np as (\n  select prm.id, coalesce(b.result_publication_numbers[1], b.tender_publication_number) as ref,\n         array_remove(array[b.tender_publication_number] || b.result_publication_numbers, null) as pubs,\n         b.outcome, b.published, b.bids_received, b.currency, b.quantity, b.quantity_unit, b.unit_price, b.winners\n  from prm join public.kb_baseline_procedures b on b.snapshot_id = 'baseline_v1'\n   and (prm.country is null or b.buyer_country = prm.country)\n   and (prm.cpv_re is null or exists (select 1 from unnest(b.cpv_codes) c where c ~ prm.cpv_re))\n   and (prm.txt_re is null or concat_ws(' ', b.title_en, b.title_original, b.description) ~* prm.txt_re)\n   and (prm.not_re is null or concat_ws(' ', b.title_en, b.title_original, b.description) !~* prm.not_re)\n   and ((prm.buyer_re is null and prm.buyer_ident is null)\n        or b.buyer_name ~* prm.buyer_re or b.buyer_identifier = prm.buyer_ident)\n),\nl as (\n  select prm.id, a.publication_number as ref, a.winner_name as name\n  from prm join public.ted_notices n\n    on (prm.country is null or n.buyer_country = prm.country)\n   and (prm.cpv_re is null or exists (select 1 from unnest(n.cpv_codes) c where c ~ prm.cpv_re))\n   and (prm.txt_re is null or concat_ws(' ', n.title_en, n.title_original, n.description) ~* prm.txt_re)\n   and (prm.not_re is null or concat_ws(' ', n.title_en, n.title_original, n.description) !~* prm.not_re)\n   and ((prm.buyer_re is null and prm.buyer_ident is null)\n        or n.buyer_name ~* prm.buyer_re or n.buyer_identifier = prm.buyer_ident)\n  join public.ted_awards a on a.publication_number = n.publication_number\n),\nw as (\n  select p.id, lower(btrim(regexp_replace(x ->> 'name', '[„”“\"]', '', 'g'))) as name, p.ref\n  from p cross join lateral jsonb_array_elements(coalesce(p.winners, '[]'::jsonb)) x\n  union\n  select l.id, lower(btrim(regexp_replace(l.name, '[„”“\"]', '', 'g'))), l.ref from l\n)\nselect prm.id, jsonb_build_object(\n  'n_procedures', (select count(*) from p where p.id = prm.id),\n  'n_awarded', (select count(*) from p where p.id = prm.id and p.outcome = 'awarded'),\n  'bids_p50_known', (select percentile_cont(0.5) within group (order by p.bids_received) from p\n                     where p.id = prm.id and p.bids_received > 0),\n  'unit_prices', (select jsonb_agg(jsonb_build_object('pubs', p.pubs, 'unit_price', p.unit_price, 'currency', p.currency,\n                                                      'quantity', p.quantity, 'unit', p.quantity_unit))\n                  from p where p.id = prm.id and p.unit_price is not null),\n  'top_winners', (select jsonb_agg(jsonb_build_object('name', t.name, 'notices', t.n) order by t.n desc, t.name)\n                  from (select w.name, count(distinct w.ref) as n from w where w.id = prm.id and w.name <> ''\n                        group by w.name order by 2 desc, 1 limit 8) t),\n  'recent_awarded', (select jsonb_agg(t.pubs order by t.published desc)\n                     from (select p.pubs, p.published from p where p.id = prm.id and p.outcome = 'awarded'\n                           order by p.published desc limit 5) t)\n) as ground_truth\nfrom prm"
+  },
+  {
+    "id": "Q02",
+    "purpose": "assess_tender",
+    "role": "supplier",
+    "viewer": "supplier-ita-n0057381f",
+    "subject": {
+      "publication_number": "397552-2026",
+      "supplier_id": "supplier-ita-n0057381f"
+    },
+    "question": "Fiocchi looks at the French Interior Ministry 9x19 tender (397552-2026): who wins French small-arms ammunition tenders?",
+    "query_text": "French 9x19 ammunition police award",
+    "gt_scope": "FRA buyers, CPV 3533*, munition/cartouche in text, grenades/shells/mortars excluded",
+    "ground_truth": {
+      "template": "procedures",
+      "params": {
+        "country": "FRA",
+        "cpv_re": "^3533",
+        "txt_re": "(munition|cartouche|ammunition)",
+        "not_re": "(grenade|obus|mortier)",
+        "buyer_re": null,
+        "buyer_ident": null
+      }
+    },
+    "proxy_embedding_pub": "397552-2026",
+    "quote": null,
+    "expected": [
+      {
+        "label": "Rivolier",
+        "re": "rivolier",
+        "type": "text",
+        "kind": "winner"
+      },
+      {
+        "label": "KNDS Ammo France",
+        "re": "knds ammo",
+        "type": "text",
+        "kind": "winner"
+      },
+      {
+        "label": "SARL STE",
+        "re": "sarl ste",
+        "type": "text",
+        "kind": "winner"
+      },
+      {
+        "label": "Thales DMS",
+        "re": "thales dms",
+        "type": "text",
+        "kind": "winner"
+      }
+    ],
+    "ground_truth_sql": "with prm(id, country, cpv_re, txt_re, not_re, buyer_re, buyer_ident) as (values\n  ('Q02', 'FRA'::text, '^3533', '(munition|cartouche|ammunition)', '(grenade|obus|mortier)', null, null)\n),\np as (\n  select prm.id, coalesce(b.result_publication_numbers[1], b.tender_publication_number) as ref,\n         array_remove(array[b.tender_publication_number] || b.result_publication_numbers, null) as pubs,\n         b.outcome, b.published, b.bids_received, b.currency, b.quantity, b.quantity_unit, b.unit_price, b.winners\n  from prm join public.kb_baseline_procedures b on b.snapshot_id = 'baseline_v1'\n   and (prm.country is null or b.buyer_country = prm.country)\n   and (prm.cpv_re is null or exists (select 1 from unnest(b.cpv_codes) c where c ~ prm.cpv_re))\n   and (prm.txt_re is null or concat_ws(' ', b.title_en, b.title_original, b.description) ~* prm.txt_re)\n   and (prm.not_re is null or concat_ws(' ', b.title_en, b.title_original, b.description) !~* prm.not_re)\n   and ((prm.buyer_re is null and prm.buyer_ident is null)\n        or b.buyer_name ~* prm.buyer_re or b.buyer_identifier = prm.buyer_ident)\n),\nl as (\n  select prm.id, a.publication_number as ref, a.winner_name as name\n  from prm join public.ted_notices n\n    on (prm.country is null or n.buyer_country = prm.country)\n   and (prm.cpv_re is null or exists (select 1 from unnest(n.cpv_codes) c where c ~ prm.cpv_re))\n   and (prm.txt_re is null or concat_ws(' ', n.title_en, n.title_original, n.description) ~* prm.txt_re)\n   and (prm.not_re is null or concat_ws(' ', n.title_en, n.title_original, n.description) !~* prm.not_re)\n   and ((prm.buyer_re is null and prm.buyer_ident is null)\n        or n.buyer_name ~* prm.buyer_re or n.buyer_identifier = prm.buyer_ident)\n  join public.ted_awards a on a.publication_number = n.publication_number\n),\nw as (\n  select p.id, lower(btrim(regexp_replace(x ->> 'name', '[„”“\"]', '', 'g'))) as name, p.ref\n  from p cross join lateral jsonb_array_elements(coalesce(p.winners, '[]'::jsonb)) x\n  union\n  select l.id, lower(btrim(regexp_replace(l.name, '[„”“\"]', '', 'g'))), l.ref from l\n)\nselect prm.id, jsonb_build_object(\n  'n_procedures', (select count(*) from p where p.id = prm.id),\n  'n_awarded', (select count(*) from p where p.id = prm.id and p.outcome = 'awarded'),\n  'bids_p50_known', (select percentile_cont(0.5) within group (order by p.bids_received) from p\n                     where p.id = prm.id and p.bids_received > 0),\n  'unit_prices', (select jsonb_agg(jsonb_build_object('pubs', p.pubs, 'unit_price', p.unit_price, 'currency', p.currency,\n                                                      'quantity', p.quantity, 'unit', p.quantity_unit))\n                  from p where p.id = prm.id and p.unit_price is not null),\n  'top_winners', (select jsonb_agg(jsonb_build_object('name', t.name, 'notices', t.n) order by t.n desc, t.name)\n                  from (select w.name, count(distinct w.ref) as n from w where w.id = prm.id and w.name <> ''\n                        group by w.name order by 2 desc, 1 limit 8) t),\n  'recent_awarded', (select jsonb_agg(t.pubs order by t.published desc)\n                     from (select p.pubs, p.published from p where p.id = prm.id and p.outcome = 'awarded'\n                           order by p.published desc limit 5) t)\n) as ground_truth\nfrom prm"
+  },
+  {
+    "id": "Q03",
+    "purpose": "assess_tender",
+    "role": "supplier",
+    "viewer": "supplier-deu-de811144119",
+    "subject": {
+      "publication_number": "695606-2026",
+      "supplier_id": "supplier-deu-de811144119"
+    },
+    "question": "Rheinmetall looks at the Spanish 155 mm ACA tender (695606-2026): who won Spanish 155 mm procedures and with how many bids?",
+    "query_text": "Spain 155 mm artillery ammunition award",
+    "gt_scope": "ESP buyers, CPV 353*, '155 mm' in text",
+    "ground_truth": {
+      "template": "procedures",
+      "params": {
+        "country": "ESP",
+        "cpv_re": "^353",
+        "txt_re": "155 ?mm",
+        "not_re": null,
+        "buyer_re": null,
+        "buyer_ident": null
+      }
+    },
+    "proxy_embedding_pub": "695606-2026",
+    "quote": null,
+    "expected": [
+      {
+        "label": "Rheinmetall Expal",
+        "re": "rheinmetall expal",
+        "type": "text",
+        "kind": "winner"
+      },
+      {
+        "label": "Fabrica de Municiones de Granada",
+        "re": "municiones de granada",
+        "type": "text",
+        "kind": "winner"
+      },
+      {
+        "label": "bids median 1",
+        "path": [
+          "priors",
+          "baseline",
+          "bids_median"
+        ],
+        "value": 1,
+        "tol": 0,
+        "type": "number",
+        "kind": "number"
+      }
+    ],
+    "ground_truth_sql": "with prm(id, country, cpv_re, txt_re, not_re, buyer_re, buyer_ident) as (values\n  ('Q03', 'ESP'::text, '^353', '155 ?mm', null, null, null)\n),\np as (\n  select prm.id, coalesce(b.result_publication_numbers[1], b.tender_publication_number) as ref,\n         array_remove(array[b.tender_publication_number] || b.result_publication_numbers, null) as pubs,\n         b.outcome, b.published, b.bids_received, b.currency, b.quantity, b.quantity_unit, b.unit_price, b.winners\n  from prm join public.kb_baseline_procedures b on b.snapshot_id = 'baseline_v1'\n   and (prm.country is null or b.buyer_country = prm.country)\n   and (prm.cpv_re is null or exists (select 1 from unnest(b.cpv_codes) c where c ~ prm.cpv_re))\n   and (prm.txt_re is null or concat_ws(' ', b.title_en, b.title_original, b.description) ~* prm.txt_re)\n   and (prm.not_re is null or concat_ws(' ', b.title_en, b.title_original, b.description) !~* prm.not_re)\n   and ((prm.buyer_re is null and prm.buyer_ident is null)\n        or b.buyer_name ~* prm.buyer_re or b.buyer_identifier = prm.buyer_ident)\n),\nl as (\n  select prm.id, a.publication_number as ref, a.winner_name as name\n  from prm join public.ted_notices n\n    on (prm.country is null or n.buyer_country = prm.country)\n   and (prm.cpv_re is null or exists (select 1 from unnest(n.cpv_codes) c where c ~ prm.cpv_re))\n   and (prm.txt_re is null or concat_ws(' ', n.title_en, n.title_original, n.description) ~* prm.txt_re)\n   and (prm.not_re is null or concat_ws(' ', n.title_en, n.title_original, n.description) !~* prm.not_re)\n   and ((prm.buyer_re is null and prm.buyer_ident is null)\n        or n.buyer_name ~* prm.buyer_re or n.buyer_identifier = prm.buyer_ident)\n  join public.ted_awards a on a.publication_number = n.publication_number\n),\nw as (\n  select p.id, lower(btrim(regexp_replace(x ->> 'name', '[„”“\"]', '', 'g'))) as name, p.ref\n  from p cross join lateral jsonb_array_elements(coalesce(p.winners, '[]'::jsonb)) x\n  union\n  select l.id, lower(btrim(regexp_replace(l.name, '[„”“\"]', '', 'g'))), l.ref from l\n)\nselect prm.id, jsonb_build_object(\n  'n_procedures', (select count(*) from p where p.id = prm.id),\n  'n_awarded', (select count(*) from p where p.id = prm.id and p.outcome = 'awarded'),\n  'bids_p50_known', (select percentile_cont(0.5) within group (order by p.bids_received) from p\n                     where p.id = prm.id and p.bids_received > 0),\n  'unit_prices', (select jsonb_agg(jsonb_build_object('pubs', p.pubs, 'unit_price', p.unit_price, 'currency', p.currency,\n                                                      'quantity', p.quantity, 'unit', p.quantity_unit))\n                  from p where p.id = prm.id and p.unit_price is not null),\n  'top_winners', (select jsonb_agg(jsonb_build_object('name', t.name, 'notices', t.n) order by t.n desc, t.name)\n                  from (select w.name, count(distinct w.ref) as n from w where w.id = prm.id and w.name <> ''\n                        group by w.name order by 2 desc, 1 limit 8) t),\n  'recent_awarded', (select jsonb_agg(t.pubs order by t.published desc)\n                     from (select p.pubs, p.published from p where p.id = prm.id and p.outcome = 'awarded'\n                           order by p.published desc limit 5) t)\n) as ground_truth\nfrom prm"
+  },
+  {
+    "id": "Q04",
+    "purpose": "assess_tender",
+    "role": "supplier",
+    "viewer": "supplier-deu-de811144119",
+    "subject": {
+      "publication_number": "749708-2026",
+      "supplier_id": "supplier-deu-de811144119"
+    },
+    "question": "Rheinmetall looks at the Polish naval gun ammunition tender (749708-2026, Agencja Uzbrojenia): who has won Agencja Uzbrojenia ammunition contracts?",
+    "query_text": "Agencja Uzbrojenia naval gun ammunition award",
+    "gt_scope": "buyer name Agencja Uzbrojenia (Polish Armament Agency), CPV 3533*",
+    "ground_truth": {
+      "template": "procedures",
+      "params": {
+        "country": null,
+        "cpv_re": "^3533",
+        "txt_re": null,
+        "not_re": null,
+        "buyer_re": "agencja uzbrojenia",
+        "buyer_ident": null
+      }
+    },
+    "proxy_embedding_pub": "749708-2026",
+    "quote": null,
+    "expected": [
+      {
+        "label": "Belma",
+        "re": "belma",
+        "type": "text",
+        "kind": "winner"
+      },
+      {
+        "label": "MESKO",
+        "re": "mesko",
+        "type": "text",
+        "kind": "winner"
+      },
+      {
+        "label": "Mildat",
+        "re": "mildat",
+        "type": "text",
+        "kind": "winner"
+      },
+      {
+        "label": "Chema",
+        "re": "chema sp",
+        "type": "text",
+        "kind": "winner"
+      },
+      {
+        "label": "Megmar",
+        "re": "megmar",
+        "type": "text",
+        "kind": "winner"
+      },
+      {
+        "label": "UMO",
+        "re": "umo sp",
+        "type": "text",
+        "kind": "winner"
+      }
+    ],
+    "ground_truth_sql": "with prm(id, country, cpv_re, txt_re, not_re, buyer_re, buyer_ident) as (values\n  ('Q04', null::text, '^3533', null, null, 'agencja uzbrojenia', null)\n),\np as (\n  select prm.id, coalesce(b.result_publication_numbers[1], b.tender_publication_number) as ref,\n         array_remove(array[b.tender_publication_number] || b.result_publication_numbers, null) as pubs,\n         b.outcome, b.published, b.bids_received, b.currency, b.quantity, b.quantity_unit, b.unit_price, b.winners\n  from prm join public.kb_baseline_procedures b on b.snapshot_id = 'baseline_v1'\n   and (prm.country is null or b.buyer_country = prm.country)\n   and (prm.cpv_re is null or exists (select 1 from unnest(b.cpv_codes) c where c ~ prm.cpv_re))\n   and (prm.txt_re is null or concat_ws(' ', b.title_en, b.title_original, b.description) ~* prm.txt_re)\n   and (prm.not_re is null or concat_ws(' ', b.title_en, b.title_original, b.description) !~* prm.not_re)\n   and ((prm.buyer_re is null and prm.buyer_ident is null)\n        or b.buyer_name ~* prm.buyer_re or b.buyer_identifier = prm.buyer_ident)\n),\nl as (\n  select prm.id, a.publication_number as ref, a.winner_name as name\n  from prm join public.ted_notices n\n    on (prm.country is null or n.buyer_country = prm.country)\n   and (prm.cpv_re is null or exists (select 1 from unnest(n.cpv_codes) c where c ~ prm.cpv_re))\n   and (prm.txt_re is null or concat_ws(' ', n.title_en, n.title_original, n.description) ~* prm.txt_re)\n   and (prm.not_re is null or concat_ws(' ', n.title_en, n.title_original, n.description) !~* prm.not_re)\n   and ((prm.buyer_re is null and prm.buyer_ident is null)\n        or n.buyer_name ~* prm.buyer_re or n.buyer_identifier = prm.buyer_ident)\n  join public.ted_awards a on a.publication_number = n.publication_number\n),\nw as (\n  select p.id, lower(btrim(regexp_replace(x ->> 'name', '[„”“\"]', '', 'g'))) as name, p.ref\n  from p cross join lateral jsonb_array_elements(coalesce(p.winners, '[]'::jsonb)) x\n  union\n  select l.id, lower(btrim(regexp_replace(l.name, '[„”“\"]', '', 'g'))), l.ref from l\n)\nselect prm.id, jsonb_build_object(\n  'n_procedures', (select count(*) from p where p.id = prm.id),\n  'n_awarded', (select count(*) from p where p.id = prm.id and p.outcome = 'awarded'),\n  'bids_p50_known', (select percentile_cont(0.5) within group (order by p.bids_received) from p\n                     where p.id = prm.id and p.bids_received > 0),\n  'unit_prices', (select jsonb_agg(jsonb_build_object('pubs', p.pubs, 'unit_price', p.unit_price, 'currency', p.currency,\n                                                      'quantity', p.quantity, 'unit', p.quantity_unit))\n                  from p where p.id = prm.id and p.unit_price is not null),\n  'top_winners', (select jsonb_agg(jsonb_build_object('name', t.name, 'notices', t.n) order by t.n desc, t.name)\n                  from (select w.name, count(distinct w.ref) as n from w where w.id = prm.id and w.name <> ''\n                        group by w.name order by 2 desc, 1 limit 8) t),\n  'recent_awarded', (select jsonb_agg(t.pubs order by t.published desc)\n                     from (select p.pubs, p.published from p where p.id = prm.id and p.outcome = 'awarded'\n                           order by p.published desc limit 5) t)\n) as ground_truth\nfrom prm"
+  },
+  {
+    "id": "Q05",
+    "purpose": "assess_tender",
+    "role": "supplier",
+    "viewer": "supplier-est-11535997",
+    "subject": {
+      "publication_number": "668765-2026",
+      "supplier_id": "supplier-est-11535997"
+    },
+    "question": "Baltic Fox looks at the Lithuanian 12.7x99 tender (668765-2026): who wins Lithuanian small-calibre ammunition tenders?",
+    "query_text": "Lithuania cartridges ammunition award winners",
+    "gt_scope": "LTU buyers, CPV 3533*, grenades/mortars/artillery excluded",
+    "ground_truth": {
+      "template": "procedures",
+      "params": {
+        "country": "LTU",
+        "cpv_re": "^3533",
+        "txt_re": null,
+        "not_re": "(granat|grenade|mortar|minosvaid|artiler)",
+        "buyer_re": null,
+        "buyer_ident": null
+      }
+    },
+    "proxy_embedding_pub": "668765-2026",
+    "quote": null,
+    "expected": [
+      {
+        "label": "UAB Defensa",
+        "re": "uab defensa",
+        "type": "text",
+        "kind": "winner"
+      },
+      {
+        "label": "Baltic Fox",
+        "re": "baltic fox",
+        "type": "text",
+        "kind": "winner"
+      },
+      {
+        "label": "Banzai",
+        "re": "banzai",
+        "type": "text",
+        "kind": "winner"
+      }
+    ],
+    "ground_truth_sql": "with prm(id, country, cpv_re, txt_re, not_re, buyer_re, buyer_ident) as (values\n  ('Q05', 'LTU'::text, '^3533', null, '(granat|grenade|mortar|minosvaid|artiler)', null, null)\n),\np as (\n  select prm.id, coalesce(b.result_publication_numbers[1], b.tender_publication_number) as ref,\n         array_remove(array[b.tender_publication_number] || b.result_publication_numbers, null) as pubs,\n         b.outcome, b.published, b.bids_received, b.currency, b.quantity, b.quantity_unit, b.unit_price, b.winners\n  from prm join public.kb_baseline_procedures b on b.snapshot_id = 'baseline_v1'\n   and (prm.country is null or b.buyer_country = prm.country)\n   and (prm.cpv_re is null or exists (select 1 from unnest(b.cpv_codes) c where c ~ prm.cpv_re))\n   and (prm.txt_re is null or concat_ws(' ', b.title_en, b.title_original, b.description) ~* prm.txt_re)\n   and (prm.not_re is null or concat_ws(' ', b.title_en, b.title_original, b.description) !~* prm.not_re)\n   and ((prm.buyer_re is null and prm.buyer_ident is null)\n        or b.buyer_name ~* prm.buyer_re or b.buyer_identifier = prm.buyer_ident)\n),\nl as (\n  select prm.id, a.publication_number as ref, a.winner_name as name\n  from prm join public.ted_notices n\n    on (prm.country is null or n.buyer_country = prm.country)\n   and (prm.cpv_re is null or exists (select 1 from unnest(n.cpv_codes) c where c ~ prm.cpv_re))\n   and (prm.txt_re is null or concat_ws(' ', n.title_en, n.title_original, n.description) ~* prm.txt_re)\n   and (prm.not_re is null or concat_ws(' ', n.title_en, n.title_original, n.description) !~* prm.not_re)\n   and ((prm.buyer_re is null and prm.buyer_ident is null)\n        or n.buyer_name ~* prm.buyer_re or n.buyer_identifier = prm.buyer_ident)\n  join public.ted_awards a on a.publication_number = n.publication_number\n),\nw as (\n  select p.id, lower(btrim(regexp_replace(x ->> 'name', '[„”“\"]', '', 'g'))) as name, p.ref\n  from p cross join lateral jsonb_array_elements(coalesce(p.winners, '[]'::jsonb)) x\n  union\n  select l.id, lower(btrim(regexp_replace(l.name, '[„”“\"]', '', 'g'))), l.ref from l\n)\nselect prm.id, jsonb_build_object(\n  'n_procedures', (select count(*) from p where p.id = prm.id),\n  'n_awarded', (select count(*) from p where p.id = prm.id and p.outcome = 'awarded'),\n  'bids_p50_known', (select percentile_cont(0.5) within group (order by p.bids_received) from p\n                     where p.id = prm.id and p.bids_received > 0),\n  'unit_prices', (select jsonb_agg(jsonb_build_object('pubs', p.pubs, 'unit_price', p.unit_price, 'currency', p.currency,\n                                                      'quantity', p.quantity, 'unit', p.quantity_unit))\n                  from p where p.id = prm.id and p.unit_price is not null),\n  'top_winners', (select jsonb_agg(jsonb_build_object('name', t.name, 'notices', t.n) order by t.n desc, t.name)\n                  from (select w.name, count(distinct w.ref) as n from w where w.id = prm.id and w.name <> ''\n                        group by w.name order by 2 desc, 1 limit 8) t),\n  'recent_awarded', (select jsonb_agg(t.pubs order by t.published desc)\n                     from (select p.pubs, p.published from p where p.id = prm.id and p.outcome = 'awarded'\n                           order by p.published desc limit 5) t)\n) as ground_truth\nfrom prm"
+  },
+  {
+    "id": "Q06",
+    "purpose": "assess_tender",
+    "role": "supplier",
+    "viewer": "supplier-rou-ro-15148839",
+    "subject": {
+      "publication_number": "755822-2026",
+      "supplier_id": "supplier-rou-ro-15148839"
+    },
+    "question": "How many bids does a Romanian MoD ammunition tender usually get, and who wins? (Transcarpat on 755822-2026)",
+    "query_text": "Romania ammunition cartridges award bids",
+    "gt_scope": "ROU buyers, CPV 3533*",
+    "ground_truth": {
+      "template": "procedures",
+      "params": {
+        "country": "ROU",
+        "cpv_re": "^3533",
+        "txt_re": null,
+        "not_re": null,
+        "buyer_re": null,
+        "buyer_ident": null
+      }
+    },
+    "proxy_embedding_pub": "755822-2026",
+    "quote": null,
+    "expected": [
+      {
+        "label": "Squad Store",
+        "re": "squad store",
+        "type": "text",
+        "kind": "winner"
+      },
+      {
+        "label": "Transcarpat",
+        "re": "transcarpat",
+        "type": "text",
+        "kind": "winner"
+      },
+      {
+        "label": "Cess Plus",
+        "re": "cess plus",
+        "type": "text",
+        "kind": "winner"
+      },
+      {
+        "label": "Romarm",
+        "re": "romarm",
+        "type": "text",
+        "kind": "winner"
+      },
+      {
+        "label": "Sellier & Bellot",
+        "re": "sellier",
+        "type": "text",
+        "kind": "winner"
+      },
+      {
+        "label": "bids median 2 (+-0.5)",
+        "path": [
+          "priors",
+          "baseline",
+          "bids_median"
+        ],
+        "value": 2,
+        "tol": 0.5,
+        "type": "number",
+        "kind": "number"
+      }
+    ],
+    "ground_truth_sql": "with prm(id, country, cpv_re, txt_re, not_re, buyer_re, buyer_ident) as (values\n  ('Q06', 'ROU'::text, '^3533', null, null, null, null)\n),\np as (\n  select prm.id, coalesce(b.result_publication_numbers[1], b.tender_publication_number) as ref,\n         array_remove(array[b.tender_publication_number] || b.result_publication_numbers, null) as pubs,\n         b.outcome, b.published, b.bids_received, b.currency, b.quantity, b.quantity_unit, b.unit_price, b.winners\n  from prm join public.kb_baseline_procedures b on b.snapshot_id = 'baseline_v1'\n   and (prm.country is null or b.buyer_country = prm.country)\n   and (prm.cpv_re is null or exists (select 1 from unnest(b.cpv_codes) c where c ~ prm.cpv_re))\n   and (prm.txt_re is null or concat_ws(' ', b.title_en, b.title_original, b.description) ~* prm.txt_re)\n   and (prm.not_re is null or concat_ws(' ', b.title_en, b.title_original, b.description) !~* prm.not_re)\n   and ((prm.buyer_re is null and prm.buyer_ident is null)\n        or b.buyer_name ~* prm.buyer_re or b.buyer_identifier = prm.buyer_ident)\n),\nl as (\n  select prm.id, a.publication_number as ref, a.winner_name as name\n  from prm join public.ted_notices n\n    on (prm.country is null or n.buyer_country = prm.country)\n   and (prm.cpv_re is null or exists (select 1 from unnest(n.cpv_codes) c where c ~ prm.cpv_re))\n   and (prm.txt_re is null or concat_ws(' ', n.title_en, n.title_original, n.description) ~* prm.txt_re)\n   and (prm.not_re is null or concat_ws(' ', n.title_en, n.title_original, n.description) !~* prm.not_re)\n   and ((prm.buyer_re is null and prm.buyer_ident is null)\n        or n.buyer_name ~* prm.buyer_re or n.buyer_identifier = prm.buyer_ident)\n  join public.ted_awards a on a.publication_number = n.publication_number\n),\nw as (\n  select p.id, lower(btrim(regexp_replace(x ->> 'name', '[„”“\"]', '', 'g'))) as name, p.ref\n  from p cross join lateral jsonb_array_elements(coalesce(p.winners, '[]'::jsonb)) x\n  union\n  select l.id, lower(btrim(regexp_replace(l.name, '[„”“\"]', '', 'g'))), l.ref from l\n)\nselect prm.id, jsonb_build_object(\n  'n_procedures', (select count(*) from p where p.id = prm.id),\n  'n_awarded', (select count(*) from p where p.id = prm.id and p.outcome = 'awarded'),\n  'bids_p50_known', (select percentile_cont(0.5) within group (order by p.bids_received) from p\n                     where p.id = prm.id and p.bids_received > 0),\n  'unit_prices', (select jsonb_agg(jsonb_build_object('pubs', p.pubs, 'unit_price', p.unit_price, 'currency', p.currency,\n                                                      'quantity', p.quantity, 'unit', p.quantity_unit))\n                  from p where p.id = prm.id and p.unit_price is not null),\n  'top_winners', (select jsonb_agg(jsonb_build_object('name', t.name, 'notices', t.n) order by t.n desc, t.name)\n                  from (select w.name, count(distinct w.ref) as n from w where w.id = prm.id and w.name <> ''\n                        group by w.name order by 2 desc, 1 limit 8) t),\n  'recent_awarded', (select jsonb_agg(t.pubs order by t.published desc)\n                     from (select p.pubs, p.published from p where p.id = prm.id and p.outcome = 'awarded'\n                           order by p.published desc limit 5) t)\n) as ground_truth\nfrom prm"
+  },
+  {
+    "id": "Q07",
+    "purpose": "assess_tender",
+    "role": "supplier",
+    "viewer": "supplier-svk-35735473",
+    "subject": {
+      "publication_number": "615123-2026",
+      "supplier_id": "supplier-svk-35735473"
+    },
+    "question": "ERIK JV looks at the Czech Interior Ministry 5.56 framework (615123-2026): who wins Czech small-calibre ammunition tenders?",
+    "query_text": "Czech cartridges ammunition award winners",
+    "gt_scope": "CZE buyers, CPV 3533*, grenades/mortars/artillery excluded",
+    "ground_truth": {
+      "template": "procedures",
+      "params": {
+        "country": "CZE",
+        "cpv_re": "^3533",
+        "txt_re": null,
+        "not_re": "(granát|grenade|minomet|mortar|dělost)",
+        "buyer_re": null,
+        "buyer_ident": null
+      }
+    },
+    "proxy_embedding_pub": "615123-2026",
+    "quote": null,
+    "expected": [
+      {
+        "label": "Sellier & Bellot",
+        "re": "sellier",
+        "type": "text",
+        "kind": "winner"
+      },
+      {
+        "label": "Zeveta",
+        "re": "zeveta",
+        "type": "text",
+        "kind": "winner"
+      },
+      {
+        "label": "Bohemialov",
+        "re": "bohemialov",
+        "type": "text",
+        "kind": "winner"
+      },
+      {
+        "label": "CB Servis",
+        "re": "cb servis",
+        "type": "text",
+        "kind": "winner"
+      },
+      {
+        "label": "Cech Group",
+        "re": "cech group",
+        "type": "text",
+        "kind": "winner"
+      }
+    ],
+    "ground_truth_sql": "with prm(id, country, cpv_re, txt_re, not_re, buyer_re, buyer_ident) as (values\n  ('Q07', 'CZE'::text, '^3533', null, '(granát|grenade|minomet|mortar|dělost)', null, null)\n),\np as (\n  select prm.id, coalesce(b.result_publication_numbers[1], b.tender_publication_number) as ref,\n         array_remove(array[b.tender_publication_number] || b.result_publication_numbers, null) as pubs,\n         b.outcome, b.published, b.bids_received, b.currency, b.quantity, b.quantity_unit, b.unit_price, b.winners\n  from prm join public.kb_baseline_procedures b on b.snapshot_id = 'baseline_v1'\n   and (prm.country is null or b.buyer_country = prm.country)\n   and (prm.cpv_re is null or exists (select 1 from unnest(b.cpv_codes) c where c ~ prm.cpv_re))\n   and (prm.txt_re is null or concat_ws(' ', b.title_en, b.title_original, b.description) ~* prm.txt_re)\n   and (prm.not_re is null or concat_ws(' ', b.title_en, b.title_original, b.description) !~* prm.not_re)\n   and ((prm.buyer_re is null and prm.buyer_ident is null)\n        or b.buyer_name ~* prm.buyer_re or b.buyer_identifier = prm.buyer_ident)\n),\nl as (\n  select prm.id, a.publication_number as ref, a.winner_name as name\n  from prm join public.ted_notices n\n    on (prm.country is null or n.buyer_country = prm.country)\n   and (prm.cpv_re is null or exists (select 1 from unnest(n.cpv_codes) c where c ~ prm.cpv_re))\n   and (prm.txt_re is null or concat_ws(' ', n.title_en, n.title_original, n.description) ~* prm.txt_re)\n   and (prm.not_re is null or concat_ws(' ', n.title_en, n.title_original, n.description) !~* prm.not_re)\n   and ((prm.buyer_re is null and prm.buyer_ident is null)\n        or n.buyer_name ~* prm.buyer_re or n.buyer_identifier = prm.buyer_ident)\n  join public.ted_awards a on a.publication_number = n.publication_number\n),\nw as (\n  select p.id, lower(btrim(regexp_replace(x ->> 'name', '[„”“\"]', '', 'g'))) as name, p.ref\n  from p cross join lateral jsonb_array_elements(coalesce(p.winners, '[]'::jsonb)) x\n  union\n  select l.id, lower(btrim(regexp_replace(l.name, '[„”“\"]', '', 'g'))), l.ref from l\n)\nselect prm.id, jsonb_build_object(\n  'n_procedures', (select count(*) from p where p.id = prm.id),\n  'n_awarded', (select count(*) from p where p.id = prm.id and p.outcome = 'awarded'),\n  'bids_p50_known', (select percentile_cont(0.5) within group (order by p.bids_received) from p\n                     where p.id = prm.id and p.bids_received > 0),\n  'unit_prices', (select jsonb_agg(jsonb_build_object('pubs', p.pubs, 'unit_price', p.unit_price, 'currency', p.currency,\n                                                      'quantity', p.quantity, 'unit', p.quantity_unit))\n                  from p where p.id = prm.id and p.unit_price is not null),\n  'top_winners', (select jsonb_agg(jsonb_build_object('name', t.name, 'notices', t.n) order by t.n desc, t.name)\n                  from (select w.name, count(distinct w.ref) as n from w where w.id = prm.id and w.name <> ''\n                        group by w.name order by 2 desc, 1 limit 8) t),\n  'recent_awarded', (select jsonb_agg(t.pubs order by t.published desc)\n                     from (select p.pubs, p.published from p where p.id = prm.id and p.outcome = 'awarded'\n                           order by p.published desc limit 5) t)\n) as ground_truth\nfrom prm"
+  },
+  {
+    "id": "Q08",
+    "purpose": "find_suppliers",
+    "role": "buyer",
+    "subject": {
+      "family_id": "ammunition.small_calibre",
+      "calibre": "9x19",
+      "country": "POL"
+    },
+    "question": "Who has supplied 9x19 ammunition to Polish buyers and at what unit price?",
+    "query_text": "who supplied 9x19 ammunition to Polish buyers and at what unit price",
+    "gt_scope": "POL buyers, CPV 3533*, 9x19/Parabellum in text, pistol purchases excluded",
+    "ground_truth": {
+      "template": "procedures",
+      "params": {
+        "country": "POL",
+        "cpv_re": "^3533",
+        "txt_re": "(9 ?x ?19|parabellum)",
+        "not_re": "pistolet",
+        "buyer_re": null,
+        "buyer_ident": null
+      }
+    },
+    "viewer": null,
+    "proxy_embedding_pub": null,
+    "quote": null,
+    "expected": [
+      {
+        "label": "Cenzin",
+        "re": "cenzin",
+        "type": "text",
+        "kind": "winner"
+      },
+      {
+        "label": "Archangelus",
+        "re": "archangelus",
+        "type": "text",
+        "kind": "winner"
+      },
+      {
+        "label": "Kaliber",
+        "re": "kaliber sp",
+        "type": "text",
+        "kind": "winner"
+      },
+      {
+        "label": "RWS Cetus",
+        "re": "cetus",
+        "type": "text",
+        "kind": "winner"
+      },
+      {
+        "label": "DMA Puchalski",
+        "re": "puchalski",
+        "type": "text",
+        "kind": "winner"
+      },
+      {
+        "label": "FAM-Pionki",
+        "re": "pionki",
+        "type": "text",
+        "kind": "winner"
+      },
+      {
+        "label": "Mildat",
+        "re": "mildat",
+        "type": "text",
+        "kind": "winner"
+      },
+      {
+        "label": "Triplex",
+        "re": "triplex",
+        "type": "text",
+        "kind": "winner"
+      },
+      {
+        "label": "unit price 1.353 PLN",
+        "path": [
+          "priors",
+          "baseline",
+          "unit_price_p50"
+        ],
+        "value": 1.353,
+        "tol": 0.01,
+        "type": "number",
+        "kind": "number"
+      },
+      {
+        "label": "636930-2024",
+        "re": "[^0-9](636930-2024|200447-2025)",
+        "type": "text",
+        "kind": "ref"
+      }
+    ],
+    "ground_truth_sql": "with prm(id, country, cpv_re, txt_re, not_re, buyer_re, buyer_ident) as (values\n  ('Q08', 'POL'::text, '^3533', '(9 ?x ?19|parabellum)', 'pistolet', null, null)\n),\np as (\n  select prm.id, coalesce(b.result_publication_numbers[1], b.tender_publication_number) as ref,\n         array_remove(array[b.tender_publication_number] || b.result_publication_numbers, null) as pubs,\n         b.outcome, b.published, b.bids_received, b.currency, b.quantity, b.quantity_unit, b.unit_price, b.winners\n  from prm join public.kb_baseline_procedures b on b.snapshot_id = 'baseline_v1'\n   and (prm.country is null or b.buyer_country = prm.country)\n   and (prm.cpv_re is null or exists (select 1 from unnest(b.cpv_codes) c where c ~ prm.cpv_re))\n   and (prm.txt_re is null or concat_ws(' ', b.title_en, b.title_original, b.description) ~* prm.txt_re)\n   and (prm.not_re is null or concat_ws(' ', b.title_en, b.title_original, b.description) !~* prm.not_re)\n   and ((prm.buyer_re is null and prm.buyer_ident is null)\n        or b.buyer_name ~* prm.buyer_re or b.buyer_identifier = prm.buyer_ident)\n),\nl as (\n  select prm.id, a.publication_number as ref, a.winner_name as name\n  from prm join public.ted_notices n\n    on (prm.country is null or n.buyer_country = prm.country)\n   and (prm.cpv_re is null or exists (select 1 from unnest(n.cpv_codes) c where c ~ prm.cpv_re))\n   and (prm.txt_re is null or concat_ws(' ', n.title_en, n.title_original, n.description) ~* prm.txt_re)\n   and (prm.not_re is null or concat_ws(' ', n.title_en, n.title_original, n.description) !~* prm.not_re)\n   and ((prm.buyer_re is null and prm.buyer_ident is null)\n        or n.buyer_name ~* prm.buyer_re or n.buyer_identifier = prm.buyer_ident)\n  join public.ted_awards a on a.publication_number = n.publication_number\n),\nw as (\n  select p.id, lower(btrim(regexp_replace(x ->> 'name', '[„”“\"]', '', 'g'))) as name, p.ref\n  from p cross join lateral jsonb_array_elements(coalesce(p.winners, '[]'::jsonb)) x\n  union\n  select l.id, lower(btrim(regexp_replace(l.name, '[„”“\"]', '', 'g'))), l.ref from l\n)\nselect prm.id, jsonb_build_object(\n  'n_procedures', (select count(*) from p where p.id = prm.id),\n  'n_awarded', (select count(*) from p where p.id = prm.id and p.outcome = 'awarded'),\n  'bids_p50_known', (select percentile_cont(0.5) within group (order by p.bids_received) from p\n                     where p.id = prm.id and p.bids_received > 0),\n  'unit_prices', (select jsonb_agg(jsonb_build_object('pubs', p.pubs, 'unit_price', p.unit_price, 'currency', p.currency,\n                                                      'quantity', p.quantity, 'unit', p.quantity_unit))\n                  from p where p.id = prm.id and p.unit_price is not null),\n  'top_winners', (select jsonb_agg(jsonb_build_object('name', t.name, 'notices', t.n) order by t.n desc, t.name)\n                  from (select w.name, count(distinct w.ref) as n from w where w.id = prm.id and w.name <> ''\n                        group by w.name order by 2 desc, 1 limit 8) t),\n  'recent_awarded', (select jsonb_agg(t.pubs order by t.published desc)\n                     from (select p.pubs, p.published from p where p.id = prm.id and p.outcome = 'awarded'\n                           order by p.published desc limit 5) t)\n) as ground_truth\nfrom prm"
+  },
+  {
+    "id": "Q09",
+    "purpose": "find_suppliers",
+    "role": "buyer",
+    "subject": {
+      "publication_number": "397552-2026"
+    },
+    "question": "French Interior Ministry 9x19 tender (397552-2026): which suppliers have delivered 9x19 ammunition to European public buyers?",
+    "query_text": "9x19 ammunition suppliers awards",
+    "gt_scope": "any buyer, CPV 3533*, 9x19/9 mm Parabellum/Luger in text, pistol purchases excluded",
+    "ground_truth": {
+      "template": "procedures",
+      "params": {
+        "country": null,
+        "cpv_re": "^3533",
+        "txt_re": "(9 ?x ?19|9 ?mm (para|luger)|parabellum)",
+        "not_re": "(pistol|pistolet|pistole)",
+        "buyer_re": null,
+        "buyer_ident": null
+      }
+    },
+    "viewer": null,
+    "proxy_embedding_pub": "397552-2026",
+    "quote": null,
+    "expected": [
+      {
+        "label": "Sellier & Bellot",
+        "re": "sellier",
+        "type": "text",
+        "kind": "winner"
+      },
+      {
+        "label": "Transcarpat",
+        "re": "transcarpat",
+        "type": "text",
+        "kind": "winner"
+      },
+      {
+        "label": "Cenzin",
+        "re": "cenzin",
+        "type": "text",
+        "kind": "winner"
+      },
+      {
+        "label": "RWS GmbH",
+        "re": "rws gmbh",
+        "type": "text",
+        "kind": "winner"
+      },
+      {
+        "label": "Shooting World",
+        "re": "shooting world",
+        "type": "text",
+        "kind": "winner"
+      },
+      {
+        "label": "Archangelus",
+        "re": "archangelus",
+        "type": "text",
+        "kind": "winner"
+      },
+      {
+        "label": "Belgian Weapons Corp.",
+        "re": "belgian weapons",
+        "type": "text",
+        "kind": "winner"
+      },
+      {
+        "label": "Beretta Benelli Iberica",
+        "re": "beretta benelli",
+        "type": "text",
+        "kind": "winner"
+      }
+    ],
+    "ground_truth_sql": "with prm(id, country, cpv_re, txt_re, not_re, buyer_re, buyer_ident) as (values\n  ('Q09', null::text, '^3533', '(9 ?x ?19|9 ?mm (para|luger)|parabellum)', '(pistol|pistolet|pistole)', null, null)\n),\np as (\n  select prm.id, coalesce(b.result_publication_numbers[1], b.tender_publication_number) as ref,\n         array_remove(array[b.tender_publication_number] || b.result_publication_numbers, null) as pubs,\n         b.outcome, b.published, b.bids_received, b.currency, b.quantity, b.quantity_unit, b.unit_price, b.winners\n  from prm join public.kb_baseline_procedures b on b.snapshot_id = 'baseline_v1'\n   and (prm.country is null or b.buyer_country = prm.country)\n   and (prm.cpv_re is null or exists (select 1 from unnest(b.cpv_codes) c where c ~ prm.cpv_re))\n   and (prm.txt_re is null or concat_ws(' ', b.title_en, b.title_original, b.description) ~* prm.txt_re)\n   and (prm.not_re is null or concat_ws(' ', b.title_en, b.title_original, b.description) !~* prm.not_re)\n   and ((prm.buyer_re is null and prm.buyer_ident is null)\n        or b.buyer_name ~* prm.buyer_re or b.buyer_identifier = prm.buyer_ident)\n),\nl as (\n  select prm.id, a.publication_number as ref, a.winner_name as name\n  from prm join public.ted_notices n\n    on (prm.country is null or n.buyer_country = prm.country)\n   and (prm.cpv_re is null or exists (select 1 from unnest(n.cpv_codes) c where c ~ prm.cpv_re))\n   and (prm.txt_re is null or concat_ws(' ', n.title_en, n.title_original, n.description) ~* prm.txt_re)\n   and (prm.not_re is null or concat_ws(' ', n.title_en, n.title_original, n.description) !~* prm.not_re)\n   and ((prm.buyer_re is null and prm.buyer_ident is null)\n        or n.buyer_name ~* prm.buyer_re or n.buyer_identifier = prm.buyer_ident)\n  join public.ted_awards a on a.publication_number = n.publication_number\n),\nw as (\n  select p.id, lower(btrim(regexp_replace(x ->> 'name', '[„”“\"]', '', 'g'))) as name, p.ref\n  from p cross join lateral jsonb_array_elements(coalesce(p.winners, '[]'::jsonb)) x\n  union\n  select l.id, lower(btrim(regexp_replace(l.name, '[„”“\"]', '', 'g'))), l.ref from l\n)\nselect prm.id, jsonb_build_object(\n  'n_procedures', (select count(*) from p where p.id = prm.id),\n  'n_awarded', (select count(*) from p where p.id = prm.id and p.outcome = 'awarded'),\n  'bids_p50_known', (select percentile_cont(0.5) within group (order by p.bids_received) from p\n                     where p.id = prm.id and p.bids_received > 0),\n  'unit_prices', (select jsonb_agg(jsonb_build_object('pubs', p.pubs, 'unit_price', p.unit_price, 'currency', p.currency,\n                                                      'quantity', p.quantity, 'unit', p.quantity_unit))\n                  from p where p.id = prm.id and p.unit_price is not null),\n  'top_winners', (select jsonb_agg(jsonb_build_object('name', t.name, 'notices', t.n) order by t.n desc, t.name)\n                  from (select w.name, count(distinct w.ref) as n from w where w.id = prm.id and w.name <> ''\n                        group by w.name order by 2 desc, 1 limit 8) t),\n  'recent_awarded', (select jsonb_agg(t.pubs order by t.published desc)\n                     from (select p.pubs, p.published from p where p.id = prm.id and p.outcome = 'awarded'\n                           order by p.published desc limit 5) t)\n) as ground_truth\nfrom prm"
+  },
+  {
+    "id": "Q10",
+    "purpose": "find_suppliers",
+    "role": "buyer",
+    "viewer": "buyer-svn-5268923000",
+    "subject": {
+      "publication_number": "653973-2026"
+    },
+    "question": "Slovenian MoD 7.62x39 tender (653973-2026): who has supplied ammunition to Slovenian buyers?",
+    "query_text": "Slovenia ammunition cartridges suppliers",
+    "gt_scope": "SVN buyers, CPV 3533*",
+    "ground_truth": {
+      "template": "procedures",
+      "params": {
+        "country": "SVN",
+        "cpv_re": "^3533",
+        "txt_re": null,
+        "not_re": null,
+        "buyer_re": null,
+        "buyer_ident": null
+      }
+    },
+    "proxy_embedding_pub": "653973-2026",
+    "quote": null,
+    "expected": [
+      {
+        "label": "Panna Plus",
+        "re": "panna plus",
+        "type": "text",
+        "kind": "winner"
+      },
+      {
+        "label": "D Partner",
+        "re": "d partner",
+        "type": "text",
+        "kind": "winner"
+      },
+      {
+        "label": "Ancelj",
+        "re": "ancelj",
+        "type": "text",
+        "kind": "winner"
+      },
+      {
+        "label": "Arex",
+        "re": "arex",
+        "type": "text",
+        "kind": "winner"
+      },
+      {
+        "label": "Ensign-Bickford",
+        "re": "ensign.bickford",
+        "type": "text",
+        "kind": "winner"
+      },
+      {
+        "label": "Forcit",
+        "re": "forcit",
+        "type": "text",
+        "kind": "winner"
+      },
+      {
+        "label": "Group 22",
+        "re": "group 22",
+        "type": "text",
+        "kind": "winner"
+      },
+      {
+        "label": "Koptex",
+        "re": "koptex",
+        "type": "text",
+        "kind": "winner"
+      }
+    ],
+    "ground_truth_sql": "with prm(id, country, cpv_re, txt_re, not_re, buyer_re, buyer_ident) as (values\n  ('Q10', 'SVN'::text, '^3533', null, null, null, null)\n),\np as (\n  select prm.id, coalesce(b.result_publication_numbers[1], b.tender_publication_number) as ref,\n         array_remove(array[b.tender_publication_number] || b.result_publication_numbers, null) as pubs,\n         b.outcome, b.published, b.bids_received, b.currency, b.quantity, b.quantity_unit, b.unit_price, b.winners\n  from prm join public.kb_baseline_procedures b on b.snapshot_id = 'baseline_v1'\n   and (prm.country is null or b.buyer_country = prm.country)\n   and (prm.cpv_re is null or exists (select 1 from unnest(b.cpv_codes) c where c ~ prm.cpv_re))\n   and (prm.txt_re is null or concat_ws(' ', b.title_en, b.title_original, b.description) ~* prm.txt_re)\n   and (prm.not_re is null or concat_ws(' ', b.title_en, b.title_original, b.description) !~* prm.not_re)\n   and ((prm.buyer_re is null and prm.buyer_ident is null)\n        or b.buyer_name ~* prm.buyer_re or b.buyer_identifier = prm.buyer_ident)\n),\nl as (\n  select prm.id, a.publication_number as ref, a.winner_name as name\n  from prm join public.ted_notices n\n    on (prm.country is null or n.buyer_country = prm.country)\n   and (prm.cpv_re is null or exists (select 1 from unnest(n.cpv_codes) c where c ~ prm.cpv_re))\n   and (prm.txt_re is null or concat_ws(' ', n.title_en, n.title_original, n.description) ~* prm.txt_re)\n   and (prm.not_re is null or concat_ws(' ', n.title_en, n.title_original, n.description) !~* prm.not_re)\n   and ((prm.buyer_re is null and prm.buyer_ident is null)\n        or n.buyer_name ~* prm.buyer_re or n.buyer_identifier = prm.buyer_ident)\n  join public.ted_awards a on a.publication_number = n.publication_number\n),\nw as (\n  select p.id, lower(btrim(regexp_replace(x ->> 'name', '[„”“\"]', '', 'g'))) as name, p.ref\n  from p cross join lateral jsonb_array_elements(coalesce(p.winners, '[]'::jsonb)) x\n  union\n  select l.id, lower(btrim(regexp_replace(l.name, '[„”“\"]', '', 'g'))), l.ref from l\n)\nselect prm.id, jsonb_build_object(\n  'n_procedures', (select count(*) from p where p.id = prm.id),\n  'n_awarded', (select count(*) from p where p.id = prm.id and p.outcome = 'awarded'),\n  'bids_p50_known', (select percentile_cont(0.5) within group (order by p.bids_received) from p\n                     where p.id = prm.id and p.bids_received > 0),\n  'unit_prices', (select jsonb_agg(jsonb_build_object('pubs', p.pubs, 'unit_price', p.unit_price, 'currency', p.currency,\n                                                      'quantity', p.quantity, 'unit', p.quantity_unit))\n                  from p where p.id = prm.id and p.unit_price is not null),\n  'top_winners', (select jsonb_agg(jsonb_build_object('name', t.name, 'notices', t.n) order by t.n desc, t.name)\n                  from (select w.name, count(distinct w.ref) as n from w where w.id = prm.id and w.name <> ''\n                        group by w.name order by 2 desc, 1 limit 8) t),\n  'recent_awarded', (select jsonb_agg(t.pubs order by t.published desc)\n                     from (select p.pubs, p.published from p where p.id = prm.id and p.outcome = 'awarded'\n                           order by p.published desc limit 5) t)\n) as ground_truth\nfrom prm"
+  },
+  {
+    "id": "Q11",
+    "purpose": "find_suppliers",
+    "role": "buyer",
+    "subject": {
+      "publication_number": "693937-2026"
+    },
+    "question": "Estonian 40 mm / 23 mm ammunition tender (693937-2026): who has supplied ammunition to Estonian buyers?",
+    "query_text": "Estonia ammunition 40 mm suppliers",
+    "gt_scope": "EST buyers, CPV 3533*",
+    "ground_truth": {
+      "template": "procedures",
+      "params": {
+        "country": "EST",
+        "cpv_re": "^3533",
+        "txt_re": null,
+        "not_re": null,
+        "buyer_re": null,
+        "buyer_ident": null
+      }
+    },
+    "viewer": null,
+    "proxy_embedding_pub": "693937-2026",
+    "quote": null,
+    "expected": [
+      {
+        "label": "Nordic Armoury",
+        "re": "nordic armoury",
+        "type": "text",
+        "kind": "winner"
+      },
+      {
+        "label": "CBC",
+        "re": "companhia brasileira",
+        "type": "text",
+        "kind": "winner"
+      },
+      {
+        "label": "Fiocchi",
+        "re": "fiocchi",
+        "type": "text",
+        "kind": "winner"
+      },
+      {
+        "label": "Jahipaun",
+        "re": "jahipaun",
+        "type": "text",
+        "kind": "winner"
+      },
+      {
+        "label": "Diehl Defence",
+        "re": "diehl",
+        "type": "text",
+        "kind": "winner"
+      },
+      {
+        "label": "IMI Systems",
+        "re": "imi systems",
+        "type": "text",
+        "kind": "winner"
+      },
+      {
+        "label": "Nammo Lapua",
+        "re": "nammo lapua",
+        "type": "text",
+        "kind": "winner"
+      },
+      {
+        "label": "Stingeris",
+        "re": "stingeris",
+        "type": "text",
+        "kind": "winner"
+      }
+    ],
+    "ground_truth_sql": "with prm(id, country, cpv_re, txt_re, not_re, buyer_re, buyer_ident) as (values\n  ('Q11', 'EST'::text, '^3533', null, null, null, null)\n),\np as (\n  select prm.id, coalesce(b.result_publication_numbers[1], b.tender_publication_number) as ref,\n         array_remove(array[b.tender_publication_number] || b.result_publication_numbers, null) as pubs,\n         b.outcome, b.published, b.bids_received, b.currency, b.quantity, b.quantity_unit, b.unit_price, b.winners\n  from prm join public.kb_baseline_procedures b on b.snapshot_id = 'baseline_v1'\n   and (prm.country is null or b.buyer_country = prm.country)\n   and (prm.cpv_re is null or exists (select 1 from unnest(b.cpv_codes) c where c ~ prm.cpv_re))\n   and (prm.txt_re is null or concat_ws(' ', b.title_en, b.title_original, b.description) ~* prm.txt_re)\n   and (prm.not_re is null or concat_ws(' ', b.title_en, b.title_original, b.description) !~* prm.not_re)\n   and ((prm.buyer_re is null and prm.buyer_ident is null)\n        or b.buyer_name ~* prm.buyer_re or b.buyer_identifier = prm.buyer_ident)\n),\nl as (\n  select prm.id, a.publication_number as ref, a.winner_name as name\n  from prm join public.ted_notices n\n    on (prm.country is null or n.buyer_country = prm.country)\n   and (prm.cpv_re is null or exists (select 1 from unnest(n.cpv_codes) c where c ~ prm.cpv_re))\n   and (prm.txt_re is null or concat_ws(' ', n.title_en, n.title_original, n.description) ~* prm.txt_re)\n   and (prm.not_re is null or concat_ws(' ', n.title_en, n.title_original, n.description) !~* prm.not_re)\n   and ((prm.buyer_re is null and prm.buyer_ident is null)\n        or n.buyer_name ~* prm.buyer_re or n.buyer_identifier = prm.buyer_ident)\n  join public.ted_awards a on a.publication_number = n.publication_number\n),\nw as (\n  select p.id, lower(btrim(regexp_replace(x ->> 'name', '[„”“\"]', '', 'g'))) as name, p.ref\n  from p cross join lateral jsonb_array_elements(coalesce(p.winners, '[]'::jsonb)) x\n  union\n  select l.id, lower(btrim(regexp_replace(l.name, '[„”“\"]', '', 'g'))), l.ref from l\n)\nselect prm.id, jsonb_build_object(\n  'n_procedures', (select count(*) from p where p.id = prm.id),\n  'n_awarded', (select count(*) from p where p.id = prm.id and p.outcome = 'awarded'),\n  'bids_p50_known', (select percentile_cont(0.5) within group (order by p.bids_received) from p\n                     where p.id = prm.id and p.bids_received > 0),\n  'unit_prices', (select jsonb_agg(jsonb_build_object('pubs', p.pubs, 'unit_price', p.unit_price, 'currency', p.currency,\n                                                      'quantity', p.quantity, 'unit', p.quantity_unit))\n                  from p where p.id = prm.id and p.unit_price is not null),\n  'top_winners', (select jsonb_agg(jsonb_build_object('name', t.name, 'notices', t.n) order by t.n desc, t.name)\n                  from (select w.name, count(distinct w.ref) as n from w where w.id = prm.id and w.name <> ''\n                        group by w.name order by 2 desc, 1 limit 8) t),\n  'recent_awarded', (select jsonb_agg(t.pubs order by t.published desc)\n                     from (select p.pubs, p.published from p where p.id = prm.id and p.outcome = 'awarded'\n                           order by p.published desc limit 5) t)\n) as ground_truth\nfrom prm"
+  },
+  {
+    "id": "Q12",
+    "purpose": "find_suppliers",
+    "role": "buyer",
+    "subject": {
+      "publication_number": "659995-2026"
+    },
+    "question": "Bulgarian MoD 40 mm automatic grenade launcher tender (659995-2026): who has supplied firearms to Bulgarian buyers?",
+    "query_text": "Bulgaria grenade launcher firearms suppliers",
+    "gt_scope": "BGR buyers, CPV 3532*",
+    "ground_truth": {
+      "template": "procedures",
+      "params": {
+        "country": "BGR",
+        "cpv_re": "^3532",
+        "txt_re": null,
+        "not_re": null,
+        "buyer_re": null,
+        "buyer_ident": null
+      }
+    },
+    "viewer": null,
+    "proxy_embedding_pub": "659995-2026",
+    "quote": null,
+    "expected": [
+      {
+        "label": "ISD BG (АЙЕСДИ БГ)",
+        "re": "айесди",
+        "type": "text",
+        "kind": "winner"
+      },
+      {
+        "label": "Bulgarian Arms and Defence Systems",
+        "re": "бългериън армс",
+        "type": "text",
+        "kind": "winner"
+      }
+    ],
+    "ground_truth_sql": "with prm(id, country, cpv_re, txt_re, not_re, buyer_re, buyer_ident) as (values\n  ('Q12', 'BGR'::text, '^3532', null, null, null, null)\n),\np as (\n  select prm.id, coalesce(b.result_publication_numbers[1], b.tender_publication_number) as ref,\n         array_remove(array[b.tender_publication_number] || b.result_publication_numbers, null) as pubs,\n         b.outcome, b.published, b.bids_received, b.currency, b.quantity, b.quantity_unit, b.unit_price, b.winners\n  from prm join public.kb_baseline_procedures b on b.snapshot_id = 'baseline_v1'\n   and (prm.country is null or b.buyer_country = prm.country)\n   and (prm.cpv_re is null or exists (select 1 from unnest(b.cpv_codes) c where c ~ prm.cpv_re))\n   and (prm.txt_re is null or concat_ws(' ', b.title_en, b.title_original, b.description) ~* prm.txt_re)\n   and (prm.not_re is null or concat_ws(' ', b.title_en, b.title_original, b.description) !~* prm.not_re)\n   and ((prm.buyer_re is null and prm.buyer_ident is null)\n        or b.buyer_name ~* prm.buyer_re or b.buyer_identifier = prm.buyer_ident)\n),\nl as (\n  select prm.id, a.publication_number as ref, a.winner_name as name\n  from prm join public.ted_notices n\n    on (prm.country is null or n.buyer_country = prm.country)\n   and (prm.cpv_re is null or exists (select 1 from unnest(n.cpv_codes) c where c ~ prm.cpv_re))\n   and (prm.txt_re is null or concat_ws(' ', n.title_en, n.title_original, n.description) ~* prm.txt_re)\n   and (prm.not_re is null or concat_ws(' ', n.title_en, n.title_original, n.description) !~* prm.not_re)\n   and ((prm.buyer_re is null and prm.buyer_ident is null)\n        or n.buyer_name ~* prm.buyer_re or n.buyer_identifier = prm.buyer_ident)\n  join public.ted_awards a on a.publication_number = n.publication_number\n),\nw as (\n  select p.id, lower(btrim(regexp_replace(x ->> 'name', '[„”“\"]', '', 'g'))) as name, p.ref\n  from p cross join lateral jsonb_array_elements(coalesce(p.winners, '[]'::jsonb)) x\n  union\n  select l.id, lower(btrim(regexp_replace(l.name, '[„”“\"]', '', 'g'))), l.ref from l\n)\nselect prm.id, jsonb_build_object(\n  'n_procedures', (select count(*) from p where p.id = prm.id),\n  'n_awarded', (select count(*) from p where p.id = prm.id and p.outcome = 'awarded'),\n  'bids_p50_known', (select percentile_cont(0.5) within group (order by p.bids_received) from p\n                     where p.id = prm.id and p.bids_received > 0),\n  'unit_prices', (select jsonb_agg(jsonb_build_object('pubs', p.pubs, 'unit_price', p.unit_price, 'currency', p.currency,\n                                                      'quantity', p.quantity, 'unit', p.quantity_unit))\n                  from p where p.id = prm.id and p.unit_price is not null),\n  'top_winners', (select jsonb_agg(jsonb_build_object('name', t.name, 'notices', t.n) order by t.n desc, t.name)\n                  from (select w.name, count(distinct w.ref) as n from w where w.id = prm.id and w.name <> ''\n                        group by w.name order by 2 desc, 1 limit 8) t),\n  'recent_awarded', (select jsonb_agg(t.pubs order by t.published desc)\n                     from (select p.pubs, p.published from p where p.id = prm.id and p.outcome = 'awarded'\n                           order by p.published desc limit 5) t)\n) as ground_truth\nfrom prm"
+  },
+  {
+    "id": "Q13",
+    "purpose": "find_suppliers",
+    "role": "buyer",
+    "subject": {
+      "publication_number": "630124-2026"
+    },
+    "question": "Slovak prison service long firearms tender (630124-2026): who has supplied firearms to Slovak buyers?",
+    "query_text": "Slovakia firearms suppliers awards",
+    "gt_scope": "SVK buyers, CPV 3532*",
+    "ground_truth": {
+      "template": "procedures",
+      "params": {
+        "country": "SVK",
+        "cpv_re": "^3532",
+        "txt_re": null,
+        "not_re": null,
+        "buyer_re": null,
+        "buyer_ident": null
+      }
+    },
+    "viewer": null,
+    "proxy_embedding_pub": "630124-2026",
+    "quote": null,
+    "expected": [
+      {
+        "label": "ERIK JV",
+        "re": "erik jv",
+        "type": "text",
+        "kind": "winner"
+      },
+      {
+        "label": "Black Market",
+        "re": "black market",
+        "type": "text",
+        "kind": "winner"
+      },
+      {
+        "label": "Exima",
+        "re": "exima",
+        "type": "text",
+        "kind": "winner"
+      },
+      {
+        "label": "Glomex",
+        "re": "glomex",
+        "type": "text",
+        "kind": "winner"
+      },
+      {
+        "label": "Pyra",
+        "re": "pyra",
+        "type": "text",
+        "kind": "winner"
+      },
+      {
+        "label": "W.A.R. Defender",
+        "re": "defender s",
+        "type": "text",
+        "kind": "winner"
+      }
+    ],
+    "ground_truth_sql": "with prm(id, country, cpv_re, txt_re, not_re, buyer_re, buyer_ident) as (values\n  ('Q13', 'SVK'::text, '^3532', null, null, null, null)\n),\np as (\n  select prm.id, coalesce(b.result_publication_numbers[1], b.tender_publication_number) as ref,\n         array_remove(array[b.tender_publication_number] || b.result_publication_numbers, null) as pubs,\n         b.outcome, b.published, b.bids_received, b.currency, b.quantity, b.quantity_unit, b.unit_price, b.winners\n  from prm join public.kb_baseline_procedures b on b.snapshot_id = 'baseline_v1'\n   and (prm.country is null or b.buyer_country = prm.country)\n   and (prm.cpv_re is null or exists (select 1 from unnest(b.cpv_codes) c where c ~ prm.cpv_re))\n   and (prm.txt_re is null or concat_ws(' ', b.title_en, b.title_original, b.description) ~* prm.txt_re)\n   and (prm.not_re is null or concat_ws(' ', b.title_en, b.title_original, b.description) !~* prm.not_re)\n   and ((prm.buyer_re is null and prm.buyer_ident is null)\n        or b.buyer_name ~* prm.buyer_re or b.buyer_identifier = prm.buyer_ident)\n),\nl as (\n  select prm.id, a.publication_number as ref, a.winner_name as name\n  from prm join public.ted_notices n\n    on (prm.country is null or n.buyer_country = prm.country)\n   and (prm.cpv_re is null or exists (select 1 from unnest(n.cpv_codes) c where c ~ prm.cpv_re))\n   and (prm.txt_re is null or concat_ws(' ', n.title_en, n.title_original, n.description) ~* prm.txt_re)\n   and (prm.not_re is null or concat_ws(' ', n.title_en, n.title_original, n.description) !~* prm.not_re)\n   and ((prm.buyer_re is null and prm.buyer_ident is null)\n        or n.buyer_name ~* prm.buyer_re or n.buyer_identifier = prm.buyer_ident)\n  join public.ted_awards a on a.publication_number = n.publication_number\n),\nw as (\n  select p.id, lower(btrim(regexp_replace(x ->> 'name', '[„”“\"]', '', 'g'))) as name, p.ref\n  from p cross join lateral jsonb_array_elements(coalesce(p.winners, '[]'::jsonb)) x\n  union\n  select l.id, lower(btrim(regexp_replace(l.name, '[„”“\"]', '', 'g'))), l.ref from l\n)\nselect prm.id, jsonb_build_object(\n  'n_procedures', (select count(*) from p where p.id = prm.id),\n  'n_awarded', (select count(*) from p where p.id = prm.id and p.outcome = 'awarded'),\n  'bids_p50_known', (select percentile_cont(0.5) within group (order by p.bids_received) from p\n                     where p.id = prm.id and p.bids_received > 0),\n  'unit_prices', (select jsonb_agg(jsonb_build_object('pubs', p.pubs, 'unit_price', p.unit_price, 'currency', p.currency,\n                                                      'quantity', p.quantity, 'unit', p.quantity_unit))\n                  from p where p.id = prm.id and p.unit_price is not null),\n  'top_winners', (select jsonb_agg(jsonb_build_object('name', t.name, 'notices', t.n) order by t.n desc, t.name)\n                  from (select w.name, count(distinct w.ref) as n from w where w.id = prm.id and w.name <> ''\n                        group by w.name order by 2 desc, 1 limit 8) t),\n  'recent_awarded', (select jsonb_agg(t.pubs order by t.published desc)\n                     from (select p.pubs, p.published from p where p.id = prm.id and p.outcome = 'awarded'\n                           order by p.published desc limit 5) t)\n) as ground_truth\nfrom prm"
+  },
+  {
+    "id": "Q14",
+    "purpose": "evaluate_quote",
+    "role": "buyer",
+    "viewer": "buyer-esp-10000140000201",
+    "subject": {
+      "conversation_id": "318bc399-e234-4959-9684-3833008ec90b"
+    },
+    "proxy_embedding_pub": null,
+    "question": "Is 7,900 EUR per 155 mm round (5,000 rounds, demo conversation on 695606-2026) a fair quote?",
+    "query_text": null,
+    "gt_scope": "ESP buyers, CPV 353*, '155 mm' in text; unit prices only where a quantity is stated",
+    "ground_truth": {
+      "template": "procedures",
+      "params": {
+        "country": "ESP",
+        "cpv_re": "^353",
+        "txt_re": "155 ?mm",
+        "not_re": null,
+        "buyer_re": null,
+        "buyer_ident": null
+      }
+    },
+    "quote": null,
+    "expected": [
+      {
+        "label": "Rheinmetall Expal",
+        "re": "rheinmetall expal",
+        "type": "text",
+        "kind": "winner"
+      },
+      {
+        "label": "Fabrica de Municiones de Granada",
+        "re": "municiones de granada",
+        "type": "text",
+        "kind": "winner"
+      },
+      {
+        "label": "says no unit-price benchmark exists",
+        "re": "not benchmarked|indicative only|unit price unknown",
+        "type": "warning",
+        "kind": "warning"
+      }
+    ],
+    "ground_truth_sql": "with prm(id, country, cpv_re, txt_re, not_re, buyer_re, buyer_ident) as (values\n  ('Q14', 'ESP'::text, '^353', '155 ?mm', null, null, null)\n),\np as (\n  select prm.id, coalesce(b.result_publication_numbers[1], b.tender_publication_number) as ref,\n         array_remove(array[b.tender_publication_number] || b.result_publication_numbers, null) as pubs,\n         b.outcome, b.published, b.bids_received, b.currency, b.quantity, b.quantity_unit, b.unit_price, b.winners\n  from prm join public.kb_baseline_procedures b on b.snapshot_id = 'baseline_v1'\n   and (prm.country is null or b.buyer_country = prm.country)\n   and (prm.cpv_re is null or exists (select 1 from unnest(b.cpv_codes) c where c ~ prm.cpv_re))\n   and (prm.txt_re is null or concat_ws(' ', b.title_en, b.title_original, b.description) ~* prm.txt_re)\n   and (prm.not_re is null or concat_ws(' ', b.title_en, b.title_original, b.description) !~* prm.not_re)\n   and ((prm.buyer_re is null and prm.buyer_ident is null)\n        or b.buyer_name ~* prm.buyer_re or b.buyer_identifier = prm.buyer_ident)\n),\nl as (\n  select prm.id, a.publication_number as ref, a.winner_name as name\n  from prm join public.ted_notices n\n    on (prm.country is null or n.buyer_country = prm.country)\n   and (prm.cpv_re is null or exists (select 1 from unnest(n.cpv_codes) c where c ~ prm.cpv_re))\n   and (prm.txt_re is null or concat_ws(' ', n.title_en, n.title_original, n.description) ~* prm.txt_re)\n   and (prm.not_re is null or concat_ws(' ', n.title_en, n.title_original, n.description) !~* prm.not_re)\n   and ((prm.buyer_re is null and prm.buyer_ident is null)\n        or n.buyer_name ~* prm.buyer_re or n.buyer_identifier = prm.buyer_ident)\n  join public.ted_awards a on a.publication_number = n.publication_number\n),\nw as (\n  select p.id, lower(btrim(regexp_replace(x ->> 'name', '[„”“\"]', '', 'g'))) as name, p.ref\n  from p cross join lateral jsonb_array_elements(coalesce(p.winners, '[]'::jsonb)) x\n  union\n  select l.id, lower(btrim(regexp_replace(l.name, '[„”“\"]', '', 'g'))), l.ref from l\n)\nselect prm.id, jsonb_build_object(\n  'n_procedures', (select count(*) from p where p.id = prm.id),\n  'n_awarded', (select count(*) from p where p.id = prm.id and p.outcome = 'awarded'),\n  'bids_p50_known', (select percentile_cont(0.5) within group (order by p.bids_received) from p\n                     where p.id = prm.id and p.bids_received > 0),\n  'unit_prices', (select jsonb_agg(jsonb_build_object('pubs', p.pubs, 'unit_price', p.unit_price, 'currency', p.currency,\n                                                      'quantity', p.quantity, 'unit', p.quantity_unit))\n                  from p where p.id = prm.id and p.unit_price is not null),\n  'top_winners', (select jsonb_agg(jsonb_build_object('name', t.name, 'notices', t.n) order by t.n desc, t.name)\n                  from (select w.name, count(distinct w.ref) as n from w where w.id = prm.id and w.name <> ''\n                        group by w.name order by 2 desc, 1 limit 8) t),\n  'recent_awarded', (select jsonb_agg(t.pubs order by t.published desc)\n                     from (select p.pubs, p.published from p where p.id = prm.id and p.outcome = 'awarded'\n                           order by p.published desc limit 5) t)\n) as ground_truth\nfrom prm"
+  },
+  {
+    "id": "Q15",
+    "purpose": "evaluate_quote_emulated",
+    "role": "buyer",
+    "subject": {
+      "family_id": "ammunition.small_calibre",
+      "calibre": "9x19",
+      "country": "POL"
+    },
+    "proxy_embedding_pub": null,
+    "quote": {
+      "unit_price": 1.6,
+      "currency": "PLN",
+      "quantity": 1000000
+    },
+    "question": "Is 1.60 PLN per 9x19 round (1,000,000 rounds) a fair offer for a Polish buyer?",
+    "gt_scope": "POL buyers, CPV 3533*, 9x19/Parabellum in text, pistol purchases excluded; unit prices where a quantity is stated",
+    "ground_truth": {
+      "template": "procedures",
+      "params": {
+        "country": "POL",
+        "cpv_re": "^3533",
+        "txt_re": "(9 ?x ?19|parabellum)",
+        "not_re": "pistolet",
+        "buyer_re": null,
+        "buyer_ident": null
+      }
+    },
+    "query_text": null,
+    "viewer": null,
+    "expected": [
+      {
+        "label": "unit price 1.353 PLN",
+        "path": [
+          "priors",
+          "baseline",
+          "unit_price_p50"
+        ],
+        "value": 1.353,
+        "tol": 0.01,
+        "type": "number",
+        "kind": "number"
+      },
+      {
+        "label": "636930-2024",
+        "re": "[^0-9](636930-2024|200447-2025)",
+        "type": "text",
+        "kind": "ref"
+      },
+      {
+        "label": "quote flagged above p75",
+        "re": "above_p75",
+        "type": "text",
+        "kind": "verdict"
+      }
+    ],
+    "ground_truth_sql": "with prm(id, country, cpv_re, txt_re, not_re, buyer_re, buyer_ident) as (values\n  ('Q15', 'POL'::text, '^3533', '(9 ?x ?19|parabellum)', 'pistolet', null, null)\n),\np as (\n  select prm.id, coalesce(b.result_publication_numbers[1], b.tender_publication_number) as ref,\n         array_remove(array[b.tender_publication_number] || b.result_publication_numbers, null) as pubs,\n         b.outcome, b.published, b.bids_received, b.currency, b.quantity, b.quantity_unit, b.unit_price, b.winners\n  from prm join public.kb_baseline_procedures b on b.snapshot_id = 'baseline_v1'\n   and (prm.country is null or b.buyer_country = prm.country)\n   and (prm.cpv_re is null or exists (select 1 from unnest(b.cpv_codes) c where c ~ prm.cpv_re))\n   and (prm.txt_re is null or concat_ws(' ', b.title_en, b.title_original, b.description) ~* prm.txt_re)\n   and (prm.not_re is null or concat_ws(' ', b.title_en, b.title_original, b.description) !~* prm.not_re)\n   and ((prm.buyer_re is null and prm.buyer_ident is null)\n        or b.buyer_name ~* prm.buyer_re or b.buyer_identifier = prm.buyer_ident)\n),\nl as (\n  select prm.id, a.publication_number as ref, a.winner_name as name\n  from prm join public.ted_notices n\n    on (prm.country is null or n.buyer_country = prm.country)\n   and (prm.cpv_re is null or exists (select 1 from unnest(n.cpv_codes) c where c ~ prm.cpv_re))\n   and (prm.txt_re is null or concat_ws(' ', n.title_en, n.title_original, n.description) ~* prm.txt_re)\n   and (prm.not_re is null or concat_ws(' ', n.title_en, n.title_original, n.description) !~* prm.not_re)\n   and ((prm.buyer_re is null and prm.buyer_ident is null)\n        or n.buyer_name ~* prm.buyer_re or n.buyer_identifier = prm.buyer_ident)\n  join public.ted_awards a on a.publication_number = n.publication_number\n),\nw as (\n  select p.id, lower(btrim(regexp_replace(x ->> 'name', '[„”“\"]', '', 'g'))) as name, p.ref\n  from p cross join lateral jsonb_array_elements(coalesce(p.winners, '[]'::jsonb)) x\n  union\n  select l.id, lower(btrim(regexp_replace(l.name, '[„”“\"]', '', 'g'))), l.ref from l\n)\nselect prm.id, jsonb_build_object(\n  'n_procedures', (select count(*) from p where p.id = prm.id),\n  'n_awarded', (select count(*) from p where p.id = prm.id and p.outcome = 'awarded'),\n  'bids_p50_known', (select percentile_cont(0.5) within group (order by p.bids_received) from p\n                     where p.id = prm.id and p.bids_received > 0),\n  'unit_prices', (select jsonb_agg(jsonb_build_object('pubs', p.pubs, 'unit_price', p.unit_price, 'currency', p.currency,\n                                                      'quantity', p.quantity, 'unit', p.quantity_unit))\n                  from p where p.id = prm.id and p.unit_price is not null),\n  'top_winners', (select jsonb_agg(jsonb_build_object('name', t.name, 'notices', t.n) order by t.n desc, t.name)\n                  from (select w.name, count(distinct w.ref) as n from w where w.id = prm.id and w.name <> ''\n                        group by w.name order by 2 desc, 1 limit 8) t),\n  'recent_awarded', (select jsonb_agg(t.pubs order by t.published desc)\n                     from (select p.pubs, p.published from p where p.id = prm.id and p.outcome = 'awarded'\n                           order by p.published desc limit 5) t)\n) as ground_truth\nfrom prm"
+  },
+  {
+    "id": "Q16",
+    "purpose": "evaluate_quote_emulated",
+    "role": "buyer",
+    "subject": {
+      "family_id": "ammunition.artillery",
+      "calibre": "155mm",
+      "country": "POL"
+    },
+    "proxy_embedding_pub": null,
+    "quote": {
+      "unit_price": 15000,
+      "currency": "PLN",
+      "quantity": 10000
+    },
+    "question": "Is 15,000 PLN per 155 mm round (10,000 rounds) a fair offer for a Polish buyer?",
+    "gt_scope": "POL buyers, CPV 3533*, '155 mm' in text (ammunition procedures only)",
+    "ground_truth": {
+      "template": "procedures",
+      "params": {
+        "country": "POL",
+        "cpv_re": "^3533",
+        "txt_re": "155 ?mm",
+        "not_re": null,
+        "buyer_re": null,
+        "buyer_ident": null
+      }
+    },
+    "query_text": null,
+    "viewer": null,
+    "expected": [
+      {
+        "label": "says no unit-price benchmark exists",
+        "re": "not benchmarked|unit price unknown|no statistics",
+        "type": "warning",
+        "kind": "warning"
+      }
+    ],
+    "ground_truth_sql": "with prm(id, country, cpv_re, txt_re, not_re, buyer_re, buyer_ident) as (values\n  ('Q16', 'POL'::text, '^3533', '155 ?mm', null, null, null)\n),\np as (\n  select prm.id, coalesce(b.result_publication_numbers[1], b.tender_publication_number) as ref,\n         array_remove(array[b.tender_publication_number] || b.result_publication_numbers, null) as pubs,\n         b.outcome, b.published, b.bids_received, b.currency, b.quantity, b.quantity_unit, b.unit_price, b.winners\n  from prm join public.kb_baseline_procedures b on b.snapshot_id = 'baseline_v1'\n   and (prm.country is null or b.buyer_country = prm.country)\n   and (prm.cpv_re is null or exists (select 1 from unnest(b.cpv_codes) c where c ~ prm.cpv_re))\n   and (prm.txt_re is null or concat_ws(' ', b.title_en, b.title_original, b.description) ~* prm.txt_re)\n   and (prm.not_re is null or concat_ws(' ', b.title_en, b.title_original, b.description) !~* prm.not_re)\n   and ((prm.buyer_re is null and prm.buyer_ident is null)\n        or b.buyer_name ~* prm.buyer_re or b.buyer_identifier = prm.buyer_ident)\n),\nl as (\n  select prm.id, a.publication_number as ref, a.winner_name as name\n  from prm join public.ted_notices n\n    on (prm.country is null or n.buyer_country = prm.country)\n   and (prm.cpv_re is null or exists (select 1 from unnest(n.cpv_codes) c where c ~ prm.cpv_re))\n   and (prm.txt_re is null or concat_ws(' ', n.title_en, n.title_original, n.description) ~* prm.txt_re)\n   and (prm.not_re is null or concat_ws(' ', n.title_en, n.title_original, n.description) !~* prm.not_re)\n   and ((prm.buyer_re is null and prm.buyer_ident is null)\n        or n.buyer_name ~* prm.buyer_re or n.buyer_identifier = prm.buyer_ident)\n  join public.ted_awards a on a.publication_number = n.publication_number\n),\nw as (\n  select p.id, lower(btrim(regexp_replace(x ->> 'name', '[„”“\"]', '', 'g'))) as name, p.ref\n  from p cross join lateral jsonb_array_elements(coalesce(p.winners, '[]'::jsonb)) x\n  union\n  select l.id, lower(btrim(regexp_replace(l.name, '[„”“\"]', '', 'g'))), l.ref from l\n)\nselect prm.id, jsonb_build_object(\n  'n_procedures', (select count(*) from p where p.id = prm.id),\n  'n_awarded', (select count(*) from p where p.id = prm.id and p.outcome = 'awarded'),\n  'bids_p50_known', (select percentile_cont(0.5) within group (order by p.bids_received) from p\n                     where p.id = prm.id and p.bids_received > 0),\n  'unit_prices', (select jsonb_agg(jsonb_build_object('pubs', p.pubs, 'unit_price', p.unit_price, 'currency', p.currency,\n                                                      'quantity', p.quantity, 'unit', p.quantity_unit))\n                  from p where p.id = prm.id and p.unit_price is not null),\n  'top_winners', (select jsonb_agg(jsonb_build_object('name', t.name, 'notices', t.n) order by t.n desc, t.name)\n                  from (select w.name, count(distinct w.ref) as n from w where w.id = prm.id and w.name <> ''\n                        group by w.name order by 2 desc, 1 limit 8) t),\n  'recent_awarded', (select jsonb_agg(t.pubs order by t.published desc)\n                     from (select p.pubs, p.published from p where p.id = prm.id and p.outcome = 'awarded'\n                           order by p.published desc limit 5) t)\n) as ground_truth\nfrom prm"
+  },
+  {
+    "id": "Q17",
+    "purpose": "evaluate_quote_emulated",
+    "role": "buyer",
+    "subject": {
+      "family_id": "firearms.handguns",
+      "calibre": "9x19",
+      "country": "POL"
+    },
+    "proxy_embedding_pub": null,
+    "quote": {
+      "unit_price": 2100,
+      "currency": "PLN",
+      "quantity": 3000
+    },
+    "question": "Is 2,100 PLN per 9 mm pistol (3,000 pistols) a fair offer for a Polish buyer?",
+    "gt_scope": "POL buyers, CPV 35321*, 9 mm / 9x19 pistol in text",
+    "ground_truth": {
+      "template": "procedures",
+      "params": {
+        "country": "POL",
+        "cpv_re": "^35321",
+        "txt_re": "(9 ?x ?19|9 ?mm).*pistolet|pistolet.*(9 ?x ?19|9 ?mm)",
+        "not_re": null,
+        "buyer_re": null,
+        "buyer_ident": null
+      }
+    },
+    "query_text": null,
+    "viewer": null,
+    "expected": [
+      {
+        "label": "1,913.30 PLN per pistol (211258-2025)",
+        "re": "1913\\.3",
+        "type": "text",
+        "kind": "price"
+      },
+      {
+        "label": "1,459 PLN per pistol (163277-2024)",
+        "re": "1459",
+        "type": "text",
+        "kind": "price"
+      },
+      {
+        "label": "quote flagged above p75",
+        "re": "above_p75",
+        "type": "text",
+        "kind": "verdict"
+      }
+    ],
+    "ground_truth_sql": "with prm(id, country, cpv_re, txt_re, not_re, buyer_re, buyer_ident) as (values\n  ('Q17', 'POL'::text, '^35321', '(9 ?x ?19|9 ?mm).*pistolet|pistolet.*(9 ?x ?19|9 ?mm)', null, null, null)\n),\np as (\n  select prm.id, coalesce(b.result_publication_numbers[1], b.tender_publication_number) as ref,\n         array_remove(array[b.tender_publication_number] || b.result_publication_numbers, null) as pubs,\n         b.outcome, b.published, b.bids_received, b.currency, b.quantity, b.quantity_unit, b.unit_price, b.winners\n  from prm join public.kb_baseline_procedures b on b.snapshot_id = 'baseline_v1'\n   and (prm.country is null or b.buyer_country = prm.country)\n   and (prm.cpv_re is null or exists (select 1 from unnest(b.cpv_codes) c where c ~ prm.cpv_re))\n   and (prm.txt_re is null or concat_ws(' ', b.title_en, b.title_original, b.description) ~* prm.txt_re)\n   and (prm.not_re is null or concat_ws(' ', b.title_en, b.title_original, b.description) !~* prm.not_re)\n   and ((prm.buyer_re is null and prm.buyer_ident is null)\n        or b.buyer_name ~* prm.buyer_re or b.buyer_identifier = prm.buyer_ident)\n),\nl as (\n  select prm.id, a.publication_number as ref, a.winner_name as name\n  from prm join public.ted_notices n\n    on (prm.country is null or n.buyer_country = prm.country)\n   and (prm.cpv_re is null or exists (select 1 from unnest(n.cpv_codes) c where c ~ prm.cpv_re))\n   and (prm.txt_re is null or concat_ws(' ', n.title_en, n.title_original, n.description) ~* prm.txt_re)\n   and (prm.not_re is null or concat_ws(' ', n.title_en, n.title_original, n.description) !~* prm.not_re)\n   and ((prm.buyer_re is null and prm.buyer_ident is null)\n        or n.buyer_name ~* prm.buyer_re or n.buyer_identifier = prm.buyer_ident)\n  join public.ted_awards a on a.publication_number = n.publication_number\n),\nw as (\n  select p.id, lower(btrim(regexp_replace(x ->> 'name', '[„”“\"]', '', 'g'))) as name, p.ref\n  from p cross join lateral jsonb_array_elements(coalesce(p.winners, '[]'::jsonb)) x\n  union\n  select l.id, lower(btrim(regexp_replace(l.name, '[„”“\"]', '', 'g'))), l.ref from l\n)\nselect prm.id, jsonb_build_object(\n  'n_procedures', (select count(*) from p where p.id = prm.id),\n  'n_awarded', (select count(*) from p where p.id = prm.id and p.outcome = 'awarded'),\n  'bids_p50_known', (select percentile_cont(0.5) within group (order by p.bids_received) from p\n                     where p.id = prm.id and p.bids_received > 0),\n  'unit_prices', (select jsonb_agg(jsonb_build_object('pubs', p.pubs, 'unit_price', p.unit_price, 'currency', p.currency,\n                                                      'quantity', p.quantity, 'unit', p.quantity_unit))\n                  from p where p.id = prm.id and p.unit_price is not null),\n  'top_winners', (select jsonb_agg(jsonb_build_object('name', t.name, 'notices', t.n) order by t.n desc, t.name)\n                  from (select w.name, count(distinct w.ref) as n from w where w.id = prm.id and w.name <> ''\n                        group by w.name order by 2 desc, 1 limit 8) t),\n  'recent_awarded', (select jsonb_agg(t.pubs order by t.published desc)\n                     from (select p.pubs, p.published from p where p.id = prm.id and p.outcome = 'awarded'\n                           order by p.published desc limit 5) t)\n) as ground_truth\nfrom prm"
+  },
+  {
+    "id": "Q18",
+    "purpose": "check_counterparty",
+    "role": "buyer",
+    "subject": {
+      "supplier_id": "supplier-ita-n0057381f"
+    },
+    "proxy_embedding_pub": null,
+    "question": "Has Fiocchi Munizioni won comparable contracts before?",
+    "gt_scope": "the 8 most recent award notices won by the supplier: supplier_contracts, ted_awards and baseline result-notice winners matching 'fiocchi'",
+    "ground_truth": {
+      "template": "supplier",
+      "params": {
+        "supplier_id": "supplier-ita-n0057381f",
+        "name_re": "fiocchi"
+      }
+    },
+    "query_text": null,
+    "viewer": null,
+    "quote": null,
+    "expected": [
+      {
+        "label": "675036-2026",
+        "re": "[^0-9](675036-2026)",
+        "type": "text",
+        "kind": "ref"
+      },
+      {
+        "label": "481141-2026",
+        "re": "[^0-9](481141-2026)",
+        "type": "text",
+        "kind": "ref"
+      },
+      {
+        "label": "741971-2025",
+        "re": "[^0-9](741971-2025)",
+        "type": "text",
+        "kind": "ref"
+      },
+      {
+        "label": "511618-2025",
+        "re": "[^0-9](511618-2025)",
+        "type": "text",
+        "kind": "ref"
+      },
+      {
+        "label": "458595-2025",
+        "re": "[^0-9](458595-2025)",
+        "type": "text",
+        "kind": "ref"
+      },
+      {
+        "label": "444736-2025",
+        "re": "[^0-9](444736-2025)",
+        "type": "text",
+        "kind": "ref"
+      },
+      {
+        "label": "436910-2025",
+        "re": "[^0-9](436910-2025)",
+        "type": "text",
+        "kind": "ref"
+      },
+      {
+        "label": "390831-2025",
+        "re": "[^0-9](390831-2025)",
+        "type": "text",
+        "kind": "ref"
+      }
+    ],
+    "ground_truth_sql": "with prm(id, supplier_id, name_re) as (values\n  ('Q18', 'supplier-ita-n0057381f'::text, 'fiocchi')\n),\nw as (   -- award notices won by the supplier, from every source (publication date of the award notice)\n  select prm.id, sc.notice_number as pub, sc.published as d, 'supplier_contracts' as src\n  from prm join public.supplier_contracts sc on sc.supplier_id = prm.supplier_id\n  union\n  select prm.id, a.publication_number, n.publication_date, 'ted_awards'\n  from prm join public.ted_awards a on a.winner_name ~* prm.name_re\n  join public.ted_notices n on n.publication_number = a.publication_number\n  union   -- winners per result notice (not per procedure: a procedure's later result notices can name other winners)\n  select prm.id, bn.publication_number, bn.publication_date, 'kb_baseline_notices'\n  from prm join public.kb_baseline_notices bn on bn.snapshot_id = 'baseline_v1' and bn.kind = 'result'\n  cross join lateral jsonb_array_elements(coalesce(bn.winners, '[]'::jsonb)) x\n  where x ->> 'name' ~* prm.name_re\n),\nd as (select w.id, w.pub, max(w.d) as d, array_agg(distinct w.src order by w.src) as srcs from w group by 1, 2)\nselect prm.id, jsonb_build_object(\n  'award_notices', (select count(*) from d where d.id = prm.id),\n  'only_in_baseline', (select count(*) from d where d.id = prm.id and d.srcs = array['kb_baseline_notices']),\n  'recent_award_notices', (select jsonb_agg(jsonb_build_object('pub', t.pub, 'date', t.d, 'sources', t.srcs) order by t.d desc, t.pub)\n                           from (select * from d where d.id = prm.id order by d.d desc nulls last, d.pub limit 8) t)\n) as ground_truth\nfrom prm"
+  },
+  {
+    "id": "Q19",
+    "purpose": "check_counterparty",
+    "role": "buyer",
+    "subject": {
+      "supplier_id": "supplier-deu-de811144119"
+    },
+    "proxy_embedding_pub": null,
+    "question": "Has Rheinmetall Waffe Munition won comparable contracts before?",
+    "gt_scope": "the 8 most recent award notices won by the supplier: supplier_contracts, ted_awards and baseline result-notice winners matching 'rheinmetall waffe munition'",
+    "ground_truth": {
+      "template": "supplier",
+      "params": {
+        "supplier_id": "supplier-deu-de811144119",
+        "name_re": "rheinmetall waffe munition"
+      }
+    },
+    "query_text": null,
+    "viewer": null,
+    "quote": null,
+    "expected": [
+      {
+        "label": "672975-2026",
+        "re": "[^0-9](672975-2026)",
+        "type": "text",
+        "kind": "ref"
+      },
+      {
+        "label": "601197-2026",
+        "re": "[^0-9](601197-2026)",
+        "type": "text",
+        "kind": "ref"
+      },
+      {
+        "label": "558036-2026",
+        "re": "[^0-9](558036-2026)",
+        "type": "text",
+        "kind": "ref"
+      },
+      {
+        "label": "545234-2026",
+        "re": "[^0-9](545234-2026)",
+        "type": "text",
+        "kind": "ref"
+      },
+      {
+        "label": "164196-2026",
+        "re": "[^0-9](164196-2026)",
+        "type": "text",
+        "kind": "ref"
+      },
+      {
+        "label": "133997-2026",
+        "re": "[^0-9](133997-2026)",
+        "type": "text",
+        "kind": "ref"
+      },
+      {
+        "label": "97874-2026",
+        "re": "[^0-9](97874-2026)",
+        "type": "text",
+        "kind": "ref"
+      },
+      {
+        "label": "43696-2026",
+        "re": "[^0-9](43696-2026)",
+        "type": "text",
+        "kind": "ref"
+      }
+    ],
+    "ground_truth_sql": "with prm(id, supplier_id, name_re) as (values\n  ('Q19', 'supplier-deu-de811144119'::text, 'rheinmetall waffe munition')\n),\nw as (   -- award notices won by the supplier, from every source (publication date of the award notice)\n  select prm.id, sc.notice_number as pub, sc.published as d, 'supplier_contracts' as src\n  from prm join public.supplier_contracts sc on sc.supplier_id = prm.supplier_id\n  union\n  select prm.id, a.publication_number, n.publication_date, 'ted_awards'\n  from prm join public.ted_awards a on a.winner_name ~* prm.name_re\n  join public.ted_notices n on n.publication_number = a.publication_number\n  union   -- winners per result notice (not per procedure: a procedure's later result notices can name other winners)\n  select prm.id, bn.publication_number, bn.publication_date, 'kb_baseline_notices'\n  from prm join public.kb_baseline_notices bn on bn.snapshot_id = 'baseline_v1' and bn.kind = 'result'\n  cross join lateral jsonb_array_elements(coalesce(bn.winners, '[]'::jsonb)) x\n  where x ->> 'name' ~* prm.name_re\n),\nd as (select w.id, w.pub, max(w.d) as d, array_agg(distinct w.src order by w.src) as srcs from w group by 1, 2)\nselect prm.id, jsonb_build_object(\n  'award_notices', (select count(*) from d where d.id = prm.id),\n  'only_in_baseline', (select count(*) from d where d.id = prm.id and d.srcs = array['kb_baseline_notices']),\n  'recent_award_notices', (select jsonb_agg(jsonb_build_object('pub', t.pub, 'date', t.d, 'sources', t.srcs) order by t.d desc, t.pub)\n                           from (select * from d where d.id = prm.id order by d.d desc nulls last, d.pub limit 8) t)\n) as ground_truth\nfrom prm"
+  },
+  {
+    "id": "Q20",
+    "purpose": "check_counterparty",
+    "role": "buyer",
+    "subject": {
+      "supplier_id": "supplier-rou-ro-15148839"
+    },
+    "proxy_embedding_pub": null,
+    "question": "Has Transcarpat Sportours International won comparable contracts before?",
+    "gt_scope": "the 8 most recent award notices won by the supplier: supplier_contracts, ted_awards and baseline result-notice winners matching 'transcarpat'",
+    "ground_truth": {
+      "template": "supplier",
+      "params": {
+        "supplier_id": "supplier-rou-ro-15148839",
+        "name_re": "transcarpat"
+      }
+    },
+    "query_text": null,
+    "viewer": null,
+    "quote": null,
+    "expected": [
+      {
+        "label": "675339-2026",
+        "re": "[^0-9](675339-2026)",
+        "type": "text",
+        "kind": "ref"
+      },
+      {
+        "label": "636422-2026",
+        "re": "[^0-9](636422-2026)",
+        "type": "text",
+        "kind": "ref"
+      },
+      {
+        "label": "492028-2026",
+        "re": "[^0-9](492028-2026)",
+        "type": "text",
+        "kind": "ref"
+      },
+      {
+        "label": "467174-2026",
+        "re": "[^0-9](467174-2026)",
+        "type": "text",
+        "kind": "ref"
+      },
+      {
+        "label": "273189-2026",
+        "re": "[^0-9](273189-2026)",
+        "type": "text",
+        "kind": "ref"
+      },
+      {
+        "label": "216171-2026",
+        "re": "[^0-9](216171-2026)",
+        "type": "text",
+        "kind": "ref"
+      },
+      {
+        "label": "192367-2026",
+        "re": "[^0-9](192367-2026)",
+        "type": "text",
+        "kind": "ref"
+      },
+      {
+        "label": "733866-2025",
+        "re": "[^0-9](733866-2025)",
+        "type": "text",
+        "kind": "ref"
+      }
+    ],
+    "ground_truth_sql": "with prm(id, supplier_id, name_re) as (values\n  ('Q20', 'supplier-rou-ro-15148839'::text, 'transcarpat')\n),\nw as (   -- award notices won by the supplier, from every source (publication date of the award notice)\n  select prm.id, sc.notice_number as pub, sc.published as d, 'supplier_contracts' as src\n  from prm join public.supplier_contracts sc on sc.supplier_id = prm.supplier_id\n  union\n  select prm.id, a.publication_number, n.publication_date, 'ted_awards'\n  from prm join public.ted_awards a on a.winner_name ~* prm.name_re\n  join public.ted_notices n on n.publication_number = a.publication_number\n  union   -- winners per result notice (not per procedure: a procedure's later result notices can name other winners)\n  select prm.id, bn.publication_number, bn.publication_date, 'kb_baseline_notices'\n  from prm join public.kb_baseline_notices bn on bn.snapshot_id = 'baseline_v1' and bn.kind = 'result'\n  cross join lateral jsonb_array_elements(coalesce(bn.winners, '[]'::jsonb)) x\n  where x ->> 'name' ~* prm.name_re\n),\nd as (select w.id, w.pub, max(w.d) as d, array_agg(distinct w.src order by w.src) as srcs from w group by 1, 2)\nselect prm.id, jsonb_build_object(\n  'award_notices', (select count(*) from d where d.id = prm.id),\n  'only_in_baseline', (select count(*) from d where d.id = prm.id and d.srcs = array['kb_baseline_notices']),\n  'recent_award_notices', (select jsonb_agg(jsonb_build_object('pub', t.pub, 'date', t.d, 'sources', t.srcs) order by t.d desc, t.pub)\n                           from (select * from d where d.id = prm.id order by d.d desc nulls last, d.pub limit 8) t)\n) as ground_truth\nfrom prm"
+  },
+  {
+    "id": "Q21",
+    "purpose": "check_counterparty",
+    "role": "supplier",
+    "subject": {
+      "buyer_id": "buyer-esp-10000140000201"
+    },
+    "proxy_embedding_pub": null,
+    "question": "What has the Spanish Army logistics command (JAE MALE) bought before, and from whom?",
+    "gt_scope": "buyer identifier 10000140000201 or the buyer's name, any CPV in the harvest",
+    "ground_truth": {
+      "template": "procedures",
+      "params": {
+        "country": null,
+        "cpv_re": null,
+        "txt_re": null,
+        "not_re": null,
+        "buyer_re": "jefatura de asuntos econ.micos del mando de apoyo log",
+        "buyer_ident": "10000140000201"
+      }
+    },
+    "query_text": null,
+    "viewer": null,
+    "quote": null,
+    "expected": [
+      {
+        "label": "Indra",
+        "re": "indra sistemas",
+        "type": "text",
+        "kind": "winner"
+      },
+      {
+        "label": "JPG",
+        "re": "jpg",
+        "type": "text",
+        "kind": "winner"
+      },
+      {
+        "label": "Expal Systems",
+        "re": "expal systems",
+        "type": "text",
+        "kind": "winner"
+      },
+      {
+        "label": "A. Paukner",
+        "re": "paukner",
+        "type": "text",
+        "kind": "winner"
+      },
+      {
+        "label": "Cohemo",
+        "re": "cohemo",
+        "type": "text",
+        "kind": "winner"
+      },
+      {
+        "label": "Fabrica de Municiones de Granada",
+        "re": "municiones de granada",
+        "type": "text",
+        "kind": "winner"
+      },
+      {
+        "label": "Instalaza",
+        "re": "instalaza",
+        "type": "text",
+        "kind": "winner"
+      },
+      {
+        "label": "Rheinmetall Expal",
+        "re": "rheinmetall expal",
+        "type": "text",
+        "kind": "winner"
+      }
+    ],
+    "ground_truth_sql": "with prm(id, country, cpv_re, txt_re, not_re, buyer_re, buyer_ident) as (values\n  ('Q21', null::text, null, null, null, 'jefatura de asuntos econ.micos del mando de apoyo log', '10000140000201')\n),\np as (\n  select prm.id, coalesce(b.result_publication_numbers[1], b.tender_publication_number) as ref,\n         array_remove(array[b.tender_publication_number] || b.result_publication_numbers, null) as pubs,\n         b.outcome, b.published, b.bids_received, b.currency, b.quantity, b.quantity_unit, b.unit_price, b.winners\n  from prm join public.kb_baseline_procedures b on b.snapshot_id = 'baseline_v1'\n   and (prm.country is null or b.buyer_country = prm.country)\n   and (prm.cpv_re is null or exists (select 1 from unnest(b.cpv_codes) c where c ~ prm.cpv_re))\n   and (prm.txt_re is null or concat_ws(' ', b.title_en, b.title_original, b.description) ~* prm.txt_re)\n   and (prm.not_re is null or concat_ws(' ', b.title_en, b.title_original, b.description) !~* prm.not_re)\n   and ((prm.buyer_re is null and prm.buyer_ident is null)\n        or b.buyer_name ~* prm.buyer_re or b.buyer_identifier = prm.buyer_ident)\n),\nl as (\n  select prm.id, a.publication_number as ref, a.winner_name as name\n  from prm join public.ted_notices n\n    on (prm.country is null or n.buyer_country = prm.country)\n   and (prm.cpv_re is null or exists (select 1 from unnest(n.cpv_codes) c where c ~ prm.cpv_re))\n   and (prm.txt_re is null or concat_ws(' ', n.title_en, n.title_original, n.description) ~* prm.txt_re)\n   and (prm.not_re is null or concat_ws(' ', n.title_en, n.title_original, n.description) !~* prm.not_re)\n   and ((prm.buyer_re is null and prm.buyer_ident is null)\n        or n.buyer_name ~* prm.buyer_re or n.buyer_identifier = prm.buyer_ident)\n  join public.ted_awards a on a.publication_number = n.publication_number\n),\nw as (\n  select p.id, lower(btrim(regexp_replace(x ->> 'name', '[„”“\"]', '', 'g'))) as name, p.ref\n  from p cross join lateral jsonb_array_elements(coalesce(p.winners, '[]'::jsonb)) x\n  union\n  select l.id, lower(btrim(regexp_replace(l.name, '[„”“\"]', '', 'g'))), l.ref from l\n)\nselect prm.id, jsonb_build_object(\n  'n_procedures', (select count(*) from p where p.id = prm.id),\n  'n_awarded', (select count(*) from p where p.id = prm.id and p.outcome = 'awarded'),\n  'bids_p50_known', (select percentile_cont(0.5) within group (order by p.bids_received) from p\n                     where p.id = prm.id and p.bids_received > 0),\n  'unit_prices', (select jsonb_agg(jsonb_build_object('pubs', p.pubs, 'unit_price', p.unit_price, 'currency', p.currency,\n                                                      'quantity', p.quantity, 'unit', p.quantity_unit))\n                  from p where p.id = prm.id and p.unit_price is not null),\n  'top_winners', (select jsonb_agg(jsonb_build_object('name', t.name, 'notices', t.n) order by t.n desc, t.name)\n                  from (select w.name, count(distinct w.ref) as n from w where w.id = prm.id and w.name <> ''\n                        group by w.name order by 2 desc, 1 limit 8) t),\n  'recent_awarded', (select jsonb_agg(t.pubs order by t.published desc)\n                     from (select p.pubs, p.published from p where p.id = prm.id and p.outcome = 'awarded'\n                           order by p.published desc limit 5) t)\n) as ground_truth\nfrom prm"
+  },
+  {
+    "id": "Q22",
+    "purpose": "search",
+    "role": "buyer",
+    "subject": {
+      "country": "ESP"
+    },
+    "proxy_embedding_pub": null,
+    "question": "Search: 155 mm artillery ammunition in Spain",
+    "query_text": "155 mm artillery ammunition",
+    "gt_scope": "ESP buyers, CPV 353*, '155 mm' in text",
+    "ground_truth": {
+      "template": "search",
+      "params": {
+        "country": "ESP",
+        "cpv_re": "^353",
+        "txt_re": "155 ?mm"
+      }
+    },
+    "viewer": null,
+    "quote": null,
+    "expected": [
+      {
+        "label": "765887-2025",
+        "re": "[^0-9](765887-2025|482187-2026)",
+        "type": "text",
+        "kind": "ref"
+      },
+      {
+        "label": "352109-2025",
+        "re": "[^0-9](352109-2025|666396-2025)",
+        "type": "text",
+        "kind": "ref"
+      },
+      {
+        "label": "303969-2025",
+        "re": "[^0-9](303969-2025)",
+        "type": "text",
+        "kind": "ref"
+      },
+      {
+        "label": "719557-2023",
+        "re": "[^0-9](719557-2023|448800-2024)",
+        "type": "text",
+        "kind": "ref"
+      },
+      {
+        "label": "41791-2024",
+        "re": "[^0-9](41791-2024)",
+        "type": "text",
+        "kind": "ref"
+      },
+      {
+        "label": "27128-2024",
+        "re": "[^0-9](27128-2024)",
+        "type": "text",
+        "kind": "ref"
+      },
+      {
+        "label": "695606-2026",
+        "re": "[^0-9](695606-2026|719421-2026)",
+        "type": "text",
+        "kind": "ref"
+      }
+    ],
+    "ground_truth_sql": "with prm(id, country, cpv_re, txt_re) as (values\n  ('Q22', 'ESP'::text, '^353', '155 ?mm')\n),\np as (\n  select prm.id, array_remove(array[b.tender_publication_number] || b.result_publication_numbers, null) as pubs, b.published\n  from prm join public.kb_baseline_procedures b on b.snapshot_id = 'baseline_v1'\n   and (prm.country is null or b.buyer_country = prm.country)\n   and (prm.cpv_re is null or exists (select 1 from unnest(b.cpv_codes) c where c ~ prm.cpv_re))\n   and concat_ws(' ', b.title_en, b.title_original, b.description) ~* prm.txt_re\n),\nl as (\n  select prm.id, n.publication_number, n.publication_date\n  from prm join public.ted_notices n\n    on (prm.country is null or n.buyer_country = prm.country)\n   and (prm.cpv_re is null or exists (select 1 from unnest(n.cpv_codes) c where c ~ prm.cpv_re))\n   and concat_ws(' ', n.title_en, n.title_original, n.description) ~* prm.txt_re\n)\nselect prm.id, jsonb_build_object(\n  'baseline_procedures', (select count(*) from p where p.id = prm.id),\n  'procedures', (select jsonb_agg(p.pubs order by p.published desc) from p where p.id = prm.id),\n  'live_notices', (select jsonb_agg(l.publication_number order by l.publication_date desc) from l where l.id = prm.id)\n) as ground_truth\nfrom prm"
+  },
+  {
+    "id": "Q23",
+    "purpose": "search",
+    "role": "buyer",
+    "subject": {},
+    "proxy_embedding_pub": null,
+    "question": "Search: 81 mm mortar bombs",
+    "query_text": "81 mm mortar bombs",
+    "gt_scope": "any buyer, CPV 3533*, '81 mm' in text",
+    "ground_truth": {
+      "template": "search",
+      "params": {
+        "country": null,
+        "cpv_re": "^3533",
+        "txt_re": "81 ?mm"
+      }
+    },
+    "viewer": null,
+    "quote": null,
+    "expected": [
+      {
+        "label": "122423-2026",
+        "re": "[^0-9](122423-2026)",
+        "type": "text",
+        "kind": "ref"
+      },
+      {
+        "label": "518843-2024",
+        "re": "[^0-9](518843-2024)",
+        "type": "text",
+        "kind": "ref"
+      },
+      {
+        "label": "540112-2024",
+        "re": "[^0-9](540112-2024)",
+        "type": "text",
+        "kind": "ref"
+      },
+      {
+        "label": "551965-2024",
+        "re": "[^0-9](551965-2024)",
+        "type": "text",
+        "kind": "ref"
+      },
+      {
+        "label": "666725-2024",
+        "re": "[^0-9](666725-2024)",
+        "type": "text",
+        "kind": "ref"
+      },
+      {
+        "label": "672444-2026",
+        "re": "[^0-9](672444-2026)",
+        "type": "text",
+        "kind": "ref"
+      }
+    ],
+    "ground_truth_sql": "with prm(id, country, cpv_re, txt_re) as (values\n  ('Q23', null::text, '^3533', '81 ?mm')\n),\np as (\n  select prm.id, array_remove(array[b.tender_publication_number] || b.result_publication_numbers, null) as pubs, b.published\n  from prm join public.kb_baseline_procedures b on b.snapshot_id = 'baseline_v1'\n   and (prm.country is null or b.buyer_country = prm.country)\n   and (prm.cpv_re is null or exists (select 1 from unnest(b.cpv_codes) c where c ~ prm.cpv_re))\n   and concat_ws(' ', b.title_en, b.title_original, b.description) ~* prm.txt_re\n),\nl as (\n  select prm.id, n.publication_number, n.publication_date\n  from prm join public.ted_notices n\n    on (prm.country is null or n.buyer_country = prm.country)\n   and (prm.cpv_re is null or exists (select 1 from unnest(n.cpv_codes) c where c ~ prm.cpv_re))\n   and concat_ws(' ', n.title_en, n.title_original, n.description) ~* prm.txt_re\n)\nselect prm.id, jsonb_build_object(\n  'baseline_procedures', (select count(*) from p where p.id = prm.id),\n  'procedures', (select jsonb_agg(p.pubs order by p.published desc) from p where p.id = prm.id),\n  'live_notices', (select jsonb_agg(l.publication_number order by l.publication_date desc) from l where l.id = prm.id)\n) as ground_truth\nfrom prm"
+  },
+  {
+    "id": "Q24",
+    "purpose": "search",
+    "role": "supplier",
+    "subject": {},
+    "proxy_embedding_pub": null,
+    "question": "Search: SIMMUNITION training cartridges",
+    "query_text": "Simmunition training cartridges",
+    "gt_scope": "any buyer, 'simmunition' in text",
+    "ground_truth": {
+      "template": "search",
+      "params": {
+        "country": null,
+        "cpv_re": null,
+        "txt_re": "simmunition"
+      }
+    },
+    "viewer": null,
+    "quote": null,
+    "expected": [
+      {
+        "label": "755822-2026",
+        "re": "[^0-9](755822-2026)",
+        "type": "text",
+        "kind": "ref"
+      },
+      {
+        "label": "721424-2026",
+        "re": "[^0-9](721424-2026)",
+        "type": "text",
+        "kind": "ref"
+      },
+      {
+        "label": "712456-2026",
+        "re": "[^0-9](712456-2026)",
+        "type": "text",
+        "kind": "ref"
+      }
+    ],
+    "ground_truth_sql": "with prm(id, country, cpv_re, txt_re) as (values\n  ('Q24', null::text, null, 'simmunition')\n),\np as (\n  select prm.id, array_remove(array[b.tender_publication_number] || b.result_publication_numbers, null) as pubs, b.published\n  from prm join public.kb_baseline_procedures b on b.snapshot_id = 'baseline_v1'\n   and (prm.country is null or b.buyer_country = prm.country)\n   and (prm.cpv_re is null or exists (select 1 from unnest(b.cpv_codes) c where c ~ prm.cpv_re))\n   and concat_ws(' ', b.title_en, b.title_original, b.description) ~* prm.txt_re\n),\nl as (\n  select prm.id, n.publication_number, n.publication_date\n  from prm join public.ted_notices n\n    on (prm.country is null or n.buyer_country = prm.country)\n   and (prm.cpv_re is null or exists (select 1 from unnest(n.cpv_codes) c where c ~ prm.cpv_re))\n   and concat_ws(' ', n.title_en, n.title_original, n.description) ~* prm.txt_re\n)\nselect prm.id, jsonb_build_object(\n  'baseline_procedures', (select count(*) from p where p.id = prm.id),\n  'procedures', (select jsonb_agg(p.pubs order by p.published desc) from p where p.id = prm.id),\n  'live_notices', (select jsonb_agg(l.publication_number order by l.publication_date desc) from l where l.id = prm.id)\n) as ground_truth\nfrom prm"
+  },
+  {
+    "id": "Q25",
+    "purpose": "search",
+    "role": "supplier",
+    "subject": {},
+    "proxy_embedding_pub": null,
+    "question": "Search (Lithuanian wording): 12,7 x 99 mm šoviniai",
+    "query_text": "12,7 x 99 mm šoviniai",
+    "gt_scope": "any buyer, CPV 3533*, 12.7x99 in text (any language)",
+    "ground_truth": {
+      "template": "search",
+      "params": {
+        "country": null,
+        "cpv_re": "^3533",
+        "txt_re": "12[,.]7 ?(x|×) ?99"
+      }
+    },
+    "viewer": null,
+    "quote": null,
+    "expected": [
+      {
+        "label": "486856-2026",
+        "re": "[^0-9](486856-2026)",
+        "type": "text",
+        "kind": "ref"
+      },
+      {
+        "label": "483069-2026",
+        "re": "[^0-9](483069-2026|626043-2026)",
+        "type": "text",
+        "kind": "ref"
+      },
+      {
+        "label": "439616-2026",
+        "re": "[^0-9](439616-2026)",
+        "type": "text",
+        "kind": "ref"
+      },
+      {
+        "label": "775493-2025",
+        "re": "[^0-9](775493-2025|43585-2026|49932-2026|50908-2026|52660-2026)",
+        "type": "text",
+        "kind": "ref"
+      },
+      {
+        "label": "472813-2025",
+        "re": "[^0-9](472813-2025|231846-2026)",
+        "type": "text",
+        "kind": "ref"
+      },
+      {
+        "label": "173872-2024",
+        "re": "[^0-9](173872-2024|184632-2024|235553-2024|355559-2025)",
+        "type": "text",
+        "kind": "ref"
+      },
+      {
+        "label": "817388-2025",
+        "re": "[^0-9](817388-2025)",
+        "type": "text",
+        "kind": "ref"
+      },
+      {
+        "label": "569562-2025",
+        "re": "[^0-9](569562-2025)",
+        "type": "text",
+        "kind": "ref"
+      },
+      {
+        "label": "668765-2026",
+        "re": "[^0-9](668765-2026)",
+        "type": "text",
+        "kind": "ref"
+      }
+    ],
+    "ground_truth_sql": "with prm(id, country, cpv_re, txt_re) as (values\n  ('Q25', null::text, '^3533', '12[,.]7 ?(x|×) ?99')\n),\np as (\n  select prm.id, array_remove(array[b.tender_publication_number] || b.result_publication_numbers, null) as pubs, b.published\n  from prm join public.kb_baseline_procedures b on b.snapshot_id = 'baseline_v1'\n   and (prm.country is null or b.buyer_country = prm.country)\n   and (prm.cpv_re is null or exists (select 1 from unnest(b.cpv_codes) c where c ~ prm.cpv_re))\n   and concat_ws(' ', b.title_en, b.title_original, b.description) ~* prm.txt_re\n),\nl as (\n  select prm.id, n.publication_number, n.publication_date\n  from prm join public.ted_notices n\n    on (prm.country is null or n.buyer_country = prm.country)\n   and (prm.cpv_re is null or exists (select 1 from unnest(n.cpv_codes) c where c ~ prm.cpv_re))\n   and concat_ws(' ', n.title_en, n.title_original, n.description) ~* prm.txt_re\n)\nselect prm.id, jsonb_build_object(\n  'baseline_procedures', (select count(*) from p where p.id = prm.id),\n  'procedures', (select jsonb_agg(p.pubs order by p.published desc) from p where p.id = prm.id),\n  'live_notices', (select jsonb_agg(l.publication_number order by l.publication_date desc) from l where l.id = prm.id)\n) as ground_truth\nfrom prm"
+  }
+]
