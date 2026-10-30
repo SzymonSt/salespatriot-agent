@@ -137,13 +137,13 @@ An empty `deadline` usually means the notice uses a request-to-participate deadl
   `uv run --project app/backend python -m app.backend.due_diligence <supplier id> [--recompute]`.
 - **Company agents (Gemini, live):** every supplier and buyer has its own agent whose system instruction is built from
   its profile (`app/backend/agents/company.py`). When a buyer posts a requirement (`/workspace` → Post to suppliers),
-  `serve.py` runs the D1–D14 deal check per matched supplier, then calls the backend (`POST /v1/agents/offers`): the
+  `serve.py` runs the D1–D14 deal check per matched supplier, then calls the backend (`POST /v1/live/agents/offers`): the
   supplier agent assesses whether its company can ever supply it and, if yes, talks to the buyer agent. Both sides see
   the conversation as a pop-up chat; a person can write into it (e.g. approve an escalation) and the agents resume.
-  Mandate rules run in Python (`app/backend/knowledge/conversations.py`): accept needs a quote within budget, deal check
+  Mandate rules run in Python (`app/backend/live/conversations.py`): accept needs a quote within budget, deal check
   ESCALATE/NO-GO or risk flags need a person, max 2 counters, one award per request, quotes not below 97% of the
   awarded TED price; suppliers never see the buyer's budget. Data: simulated knowledge DB
-  (`app/backend/knowledge/simulated.py`, `data/demo/agent_db.json`) behind the `KnowledgeClient` contract of
+  (`app/backend/live/simulated.py`, `data/demo/agent_db.json`; API under `/v1/live`) behind the `KnowledgeClient` contract of
   `docs/agent-context-rag-implementation.md` §3, to be swapped for Supabase. Run both processes from the repo root:
   `uv run --project app/backend uvicorn app.backend.main:app --host 127.0.0.1 --port 8000` and `python3 serve.py`
   (port 8765; proxies `/v1/*` to the backend). Needs `GOOGLE_API_KEY` in `.env`; model `gemini-3.8-flash`
@@ -230,5 +230,5 @@ automatically (`serve.py --manual-agents` waits for "Let agent respond" instead)
 `data/price_lists.json` (declared demo price list, €430/set); C.I.D Praha and Baltic Fox decline. 4. Before its first reply the
 buyer agent runs due diligence (company score, hard gates, KYC, deal check; a card in the chat), asks one question about the
 deal check, then accepts within its mandate. 5. The agreed deal appears under "Deals agreed by your agent — your approval"
-(buyer workspace and overview page): Review / Chat / Reject / Approve → `POST /v1/conversations/{id}/approval`.
+(buyer workspace and overview page): Review / Chat / Reject / Approve → `POST /v1/live/conversations/{id}/approval`.
 Orchestrator options in `app/backend/main.py`: `clarify_first=True`; `review_gate` (pause for a human review mid-way) is off.

@@ -729,6 +729,17 @@
         .map(([v, label]) => h("option", { value: v }, label)));
     const qty = h("input", { class: "field small", type: "number", min: "1", step: "1", placeholder: "Quantity", "aria-label": "Quantity" });
     const unit = h("select", { class: "field small", "aria-label": "Unit" }, ["rounds", "pieces", "sets"].map((u) => h("option", { value: u }, u)));
+    // Suggest category and unit from the description ("spare parts for carbines" → Parts, sets) until the buyer picks one.
+    const GUESS = [[/\b(spare|parts?|barrels?|magazines?|bolts?|springs?|stocks?|sights?|components?)\b/i, "35340000", "sets"],
+      [/\b(cartridges?|ammunition|ammo|rounds?|shells?|grenades?|bullets?)\b/i, "35330000", "rounds"],
+      [/\b(rifles?|carbines?|pistols?|guns?|firearms?|revolvers?|shotguns?)\b/i, "35320000", "pieces"],
+      [/\b(bayonets?|knives|knife|swords?|launchers?)\b/i, "35310000", "pieces"]];
+    let picked = false;
+    cpv.addEventListener("change", () => { picked = true; });
+    text.addEventListener("input", () => {
+      const hit = !picked && GUESS.find(([re]) => re.test(text.value));
+      if (hit) { cpv.value = hit[1]; unit.value = hit[2]; }
+    });
     const budget = h("input", { class: "field small", type: "number", min: "0", step: "1000", placeholder: "Budget EUR", "aria-label": "Budget in EUR" });
     const needBy = h("input", { class: "field small", type: "date", "aria-label": "Needed by",
       value: new Date(Date.now() + 120 * 864e5).toISOString().slice(0, 10) });
