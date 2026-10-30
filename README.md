@@ -9,8 +9,9 @@ parts of firearms and ammunition, and miscellaneous weapons. It covers supplies 
 It turns ten years of procurement history into evidence an agent can cite, and gives each company an agent that
 works inside a mandate. A supplier agent assesses a tender. A buyer agent finds proven suppliers, weighs their
 KYC and 14 per-deal checks, and benchmarks their quotes against real awarded prices. We measured the effect:
-with the historical layer, the agents' context covers **56% vs 45%** of the ground-truth facts, and **86% vs 29%**
-for quote evaluation ([eval](evals/agent_context/results-2026-10-30.md)).
+with the historical layer, the agents' context covers **56% vs 45%** of the ground-truth facts, **50% vs 31%**
+when finding suppliers, and twice as many nearest neighbours share the product family (**0.46 vs 0.24**)
+([eval](evals/agent_context/results-2026-10-30.md)).
 
 ## Why it works
 
@@ -24,24 +25,23 @@ for quote evaluation ([eval](evals/agent_context/results-2026-10-30.md)).
 - **One context call per purpose, not free-form RAG.** Agents never query tables. They call
   `agent_context(role, purpose, subject)` with one of five purposes and get the same JSON shape back every time:
   facts, candidates, evidence, price anchors, regulatory profile, memory, priors and warnings.
-  The logic lives in SQL, so the backend stays thin and every agent sees the same facts. In the eval the call
-  took a median of 84 ms.
+  The logic lives in SQL, so the backend stays thin and every agent sees the same facts.
 - **Every number has a ref and an n.** Each evidence item and price anchor has a `ref` (for example
-  `ted:750233-2026`), and priors state their sample size. Unknown values stay unknown: null plus a warning,
-  never zero and never a guess. Before a message is stored, the orchestrator drops any ref the agent cites that
+  `ted:750233-2026`), and priors state their sample size. A unit price without clean data stays null with a
+  warning instead of a guess. Before a message is stored, the orchestrator drops any ref the agent cites that
   appears neither in its context pack nor in its tool results, and records it in `payload.dropped_refs`.
 - **The model recommends; the mandate decides.** Gemini drafts and recommends. Python policy gates decide what
   happens. An `accept` above the autonomous limit becomes `escalate`. A price above the ceiling becomes a
   `counter` at the ceiling. Unknown KYC escalates. The agent's company id is bound in a closure by the backend,
   so the model never chooses whose data it reads.
 - **Strict unit prices.** A price benchmark uses only clean data points: pieces, quantity above 1, a single lot
-  with a stated quantity, and one result notice. It matches family, calibre and country, and never mixes
-  calibres. The eval caught a "unit price" of 3.95 bn PLN per 155 mm round. With these rules it is gone, and
+  with a stated quantity, and one result notice. When the tender names a calibre, it compares only with the
+  same family, calibre and country, and never mixes calibres. The eval caught a "unit price" of 3.95 bn PLN per 155 mm round. With these rules it is gone, and
   suspect priors fell from 5 to 1 across 31 open-tender scopes.
 - **One ontology for supply and demand.** TED tenders, awarded lots and supplier catalogue lines are classified
   into the same 28 product families when stored, not at query time, using CPV codes, calibre and keywords, so
   supply and demand are matched within one family. Embeddings come from one multilingual model
-  (`gemini-embedding-001`, 768 dimensions), because TED notices are written in the EU's 24 official languages.
+  (`gemini-embedding-001`, 768 dimensions).
 - **We evaluate the context, not the prose.** The eval scores 25 questions about real open tenders against
   ground truth computed in SQL. It is read-only and makes no LLM call. Each pack is compared with an exact
   replica that leaves out the history layer, which reproduced the real evidence in 34 of 34 packs.
@@ -169,8 +169,8 @@ truth, read-only and re-runnable.
 | Recall of ground-truth items in the context pack (25 questions, 142 items) | **56%** | 45% |
 | `find_suppliers` recall | **50%** | 31% |
 | `assess_tender` recall | **64%** | 58% |
-| Quote evaluation recall (3 emulated questions) | **86%** | 29% |
 | Nearest-neighbour precision@5, same product family (14 open tenders) | **0.46** | 0.24 |
+
 The strict unit-price rules cut suspect priors from 5 to 1 across 31 open-tender scopes. Full per-question
 breakdown: [`evals/agent_context/results-2026-10-30.md`](evals/agent_context/results-2026-10-30.md).
 
