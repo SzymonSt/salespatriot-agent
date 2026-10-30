@@ -23,6 +23,8 @@ AWARD_TYPES = "can-standard can-desg can-social can-tran can-modif veat"
 MAX_RETRIES = 5
 RETRY_DELAY_SECONDS = 5
 DESCRIPTION_CHARS = 800
+# Lot titles shorter than this ("Lot 1", "Generell del") say nothing useful.
+GENERIC_TITLE_CHARS = 15
 
 
 def local(tag: str) -> str:
@@ -147,27 +149,28 @@ def won_lots(
     lots = lot_details(root)
 
     records = []
+    # A lot result lists every tender received; only tenders that ended in a
+    # settled contract won. Without any contracts we cannot tell, so fall back
+    # to all listed tenders and mark the winner as unconfirmed.
+    confirmed = bool(contracts)
     for lot_result in result.findall("LotResult"):
-        if text(lot_result, "TenderResultCode") != "selec-w":
+        # Direct awards (VEAT) carry no result code.
+        if text(lot_result, "TenderResultCode") not in ("selec-w", ""):
             continue
-        winners: list[str] = []
+        co_winners: set[str] = set()
         ours = None
         for tender_ref in lot_result.findall("LotTender"):
             tender = tenders.get(text(tender_ref, "ID"))
-            if tender is None:
+            if tender is None or (confirmed and text(tender, "ID") not in contracts):
                 continue
-            members = party_members.get(text(tender, "TenderingParty/ID"), [])
-            names = [
-                text(organisations.get(member), "Company/PartyName/Name")
-                for member in members
-            ]
-            winners.extend(n for n in names if n)
-            if ours is None and any(
-                member in organisations
-                and is_supplier(organisations[member], identifier, name)
-                for member in members
-            ):
-                ours = tender
+            for member in party_members.get(text(tender, "TenderingParty/ID"), []):
+                org = organisations.get(member)
+                if org is None:
+                    continue
+                if is_supplier(org, identifier, name):
+                    ours = ours if ours is not None else tender
+                else:
+                    co_winners.add(text(org, "Company/PartyName/Name"))
         if ours is None:
             continue
 
@@ -185,11 +188,9 @@ def won_lots(
                 "tenders_received": int(submissions["tenders"])
                 if submissions.get("tenders", "").isdigit()
                 else None,
-                "co_winners": sorted(
-                    {w for w in winners if normalise(w) != normalise(name)}
-                    - {""}
-                ),
+                "co_winners": sorted(co_winners - {""}),
                 "subcontracting": text(ours, "SubcontractingTerm/TermCode"),
+                "winner_confirmed": confirmed,
                 "award_date": text(contract, "AwardDate")[:10],
                 "contract_signed": text(contract, "IssueDate")[:10],
                 "contract_title": text(contract, "Title"),
@@ -199,9 +200,13 @@ def won_lots(
 
 
 def award_notices(identifier: str, name: str, limit: int) -> list[dict[str, Any]]:
-    query = (
-        f'winner-identifier="{identifier}"' if identifier else f'winner-name="{name}"'
-    )
+    # Identifiers are formatted inconsistently (5565005930 vs 556500-5930), so
+    # also match on name; won_lots() then confirms the exact organisation.
+    # Quotes inside the name would end the phrase and break the query.
+    phrase = name.replace('"', " ")
+    query = f'winner-name="{phrase}"'
+    if identifier:
+        query = f'(winner-identifier="{identifier}" OR {query})'
     notices, _ = fetch(f"notice-type IN ({AWARD_TYPES}) AND {query}", limit)
     return notices
 
@@ -210,15 +215,27 @@ def track_record(
     contracts: list[dict[str, Any]], cpv_labels: dict[str, str]
 ) -> dict[str, Any]:
     values: Counter[str] = Counter()
+    shared_ceilings: Counter[str] = Counter()
     buyers: Counter[str] = Counter()
     buyer_countries: Counter[str] = Counter()
     products: dict[str, dict[str, Any]] = defaultdict(
         lambda: {"lots": 0, "value": Counter(), "last_award": "", "examples": []}
     )
     competitive = sole_bid = frameworks = 0
+    counted: set[tuple[str, str, float]] = set()
     for contract in contracts:
         value = contract.get("awarded_value")
-        if value and value["value"] > 0:
+        has_value = bool(value and value["value"] > 0)
+        # Some buyers repeat one tender total on every lot; count it once.
+        if has_value:
+            key = (contract["notice_number"], value["currency"], value["value"])
+            has_value = key not in counted
+            counted.add(key)
+        # With co-winners the value is usually a shared framework ceiling.
+        shared = bool(contract.get("co_winners"))
+        if has_value and shared:
+            shared_ceilings[value["currency"]] += value["value"]
+        elif has_value:
             values[value["currency"]] += value["value"]
         buyers[contract["buyer"]] += 1
         buyer_countries[contract["buyer_country"]] += 1
@@ -232,10 +249,12 @@ def track_record(
         main_cpv = (contract.get("cpv_codes") or ["unknown"])[0]
         product = products[main_cpv]
         product["lots"] += 1
-        if value and value["value"] > 0:
+        if has_value and not shared:
             product["value"][value["currency"]] += value["value"]
         product["last_award"] = max(product["last_award"], contract["published"])
-        title = contract.get("title") or contract.get("notice_title", "")
+        title = contract.get("title", "")
+        if len(title) < GENERIC_TITLE_CHARS:
+            title = contract.get("notice_title") or title
         if title and title not in product["examples"] and len(product["examples"]) < 5:
             product["examples"].append(title)
 
@@ -246,6 +265,9 @@ def track_record(
         "first_award": dates[0] if dates else "",
         "last_award": dates[-1] if dates else "",
         "awarded_value": {k: round(v, 2) for k, v in values.items()},
+        "shared_framework_ceilings": {
+            k: round(v, 2) for k, v in shared_ceilings.items()
+        },
         "distinct_buyers": len(buyers),
         "repeat_buyers": [
             {"name": buyer, "lots": count}
@@ -270,6 +292,27 @@ def track_record(
             )
         ],
     }
+
+
+def latest_contracts(contracts: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Drop copies of the same award from corrected or republished notices.
+
+    Matching lots inside one notice are kept: they are separate lots.
+    """
+    first_notice: dict[tuple[Any, ...], str] = {}
+    unique = []
+    for contract in contracts:
+        value = contract.get("awarded_value") or {}
+        key = (
+            normalise(contract["buyer"]),
+            normalise(contract.get("title", "") or contract["notice_title"]),
+            value.get("value"),
+            contract.get("contract_signed", ""),
+        )
+        notice = first_notice.setdefault(key, contract["notice_number"])
+        if notice == contract["notice_number"]:
+            unique.append(contract)
+    return unique
 
 
 def enrich(
@@ -302,6 +345,7 @@ def enrich(
                 }
             )
     contracts.sort(key=lambda c: c["published"], reverse=True)
+    contracts = latest_contracts(contracts)
     profile["track_record"] = track_record(contracts, cpv_labels)
     profile["track_record"]["notices_without_lot_detail"] = unparsed
     profile["contracts"] = contracts
@@ -321,10 +365,10 @@ def main() -> int:
         help="award notices fetched per supplier (default: 100)",
     )
     parser.add_argument(
-        "--kb-dir",
+        "--data-dir",
         type=Path,
-        default=Path("knowledge_base"),
-        help="knowledge base directory (default: knowledge_base)",
+        default=Path("data"),
+        help="data directory (default: data)",
     )
     parser.add_argument(
         "--cache-dir",
@@ -336,9 +380,9 @@ def main() -> int:
     if args.limit < 1:
         parser.error("--limit must be a positive integer")
 
-    path = args.kb_dir / "profiles" / "suppliers.json"
+    path = args.data_dir / "profiles" / "suppliers.json"
     profiles = json.loads(path.read_text(encoding="utf-8"))
-    cpv_labels = load_cpv(args.kb_dir / "cpv_codes.csv")
+    cpv_labels = load_cpv(args.data_dir / "cpv_codes.csv")
     args.cache_dir.mkdir(parents=True, exist_ok=True)
 
     for profile in profiles:

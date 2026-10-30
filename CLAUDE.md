@@ -121,3 +121,28 @@ An empty `deadline` usually means the notice uses a request-to-participate deadl
   TED API, ePO ontology decision, agent design, demo plan). Each file is small; load only what the task needs.
   Respect the evidence labels (`VERIFIED`, `REPORTED`, `HYPOTHESIS`…) — don't present unverified numbers as fact.
   Due diligence design (KYC on onboarding vs per-deal checks): `knowledge_base/22-kyc-and-deal-due-diligence.md`.
+- `ted_company_profiles.py` — builds company/buyer profiles into `data/profiles`
+- `cpv_codes.py`, `data/cpv_codes.csv`, `data/cpv_defence_codes.csv` — CPV reference data
+- `supplier_due_diligence.py` + `dd_sources.py` — 1–10 supplier due-diligence score from free open data,
+  written to `due_diligence` in `suppliers.json` and to `data/profiles/due_diligence_summary.md`.
+  Method is in the module docstring; supplier-uploaded documents go in `data/supplier_evidence/`
+  (see its README). Source responses are cached in `.cache/dd/`; `--offline` re-scores from the cache.
+
+## Due diligence sources (free, no key, checked 2026-10-30)
+
+| Scope | Source | Gives |
+|---|---|---|
+| CZ | ARES REST (`ekonomicke-subjekty`, `-vr`) | status, NACE, licensed activities, shareholders, officers, insolvency flag |
+| PL | VAT white list + KRS `OdpisAktualny` | status, PKD, shareholders, filed accounts, dzial6 liquidation/bankruptcy |
+| FR | recherche-entreprises.api.gouv.fr | status, NAF, revenue/profit |
+| RO | ANAF `PlatitorTvaRest/v9` + `bilant` | status/inactive flag, CAEN, ownership form, balance sheet |
+| SK | RPO (statistics.sk), RPVS OData, registeruz.sk | status, owners, UBOs (public-sector partners), filed accounts |
+| DK | cvrapi.dk | status, bankruptcy flag, industry, employees |
+| EE | ariregister autocomplete | status (R/L/N/K) |
+| LV | data.gov.lv UR CSVs (streamed, indexed) | register, members, UBOs, insolvency, suspensions, accounts |
+| EU/all | VIES, GLEIF (+ parents), Wikidata (via LEI), EU Funding & Tenders search (EDF/ASAP projects), GDELT news | VAT validity, LEI, parent group, industry, EU defence projects, adverse headlines |
+| Sanctions | EU FSF CSV, UN XML, OFAC SDN/alt/consolidated, UK FCDO CSV | name screening of company, owners, officers |
+
+Not free / not covered: DE, NL, ES, IT, IE, SE, SI, BG, CY, PT registers (VIES + GLEIF only);
+UK Companies House needs a free key; OpenSanctions needs a commercial licence; EDES and World Bank
+debarment lists have no clean public API; GDELT rate-limits to 1 request / 5 s.

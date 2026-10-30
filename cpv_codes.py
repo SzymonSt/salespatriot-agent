@@ -129,8 +129,8 @@ def main() -> int:
     parser.add_argument(
         "--out-dir",
         type=Path,
-        default=Path("knowledge_base"),
-        help="output directory (default: knowledge_base)",
+        default=Path("data"),
+        help="output directory (default: data)",
     )
     args = parser.parse_args()
 

@@ -378,10 +378,10 @@ def main() -> int:
         help="notices fetched per organisation for its profile (default: 100)",
     )
     parser.add_argument(
-        "--kb-dir",
+        "--data-dir",
         type=Path,
-        default=Path("knowledge_base"),
-        help="knowledge base directory (default: knowledge_base)",
+        default=Path("data"),
+        help="data directory (default: data)",
     )
     args = parser.parse_args()
     if min(args.buyers, args.suppliers) < 0:
@@ -389,8 +389,8 @@ def main() -> int:
     if min(args.scan, args.history) < 1:
         parser.error("--scan and --history must be positive integers")
 
-    cpv_labels = load_cpv(args.kb_dir / "cpv_codes.csv")
-    out_dir = args.kb_dir / "profiles"
+    cpv_labels = load_cpv(args.data_dir / "cpv_codes.csv")
+    out_dir = args.data_dir / "profiles"
     out_dir.mkdir(parents=True, exist_ok=True)
 
     roles = (
