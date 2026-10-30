@@ -18,7 +18,7 @@ diligence, make an award, or send messages to another organization.
 The current backend is a local FastAPI and Google ADK foundation:
 
 1. At startup, it reads `buyers.json` and `suppliers.json` from
-   `knowledge_base/profiles/` and keeps the validated records in memory.
+   `data/profiles/` and keeps the validated records in memory.
 2. A caller submits a supplier preview or buyer draft request to FastAPI.
 3. FastAPI checks the requested profile's opt-in or buyer policy gate.
 4. The backend creates an ADK agent with a role-specific instruction and typed

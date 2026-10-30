@@ -20,7 +20,7 @@ class Settings(BaseSettings):
     database_url: SecretStr | None = None
     google_api_key: SecretStr | None = None
     gemini_model: str = "gemini-2.5-flash"
-    profiles_dir: Path = REPOSITORY_ROOT / "knowledge_base" / "profiles"
+    profiles_dir: Path = REPOSITORY_ROOT / "data" / "profiles"
 
     @model_validator(mode="after")
     def validate_model_name(self) -> Self:

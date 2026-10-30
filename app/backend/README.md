@@ -3,7 +3,7 @@
 Architecture, API, and local-development documentation is indexed in
 [`docs/README.md`](../../docs/README.md).
 
-The backend loads buyer and supplier profiles from `knowledge_base/profiles/*.json`
+The backend loads buyer and supplier profiles from `data/profiles/*.json`
 at startup. It does not write those profiles to PostgreSQL.
 
 ## Local setup
