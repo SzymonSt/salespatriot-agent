@@ -15,7 +15,7 @@ Requests are kept in data/demo/live_requests.json. Deal checks run in a backgrou
 (deal_due_diligence.run_deal_check); the result appears once it is ready.
 
 Company agents (Gemini, app/backend): each new request is also sent to the backend
-(POST /v1/agents/offers), where every matched supplier's agent assesses it and, if it can supply,
+(POST /v1/live/agents/offers), where every matched supplier's agent assesses it and, if it can supply,
 starts a conversation with the buyer's agent. /v1/* is proxied to the backend so the browser
 stays on one origin. Start the backend separately:
   uv run --project app/backend uvicorn app.backend.main:app --host 127.0.0.1 --port 8000
@@ -119,7 +119,7 @@ class LiveRequests:
         """Hand the request and this supplier's D1-D14 result to its agent (backend)."""
         body = {"request": {**{k: v for k, v in request.items() if k != "matches"}, "deal_check": match["check"]},
                 "supplier_ids": [match["supplier_id"]]}
-        status, payload = backend_call("POST", "/v1/agents/offers", json.dumps(body).encode("utf-8"))
+        status, payload = backend_call("POST", "/v1/live/agents/offers", json.dumps(body).encode("utf-8"))
         with self.lock:
             match["agent"] = "started" if status == 202 else f"not started (HTTP {status}): {payload[:200].decode('utf-8', 'replace')}"
             self._save()
@@ -276,7 +276,7 @@ class Handler(SimpleHTTPRequestHandler):
     def log_message(self, format: str, *args: Any) -> None:
         # Polling every 2 s would flood the terminal; log everything except those GETs.
         line = args[0] if args else ""
-        if "/api/offers?" not in line and "/v1/conversations?" not in line:
+        if "/api/offers?" not in line and "/v1/live/conversations?" not in line:
             super().log_message(format, *args)
 
 

@@ -14,8 +14,8 @@ from pathlib import Path
 from typing import Any
 from uuid import uuid4
 
-from app.backend.knowledge.client import CONVERSATION_STATUSES, MESSAGE_TYPES
-from app.backend.knowledge.context import build_context
+from app.backend.live.client import CONVERSATION_STATUSES, MESSAGE_TYPES
+from app.backend.live.context import build_context
 
 TABLES = ("agent_conversations", "agent_messages", "agent_assessments")
 

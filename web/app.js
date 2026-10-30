@@ -24,8 +24,8 @@
   const PREVIEW = 6;
 
   const state = { suppliers: [], buyers: [], byId: new Map(), logos: {}, matches: [], demo: [], convs: new Map(), open: [],
-    sessionId: null, liveViews: [], requests: {}, requestsSeeded: new Set(), ontViews: [], expanded: new Set() };
-    sessionId: null, liveViews: [], requests: {}, requestsSeeded: new Set(), agentsSeeded: new Set(), seenAssessments: new Set(), assessments: {} };
+    sessionId: null, liveViews: [], requests: {}, requestsSeeded: new Set(), ontViews: [], expanded: new Set(),
+    agentsSeeded: new Set(), seenAssessments: new Set(), assessments: {} };
 
   /* ---------- DOM helpers ---------- */
   function h(tag, props, ...children) {
@@ -634,7 +634,6 @@
       ], "Nothing right now."),
       liveSection("Requests from buyers", () => supplierRequestRows(s),
         "No new requests. When a buyer posts a requirement that matches your products, it pops up here with your deal check."),
-<<<<<<< HEAD
       ontView(() => {
         const opps = oppsNow();
         return section(`Opportunities your agent found (${opps.length})`, opps.length ? expandable(opps, (m) => row(
@@ -642,17 +641,9 @@
           [`${m.buyer.name} · ${country(m.buyer.country)} · ${m.notice.published} · `, external(m.notice.ted_url, "TED ›"),
             h("br"), `Your match: ${m.item.product} `, status(EVIDENCE[m.item.evidence.verification_status][0], EVIDENCE[m.item.evidence.verification_status][1]),
             O ? [tenderChips(m.notice.notice_number), matchReasons(m)] : null],
-          h("button", { class: "btn btn-quiet", type: "button", onclick: () => openMatch(m) },
+          h("button", { class: "btn btn-quiet", type: "button", onclick: (e) => startAgentOnTender(m, e.currentTarget) },
             m.item.evidence.verification_status === "document_verified" ? "Let agent respond" : "Respond (needs you)")), "opportunities") : rowsGroup([], "No open tender matches your proven products yet. Your agent keeps watching new TED notices."));
       }),
-=======
-      section(`Opportunities your agent found (${opps.length})`, opps.length ? expandable(opps, (m) => row(
-        m.notice.title,
-        [`${m.buyer.name} · ${country(m.buyer.country)} · ${m.notice.published} · `, external(m.notice.ted_url, "TED ›"),
-          h("br"), `Your match: ${m.item.product} `, status(EVIDENCE[m.item.evidence.verification_status][0], EVIDENCE[m.item.evidence.verification_status][1])],
-        h("button", { class: "btn btn-quiet", type: "button", onclick: (e) => startAgentOnTender(m, e.currentTarget) },
-          m.item.evidence.verification_status === "document_verified" ? "Let agent respond" : "Respond (needs you)"))) : rowsGroup([], "No open tender matches your proven products yet. Your agent keeps watching new TED notices.")),
->>>>>>> 948dddf (s)
       liveSection("Conversations", () => conversationRows(s), "No conversations yet. Your agent starts one when it responds to a tender."),
       section("Your agent's mandate", mandate([
         ["Sells", categories.join(", ") || "Nothing proven yet"],
@@ -681,7 +672,6 @@
     const buys = (b.top_cpv || []).filter((c) => c.code.startsWith("353")).map((c) => c.label).slice(0, 3);
     return h("div", { class: "page" },
       workspaceHeader(b, "your agent sources suppliers for your tenders and negotiates inside your mandate"),
-<<<<<<< HEAD
       ontView(() => {
         const ranked = rankAll();
         return h("div", { class: "stats" },
@@ -689,16 +679,9 @@
           stat([...ranked.values()].filter((l) => l.length).length, "with a proven supplier"),
           stat(recommendedFrom(ranked).length, "suppliers to consider"));
       }),
-      liveSection("Needs your attention", () => [...state.convs.values()]
-=======
-      h("div", { class: "stats" },
-        stat(notices.length, "open tenders"),
-        stat([...ranked.values()].filter((l) => l.length).length, "with a proven supplier"),
-        stat(recommended.length, "suppliers to consider")),
       liveSection("Deals agreed by your agent — your approval", () => approvalRows(b),
         "Nothing to approve yet. Post a requirement: supplier agents check it, negotiate with your agent, and agreed deals arrive here."),
       liveSection("Needs your attention", () => [...reviewRows(b), ...[...state.convs.values()]
->>>>>>> 948dddf (s)
         .filter((v) => v.people.buyer.id === b.id && v.waiting)
         .map((v) => row(`Approve deal with ${v.people.supplier.name}`, `${v.topic}. Your mandate needs a person for suppliers with risk flags or low due diligence.`,
           h("button", { class: "btn", type: "button", onclick: () => showConv(v.id) }, "Review")))], "Nothing to approve right now."),
@@ -860,7 +843,7 @@
           o.lead_time_days ? `· ${o.lead_time_days} days` : null].filter(Boolean).join(" ");
         const decide = (decision) => async (e) => {
           e.target.closest(".row-actions").querySelectorAll("button").forEach((x) => { x.disabled = true; });
-          await fetch(`/v1/conversations/${v.live}/approval`, { method: "POST", headers: { "Content-Type": "application/json" },
+          await fetch(`/v1/live/conversations/${v.live}/approval`, { method: "POST", headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ decision, approver: "procurement officer" }) }).catch(() => null);
           pollAgents();
         };
@@ -932,7 +915,7 @@
       h("div", { class: "toast-actions" },
         conv?.liveStatus === "awaiting_review" ? h("button", { class: "btn", type: "button", onclick: async (e) => {
           e.target.disabled = true;
-          await fetch(`/v1/conversations/${conv.live}/resume`, { method: "POST" }).catch(() => null);
+          await fetch(`/v1/live/conversations/${conv.live}/resume`, { method: "POST" }).catch(() => null);
           dialog.close();
           showConv(conv.id);
           pollAgents();
@@ -1053,8 +1036,8 @@
     if (!c) return;
     let conversations, assessments;
     try {
-      const [r1, r2] = await Promise.all([fetch(`/v1/conversations?company_id=${encodeURIComponent(c.id)}`),
-        fetch(`/v1/agents/assessments?company_id=${encodeURIComponent(c.id)}`)]);
+      const [r1, r2] = await Promise.all([fetch(`/v1/live/conversations?company_id=${encodeURIComponent(c.id)}`),
+        fetch(`/v1/live/agents/assessments?company_id=${encodeURIComponent(c.id)}`)]);
       if (!r1.ok || !r2.ok) return;
       [conversations, assessments] = await Promise.all([r1.json(), r2.json()]);
     } catch { return; /* no agents backend: the scripted demo still works */ }
@@ -1195,7 +1178,7 @@
       return;
     }
     try {
-      const r = await fetch(`/v1/conversations/${conv.live}/messages`, { method: "POST", headers: { "Content-Type": "application/json" },
+      const r = await fetch(`/v1/live/conversations/${conv.live}/messages`, { method: "POST", headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ sender_role: conv.me, sender_id: c.id, text }) });
       if (!r.ok) throw new Error((await r.json().catch(() => ({}))).detail || `HTTP ${r.status}`);
       pollAgents();
@@ -1208,7 +1191,7 @@
     button.disabled = true;
     button.textContent = "Agent is assessing…";
     try {
-      const r = await fetch("/v1/conversations", { method: "POST", headers: { "Content-Type": "application/json" },
+      const r = await fetch("/v1/live/conversations", { method: "POST", headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ buyer_id: m.buyer.id, supplier_id: m.supplier.id, publication_number: m.notice.notice_number }) });
       if (!r.ok) throw new Error(`HTTP ${r.status}`);
       button.textContent = "Agent is on it";

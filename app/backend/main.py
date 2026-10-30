@@ -20,8 +20,8 @@ from app.backend.database import check_database_connection, create_database_engi
 from app.backend.knowledge.client import KnowledgeClient
 from app.backend.knowledge.embeddings import QueryEmbedder
 from app.backend.profiles import CompanyProfile, ProfileRegistry
-from app.backend.knowledge import ConversationOrchestrator, SimulatedKnowledgeClient
-from app.backend.knowledge.routes import router as knowledge_router
+from app.backend.live import ConversationOrchestrator, SimulatedKnowledgeClient
+from app.backend.live.routes import router as live_router
 from app.backend.settings import REPOSITORY_ROOT, Settings, get_settings
 
 class DemandContext(BaseModel):
@@ -106,9 +106,9 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     from app.backend.knowledge.routes import router as knowledge_router
 
     app.include_router(demo_router)
-    app.include_router(knowledge_router)
+    app.include_router(knowledge_router)  # WS5: /v1/context, /v1/conversations, … on Supabase
     app.include_router(peer_agent_router)
-    app.include_router(knowledge_router)
+    app.include_router(live_router)  # demo flow: /v1/live/… on the simulated database
 
     def request_settings(request: Request) -> Settings:
         return request.app.state.settings

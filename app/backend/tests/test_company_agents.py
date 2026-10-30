@@ -5,7 +5,7 @@ import json
 import pytest
 
 from app.backend.agents.company import AgentTurn, SupplierAssessment, build_company_agent
-from app.backend.knowledge import ConversationOrchestrator, SimulatedKnowledgeClient
+from app.backend.live import ConversationOrchestrator, SimulatedKnowledgeClient
 from app.backend.settings import REPOSITORY_ROOT
 
 PROFILES = {
@@ -188,7 +188,7 @@ async def test_supplier_agent_never_sees_the_buyer_budget(tmp_path) -> None:
 
 
 def test_deal_check_text_does_not_leak_the_budget_to_suppliers() -> None:
-    from app.backend.knowledge.context import tender_facts
+    from app.backend.live.context import tender_facts
 
     tender = {"ref": "request:R", "title": "9x19 mm", "budget": 180000, "currency": "EUR", "deal_check": {
         "decision": "ESCALATE", "blocking": ["D14: value €180,000 > autonomous limit €250,000"],

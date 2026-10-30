@@ -3,8 +3,8 @@
 import asyncio
 
 from app.backend.agents.company import AgentTurn
-from app.backend.knowledge import ConversationOrchestrator, SimulatedKnowledgeClient
-from app.backend.knowledge.conversations import price_list_entry
+from app.backend.live import ConversationOrchestrator, SimulatedKnowledgeClient
+from app.backend.live.conversations import price_list_entry
 from app.backend.tests.test_company_agents import BUYER, PROFILES, assessment, fake_runner
 
 LUCZNIK = "supplier-pol-9482182612"

@@ -48,7 +48,9 @@ async def test_failures_timeouts_and_wrong_shapes_return_none() -> None:
     assert await QueryEmbedder(api_key=None, embed_function=short).embed("") is None
 
 
-async def test_without_api_key_embedding_is_disabled() -> None:
+async def test_without_api_key_embedding_is_disabled(monkeypatch) -> None:
+    # Other tests start the app, which exports GOOGLE_API_KEY from .env into the process.
+    monkeypatch.delenv("GOOGLE_API_KEY", raising=False)
     embedder = QueryEmbedder.from_settings(Settings(_env_file=None))
     assert embedder.enabled is False
     assert await embedder.embed("anything") is None
