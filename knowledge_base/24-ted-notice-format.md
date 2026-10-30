@@ -43,6 +43,9 @@ On macOS with python.org Python, set `SSL_CERT_FILE` to certifi's bundle if you 
   - `place-of-performance` mixes NUTS and country codes;
   - **`received-submissions-type-val`** is the number of bids received (5 in 720852), a direct measure of competition.
 - **Restricted procedures** have no `deadline-receipt-tender-date-lot`, only `deadline-receipt-request`.
+  For open procedures TED fills both with the same date. Generic `DT` repeats the request deadline.
+- **Estimated value** is optional and often missing, especially in defence tenders. Fall back to `estimated-value-lot`
+  (one entry per lot, so sum them) and `framework-maximum-value-lot`. Coverage: [25](25-supabase-ted-sync.md).
 - **Consortia:** `winner-name` lists each member and `tendering-party-name` holds the joint name (692794).
 
 ## Caveat: notices before eForms (pre late 2023)

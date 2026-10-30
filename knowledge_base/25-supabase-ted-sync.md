@@ -63,6 +63,25 @@ Backfill finished in 35 s: **4,840 notices** (2,230 competition + 2,610 result),
 runs: 10 notices, 6 winners, ~2 s. Security advisors: `pg_net` moved to schema `extensions`. `ted_sync_state` has RLS
 with no policy on purpose (service role only).
 
+## Why some tenders have no value, currency or deadline (measured 2026-10-30)
+| Competition notices | Total | With estimated value | Tender deadline | Request-to-participate deadline only | No deadline |
+|---|---|---|---|---|---|
+| eForms (Nov 2023 →) | 959 | 450 (402 procedure, 28 sum of lots, 24 framework maximum) | 430 | 527 | 2 |
+| Legacy (before Nov 2023) | 1,271 | 4 | 1 | 1,270 | 0 |
+| **Open now** (`ted_open_tenders`) | 36 | 22 | 15 | 21 | 0 |
+
+- **No value means the buyer did not publish one.** The estimated value (BT-27) is optional. 356 of the
+  509 eForms tenders without a value fall under the defence directive (2009/81), where buyers often keep
+  the budget confidential. No value also means no currency: currency is only set together with a value.
+- **We fill in what TED does have:** procedure value → sum of lot values → framework maximum
+  (`estimated_value_source` says which). Lot lists hold one entry per lot, so equal amounts are summed, not deduplicated.
+- **A missing tender deadline is usually by design.** Restricted and negotiated procedures (two stages) publish only
+  the deadline for **requests to participate**. The tender deadline comes later, in the invitation to
+  selected firms, and is not on TED. Use `next_deadline` + `deadline_kind` (`tenders` |
+  `requests_to_participate`) from `ted_open_tenders`.
+- **Legacy notices** carry their single deadline in the request field (TED maps the old `DT` there) and almost never an estimated value.
+- For agents: treat "no value" as *unknown*, never as zero. For price checks (D9) use award values of similar past deals instead.
+
 ## Known data limits
 - **Winners exist only for eForms notices (from late 2023).** Older award notices in the Search
   API carry only `total-value`, so roughly 1,036 winner rows come out of ~2,610 award notices.

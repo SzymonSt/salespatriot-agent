@@ -3,7 +3,7 @@
 
 export const TED_API = "https://api.ted.europa.eu/v3/notices/search";
 const PAGE_SIZE = 250;
-// 33 fields × 250 notices = 8,250 fields per page, under TED's 10,000 limit.
+// 38 fields × 250 notices = 9,500 fields per page, under TED's 10,000 limit.
 const FIELDS = [
   "publication-number",
   "notice-type",
@@ -22,7 +22,13 @@ const FIELDS = [
   "main-activity",
   "estimated-value-proc",
   "estimated-value-cur-proc",
+  // Some buyers give the value only per lot or as a framework maximum.
+  "estimated-value-lot",
+  "estimated-value-cur-lot",
+  "framework-maximum-value-lot",
+  "framework-maximum-value-cur-lot",
   "deadline-receipt-tender-date-lot",
+  "DT", // generic deadline; used only for pre-eForms notices (for eForms it repeats the request deadline)
   "deadline-receipt-request",
   "winner-name",
   "winner-identifier",
@@ -89,6 +95,12 @@ function num(value: unknown): number | null {
   return Number.isFinite(parsed) ? parsed : null;
 }
 
+// Lot fields hold one entry per lot, so equal values are separate lots and must all count.
+function sum(value: unknown): number | null {
+  const values = list(value).map((text) => num(text)).filter((v): v is number => v !== null);
+  return values.length ? values.reduce((a, b) => a + b, 0) : null;
+}
+
 // "2026-11-27+02:00" (date only) counts as open until the end of that day.
 function timestamp(value: string): string | null {
   const dateOnly = value.match(/^(\d{4}-\d{2}-\d{2})(Z|[+-]\d{2}:\d{2})?$/);
@@ -116,6 +128,12 @@ export function noticeRow(n: Notice, kind: Kind, now: string) {
   const cpv = uniq(list(n["classification-cpv"]));
   const title = byLanguage(n["title-proc"]);
   const description = byLanguage(n["description-proc"]);
+  const values = [
+    { source: "procedure", value: num(n["estimated-value-proc"]), currency: first(n["estimated-value-cur-proc"]) },
+    { source: "lots", value: sum(n["estimated-value-lot"]), currency: first(n["estimated-value-cur-lot"]) },
+    { source: "framework_max", value: sum(n["framework-maximum-value-lot"]), currency: first(n["framework-maximum-value-cur-lot"]) },
+  ];
+  const estimate = values.find((v) => v.value !== null);
   return {
     publication_number: String(n["publication-number"]),
     kind,
@@ -134,9 +152,12 @@ export function noticeRow(n: Notice, kind: Kind, now: string) {
     main_activity: first(n["main-activity"]),
     cpv_codes: cpv,
     focus_classes: focusClasses(cpv),
-    estimated_value: num(n["estimated-value-proc"]),
-    estimated_currency: first(n["estimated-value-cur-proc"]),
-    deadline_tender: latest(n["deadline-receipt-tender-date-lot"]),
+    estimated_value: estimate?.value ?? null,
+    estimated_currency: estimate?.currency ?? null,
+    estimated_value_source: estimate?.source ?? null,
+    deadline_tender:
+      latest(n["deadline-receipt-tender-date-lot"]) ??
+      (n["deadline-receipt-request"] ? null : latest(n["DT"])), // pre-eForms: "tenders or requests"
     deadline_request: latest(n["deadline-receipt-request"]),
     result_value: num(n["result-value-notice"]) ?? num(n["total-value"]),
     result_currency: first(n["result-value-cur-notice"]) ?? first(n["total-value-cur"]),
