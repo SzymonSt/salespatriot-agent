@@ -174,6 +174,11 @@ Every `evidence` and `price_anchors` item also carries `"layer"`. Statistics com
 }
 ```
 The baseline is read from the **active** snapshot only (`kb_snapshots.active = true`).
+Unit-price fields (`n_unit_prices`, `unit_price_p25/p50/p75`, `currency`, `quantity_p50`, `quantity_unit`) come only
+from the strict view `kb_baseline_unit_prices` (pieces, quantity > 1, single lot with a stated quantity, one result
+notice), at family+calibre+country, or family+country → family when the subject has no calibre; never across calibres
+or at class level. Unknown → null plus a warning. `unit_price_ref` and `value_currency` (currency of `awarded_value_p50`)
+sit next to them.
 
 ### 3.5 Conversations and memory tables
 ```text
@@ -389,7 +394,8 @@ Acceptance:
 - `search`: `evidence` = `kb_search(p_query_embedding, p_query_text, …)` only.
 - `priors` (§3.4) for the subject's family, calibre and country:
   - baseline row from `kb_baseline_stats` of the active snapshot, falling back from family+calibre+country
-    → family+country → family → class;
+    → family+country → family → class (counts, bids, outcome rates, winners, timing);
+  - unit prices only from `kb_baseline_unit_prices` of the active snapshot (see §3.4), never from `kb_baseline_stats`;
   - platform numbers from closed conversations and `deal_outcomes` in the same scope;
   - blend weight `n_platform / (n_platform + 10)`.
 - Always fill `warnings`:
@@ -619,7 +625,9 @@ insert into `product_items`**: that table is the live ontology layer, owned by t
 **8.8 Freeze and publish:**
 - write `manifest.json` next to the JSONL in Storage: snapshot id, cutoff, queries, counts per table, `taxonomy_version`, sha256 of the file;
 - set `kb_snapshots.status = 'frozen'`, `frozen_at = now()` and `active = true`;
-- from then on, `kb_refresh` builds `ted_live` only for notices after `cutoff_date`.
+- from then on, `kb_refresh` builds `ted_live` only for notices after `cutoff_date`, plus competition notices still
+  open at the cutoff and any TED row whose ref has no card in the active baseline (every `ted:`/`award:` ref stays
+  findable in exactly one layer; 403428-2025, open until 2031, is the one deliberate overlap).
 
 **8.9 Extending later:** build `baseline_v2` (for example legacy-XML winners, more CPV groups or more years) as a
 new snapshot next to `v1`. Compare backtests between the two, then switch `active`. Retire `v1` instead of deleting it.
