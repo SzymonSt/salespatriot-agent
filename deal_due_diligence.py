@@ -285,7 +285,7 @@ def d5_technical_fit(tender, supplier, level, documents, delivery_by) -> dict[st
     return check("D5", "Technical fit; certificates valid at delivery", "HARD/SCORE", status, summary, evidence, conditions)
 
 
-def d6_capacity(tender, supplier, value_eur) -> dict[str, Any]:
+def d6_capacity(tender, supplier, value_eur, offer, delivery_window_end) -> dict[str, Any]:
     baseline = supplier.get("deal_baseline") or {}
     largest = (baseline.get("D6_capacity_hints") or {}).get("largest_lot_eur")
     revenue = (baseline.get("D10_financial_capacity") or {}).get("revenue_eur")
@@ -293,7 +293,21 @@ def d6_capacity(tender, supplier, value_eur) -> dict[str, Any]:
     unit = first(tender["ted"].get("quantity-unit-lot"))
     evidence = [f"Largest past lot on TED: €{largest:,.0f}" if largest else "No valued past lot on TED",
                 f"Tender quantity: {quantity} {unit}".strip() if quantity else "Tender quantity not stated in the notice"]
-    conditions = ["Dated capacity statement: free monthly output, lead time, delivery schedule vs deadline"]
+    conditions = [] if offer.get("capacity_confirmed") else ["Dated capacity statement: free monthly output, lead time, delivery schedule vs deadline"]
+    delivery = parse_day(offer.get("delivery_date"))
+    if delivery:
+        evidence.append(f"Offered delivery: {delivery}" + (f" (contract window ends ~{delivery_window_end})" if delivery_window_end else ""))
+        if delivery < date.today():
+            return check("D6", "Capacity and schedule vs deadline", "SCORE/HARD", "fail", f"Offered delivery date {delivery} is in the past", evidence)
+        if delivery_window_end and delivery > delivery_window_end:
+            return check("D6", "Capacity and schedule vs deadline", "SCORE/HARD", "escalate",
+                         f"Offered delivery {delivery} is after the contract window (~{delivery_window_end})", evidence, conditions)
+    if offer.get("quantity") and quantity:
+        try:
+            if float(offer["quantity"]) < float(quantity):
+                conditions.append(f"Offer covers {offer['quantity']} of {quantity} {unit} — partial quantity, buyer must accept a split award")
+        except ValueError:
+            pass
     if value_eur and largest:
         ratio = value_eur / largest
         evidence.append(f"Deal value €{value_eur:,.0f} = {ratio:.1f}× largest past lot")
@@ -302,8 +316,9 @@ def d6_capacity(tender, supplier, value_eur) -> dict[str, Any]:
                          f"Deal is {ratio:.0f}× the largest lot this supplier has delivered — capacity unproven", evidence, conditions)
         if ratio > 2:
             conditions.append("Split delivery into batches with acceptance per batch")
-    return check("D6", "Capacity and schedule vs deadline", "SCORE/HARD", "condition",
-                 "Past deliveries known; current free capacity must be declared", evidence, conditions)
+    status = "condition" if conditions else "pass"
+    return check("D6", "Capacity and schedule vs deadline", "SCORE/HARD", status,
+                 "Delivery plan within proven range" if status == "pass" else "Past deliveries known; see conditions", evidence, conditions)
 
 
 def d7_supply_chain(tender, supplier) -> dict[str, Any]:
@@ -328,11 +343,14 @@ def d7_supply_chain(tender, supplier) -> dict[str, Any]:
                  ("SAFE funding detected; " if safe else "No SAFE funding stated; ") + "origin declaration required", evidence, conditions)
 
 
-def d8_transport(tender, supplier) -> dict[str, Any]:
+def d8_transport(tender, supplier, offer) -> dict[str, Any]:
     rule = rules.cpv_rule(tender.get("cpv_codes") or [])
     origin, destination = supplier["country"], tender.get("buyer_country") or ""
     route = rules.land_route(origin, destination)
-    evidence = [f"Dangerous goods: {rule['adr']}"]
+    incoterms = (offer.get("incoterms") or "").upper()
+    seller_carries = incoterms not in ("EXW", "FCA", "FAS", "FOB")
+    who = "supplier" if seller_carries else "buyer"
+    evidence = [f"Dangerous goods: {rule['adr']}", f"Incoterms: {incoterms or 'not agreed'}" + (f" → {who} arranges carriage" if incoterms else "")]
     conditions = []
     if route:
         evidence.append("Likely land route: " + " → ".join(route))
@@ -340,46 +358,91 @@ def d8_transport(tender, supplier) -> dict[str, Any]:
             conditions.append("Channel Tunnel does not take most Class 1 goods — use a ferry crossing")
     else:
         evidence.append(f"No land route {origin} → {destination}: sea or air freight")
-        conditions.append("Sea/air carrier with IMDG/IATA dangerous-goods approval")
+        conditions.append(f"Sea/air carrier with IMDG/IATA dangerous-goods approval ({who})")
     if rule["adr"].startswith("Class 1"):
-        conditions.append("ADR Class 1 carrier and vehicles, driver training certificate, explosives-storage licence at the delivery site")
-    conditions.append("Incoterms agreed (default proposal: DAP buyer's site) and access arrangements for the military/police site")
+        if offer.get("carrier"):
+            evidence.append(f"Named carrier: {offer['carrier']}")
+        else:
+            conditions.append(f"ADR Class 1 carrier named by the {who}; driver training certificate; explosives-storage licence at the delivery site")
+        delivery = parse_day(offer.get("delivery_date"))
+        if delivery and (delivery - date.today()).days < 42:
+            return check("D8", "Transport and logistics", "HARD/SCORE", "escalate",
+                         f"Class 1 delivery in {(delivery - date.today()).days} days — transfer/transit permits usually take weeks", evidence, conditions)
+    if not incoterms:
+        conditions.append("Incoterms agreed (default proposal: DAP buyer's site)")
+    conditions.append("Access arrangements for the military/police delivery site")
     return check("D8", "Transport and logistics", "HARD/SCORE", "condition", f"{len(conditions)} transport condition(s)", evidence, conditions)
 
 
-def d9_price(tender, history, rates, value_eur) -> dict[str, Any]:
+def d9_price(tender, history, rates, value_eur, offer) -> dict[str, Any]:
     codes = [c for c in tender.get("cpv_codes") or [] if c != "35300000"] or tender.get("cpv_codes") or []
     prefixes = {c[:5] for c in codes}
     values = []
     for notice in history:
-        if notice.get("kind") not in ("award", "result", "can") and notice.get("result_value") is None:
+        if notice.get("result_value") is None:
             continue
         if not any(c[:5] in prefixes for c in notice.get("cpv_codes") or []):
             continue
         eur = to_eur(notice.get("result_value"), notice.get("result_currency"), rates)
         if eur and eur > 1000:
             values.append(eur)
+    estimate = to_eur(tender.get("estimated_value"), tender.get("estimated_currency"), rates)
+    offered = offer_total_eur(offer, rates)
     evidence = [f"{len(values)} awarded TED notices in CPV {', '.join(sorted(p + '…' for p in prefixes))}"]
+    if values:
+        values.sort()
+        evidence.append(f"Award values: median €{statistics.median(values):,.0f}, range €{values[0]:,.0f}–€{values[-1]:,.0f}")
+    if value_eur and values:
+        position = sum(1 for v in values if v <= value_eur) / len(values)
+        evidence.append(f"Deal value €{value_eur:,.0f} is at the {position:.0%} percentile of past awards")
+    if offered and estimate:
+        ratio = offered / estimate
+        evidence.append(f"Offer €{offered:,.0f} = {ratio:.0%} of the buyer's estimate €{estimate:,.0f}")
+        quantity = first(tender["ted"].get("quantity-lot"))
+        if offer.get("unit_price") and quantity:
+            try:
+                evidence.append(f"Unit price {offer['unit_price']} {offer.get('currency', 'EUR')} vs estimate/quantity ≈ €{estimate / float(quantity):,.2f}")
+            except (ValueError, ZeroDivisionError):
+                pass
+        framework = first(tender["ted"].get("framework-agreement-lot")) not in ("", "none")
+        if framework and ratio < 1:
+            # A framework estimate is a ceiling over its whole duration, not the price of one call-off.
+            evidence.append("Framework agreement: the estimate is a ceiling for all call-offs")
+            return check("D9", "Price sanity vs history", "SCORE", "condition", f"Offer is {ratio:.0%} of the framework ceiling — compare unit prices, not totals",
+                         evidence, ["Unit-price schedule for the whole framework term"])
+        # Abnormally low offers must be explained (Dir. 2014/24 Art. 69, Dir. 2009/81 Art. 49).
+        if ratio < 0.6:
+            return check("D9", "Price sanity vs history", "SCORE", "escalate", f"Offer is {1 - ratio:.0%} below the buyer's estimate — abnormally low, risk of non-delivery", evidence,
+                         ["Supplier explains the price (abnormally low tender procedure)"])
+        if ratio > 1.5:
+            return check("D9", "Price sanity vs history", "SCORE", "escalate", f"Offer is {ratio - 1:.0%} above the buyer's estimate", evidence)
+        if ratio > 1.2:
+            return check("D9", "Price sanity vs history", "SCORE", "condition", f"Offer is {ratio - 1:.0%} above the buyer's estimate", evidence,
+                         ["Buyer confirms budget or negotiates the price down"])
+        return check("D9", "Price sanity vs history", "SCORE", "pass", f"Offer within ±20% of the buyer's estimate ({ratio:.0%})", evidence)
+    if offered:
+        return check("D9", "Price sanity vs history", "SCORE", "condition", "Buyer published no estimate; offer checked only against past award values", evidence,
+                     ["Supplier provides a unit-price breakdown"])
     if not values:
         return check("D9", "Price sanity vs history", "SCORE", "condition", "No comparable award values in TED history", evidence,
                      ["Price justified by the supplier with unit-price breakdown"])
-    values.sort()
-    median = statistics.median(values)
-    evidence.append(f"Award values: median €{median:,.0f}, range €{values[0]:,.0f}–€{values[-1]:,.0f}")
-    if value_eur:
-        position = sum(1 for v in values if v <= value_eur) / len(values)
-        evidence.append(f"Tender estimate €{value_eur:,.0f} is at the {position:.0%} percentile")
     return check("D9", "Price sanity vs history", "SCORE", "info",
-                 "Baseline ready; compare the offer's unit price to the buyer's estimate and history (lot values, not unit prices)", evidence)
+                 "Baseline ready; no offer price yet (lot values, not unit prices)", evidence)
 
 
-def d10_financial(tender, supplier, value_eur) -> dict[str, Any]:
+def d10_financial(tender, supplier, value_eur, offer) -> dict[str, Any]:
     finance = (supplier.get("deal_baseline") or {}).get("D10_financial_capacity") or {}
     revenue = finance.get("revenue_eur")
     guarantee = first(tender["ted"].get("guarantee-required-lot")) == "true"
+    advance = offer.get("advance_payment_pct") or 0
     evidence = [f"Revenue: €{revenue:,.0f} ({finance.get('revenue_year')})" if revenue else "Revenue not public",
-                f"Tender requires a guarantee: {'yes — ' + first(tender['ted'].get('guarantee-required-description-lot'))[:120] if guarantee else 'not stated'}"]
+                f"Tender requires a guarantee: {'yes — ' + first(tender['ted'].get('guarantee-required-description-lot'))[:120] if guarantee else 'not stated'}",
+                f"Advance payment requested: {advance}%"]
     conditions = ["Bid/performance guarantee as required by the tender"] if guarantee else []
+    if advance > 0:
+        conditions.append(f"Advance-payment guarantee covering the {advance}% advance")
+        if advance > 30:
+            conditions.append("Advance above 30% — buyer's finance department approves")
     if value_eur and revenue:
         share = value_eur / revenue
         evidence.append(f"Deal value = {share:.0%} of annual revenue")
@@ -387,12 +450,19 @@ def d10_financial(tender, supplier, value_eur) -> dict[str, Any]:
             return check("D10", "Payment terms and financial capacity", "SCORE", "escalate",
                          f"Deal is {share:.1f}× annual revenue — financing risk", evidence, conditions + ["Parent/bank guarantee and milestone payments"])
         if share > 0.3:
-            conditions.append("Advance payment or milestone payments; performance guarantee")
+            conditions.append("Milestone payments; performance guarantee")
     elif value_eur:
         conditions.append("Financial statements or bank reference (revenue not public)")
     status = "condition" if conditions else "pass"
     return check("D10", "Payment terms and financial capacity", "SCORE", status,
                  "Financial capacity " + ("checked against revenue" if revenue else "not provable from open data"), evidence, conditions)
+
+
+def offer_total_eur(offer: dict[str, Any], rates: dict[str, float]) -> float | None:
+    total = offer.get("total_value")
+    if total is None and offer.get("unit_price") is not None and offer.get("quantity"):
+        total = float(offer["unit_price"]) * float(offer["quantity"])
+    return to_eur(total, offer.get("currency") or "EUR", rates) if total else None
 
 
 def d11_contract_terms(tender) -> dict[str, Any]:
@@ -488,9 +558,11 @@ def d14_mandate(tender, supplier, value_eur, mandates) -> dict[str, Any]:
 # --------------------------------------------------------------------------- deal assembly
 
 
-def run_deal(tender, supplier, level, others, ctx) -> dict[str, Any]:
+def run_deal(tender, supplier, level, others, ctx, offer: dict[str, Any] | None = None) -> dict[str, Any]:
     rates = ctx["rates"]
-    value_eur = to_eur(tender.get("estimated_value"), tender.get("estimated_currency"), rates)
+    offer = offer or {}
+    # The offer value, once known, replaces the buyer's estimate in every value-based check.
+    value_eur = offer_total_eur(offer, rates) or to_eur(tender.get("estimated_value"), tender.get("estimated_currency"), rates)
     deadline = parse_day(tender.get("next_deadline"))
     months = first(tender["ted"].get("duration-period-value-lot"))
     unit = first(tender["ted"].get("duration-period-unit-lot")).upper()
@@ -498,6 +570,8 @@ def run_deal(tender, supplier, level, others, ctx) -> dict[str, Any]:
     if deadline:
         span = int(months) * (30 if unit == "MONTH" else 365 if unit == "YEAR" else 1) if months.isdigit() else 180
         delivery_by = deadline + timedelta(days=span)
+    window_end = delivery_by
+    delivery_by = parse_day(offer.get("delivery_date")) or delivery_by
     documents = ctx["documents"].get(supplier["id"], [])
     checks = [
         d1_freshness(supplier, ctx["sanctions"]),
@@ -505,11 +579,11 @@ def run_deal(tender, supplier, level, others, ctx) -> dict[str, Any]:
         d3_licences(tender, supplier, documents),
         d4_data_rules(tender, supplier),
         d5_technical_fit(tender, supplier, level, documents, delivery_by),
-        d6_capacity(tender, supplier, value_eur),
+        d6_capacity(tender, supplier, value_eur, offer, window_end),
         d7_supply_chain(tender, supplier),
-        d8_transport(tender, supplier),
-        d9_price(tender, ctx["history"], rates, value_eur),
-        d10_financial(tender, supplier, value_eur),
+        d8_transport(tender, supplier, offer),
+        d9_price(tender, ctx["history"], rates, value_eur, offer),
+        d10_financial(tender, supplier, value_eur, offer),
         d11_contract_terms(tender),
         d12_integrity(tender, supplier, others, ctx["history"], rates),
         d13_references(tender, supplier),
@@ -519,7 +593,7 @@ def run_deal(tender, supplier, level, others, ctx) -> dict[str, Any]:
     decision = ("NO-GO" if "fail" in statuses else "ESCALATE" if "escalate" in statuses
                 else "GO WITH CONDITIONS" if "condition" in statuses else "GO")
     return {
-        "deal_id": f"{tender['publication_number']}:{supplier['id']}",
+        "deal_id": f"{tender['publication_number']}:{supplier['id']}" + (f":{offer['offer_id']}" if offer.get("offer_id") else ""),
         "method_version": METHOD_VERSION,
         "checked_at": src.today(),
         "tender": {
@@ -531,11 +605,142 @@ def run_deal(tender, supplier, level, others, ctx) -> dict[str, Any]:
         "supplier": {"id": supplier["id"], "name": supplier["name"], "country": supplier["country"],
                      "score": (supplier.get("due_diligence") or {}).get("total_score"), "kyc_status": (supplier.get("kyc") or {}).get("kyc_status"),
                      "match": level},
+        "offer": offer or None,
+        "deal_value_eur": round(value_eur) if value_eur else None,
         "decision": decision,
         "blocking": [f"{c['code']}: {c['summary']}" for c in checks if c["status"] in ("fail", "escalate")],
         "conditions": [f"{c['code']}: {cond}" for c in checks for cond in c["conditions"]],
         "checks": checks,
     }
+
+
+# --------------------------------------------------------------------------- single-deal API
+
+
+_CONTEXT: dict[str, Any] | None = None
+
+
+def load_context(data_dir: Path = Path("data"), refresh: bool = False) -> dict[str, Any]:
+    """Everything the checks need, loaded once per process (sanctions lists take ~30 s cold)."""
+    global _CONTEXT
+    if _CONTEXT is None or refresh:
+        db = Supabase.from_env()
+        _CONTEXT = {
+            "db": db,
+            "rates": src.ecb_rates(),
+            "sanctions": src.sanctions_index(),
+            "history": load_history(db) if db else [],
+            "documents": load_documents(db),
+            "mandates": load_mandates(db),
+            "suppliers": {p["id"]: p for p in json.loads((data_dir / "profiles" / "suppliers.json").read_text(encoding="utf-8"))},
+        }
+    return _CONTEXT
+
+
+def tender_from_ted(number: str) -> dict[str, Any] | None:
+    """Build a tender record straight from TED (for notices not in ted_open_tenders)."""
+    fields = TENDER_FIELDS + ["notice-title", "buyer-name", "buyer-country"]
+    data, _ = src.http("https://api.ted.europa.eu/v3/notices/search",
+                       data={"query": f"publication-number={number}", "fields": sorted(set(fields)), "limit": 1})
+    notices = (data or {}).get("notices", []) if isinstance(data, dict) else []
+    if not notices:
+        return None
+    ted = notices[0]
+    deadlines = sorted(set((ted.get("deadline-receipt-tender-date-lot") or []) + (ted.get("deadline-receipt-request") or [])))
+    values = [float(v) for v in ted.get("estimated-value-lot") or [] if v]
+    return {
+        "publication_number": number,
+        "title_en": first(ted.get("notice-title")),
+        "title_original": first(ted.get("title-proc")),
+        "buyer_name": first(ted.get("buyer-name")),
+        "buyer_country": first(ted.get("buyer-country")),
+        "cpv_codes": sorted(set(ted.get("classification-cpv") or [])),
+        "estimated_value": sum(values) if values else None,
+        "estimated_currency": first(ted.get("estimated-value-cur-lot")) or None,
+        "next_deadline": deadlines[-1] if deadlines else None,
+        "legal_basis": first(ted.get("legal-basis")),
+        "procedure_type": first(ted.get("procedure-type")),
+        "ted_url": f"https://ted.europa.eu/en/notice/-/detail/{number}",
+        "ted": ted,
+    }
+
+
+def tender_from_request(request: dict[str, Any], buyer: dict[str, Any] | None) -> dict[str, Any]:
+    """A requirement posted by a buyer on the platform, shaped like a TED tender record."""
+    buyer = buyer or {}
+    return {
+        "publication_number": request["id"],
+        "title_en": request.get("title", ""),
+        "title_original": request.get("title", ""),
+        "buyer_name": buyer.get("legal_name") or buyer.get("name") or request.get("buyer_name", ""),
+        "buyer_country": buyer.get("country") or request.get("buyer_country", ""),
+        "cpv_codes": request.get("cpv_codes") or [],
+        "estimated_value": request.get("budget"),
+        "estimated_currency": request.get("currency") or "EUR",
+        "next_deadline": request.get("need_by"),
+        "legal_basis": request.get("legal_basis") or "32009L0081",
+        "procedure_type": "platform-request",
+        "ted_url": "",
+        "ted": {
+            "main-activity": [buyer.get("main_activity") or ""],
+            "description-lot": [request.get("description") or request.get("title", "")],
+            "quantity-lot": [str(request["quantity"])] if request.get("quantity") else [],
+            "quantity-unit-lot": [request.get("unit") or ""],
+            "framework-agreement-lot": ["none"],
+        },
+    }
+
+
+def get_tender(number: str, ctx: dict[str, Any]) -> dict[str, Any] | None:
+    db = ctx.get("db")
+    rows = db.select("ted_open_tenders", f"select=*&publication_number=eq.{number}") if db else []
+    if not rows:
+        return tender_from_ted(number)
+    tender = rows[0]
+    ted = tender_from_ted(number)
+    tender["ted"] = ted["ted"] if ted else {}
+    return tender
+
+
+def match_level(tender: dict[str, Any], supplier: dict[str, Any]) -> str:
+    codes = tender.get("cpv_codes") or []
+    delivered = {c for contract in supplier.get("contracts") or [] for c in contract.get("cpv_codes") or []}
+    delivered |= {c["code"] for c in supplier.get("top_cpv") or []}
+    if any(c in delivered and c != "35300000" for c in codes):
+        return "exact CPV delivered before"
+    if any(d[:4] == c[:4] and c[:4] != "3530" for c in codes for d in delivered):
+        return "same CPV class delivered before"
+    return "no comparable delivery on TED"
+
+
+def run_deal_check(deal: dict[str, Any], ctx: dict[str, Any] | None = None) -> dict[str, Any]:
+    """Run D1-D14 for one deal.
+
+    deal = {
+      "tender": "730745-2026",                 # any TED publication number
+      "supplier_id": "supplier-pol-9482182612",
+      "offer": {                               # optional; omitted fields become conditions
+        "offer_id": "o-1", "unit_price": 0.95, "currency": "EUR", "quantity": 1000000,
+        "total_value": 950000,                 # or unit_price × quantity
+        "delivery_date": "2027-03-31", "incoterms": "DAP", "advance_payment_pct": 20,
+        "carrier": "Example ADR carrier", "capacity_confirmed": true
+      }
+    }
+    Returns the deal result (decision, blocking, conditions, checks) or {"error": ...}.
+    """
+    ctx = ctx or load_context()
+    supplier = ctx["suppliers"].get(deal.get("supplier_id", ""))
+    if supplier is None:
+        return {"error": f"unknown supplier_id {deal.get('supplier_id')!r}", "known": sorted(ctx["suppliers"])}
+    # "tender" is a TED publication number, or an already-built tender record (platform request).
+    tender = deal["tender"] if isinstance(deal.get("tender"), dict) else get_tender(str(deal.get("tender", "")), ctx)
+    if tender is None:
+        return {"error": f"TED notice {deal.get('tender')!r} not found"}
+    offer = deal.get("offer") or {}
+    try:
+        return run_deal(tender, supplier, match_level(tender, supplier), [], ctx, offer)
+    except (TypeError, ValueError) as error:
+        return {"error": f"invalid deal input: {error}"}
 
 
 def summary_md(deals: list[dict[str, Any]]) -> str:
@@ -580,7 +785,19 @@ def main() -> int:
     parser.add_argument("--tender", help="only this TED publication number")
     parser.add_argument("--candidates", type=int, default=CANDIDATES_PER_TENDER)
     parser.add_argument("--push", action="store_true", help="upsert results into Supabase deal_checks / deal_check_items")
+    parser.add_argument("--deal", type=Path, help="run one deal from a JSON file (see run_deal_check) and print the result")
+    parser.add_argument("--supplier", help="with --tender: run one deal for this supplier id")
+    parser.add_argument("--offer", help="with --tender/--supplier: offer as JSON, e.g. '{\"unit_price\": 0.9, \"quantity\": 1000}'")
     args = parser.parse_args()
+
+    if args.deal or (args.tender and args.supplier):
+        deal = json.loads(args.deal.read_text(encoding="utf-8")) if args.deal else {
+            "tender": args.tender, "supplier_id": args.supplier, "offer": json.loads(args.offer) if args.offer else {}}
+        result = run_deal_check(deal, load_context(args.data_dir))
+        print(json.dumps(result, ensure_ascii=False, indent=1))
+        if args.push and "error" not in result:
+            push(Supabase.from_env(), [result])
+        return 0 if "error" not in result else 1
 
     db = Supabase.from_env()
     suppliers = json.loads((args.data_dir / "profiles" / "suppliers.json").read_text(encoding="utf-8"))

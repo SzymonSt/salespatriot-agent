@@ -333,6 +333,38 @@ h3 { font-size: 13px; font-weight: 600; color: var(--secondary); margin: 0 0 8px
   .chat-heads { bottom: calc(72vh + 12px); }
 }
 
+/* ---------- live requests: pop-up and deal-check dialog ---------- */
+.field.small, input.field.small { width: 140px; }
+.caption.inline { display: inline-flex; align-items: center; gap: 6px; }
+.row-actions { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
+.toast-stack {
+  position: fixed; top: 72px; right: 16px; z-index: 60; display: flex; flex-direction: column; gap: 12px;
+  width: min(380px, calc(100vw - 32px));
+}
+.toast {
+  background: var(--surface); color: var(--label); border-radius: var(--radius); box-shadow: var(--shadow-float);
+  padding: 16px; display: grid; gap: 6px; border-left: 4px solid var(--accent); animation: toast-in .35s ease-out;
+}
+@keyframes toast-in { from { transform: translateY(-12px); opacity: 0; } to { transform: none; opacity: 1; } }
+.toast-head { display: flex; align-items: center; gap: 10px; }
+.toast-who { display: grid; flex: 1; min-width: 0; line-height: 1.3; }
+.toast-who b { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.toast-close { border: 0; background: transparent; color: var(--secondary); font-size: 22px; line-height: 1; cursor: pointer; padding: 4px 6px; border-radius: 8px; }
+.toast-close:hover { background: var(--fill); }
+.toast-title { font-weight: 600; font-size: 16px; }
+.toast-check { display: flex; align-items: center; gap: 6px; margin-top: 4px; }
+.toast-actions { display: flex; gap: 8px; justify-content: flex-end; margin-top: 6px; }
+.conditions { margin: 4px 0 0; padding-left: 18px; font-size: 13px; color: var(--secondary); }
+.conditions li + li { margin-top: 2px; }
+.checks-dialog {
+  width: min(720px, calc(100vw - 32px)); max-height: calc(100vh - 64px); border: 0; border-radius: var(--radius);
+  padding: 20px; background: var(--surface); color: var(--label); box-shadow: var(--shadow-float);
+}
+.checks-dialog::backdrop { background: rgba(0, 0, 0, .35); }
+.checks-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 8px; }
+.checks-head h2 { font-size: 20px; }
+.checks-dialog .rows { margin: 12px 0; }
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }

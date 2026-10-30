@@ -131,6 +131,10 @@ An empty `deadline` usually means the notice uses a request-to-participate deadl
   requirement, open tenders with best proven supplier, suppliers to consider, mandate). Chats then show that company's side
   on the right. `?as=<profile id>` signs in from a link; add `?demo` to auto-open the demo negotiations. `serve.py` maps those URLs to `web/index.html` and serves `data/` at `/data/`. Matching and conversation scripts are in `web/agents.js`: simulated
   dialogue on real tender/profile data; quantities, mandates and peer references are fictitious and labelled.
+- `app/backend/due_diligence.py` — `initial_due_diligence(profile, recompute=False)`: a supplier's pre-deal score
+  (dd-v1, same code as `supplier_due_diligence.py`), gates, categories, K1–K11 as `{id, status, evidence}` and a
+  decision (BLOCKED / NEEDS_DOCUMENTS / CLEARED). Needs the backend env, not system python3:
+  `uv run --project app/backend python -m app.backend.due_diligence <supplier id> [--recompute]`.
 - `translate_data.py` — keeps `data/profiles/*.json` in English via the translation memory `data/translations.json`
   (original → English). Re-run it after any fetch or due-diligence script; `--extract pending.json` lists new strings
   to translate. `name` is the English display name; `legal_name` keeps the registered name, which scripts use to match
@@ -159,6 +163,11 @@ An empty `deadline` usually means the notice uses a request-to-participate deadl
   Mandates (K11/D14) come from Supabase `agent_mandates`, else a default policy (€250k autonomous limit,
   score ≥ 6). `deal_rules.py` holds the rule tables (CPV → Military List / Firearms Directive / ADR class,
   EU arms embargoes, land-border routing for transit, ITAR/classified keywords) — common practice, verify.
+  Single deal (the entry point for agents, e.g. an A2A server): `run_deal_check({"tender": "<TED number>",
+  "supplier_id": "<id>", "offer": {unit_price|total_value, currency, quantity, delivery_date, incoterms,
+  advance_payment_pct, carrier, capacity_confirmed}})` — any TED notice works (looked up live if not in
+  `ted_open_tenders`); `load_context()` caches sanctions/history once per process (~20 s cold, ~1 s per deal).
+  CLI: `python3 deal_due_diligence.py --tender 671826-2026 --supplier supplier-ita-n0057381f --offer '{"total_value":128000,"delivery_date":"2027-04-30","incoterms":"DAP"}'`.
 
 ## Supabase (project `hackathon`, org SalesPatriot)
 

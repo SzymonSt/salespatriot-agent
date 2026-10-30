@@ -22,7 +22,7 @@
   const PREVIEW = 6;
 
   const state = { suppliers: [], buyers: [], byId: new Map(), logos: {}, matches: [], demo: [], convs: new Map(), open: [],
-    sessionId: null, liveViews: [] };
+    sessionId: null, liveViews: [], requests: {}, requestsSeeded: new Set() };
 
   /* ---------- DOM helpers ---------- */
   function h(tag, props, ...children) {
@@ -443,6 +443,8 @@
         ...(s.capabilities?.risk_flags || []).map((f) => row(`Risk flag on your profile: ${f.flag}`, "Buyers' agents see this and send deals to a person for approval. You can respond with documents.", status("Visible to buyers", "risk"))),
         ...kycItems(s),
       ], "Nothing right now."),
+      liveSection("Requests from buyers", () => supplierRequestRows(s),
+        "No new requests. When a buyer posts a requirement that matches your products, it pops up here with your deal check."),
       section(`Opportunities your agent found (${opps.length})`, opps.length ? expandable(opps, (m) => row(
         m.notice.title,
         [`${m.buyer.name} · ${country(m.buyer.country)} · ${m.notice.published} · `, external(m.notice.ted_url, "TED ›"),
@@ -481,6 +483,7 @@
         .map((v) => row(`Approve deal with ${v.people.supplier.name}`, `${v.topic}. Your mandate needs a person for suppliers with risk flags or low due diligence.`,
           h("button", { class: "btn", type: "button", onclick: () => showConv(v.id) }, "Review"))), "Nothing to approve right now."),
       section("Post a requirement", requirementForm(b)),
+      liveSection("Your posted requests", () => buyerRequestRows(b), "Nothing posted yet. Post a requirement above; matched suppliers see it immediately."),
       section(`Your open tenders (${notices.length})`, expandable(notices, (n) => {
         const best = ranked.get(n.notice_number)[0];
         return row(n.title, [`${n.published} · `, external(n.ted_url, "TED ›"),
@@ -511,12 +514,19 @@
     const cpv = h("select", { class: "field", "aria-label": "Category" },
       [["35330000", "Ammunition"], ["35320000", "Firearms"], ["35340000", "Parts of firearms and ammunition"], ["35310000", "Miscellaneous weapons"]]
         .map(([v, label]) => h("option", { value: v }, label)));
+    const qty = h("input", { class: "field small", type: "number", min: "1", step: "1", placeholder: "Quantity", "aria-label": "Quantity" });
+    const unit = h("select", { class: "field small", "aria-label": "Unit" }, ["rounds", "pieces", "sets"].map((u) => h("option", { value: u }, u)));
+    const budget = h("input", { class: "field small", type: "number", min: "0", step: "1000", placeholder: "Budget EUR", "aria-label": "Budget in EUR" });
+    const needBy = h("input", { class: "field small", type: "date", "aria-label": "Needed by",
+      value: new Date(Date.now() + 120 * 864e5).toISOString().slice(0, 10) });
+    const sent = h("p", { class: "caption pad", role: "status" });
     const results = h("div", {});
     const form = h("form", { class: "pad form", onsubmit: (e) => {
       e.preventDefault();
       const notice = { notice_number: `REQ-${Date.now()}`, title: text.value.trim(), description: "", cpv_codes: [cpv.value],
         published: new Date().toISOString().slice(0, 10), ted_url: "" };
       const list = A.rankForNotice(b, notice, state.suppliers).slice(0, 5);
+      postRequest(b, notice, list, { quantity: Number(qty.value) || null, unit: unit.value, budget: Number(budget.value) || null, need_by: needBy.value }, sent);
       results.replaceChildren(h("ul", { class: "rows" }, list.length ? list.map((m) => {
         const dd = m.supplier.due_diligence;
         return row([link(pathFor(m.supplier), {}, m.supplier.name)],
@@ -527,8 +537,139 @@
         "No supplier has proven this yet. Include the calibre (for example 5.56×45 mm) so your agent can match it."))]));
     } },
       h("label", { class: "caption" }, "Describe what you need. Your agent ranks suppliers that have delivered it under TED contracts."),
-      h("div", { class: "form-row" }, text, cpv, h("button", { class: "btn", type: "submit" }, "Find suppliers")));
-    return group(form, results);
+      h("div", { class: "form-row" }, text, cpv),
+      h("div", { class: "form-row" }, qty, unit, budget, h("label", { class: "caption inline" }, "Needed by ", needBy),
+        h("button", { class: "btn", type: "submit" }, "Post to suppliers")));
+    return group(form, sent, results);
+  }
+
+  /* ---------- live requests: buyer posts → supplier pop-up with the D1-D14 deal check ---------- */
+  // serve.py stores requests and runs deal_due_diligence for each matched supplier; we poll it.
+  const DECISION_TONE = { "GO": "verified", "GO WITH CONDITIONS": "neutral", "ESCALATE": "caution", "NO-GO": "risk" };
+  const CHECK_STATUS = { pass: ["Pass", "verified"], condition: ["Condition", "neutral"], escalate: ["Escalate", "caution"], fail: ["Fail", "risk"], info: ["Info", "neutral"] };
+  const decisionPill = (check) => !check ? status("Checking…", "neutral")
+    : check.error ? status("Check unavailable", "neutral") : status(check.decision, DECISION_TONE[check.decision] || "neutral");
+  const requestFacts = (r) => [r.quantity ? `${Number(r.quantity).toLocaleString("en-GB")} ${r.unit}` : null,
+    r.budget ? `budget ${money(r.budget, r.currency)}` : null, r.need_by ? `needed by ${r.need_by}` : null].filter(Boolean).join(" · ");
+
+  function postRequest(b, notice, list, terms, sent) {
+    if (!list.length) { sent.textContent = "No supplier has proven this item yet, so nothing was sent."; return; }
+    sent.textContent = `Sending to ${list.length} supplier agent${list.length > 1 ? "s" : ""}…`;
+    fetch("/api/offers", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({
+      buyer_id: b.id, title: notice.title, cpv_codes: notice.cpv_codes, currency: "EUR", ...terms,
+      matches: list.map((m) => ({ supplier_id: m.supplier.id, item_product: m.item.product })) }) })
+      .then((r) => (r.ok ? r.json() : Promise.reject(new Error(`HTTP ${r.status}`))))
+      .then(() => { sent.textContent = `Sent to ${list.length} supplier agent${list.length > 1 ? "s" : ""}. Each runs the D1–D14 deal check now; results appear below.`; pollRequests(); })
+      .catch((err) => { sent.textContent = `Couldn't post the request (${err.message}). Is serve.py running?`; });
+  }
+
+  function supplierRequestRows(s) {
+    return (state.requests[s.id] || []).slice().reverse().map((r) => {
+      const buyer = state.byId.get(r.buyer_id);
+      return row(r.title, [`${buyer?.name || r.buyer_id} · ${country(buyer?.country)}${requestFacts(r) ? " · " + requestFacts(r) : ""}`, h("br"),
+        `Your match: ${r.match.item_product} · `, decisionPill(r.match.check)],
+      h("div", { class: "row-actions" },
+        r.match.check?.checks ? h("button", { class: "btn btn-quiet", type: "button", onclick: () => showChecks(r, r.match) }, "Checks") : null,
+        h("button", { class: "btn", type: "button", onclick: () => respondToRequest(r) }, "Let agent respond")));
+    });
+  }
+
+  function buyerRequestRows(b) {
+    return (state.requests[b.id] || []).slice().reverse().map((r) => row(r.title,
+      [requestFacts(r) || r.created_at.replace("T", " "), h("br"), ...r.matches.flatMap((m, i) => [i ? " · " : "",
+        `${state.byId.get(m.supplier_id)?.name || m.supplier_id} `, decisionPill(m.check)])],
+      status(`${r.matches.length} supplier${r.matches.length === 1 ? "" : "s"}`, "neutral")));
+  }
+
+  function respondToRequest(r) {
+    const supplier = state.byId.get(r.match ? sessionCompany()?.id : r.matches[0].supplier_id);
+    const buyer = state.byId.get(r.buyer_id);
+    if (!supplier || !buyer) return;
+    const item = (supplier.catalogue?.items || []).find((i) => i.product === r.match?.item_product) || supplier.catalogue?.items?.[0];
+    const notice = { notice_number: r.id, title: r.title, description: "", cpv_codes: r.cpv_codes, published: r.created_at.slice(0, 10), ted_url: "" };
+    openMatch({ buyer, supplier, notice, item, score: 1 });
+  }
+
+  function showChecks(r, match) {
+    const buyer = state.byId.get(r.buyer_id);
+    const dialog = h("dialog", { class: "checks-dialog", "aria-labelledby": "checks-title", onclose: () => dialog.remove() },
+      h("div", { class: "checks-head" },
+        h("div", {}, h("h2", { id: "checks-title" }, "Deal check D1–D14"),
+          h("p", { class: "secondary" }, `${r.title} · ${buyer?.name || r.buyer_id} → ${state.byId.get(match.supplier_id)?.name || match.supplier_id}`)),
+        h("button", { class: "btn btn-quiet", type: "button", "aria-label": "Close", onclick: () => dialog.close() }, "Close")),
+      h("p", {}, decisionPill(match.check), match.check.blocking.length ? ` ${match.check.blocking.length} item(s) need a person` : ` ${match.check.conditions.length} condition(s) for the contract`),
+      h("ul", { class: "rows" }, match.check.checks.map((c) => h("li", { class: "row" },
+        h("div", { class: "row-main" },
+          h("div", { class: "row-title wrap" }, `${c.code} · ${c.title}`),
+          h("div", { class: "row-sub wrap" }, c.summary),
+          c.conditions.length ? h("ul", { class: "conditions" }, c.conditions.map((x) => h("li", {}, x))) : null),
+        h("div", { class: "row-end" }, status(...(CHECK_STATUS[c.status] || [c.status, "neutral"])))))),
+      h("p", { class: "caption" }, "Rule tables (Military List, ADR, embargoes, licences) encode common EU practice and are not legal advice."));
+    document.body.append(dialog);
+    dialog.showModal();
+  }
+
+  function toastStack() {
+    let stack = document.getElementById("toast-stack");
+    if (!stack) document.body.append(stack = h("div", { id: "toast-stack", class: "toast-stack", "aria-live": "polite" }));
+    return stack;
+  }
+
+  function popRequest(r) {
+    const buyer = state.byId.get(r.buyer_id);
+    const check = r.match.check;
+    const reasons = check?.blocking?.length ? check.blocking : (check?.conditions || []);
+    const toast = h("div", { class: "toast", role: "status" },
+      h("div", { class: "toast-head" },
+        buyer ? avatar(buyer, "sm") : null,
+        h("div", { class: "toast-who" }, h("span", { class: "caption" }, "New request from a buyer"),
+          h("b", {}, buyer?.name || r.buyer_id), h("span", { class: "caption" }, country(buyer?.country))),
+        h("button", { class: "toast-close", type: "button", "aria-label": "Dismiss", onclick: () => toast.remove() }, "×")),
+      h("div", { class: "toast-title" }, r.title),
+      requestFacts(r) ? h("div", { class: "secondary" }, requestFacts(r)) : null,
+      h("div", { class: "secondary" }, `Your match: ${r.match.item_product}`),
+      h("div", { class: "toast-check" }, h("span", { class: "caption" }, "Deal check D1–D14 "), decisionPill(check)),
+      reasons.length ? h("ul", { class: "conditions" }, reasons.slice(0, 3).map((x) => h("li", {}, trim(x, 110))),
+        reasons.length > 3 ? h("li", { class: "secondary" }, `+${reasons.length - 3} more`) : null) : null,
+      h("div", { class: "toast-actions" },
+        check?.checks ? h("button", { class: "btn btn-quiet", type: "button", onclick: () => showChecks(r, r.match) }, "View checks") : null,
+        h("button", { class: "btn", type: "button", onclick: () => { toast.remove(); respondToRequest(r); } }, "Let agent respond")));
+    toastStack().prepend(toast);
+  }
+
+  const SEEN_KEY = "salespatriot.seenRequests";
+  function seenSet(companyId) {
+    try { return new Set(JSON.parse(localStorage.getItem(`${SEEN_KEY}.${companyId}`) || "[]")); } catch { return new Set(); }
+  }
+  function saveSeen(companyId, seen) {
+    try { localStorage.setItem(`${SEEN_KEY}.${companyId}`, JSON.stringify([...seen])); } catch { /* storage blocked: may pop again after reload */ }
+  }
+
+  async function pollRequests() {
+    const c = sessionCompany();
+    if (!c) return;
+    const param = c.role === "supply" ? "supplier_id" : "buyer_id";
+    let list;
+    try {
+      const r = await fetch(`/api/offers?${param}=${encodeURIComponent(c.id)}`);
+      if (!r.ok) return;
+      list = await r.json();
+    } catch { return; /* server without the API: no live requests */ }
+    const before = JSON.stringify(state.requests[c.id] || []);
+    state.requests[c.id] = list;
+    if (c.role === "supply") {
+      // Requests that existed when this browser first looked are history, not news.
+      const firstLook = !state.requestsSeeded.has(c.id) && seenSet(c.id).size === 0;
+      state.requestsSeeded.add(c.id);
+      const seen = seenSet(c.id);
+      for (const r of list) {
+        if (seen.has(r.id) || !r.match.check) continue;  // pop up once the deal check is ready
+        seen.add(r.id);
+        if (!firstLook) popRequest(r);
+      }
+      saveSeen(c.id, seen);
+    }
+    if (JSON.stringify(list) !== before) refreshLive();
   }
 
   /* ---------- conversations ---------- */
@@ -772,6 +913,8 @@
       history.replaceState({}, "", c ? pathFor(c) : `/${old[1]}`);
     }
     route();
+    pollRequests();
+    setInterval(pollRequests, 2000);
     // ?demo opens the demo negotiations on load (handy for presentations).
     if (new URLSearchParams(location.search).has("demo")) runDemo();
   }).catch((err) => {

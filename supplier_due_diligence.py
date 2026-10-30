@@ -57,7 +57,9 @@ DEFENCE_BUYER_WORDS = re.compile(
     r"defen[cs]|obrany|obrony|verteidigung|bundeswehr|baainbw|militar|wojsk|uzbrojen|armed forces|forsvar|"
     r"försvar|puolustus|unitatea militar|ministerul apararii|kariuomen|aizsardz|kaitse|police|policie|polici|"
     r"policja|polizei|guardia civil|ejercito|ejército|armée|esercito|mando de apoyo|vnitra|ministerstvo vnitra|"
-    r"ministry of interior|innenministerium|gendarm|carabinier",
+    r"ministry of interior|innenministerium|gendarm|carabinier|"
+    # English forms: profile buyer names are translated by translate_data.py.
+    r"armament|\barmy\b|logistic support command|ministry of the interior|interior ministry",
     re.I,
 )
 # Document types a supplier can upload, with the points they add when valid.
