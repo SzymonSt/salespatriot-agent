@@ -47,7 +47,7 @@ Files go to Supabase Storage; the DB keeps metadata, path, hash and tender link.
 ## Supabase schema — marketplace side `[OWN KNOWLEDGE]` additions
 | Table | Holds |
 |---|---|
-| `companies` | Canonical company + identifiers (KRS, NIP, VAT, LEI, NCAGE) |
+| `companies` | Canonical company + identifiers (`scheme:value`: EU VAT, LEI, NCAGE, national ids) |
 | `capabilities` | Capability taxonomy, CPV mapping |
 | `claims` | Evidence-backed graph edges (see [10](10-ontology-data-model.md)) |
 | `credentials` | Licences and certificates with `valid_to` |

@@ -33,6 +33,12 @@ SORT BY publication-number DESC
 python3 ted_open_tenders.py --query "<expert query above>" --limit 100
 ```
 
+### Geography: all of Europe
+
+Buyers and suppliers from every European country on TED, not only Poland. Company checks (KYC) use EU-wide
+sources (VIES, GLEIF, TED, sanctions) plus per-country register adapters (PL, CZ, FR tested) —
+see `knowledge_base/07-company-data-sources.md` and `knowledge_base/22-kyc-and-deal-due-diligence.md`.
+
 ### Focus categories — exactly these four
 
 Within that search we work on exactly these CPV classes (TED UI facet counts = API counts, checked 2026-10-30):

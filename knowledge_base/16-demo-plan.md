@@ -7,8 +7,8 @@ procurement infrastructure in a day.
 Fictitious buyer and demand (clearly labelled); real public data for profiles and history.
 
 ## Demo flows `[TEAM DECISION]` (from the brainstorm)
-1. **Onboard a new company** — enter KRS/NIP → agentless enrichment (KRS, VAT white list,
-   TED awards) → profile with evidence levels appears.
+1. **Onboard a new company from any EU country** — enter a VAT number or national id → agentless
+   enrichment (VIES, GLEIF, TED awards + country adapter: PL, CZ, FR live) → profile with evidence levels.
 2. **Add an offer/capability to an existing company** → supplier agent re-matches against
    open demand and tenders.
 3. **Due diligence** — KYC on onboarding, then per-deal checks (licences, capacity, transport,
@@ -29,7 +29,7 @@ Fictitious buyer and demand (clearly labelled); real public data for profiles an
 ## Build priorities
 | # | Feature | Importance |
 |---|---|---|
-| 1 | Ingest + normalise public data (TED, KRS) | Critical |
+| 1 | Ingest + normalise public data (TED, VIES/GLEIF, country registers) | Critical |
 | 2 | Supplier profiles + capabilities | Critical |
 | 3 | Buyer demand parser | Critical |
 | 4 | Semantic supplier matching | Critical |
@@ -44,7 +44,7 @@ Fictitious buyer and demand (clearly labelled); real public data for profiles an
 |---|---|
 | Usefulness (30) | Real SME pain (Tier 2–4 visibility, qualification); evidence levels buyers can trust |
 | Creativity (30) | Agent-to-agent references; consortium formation; evidence-backed living profile |
-| Use of data (20) | Live TED (defence directive, award winners), live KRS / VAT white list, CPV vocabulary |
+| Use of data (20) | Live TED across all EU countries (award winners), live VIES/GLEIF + national registers (PL, CZ, FR), CPV vocabulary |
 | Demo quality (20) | One clean end-to-end run, visible agent messages, deal closes on stage |
 
 ## Direction ranking (team's product view, not research results)

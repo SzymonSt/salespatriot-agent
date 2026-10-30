@@ -1,6 +1,7 @@
 # Focus scope — what we work on
 
-`[TEAM DECISION]` For the demo we pull data **only from TED** and focus on **exactly four CPV
+`[TEAM DECISION]` **Geography: all of Europe** — every buyer and supplier country on TED, not just
+Poland. For the demo we pull data **only from TED** and focus on **exactly four CPV
 classes** under 35300000 "Weapons, ammunition and associated parts", **supplies only**.
 
 ## The four categories

@@ -1,51 +1,58 @@
-# Company data sources (supply side) — agentless enrichment
+# Company data sources (supply side) — agentless enrichment, Europe-wide
 
-`[TEAM DECISION]` Basic company research (registry data, public results, ratings, history)
-runs **agentless or agent-minimal**: plain code calling APIs, no LLM reasoning loop. Agents
-only interpret the result. Cheaper, faster, deterministic, easy to demo.
+`[TEAM DECISION]` Scope is **all of Europe**, not Poland. KYC uses an **EU-wide baseline**
+that works for any company, plus **country adapters** for national registers. Basic company
+research runs **agentless**: plain code calls the APIs, and agents only interpret the results.
 
-## Polish registries
+## EU-wide baseline (works for any EU company)
 | Source | What it gives | Access | Status |
 |---|---|---|---|
-| **KRS API** (Ministry of Justice) | Full current extract: name, legal form, address, capital, board/representation, PKD activity codes, filed financial statements, arrears, liquidation/bankruptcy | `GET https://api-krs.ms.gov.pl/api/krs/OdpisAktualny/{KRS}?rejestr=P&format=json` — no key. Sections `dzial1`…`dzial6` | `[VERIFIED 2026-10-30]` |
-| **VAT white list** (Ministry of Finance) | Name, NIP, REGON, KRS, VAT status (*Czynny*), address, registration date, bank accounts | `GET https://wl-api.mf.gov.pl/api/search/nip/{NIP}?date=YYYY-MM-DD` — no key, has daily limits | `[VERIFIED 2026-10-30]` |
-| REGON BIR (GUS) | REGON data, PKD codes | Free key required | `[OWN KNOWLEDGE]` |
-| CEIDG | Sole traders (not in KRS) | API token required | `[OWN KNOWLEDGE]` |
-| Financial statements repository (eKRS RDF) | Filed annual accounts (often XML) → financial standing | Public web | `[OWN KNOWLEDGE]` |
+| **VIES** (EU VAT check) | VAT number valid; name and address where the member state shares them (Germany returns `---`) | `GET https://ec.europa.eu/taxation_customs/vies/rest-api/ms/{CC}/vat/{number}`, no key | `[VERIFIED 2026-10-30]` DE and IT tested |
+| **GLEIF** | LEI, legal name, address, status, **parent / ultimate parent** → foreign-control check | `https://api.gleif.org/api/v1/lei-records?...`, no key. An exact-name filter can hit a sister company → match on the LEI or on the address | `[VERIFIED 2026-10-30]` |
+| **TED award history** | Contracts won, buyers, CPVs, values, `winner-owner-nationality`, `winner-size` | TED Search API by `winner-identifier` / `winner-name` | `[VERIFIED 2026-10-30]` |
+| **Sanctions** — EU consolidated list (FSF), OpenSanctions | Sanctions and PEP screening | EU list: free download. OpenSanctions API needs a key (401 without one); its bulk data is free for non-commercial use | API 401 `[VERIFIED]`; rest `[OWN KNOWLEDGE]` |
+| **NCAGE** (NSPA) | Company codified as a NATO supplier | Public lookup tool | `[OWN KNOWLEDGE — check URL]` |
+| **CERTIDER** (EU) | Companies certified under Directive 2009/43/EC (intra-EU defence transfers) | Public web register | `[OWN KNOWLEDGE]` |
+| IAF CertSearch / IAQG OASIS | Validity of ISO 9001 / EN 9100 certificates | Web | `[OWN KNOWLEDGE]` |
+| BRIS / e-Justice business register search, EU insolvency register interconnection | Cross-border register and insolvency lookups | Web portals, no simple public API | `[OWN KNOWLEDGE]` |
 
-KRS sections (as returned): `dzial1` entity data · `dzial2` representation · `dzial3`
-activity (PKD) and filed statements · `dzial4` arrears/claims · `dzial5` curator ·
-`dzial6` liquidation, bankruptcy, restructuring. `[OWN KNOWLEDGE]` for section meanings.
+## Country adapters (national registers)
+Each adapter maps a national register into the same fields: `exists`, `active`, `legal_form`,
+`address`, `representatives`, `activity_code`, `insolvency`. Build adapters in the order buyers
+and suppliers appear in our scope ([21](21-focus-scope.md)).
 
-## EU / international
-| Source | What it gives | Status |
-|---|---|---|
-| **GLEIF API** (`api.gleif.org`) | LEI, legal name, address, **parent/ultimate parent** → foreign control check | `[OWN KNOWLEDGE]` |
-| **VIES** | EU VAT number validity | `[OWN KNOWLEDGE]` |
-| **TED award history** | Past contracts won (`winner-name`) → past performance (Directive Art. 42) | `[VERIFIED 2026-10-30]` |
-| EU consolidated sanctions list / **OpenSanctions** | Sanctions and PEP screening | `[OWN KNOWLEDGE]` |
-| **NCAGE** public search (NSPA) | Firm is codified as a NATO supplier | `[OWN KNOWLEDGE — check tool URL]` |
-| IAF CertSearch | Validity of accredited ISO certificates (e.g. ISO 9001) | `[OWN KNOWLEDGE]` |
-| IAQG OASIS | EN/AS 9100 certified suppliers | `[OWN KNOWLEDGE]` |
-| Company website, news, reviews (e.g. GoWork in PL) | History, products, reputation | Low confidence, label as such |
+| Country | Source | Notes | Status |
+|---|---|---|---|
+| PL | **KRS API** `api-krs.ms.gov.pl/api/krs/OdpisAktualny/{KRS}?rejestr=P&format=json` | Representatives, PKD activity codes, arrears, bankruptcy. No key | `[VERIFIED 2026-10-30]` |
+| PL | **VAT white list** `wl-api.mf.gov.pl/api/search/nip/{NIP}?date=…` | NIP → REGON, KRS, VAT status, bank accounts. Daily limits | `[VERIFIED 2026-10-30]` |
+| CZ | **ARES** `ares.gov.cz/ekonomicke-subjekty-v-be/rest/ekonomicke-subjekty/{IČO}` | Name, seat, legal form. No key | `[VERIFIED 2026-10-30]` |
+| FR | **Recherche d'entreprises** `recherche-entreprises.api.gouv.fr/search?q=…` | SIREN, NAF activity code (KNDS France → 25.40Z, weapons and ammunition manufacturing), headcount band. No key | `[VERIFIED 2026-10-30]` |
+| RO | ANAF VAT-payer web service | Free | `[OWN KNOWLEDGE — verify]` |
+| DE | Handelsregister / Unternehmensregister | No simple free API → VIES + GLEIF + TED | `[OWN KNOWLEDGE]` |
+| ES, IT, others | National registers (often paid) | Fall back to VIES + GLEIF + TED | `[OWN KNOWLEDGE]` |
+
+Activity codes line up across countries: PL PKD, FR NAF and other national codes all derive
+from **NACE** (25.40 = manufacture of weapons and ammunition). → Store the NACE code as the
+common capability signal.
 
 ## How each source maps to evidence
 | Check | Source | Evidence level |
 |---|---|---|
-| Company exists, active, not in bankruptcy | KRS `dzial1`, `dzial6`; VAT white list | Document-verified |
-| Who can sign for the company | KRS `dzial2` | Document-verified |
-| What it does | KRS PKD codes, website | PKD = document-verified; website = declared |
-| Financial standing (Art. 41) | Filed statements, arrears (`dzial4`) | Document-verified |
-| Past performance (Art. 42) | TED awards | Document-verified |
-| Foreign ownership | GLEIF parents, KRS shareholders | Document-verified |
-| Sanctions | Sanctions lists | Document-verified (screening, not proof of innocence) |
-| Certificates | Uploaded PDF + IAF/OASIS lookup | Declared → document-verified when matched |
-| Defence readiness | NCAGE, NSPA registration, past defence awards | Document-verified |
+| Exists, active, not insolvent | Country adapter; VIES | Document-verified |
+| Who can sign | Country adapter (where it lists representatives) | Document-verified |
+| What it does | NACE code from the register, TED CPVs, website | Code = document-verified; website = declared |
+| Financial standing | Filed accounts (where available), size band | Document-verified |
+| Past performance | TED awards | Document-verified |
+| Foreign ownership | GLEIF parents, TED `winner-owner-nationality` | Document-verified |
+| Sanctions | Sanctions lists | Document-verified (a screening, not proof of innocence) |
+| Licences, certificates | Upload + CERTIDER / IAF / OASIS lookups | Declared → document-verified when matched |
 | Free capacity | Supplier agent input | Declared (with date) |
 
 ## Rules
-- Cache every response with `source_url` and `observed_at`; don't re-fetch on every page view.
-- Respect rate limits (VAT white list has daily caps).
-- KRS lists board members by name — personal data. Store only what the feature needs;
-  don't display it in the demo beyond what's necessary.
-- No customer data, nothing classified (challenge ground rule).
+- Cache every response with `source_url` and `observed_at`.
+- Respect rate limits.
+- Registers list board members by name, which is personal data → store only what the feature needs.
+- Beneficial-owner registers: public access was curtailed after the CJEU judgment of
+  22 Nov 2022 (C-37/20, C-601/20), and many states now require a legitimate interest.
+  → Use GLEIF parents plus the supplier's own declaration. `[OWN KNOWLEDGE]`
+- No customer data, nothing classified (challenge rule).

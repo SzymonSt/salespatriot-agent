@@ -1,6 +1,8 @@
 # KYC at onboarding vs due diligence per deal
 
-`[TEAM DECISION]` Static checks run **once, when a company joins the platform** (KYC).
+`[TEAM DECISION]` Scope: **companies from all of Europe**. Every check is defined generically;
+national registers plug in as **country adapters** ([07](07-company-data-sources.md)), and Poland is just one of them.
+Static checks run **once, when a company joins the platform** (KYC).
 Checks specific to one transaction run **inside each deal** (deal due diligence).
 **Monitoring** in between keeps KYC fresh. Legal and registry facts below are
 `[OWN KNOWLEDGE — verify]` unless marked.
@@ -29,16 +31,16 @@ Check types: **HARD** = gate (fail → deal blocked, or escalated to a human who
 ## Layer 1 — KYC at onboarding (static)
 | # | Category | What we check | Source | Type |
 |---|---|---|---|---|
-| K1 | Legal identity | Exists, active, legal form, address | KRS / CEIDG, VAT white list, VIES, LEI | HARD |
-| K2 | Insolvency | No bankruptcy, liquidation or restructuring; arrears | KRS sections 6 and 4 | HARD / SCORE |
-| K3 | Authority to sign | The person onboarding and signing the agent mandate is a registered representative or holds a power of attorney | KRS section 2 | HARD |
-| K4 | Ownership and control | Beneficial owners, parent company, non-EU control | CRBR (PL beneficial-owner register), GLEIF, KRS shareholders, TED `winner-owner-nationality` | HARD if a sanctioned owner, else SCORE |
+| K1 | Legal identity | Exists, active, legal form, address | Home-country register (adapter: PL KRS, CZ ARES, FR SIRENE…), VIES, GLEIF | HARD |
+| K2 | Insolvency | No bankruptcy, liquidation or restructuring; arrears | Home-country register / insolvency register (EU interconnection via e-Justice) | HARD / SCORE |
+| K3 | Authority to sign | The person onboarding and signing the agent mandate is a registered representative or holds a power of attorney | Home-country register; otherwise an uploaded extract or power of attorney | HARD |
+| K4 | Ownership and control | Beneficial owners, parent company, non-EU control | GLEIF parents, TED `winner-owner-nationality`, supplier declaration; national beneficial-owner registers where accessible (limited since the CJEU ruling of 2022) | HARD if a sanctioned owner, else SCORE |
 | K5 | Sanctions and debarment | Company, owners and board vs EU consolidated list / OpenSanctions; exclusion from procurement | Sanctions lists | HARD |
-| K6 | Tax and payout account | Active VAT; payout account on the white list (in PL, paying > PLN 15,000 to an unlisted account carries tax risk) | VAT white list, VIES | HARD for payouts |
-| K7 | Sector licences | Arms/ammunition trade licence (PL: MSWiA concession for manufacture of and trade in weapons, ammunition and military goods); certified recipient under Directive 2009/43/EC (EU CERTIDER register) if relevant; NCAGE / NSPA Source File | Uploaded document + public registers where they exist | **HARD for our 4 CPV classes** |
+| K6 | Tax and payout account | Active EU VAT number; payout account belongs to the company (country rules apply, e.g. PL VAT white list) | VIES + country adapter | HARD for payouts |
+| K7 | Sector licences | **Home-state authorisation** to manufacture or trade in weapons, ammunition and military goods. Every EU country licenses this, and the Firearms Directive (EU) 2021/555 requires dealers to be authorised, but the issuing authority differs (e.g. PL: MSWiA concession; DE: weapons-trade permit, plus a war-weapons permit for military items; FR: AFC authorisation from the Ministry of the Armed Forces). Also: certified recipient under Directive 2009/43/EC (EU CERTIDER register) if relevant; NCAGE / NSPA Source File | Uploaded document + public registers where they exist | **HARD for our 4 CPV classes** |
 | K8 | Quality certificates | ISO 9001, EN 9100, ISO 14001 with validity dates. AQAP is a contract clause, not a certificate | Upload + IAF CertSearch / IAQG OASIS | SCORE (HARD only if the buyer requires it) |
-| K9 | Track record | Past TED awards: buyers, CPVs, values, countries | TED Search API by `winner-identifier` `[VERIFIED]` | SCORE |
-| K10 | Capability baseline | Products and CPVs, PKD codes, sites, declared capacity | Supplier input, KRS PKD, TED CPVs | INFO → SCORE |
+| K9 | Track record | Past TED awards (any EU country): buyers, CPVs, values, countries | TED Search API by `winner-identifier` `[VERIFIED]` | SCORE |
+| K10 | Capability baseline | Products and CPVs, NACE activity code (25.40 = weapons and ammunition), sites, declared capacity | Supplier input, register activity code (PKD/NAF/… → NACE), TED CPVs | INFO → SCORE |
 | K11 | Agent mandate | Signed limits: categories, max deal value, price and terms, who receives escalations | Platform | HARD |
 
 Result per company: `kyc_status = verified | limited | blocked`, an evidence table, `kyc_checked_at`.
@@ -47,7 +49,7 @@ Result per company: `kyc_status = verified | limited | blocked`, an evidence tab
 | Trigger | Action |
 |---|---|
 | Sanctions list update hits the company or an owner | Freeze all open deals → human review |
-| KRS change: bankruptcy, liquidation, new board | Re-run K1–K4; freeze on HARD fail |
+| Register change (any country adapter): bankruptcy, liquidation, new board | Re-run K1–K4; freeze on HARD fail |
 | Licence or certificate expires in < 30 days | Warn; block deals that need it after the expiry date |
 | New TED award or contract modification | Update track record; a large new award can eat free capacity |
 | Negative peer reference | Lower reputation score; supplier gets a right of reply |
@@ -60,7 +62,7 @@ Output: **GO / GO WITH CONDITIONS / ESCALATE / NO-GO**, with evidence per catego
 |---|---|---|---|---|
 | D1 | KYC freshness | Both sides `verified`, checked < 90 days ago; sanctions re-screened now | Status can change after onboarding | HARD |
 | D2 | Is the item allowed for this buyer? | Map CPV → EU Common Military List category (e.g. ML1 small arms, ML3 ammunition); military vs civilian firearm; the buyer may legally acquire it; destination embargoes | Selling a controlled item to an unauthorised buyer is illegal | HARD |
-| D3 | Licences for this flow | Domestic trade (concession); intra-EU transfer licence (Directive 2009/43/EC); export outside the EU (Common Position 2008/944/CFSP); civilian firearms export (Reg. 258/2012); transit permits; end-user certificate; broker registration for intermediaries (Common Position 2003/468/CFSP) | Without the right licence the goods cannot ship | HARD |
+| D3 | Licences for this flow | Licences in the seller's and buyer's countries; intra-EU transfer licence (Directive 2009/43/EC); export outside the EU (Common Position 2008/944/CFSP); civilian firearms export (Reg. 258/2012); transit permits; end-user certificate; broker registration for intermediaries (Common Position 2003/468/CFSP) | Without the right licence the goods cannot ship | HARD |
 | D4 | Data rules | No ITAR/EAR content, nothing classified, no CUI, no customer data in the deal record | Challenge rule ([00](00-challenge-brief.md)) | HARD |
 | D5 | Technical fit | Spec (calibre, standard, variant), quality regime (AQAP clause, lot acceptance tests), certificates valid at the delivery date | A cheap offer that fails acceptance is worthless | HARD on mandatory specs, SCORE otherwise |
 | D6 | Capacity and schedule | Quantity vs dated free capacity; lead time vs deadline; other open commitments on the platform; quantity vs the supplier's largest past delivery on TED | Certificates ≠ capacity, the biggest gap in [05](05-capability-verification.md) | SCORE; HARD if the deadline is impossible |
@@ -83,8 +85,8 @@ Output: **GO / GO WITH CONDITIONS / ESCALATE / NO-GO**, with evidence per catego
 ## What we can check today vs later
 | Checks | Demo (today) | Later |
 |---|---|---|
-| K1–K3, K6 | Live KRS + VAT white list `[VERIFIED]` | CEIDG, other EU registries |
-| K4, K5 | KRS shareholders, GLEIF, OpenSanctions | CRBR, continuous screening |
+| K1–K3, K6 | Live VIES (all EU) + adapters PL (KRS, VAT white list), CZ (ARES), FR (Recherche d'entreprises) `[VERIFIED]` | More country adapters |
+| K4, K5 | GLEIF, TED owner nationality, EU sanctions list | Beneficial-owner registers, continuous screening |
 | K7, K8 | Uploaded document + manual flag | Registry lookups where public |
 | K9, D9 | TED Search API on our 4 CPVs `[VERIFIED]` | Unit prices from tender documents |
 | D2, D3, D8 | Static rule tables: CPV → ML category → required licence; CPV → ADR class; route → transit countries | Licence and permit registries, carrier marketplace |

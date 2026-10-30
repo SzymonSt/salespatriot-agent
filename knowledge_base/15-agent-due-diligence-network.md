@@ -28,5 +28,5 @@ award? · responsiveness 1–5 · would work again?
 - **Transparency**: the buyer sees each reference with its source; the supplier gets a right of reply.
 
 ## Demo
-Onboard a supplier → KYC runs live (KRS + VAT white list + TED) → a deal starts → the deal
+Onboard a supplier from any EU country → KYC runs live (VIES + GLEIF + TED + country adapter) → a deal starts → the deal
 check runs, including one seeded and clearly labelled reference → verdict → the deal closes.

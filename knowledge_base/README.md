@@ -33,7 +33,7 @@ user or judge. If a fact is missing, say it is missing — do not invent it.
 
 ### Data
 - [06-procurement-data-sources.md](06-procurement-data-sources.md) — TED, e-Zamówienia, AU, NSPA, EDA, others
-- [07-company-data-sources.md](07-company-data-sources.md) — KRS, VAT white list, GLEIF, sanctions, NCAGE (agentless enrichment)
+- [07-company-data-sources.md](07-company-data-sources.md) — Europe-wide KYC sources: VIES, GLEIF, TED, sanctions + country adapters (PL, CZ, FR tested)
 - [08-cpv-codes.md](08-cpv-codes.md) — CPV structure, defence subset, pitfalls
 - [09-ted-api-cheatsheet.md](09-ted-api-cheatsheet.md) — tested TED API queries
 - [20-ted-api-reference.md](20-ted-api-reference.md) — official TED API v3 docs: params, limits, pagination, useful fields
@@ -43,7 +43,7 @@ user or judge. If a fact is missing, say it is missing — do not invent it.
 
 ### Design
 - [10-ontology-data-model.md](10-ontology-data-model.md) — compact graph: 9 entities, claims and evidence levels
-- [19-ted-epo-ontology.md](19-ted-epo-ontology.md) — **decision: reuse EU ePO (OP-TED) + our `sp:` extension**, tested SPARQL, TED → KRS chain
+- [19-ted-epo-ontology.md](19-ted-epo-ontology.md) — **decision: reuse EU ePO (OP-TED) + our `sp:` extension**, tested SPARQL, TED winner → national register chain
 - [11-rag-embeddings-graph.md](11-rag-embeddings-graph.md) — when to use vectors, graph or SQL
 - [12-historical-intelligence.md](12-historical-intelligence.md) — what past tenders tell us, pattern library
 - [13-architecture-pipeline.md](13-architecture-pipeline.md) — layers, collectors, Supabase schema

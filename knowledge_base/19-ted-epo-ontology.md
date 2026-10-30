@@ -47,7 +47,7 @@ marketplace half. Don't design our own procurement ontology, and don't run a tri
   appeared in the same result notices. Many notices don't fill rank/status → keep a
   fallback "tenderer in a result notice" with lower confidence.
 
-## Proven chain: TED → national registry
+## Proven chain: TED → national registry (Polish example; other countries go through VIES + their own adapter)
 TED 800547-2025 (buyer: Agencja Uzbrojenia) → winner MESKO S.A., `NIP 6630002096` →
 VAT white list → `KRS 0000041811` → KRS API → main PKD **25.40.Z "Produkcja broni i
 amunicji"** (manufacture of weapons and ammunition). A public award becomes a
@@ -88,11 +88,11 @@ document-verified supplier profile with no LLM involved.
    buyer-name, classification-cpv, result-value-notice` over the last 365 days of defence
    awards (2,703 notices). Use iteration pagination. Cache in Supabase.
 3. **Identifier normaliser**: regex the free text into typed ids (`PL:NIP`, `PL:REGON`, `PL:KRS`,
-   `DE:VAT`, `IT:VAT`/fiscal code…). Resolve Polish ids via VAT white list → KRS; EU VAT via
-   VIES. Output: canonical `Company` + claims marked `document_verified`.
+   `DE:VAT`, `IT:VAT`/fiscal code…). Resolve EU VAT via VIES (all countries), then via the country adapter (PL: VAT white list → KRS;
+   CZ: ARES; FR: Recherche d'entreprises), see [07](07-company-data-sources.md). Output: canonical `Company` + claims marked `document_verified`.
 4. **Enrichment over SPARQL** (per notice, cached): business size, beneficial owners,
    procedure type, subcontractors.
-5. **Capability layer**: build `sp:Capability` from the winner's CPVs, KRS PKD codes and supplier input.
+5. **Capability layer**: build `sp:Capability` from the winner's CPVs, NACE activity codes from national registers, and supplier input.
 6. **Historical-intelligence agent**: RAG over `epo-knowledge` class files plus
    `ted-open-data-examples`, so the agent can write SPARQL for ad-hoc questions.
    Guardrails: SELECT only, always LIMIT, anchor on a date or notice, timeout, retry.

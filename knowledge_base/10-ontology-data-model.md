@@ -16,8 +16,8 @@ Any edge or value ─BACKED_BY→ Claim (source, time, evidence level)
 
 | Entity | Key fields |
 |---|---|
-| Company | canonical id; identifiers (KRS, NIP, REGON, VAT, LEI, NCAGE); country; size; role (buyer/supplier); `kyc_status`, `kyc_checked_at` |
-| Capability | own taxonomy; CPV and PKD mapping |
+| Company | canonical id; identifiers as `scheme:value` (EU VAT, LEI, NCAGE, national ids such as `PL:KRS`, `CZ:ICO`, `FR:SIREN`); country; NACE code; size; role (buyer/supplier); `kyc_status`, `kyc_checked_at` |
+| Capability | own taxonomy; CPV and NACE mapping |
 | Credential | type (arms concession, ISO 9001, EN 9100…), issuer, `valid_from` / `valid_to`, scope |
 | Award | TED publication number, buyer, winner, CPV, value, date |
 | Demand | buyer, spec (JSON), quantity, deadline, budget, delivery place |
@@ -44,5 +44,5 @@ peer attestation apart.
 ## Rules
 - The LLM maps text into this schema and never invents new classes. Schema changes go
   through a human-approved proposal queue.
-- One canonical company id. Resolve by hard ids (KRS, NIP, VAT, LEI) first; a match on
+- One canonical company id. Resolve by hard ids (EU VAT, LEI, national register ids) first; a match on
   name + country is marked `inferred`.
