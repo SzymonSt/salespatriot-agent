@@ -96,11 +96,17 @@ class Category:
         self.findings: list[str] = []
         self.evidence: list[dict[str, str]] = []
         self.forced: float | None = None
+        self.red_flags: list[str] = []
 
     def add(self, points: float, finding: str) -> None:
         self.points += points
         self.findings.append(finding)
         self.has_data = True
+
+    def flag(self, points: float, finding: str) -> None:
+        """A negative finding: costs points and is listed as a red flag for the buyer."""
+        self.add(points, finding)
+        self.red_flags.append(finding)
 
     def note(self, finding: str) -> None:
         self.findings.append(finding)
@@ -118,16 +124,19 @@ class Category:
             "label": LABELS[self.key],
             "weight": WEIGHTS[self.key],
             "score": score,
-            "reasoning": reasoning(self.findings, score),
+            "reasoning": reasoning(self.findings, self.red_flags, score),
             "findings": self.findings,
+            "red_flags": self.red_flags,
             "evidence": self.evidence,
         }
 
 
-def reasoning(findings: list[str], score: float | None) -> str:
+def reasoning(findings: list[str], red_flags: list[str], score: float | None) -> str:
+    """One sentence: the two strongest positives, then the first red flag."""
     if score is None:
         return "No usable open data for this category; excluded from the total and lowers confidence."
-    lead = [f for f in findings if not f.startswith("(")][:3]
+    positives = [f for f in findings if not f.startswith("(") and f not in red_flags][:2]
+    lead = positives + red_flags[:1]
     return "; ".join(lead) + "." if lead else ""
 
 
@@ -172,7 +181,8 @@ def document_status(doc: dict[str, Any]) -> tuple[float, str]:
 
 
 def collect(profile: dict[str, Any], sanctions: dict[str, Any], with_media: bool) -> dict[str, Any]:
-    country, identifier, name = profile["country"], profile.get("identifier", ""), profile["name"]
+    # Match registers and sanctions lists on the registered name, not an English display name.
+    country, identifier, name = profile["country"], profile.get("identifier", ""), legal_name(profile)
     data: dict[str, Any] = {"registry": None, "sources": []}
     fetcher = src.NATIONAL_REGISTERS.get(country)
     if fetcher and identifier:
@@ -180,8 +190,19 @@ def collect(profile: dict[str, Any], sanctions: dict[str, Any], with_media: bool
         data["sources"].append(fetcher.__name__)
     data["vies"] = src.vies(country, identifier) if identifier else None
     data["gleif"] = src.gleif(name, country, identifier)
-    lei = data["gleif"].get("lei") if isinstance(data["gleif"], dict) and "lei" in data["gleif"] else None
+    gleif = data["gleif"] if isinstance(data["gleif"], dict) and "lei" in data["gleif"] else None
+    lei = gleif["lei"] if gleif else None
+    # TED identifiers are sometimes wrong; retry VIES with the register id that GLEIF holds.
+    registered_as = re.sub(r"[^0-9A-Za-z]", "", (gleif or {}).get("registered_as") or "")
+    vies_ok = isinstance(data["vies"], dict) and data["vies"].get("valid")
+    if registered_as and not vies_ok and registered_as.upper() != re.sub(r"[^0-9A-Za-z]", "", identifier).upper():
+        retry = src.vies(country, registered_as)
+        if isinstance(retry, dict) and retry.get("valid"):
+            data["ted_identifier_invalid"] = identifier
+            data["vies"] = retry
     data["wikidata"] = src.wikidata(lei, name, country)
+    ultimate = ((gleif or {}).get("parents") or {}).get("ultimate-parent") or ((gleif or {}).get("parents") or {}).get("direct-parent")
+    data["parent_wikidata"] = src.wikidata(ultimate["lei"], ultimate["name"], country) if ultimate else None
     data["eu_funding"] = src.eu_funding(name)
     data["media"] = src.adverse_media(name) if with_media else None
     data["sources"] += ["vies", "gleif", "wikidata", "eu_funding"] + (["gdelt"] if with_media else [])
@@ -200,6 +221,10 @@ def collect(profile: dict[str, Any], sanctions: dict[str, Any], with_media: bool
         "lists": sanctions["loaded"],
     }
     return data
+
+
+def legal_name(profile: dict[str, Any]) -> str:
+    return profile.get("legal_name") or profile["name"]
 
 
 def owner_list(data: dict[str, Any]) -> list[dict[str, Any]]:
@@ -255,10 +280,15 @@ def score_supplier(profile: dict[str, Any], data: dict[str, Any], documents: lis
     if failed:
         caps.append("Set to 1.0 by a failed hard gate: " + "; ".join(g["check"] for g in failed) + ".")
         total = 1.0
+    # The verdict describes how strong the evidence is; red flags are listed separately so a
+    # thin file ("little open data") is not confused with a bad one ("negative findings").
     verdict = (
         "Blocked — manual review required" if failed
-        else "Low risk" if total >= 8 else "Moderate risk" if total >= 6 else "Elevated risk — review" if total >= 4 else "High risk"
+        else "Weak evidence" if total < 4
+        else "Limited evidence" if total < 6 or confidence == "low"
+        else "Strong" if total >= 8 else "Good"
     )
+    red_flags = [f"{LABELS[k]}: {flag}" for k, c in cats.items() for flag in c.red_flags]
     return {
         "method_version": METHOD_VERSION,
         "assessed_at": src.today(),
@@ -267,6 +297,7 @@ def score_supplier(profile: dict[str, Any], data: dict[str, Any], documents: lis
         "verdict": verdict,
         "confidence": confidence,
         "data_coverage": round(weight_with_data, 2),
+        "red_flags": red_flags,
         "caps_applied": caps,
         "gates": gates,
         "categories": {k: c.output() for k, c in cats.items()},
@@ -277,7 +308,7 @@ def score_supplier(profile: dict[str, Any], data: dict[str, Any], documents: lis
 
 
 def score_identity(cat: Category, profile, registry, gleif, vies, wiki, data, gates) -> None:
-    name = profile["name"]
+    name = legal_name(profile)
     founded = ""
     if registry:
         active = registry.get("status_active")
@@ -292,7 +323,7 @@ def score_identity(cat: Category, profile, registry, gleif, vies, wiki, data, ga
         if similarity >= 0.6:
             cat.add(1.5, "Registered name matches the TED award name")
         else:
-            cat.note(f"(Registered name '{registry.get('name')}' differs from TED name — check the identifier)")
+            cat.flag(0, f"Registered name '{registry.get('name')}' differs from the TED award name — check the identifier")
         founded = registry.get("founded") or ""
         gates.append({"check": "Company active", "status": "pass", "detail": registry["source"]})
     elif isinstance(data["registry"], dict) and "error" in data["registry"]:
@@ -301,8 +332,12 @@ def score_identity(cat: Category, profile, registry, gleif, vies, wiki, data, ga
         cat.evidence.append(src.evidence("VIES (EU VAT)", vies["url"], vies["observed_at"], f"VAT {vies['vat']} valid={vies['valid']}"))
         if vies["valid"]:
             cat.add(1 if registry else 3, f"EU VAT number {vies['vat']} is valid")
+            if data.get("ted_identifier_invalid"):
+                cat.note(f"(TED lists identifier {data['ted_identifier_invalid']}, which is not a valid VAT number; matched via GLEIF instead — a data error in the award notice, not counted against the supplier)")
+        elif gleif:
+            cat.note(f"(Identifier {vies['vat']} from TED is not a valid VAT number; the company was matched by name in GLEIF instead)")
         else:
-            cat.add(0, f"VAT number {vies['vat']} is not valid in VIES")
+            cat.flag(0, f"Identifier {vies['vat']} is not a valid EU VAT number and no other register matched")
     if gleif:
         cat.evidence.append(src.evidence("GLEIF", gleif["url"], gleif["observed_at"], f"LEI {gleif['lei']} {gleif['registration_status']}, matched by {gleif['match']}"))
         if gleif["registration_status"] == "ISSUED" and gleif["entity_status"] == "ACTIVE":
@@ -321,7 +356,7 @@ def score_identity(cat: Category, profile, registry, gleif, vies, wiki, data, ga
         elif age >= 2:
             cat.add(0.5, f"Young company, established {founded[:4]}")
         else:
-            cat.add(0, f"Very young company, established {founded[:10]}")
+            cat.flag(0, f"Very young company, established {founded[:10]}")
     if not (registry or vies or gleif):
         if profile.get("identifier"):
             cat.add(1, f"Identifier {profile['identifier']} could not be confirmed in any free register — check it")
@@ -348,7 +383,7 @@ def score_ownership(cat: Category, data, registry, gates) -> None:
     if risky:
         gates.append({"check": "No Russian/Belarusian control (Reg. 833/2014 Art. 5k)", "status": "fail", "detail": ", ".join(o["name"] for o in risky)})
         cat.forced = 0.0
-        cat.add(0, "Owner or parent registered in Russia/Belarus")
+        cat.flag(0, "Owner or parent registered in Russia/Belarus")
         return
     gates.append({"check": "No Russian/Belarusian control (Reg. 833/2014 Art. 5k)", "status": "pass", "detail": f"Owner countries: {dict(countries)}"})
     known = [o for o in owners if o.get("country") and o["country"] != "?"]
@@ -359,7 +394,7 @@ def score_ownership(cat: Category, data, registry, gates) -> None:
     else:
         cat.add(1, "Owner countries not stated")
     if non_allied:
-        cat.add(-4, "Owner in a non-allied jurisdiction: " + ", ".join(f"{o['name']} ({o['country']})" for o in non_allied))
+        cat.flag(-4, "Owner in a non-allied jurisdiction: " + ", ".join(f"{o['name']} ({o['country']})" for o in non_allied))
     if any(o["kind"] in ("ultimate-parent", "direct-parent", "parent/owner") for o in owners):
         cat.add(1.5, "Parent group identified (GLEIF/Wikidata)")
     if any(o["kind"] == "ubo" for o in owners) or (registry or {}).get("extra", {}).get("ubo_count"):
@@ -376,22 +411,22 @@ def score_track_record(cat: Category, profile, track, rates) -> float | None:
     contracts = profile.get("contracts") or []
     buyers = track.get("distinct_buyers") or len({c.get("buyer") for c in contracts})
     countries = len(track.get("buyer_countries") or {})
-    cat.add(3 if lots >= 20 else 2 if lots >= 5 else 1, f"{lots} lots won on TED ({track.get('first_award', '?')} – {track.get('last_award', '?')})")
-    cat.add(2 if buyers >= 5 else 1 if buyers >= 2 else 0, f"{buyers} distinct buyer(s)")
+    cat.add(4 if lots >= 20 else 3 if lots >= 5 else 2, f"{lots} lots won on TED ({track.get('first_award', '?')} – {track.get('last_award', '?')})")
+    cat.add(2 if buyers >= 5 else 1 if buyers >= 2 else 0.5, f"{buyers} distinct buyer(s)")
     if countries >= 2:
         cat.add(1, f"Trusted by buyers in {countries} countries")
     defence = sum(1 for c in contracts if DEFENCE_BUYER_WORDS.search(c.get("buyer", "")))
     if defence:
-        cat.add(1.5, f"{defence} lots for defence/police/interior buyers")
+        cat.add(1, f"{defence} lots for defence/police/interior buyers")
     received = [c.get("tenders_received") for c in contracts if isinstance(c.get("tenders_received"), (int, float))]
     if received:
         competitive = sum(1 for r in received if r >= 2) / len(received)
         if competitive >= 0.5:
-            cat.add(2, f"{competitive:.0%} of wins were contested (2+ bids)")
+            cat.add(1.5, f"{competitive:.0%} of wins were contested (2+ bids)")
         elif competitive >= 0.2:
-            cat.add(1, f"Only {competitive:.0%} of wins were contested")
+            cat.add(0.75, f"Only {competitive:.0%} of wins were contested")
         else:
-            cat.add(0, f"{1 - competitive:.0%} of wins had a single bid — weaker evidence of competitiveness")
+            cat.flag(0, f"{1 - competitive:.0%} of wins had a single bid — no proof it beat competitors (a standard procurement red flag)")
     last = track.get("last_award") or ""
     since_last = years_between(last) if last else None
     if since_last is not None and since_last <= 1:
@@ -401,7 +436,7 @@ def score_track_record(cat: Category, profile, track, rates) -> float | None:
     annual = total_eur / max(1.0, span) if total_eur else None
     ceiling = SIZE_REVENUE_CEILING_EUR.get((profile.get("company_size") or "").lower())
     if annual and ceiling and annual > ceiling:
-        cat.add(-2, f"Awards average €{annual / 1e6:.1f}M/year, above the typical revenue of a '{profile['company_size']}' company — check capacity")
+        cat.flag(-2, f"Awards average €{annual / 1e6:.1f}M/year, above the typical revenue of a '{profile['company_size']}' company — check capacity")
     for contract in contracts[:3]:
         cat.evidence.append(src.evidence("TED award notice", contract.get("ted_url", ""), contract.get("published", ""), f"{contract.get('buyer')}: {contract.get('title', '')[:90]}"))
     return annual
@@ -413,7 +448,10 @@ def score_financial(cat: Category, profile, registry, annual_eur, rates) -> None
     this_year = date.today().year
     if filed:
         lag = this_year - filed
-        cat.add(3 if lag <= 2 else 1, f"Latest filed annual accounts: {filed}" + ("" if lag <= 2 else " (overdue)"))
+        if lag <= 2:
+            cat.add(3, f"Latest filed annual accounts: {filed}")
+        else:
+            cat.flag(1, f"Latest filed annual accounts: {filed} (overdue)")
         cat.evidence.append(src.evidence(registry["source"], registry["url"], registry["observed_at"], f"Annual accounts filed for {filed}"))
     revenue = fin.get("revenue")
     if revenue:
@@ -421,10 +459,17 @@ def score_financial(cat: Category, profile, registry, annual_eur, rates) -> None
         cat.add(2, f"Revenue {fin['year']}: €{revenue_eur / 1e6:.1f}M")
         profit = fin.get("net_profit")
         if profit is not None:
-            cat.add(2 if profit >= 0 else 0, f"Net {'profit' if profit >= 0 else 'loss'} €{profit / rates.get(fin.get('currency') or 'EUR', 1.0) / 1e6:.1f}M")
+            amount = f"€{profit / rates.get(fin.get('currency') or 'EUR', 1.0) / 1e6:.1f}M"
+            if profit >= 0:
+                cat.add(2, f"Net profit {amount}")
+            else:
+                cat.flag(0, f"Net loss {amount}")
         equity = fin.get("equity")
         if equity is not None:
-            cat.add(1 if equity > 0 else -2, "Positive equity" if equity > 0 else "Negative equity")
+            if equity > 0:
+                cat.add(1, "Positive equity")
+            else:
+                cat.flag(-2, "Negative equity")
         if annual_eur:
             ratio = annual_eur / revenue_eur if revenue_eur else 99
             if ratio <= 0.5:
@@ -432,13 +477,13 @@ def score_financial(cat: Category, profile, registry, annual_eur, rates) -> None
             elif ratio <= 1:
                 cat.add(1, f"TED awards ≈ {ratio:.0%} of annual revenue")
             else:
-                cat.add(0, f"TED awards ≈ {ratio:.0%} of annual revenue — exceeds turnover, check capacity")
+                cat.flag(0, f"TED awards ≈ {ratio:.0%} of annual revenue — exceeds turnover, check capacity")
         else:
             cat.add(1, "(No award value to compare with revenue)")
     elif fin.get("employees"):
         cat.add(2, f"{fin['employees']:.0f} employees reported")
     if registry and registry.get("extra", {}).get("registered_arrears"):
-        cat.add(-2, "Registered arrears/claims in the court register")
+        cat.flag(-2, "Registered arrears/claims in the court register")
 
 
 def score_defence(cat: Category, profile, registry, wiki, data, track) -> None:
@@ -451,11 +496,15 @@ def score_defence(cat: Category, profile, registry, wiki, data, track) -> None:
         if licence:
             cat.add(4, "Register lists a licensed weapons/military-material activity: " + licence[0][:110])
         if not licence and not any(code.startswith(DEFENCE_NACE) for code in codes):
-            cat.add(1, f"Registered activity ({', '.join(codes[:3]) or texts[0][:40]}) is not defence-specific — trading company?")
+            cat.flag(1, f"Registered activity ({', '.join(codes[:3]) or texts[0][:40]}) is not defence-specific — trading company?")
         cat.evidence.append(src.evidence(registry["source"], registry["url"], registry["observed_at"], f"Activity codes {codes[:5]}"))
     if wiki and any(DEFENCE_WORDS.search(i) or "arms" in i.lower() for i in wiki.get("industries", [])):
-        cat.add(1.5, f"Wikidata industry: {', '.join(wiki['industries'][:3])}")
+        cat.add(2, f"Wikidata industry: {', '.join(wiki['industries'][:3])}")
         cat.evidence.append(src.evidence("Wikidata", wiki["url"], wiki["observed_at"], f"industry {wiki['industries'][:3]}"))
+    parent = data.get("parent_wikidata") if isinstance(data.get("parent_wikidata"), dict) and "qid" in data["parent_wikidata"] else None
+    if parent and any(DEFENCE_WORDS.search(i) or "arms" in i.lower() for i in parent.get("industries", [])):
+        cat.add(2, f"Parent group is a defence manufacturer (Wikidata: {', '.join(parent['industries'][:2])})")
+        cat.evidence.append(src.evidence("Wikidata (parent via GLEIF)", parent["url"], parent["observed_at"], f"parent industry {parent['industries'][:3]}"))
     funding = data.get("eu_funding")
     if isinstance(funding, dict) and "organisations" in funding:
         if funding["defence_projects"]:
@@ -465,8 +514,12 @@ def score_defence(cat: Category, profile, registry, wiki, data, track) -> None:
         if funding["organisations"]:
             cat.add(0.5, "Validated EU participant (PIC) in the Funding & Tenders portal")
     weapons_lots = sum(1 for c in profile.get("contracts") or [] if any(code.startswith("353") for code in c.get("cpv_codes", [])))
-    if weapons_lots:
+    # Weapons awards alone are track record, not a credential: without any credential source the
+    # category is "no data" (lowers confidence) rather than a low score.
+    if weapons_lots and cat.has_data:
         cat.add(1, f"{weapons_lots} weapons/ammunition (CPV 353) lots delivered to public buyers")
+    elif weapons_lots:
+        cat.note(f"({weapons_lots} weapons/ammunition lots on TED, but no free source for licences or industry codes in this country)")
 
 
 def score_integrity(cat: Category, data, registry, gates) -> None:
@@ -478,7 +531,7 @@ def score_integrity(cat: Category, data, registry, gates) -> None:
     cat.add(10, f"Sanctions screening against {lists}")
     close = {e["name"] for result in screening["company_and_owner_names"].values() for e in result["close"]}
     if close:
-        cat.add(-3, f"Similar (not identical) names on sanctions lists — review: {', '.join(sorted(close)[:3])}")
+        cat.flag(-3, f"Similar (not identical) names on sanctions lists — review: {', '.join(sorted(close)[:3])}")
     persons = screening["persons"]
     if persons:
         cat.note(f"({len(persons)} named officers screened; names are not stored in this report)")
@@ -486,7 +539,7 @@ def score_integrity(cat: Category, data, registry, gates) -> None:
     if isinstance(media, dict) and "articles" in media:
         hits = media["articles"]
         if hits:
-            cat.add(-1 if len(hits) <= 2 else -2, f"{len(hits)} recent news headline(s) pairing the name with fraud/corruption/sanctions terms — unverified press, review")
+            cat.flag(-1 if len(hits) <= 2 else -2, f"{len(hits)} recent news headline(s) pairing the name with fraud/corruption/sanctions terms — unverified press, review")
             for article in hits[:3]:
                 cat.evidence.append(src.evidence("GDELT news", article["url"], media["observed_at"], article["title"][:120], "inferred"))
         else:
@@ -495,11 +548,11 @@ def score_integrity(cat: Category, data, registry, gates) -> None:
         cat.note(f"(News check unavailable: {media.get('error')})")
     extra = (registry or {}).get("extra", {})
     if extra.get("suspensions"):
-        cat.add(-5, "Register shows activity suspension/prohibition: " + "; ".join(extra["suspensions"][:2]))
+        cat.flag(-5, "Register shows activity suspension/prohibition: " + "; ".join(extra["suspensions"][:2]))
         gates.append({"check": "Activity not suspended", "status": "fail", "detail": "; ".join(extra["suspensions"][:2])})
     if registry and registry.get("insolvency"):
         gates.append({"check": "No insolvency/liquidation", "status": "fail", "detail": registry["source"]})
-        cat.add(-5, "Insolvency, liquidation or restructuring registered")
+        cat.flag(-5, "Insolvency, liquidation or restructuring registered")
     elif registry and registry.get("insolvency") is False:
         gates.append({"check": "No insolvency/liquidation", "status": "pass", "detail": registry["source"]})
     else:
@@ -528,6 +581,9 @@ def apply_documents(cats: dict[str, Category], documents: list[dict[str, Any]]) 
         category, points, label = DOCUMENT_POINTS[kind]
         factor, status = document_status(doc)
         cat = cats[category]
+        if factor and points and not cat.has_data:
+            # No open data for this category: start from neutral so documents can only help.
+            cat.add(5, "(No open data for this category; scored from supplier documents, starting at a neutral 5)")
         cat.evidence.append(src.evidence("Supplier-provided document", doc.get("file", ""), doc.get("uploaded_at", src.today()), f"{label}: {doc.get('title') or doc.get('number') or ''}", "document_verified" if factor == 1.0 else "declared"))
         if factor == 0:
             cat.note(f"({label} — {status}, not counted)")

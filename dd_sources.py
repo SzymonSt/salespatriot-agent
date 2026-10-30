@@ -548,7 +548,7 @@ def lv_registers(regcode: str) -> dict[str, Any] | None:
         url=f"https://info.ur.gov.lv/#/data-search (reg. no. {regcode})",
         observed_at=observed,
         name=entry.get("name", ""),
-        status_active=not entry.get("terminated") and not entry.get("closed"),
+        status_active=not entry.get("terminated", "").strip() and not entry.get("closed", "").strip(),
         status_text="terminated" if entry.get("terminated") else "active",
         founded=entry.get("registered", ""),
         address=entry.get("address", ""),

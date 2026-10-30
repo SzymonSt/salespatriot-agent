@@ -321,7 +321,9 @@ def enrich(
     cache_dir: Path,
     cpv_labels: dict[str, str],
 ) -> None:
-    identifier, name = profile["identifier"], profile["name"]
+    # Match TED on the registered name; `name` may be an English display name.
+    identifier = profile["identifier"]
+    name = profile.get("legal_name", profile["name"])
     contracts = []
     unparsed = []
     for notice in award_notices(identifier, name, limit):
