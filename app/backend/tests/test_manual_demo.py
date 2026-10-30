@@ -30,7 +30,8 @@ def test_manual_demo_page_and_synthetic_flow(monkeypatch) -> None:
         response = client.post("/api/demo/run")
 
     assert page.status_code == 200
-    assert "Run demo" in page.text
+    assert "Send profile reference request" in page.text
+    assert "Run synthetic demo" in page.text
     assert response.status_code == 200
     result = response.json()
     assert result["demo_only"] is True

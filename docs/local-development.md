@@ -20,16 +20,27 @@ Create `app/backend/.env` from the tracked `app/backend/.env.example` and set:
 Keep `.env` local and never commit or share its contents. The service is
 unauthenticated in this development slice; keep it bound to `127.0.0.1`.
 
-## Run the synthetic demo
+## Run profile-backed buyer-agent references
 
-Open <http://127.0.0.1:8000/demo> and click **Run demo**. A successful flow
-makes three Gemini API calls and may incur charges. It uses synthetic data,
-saves nothing to Supabase, sends no external messages, submits no bid, and
-makes no binding offer.
+Open <http://127.0.0.1:8000/demo> and use the **Profile-backed buyer-agent
+reference check** section. The options come from actual buyer and supplier
+profiles in `data/profiles/`. A buyer agent can ask another buyer agent for
+public TED counterpart/notice evidence about a supplier.
 
-The demonstration includes a seeded simulated peer-buyer reference and
-illustrative quote fixtures. It is not a live procurement integration or a
-test of real-world due diligence.
+This exchange is mediated in-process by the backend. It sends no external
+message and makes no Gemini API call. Only public allowlisted counterpart and
+notice fields are returned; KYC and due-diligence profile fields are excluded.
+The source profiles do not contain delivery or quality assessments, so the
+agent reports that limitation rather than presenting a public award as a
+positive performance reference. These are platform-hosted profile agents, not
+agents operated by the named buyers.
+
+## Run the synthetic ADK demo
+
+The same page also has a **Run synthetic demo** button. It uses synthetic
+suppliers, diligence results, a simulated peer reference, and illustrative
+quotes. A successful run makes up to three Gemini API calls and may incur
+charges. It sends no external messages and persists nothing to Supabase.
 
 ## Gemini API subscription and billing are separate
 

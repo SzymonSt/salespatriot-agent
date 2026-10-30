@@ -11,21 +11,142 @@
       .note { color: #526170; line-height: 1.5; }
       button { margin: 1rem 0; padding: .7rem 1rem; border: 0; border-radius: .4rem; background: #126b51; color: white; font: inherit; cursor: pointer; }
       button:disabled { opacity: .6; cursor: wait; }
+      label { display: block; margin: .8rem 0; }
+      select { display: block; width: 100%; max-width: 40rem; margin-top: .3rem; padding: .55rem; font: inherit; }
+      section { margin: 2rem 0; padding: 1rem; border: 1px solid #d5dde3; border-radius: .5rem; }
       pre { min-height: 12rem; overflow: auto; padding: 1rem; border-radius: .5rem; background: #101820; color: #e7f0f7; line-height: 1.45; white-space: pre-wrap; }
       .warning { padding: .8rem 1rem; border-left: 4px solid #d59b22; background: #fff8e8; }
     </style>
   </head>
   <body>
     <h1>SalesPatriot A2A flow demo</h1>
-    <p class="note">Run a synthetic, non-controlled procurement flow through the ADK supplier and buyer agents. The demo also shows a simulated peer-buyer reference and deterministic quote comparison.</p>
-    <p class="warning">This makes three Gemini API calls and may incur usage charges. It uses synthetic data only: no real buyer or supplier is contacted, no offer is made, and nothing is saved to Supabase.</p>
-    <button id="run-demo">Run demo</button>
-    <p id="status" role="status" aria-live="polite"></p>
-    <pre id="result">The run timeline and agent messages will appear here.</pre>
+    <section>
+      <h2>Profile-backed buyer-agent reference check</h2>
+      <p class="note">Platform-hosted buyer agents exchange a local request and response using only allowlisted public TED profile evidence. No private profile fields are shared, no real organization is contacted, and no Gemini call is made. Public award/counterpart data is not proof of delivery or quality performance.</p>
+      <label>Requesting buyer agent
+        <select id="reference-requester"></select>
+      </label>
+      <label>Supplier
+        <select id="reference-supplier"></select>
+      </label>
+      <label>Peer buyer agent
+        <select id="reference-peer"></select>
+      </label>
+      <button id="run-reference">Send profile reference request</button>
+      <p id="reference-status" role="status" aria-live="polite">Loading actual profile options...</p>
+      <pre id="reference-result">The request and peer-agent response will appear here.</pre>
+    </section>
+
+    <section>
+      <h2>Synthetic ADK flow</h2>
+      <p class="note">Runs the synthetic supplier introductions, simulated reference, due-diligence checks, buyer quote request, and quote comparison.</p>
+      <p class="warning">This makes up to three Gemini API calls and may incur usage charges. It uses synthetic data only and does not persist the run.</p>
+      <button id="run-demo">Run synthetic demo</button>
+      <p id="status" role="status" aria-live="polite"></p>
+      <pre id="result">The synthetic run timeline and agent messages will appear here.</pre>
+    </section>
     <script>
       const button = document.getElementById("run-demo");
       const status = document.getElementById("status");
       const output = document.getElementById("result");
+      const requesterSelect = document.getElementById("reference-requester");
+      const supplierSelect = document.getElementById("reference-supplier");
+      const peerSelect = document.getElementById("reference-peer");
+      const referenceButton = document.getElementById("run-reference");
+      const referenceStatus = document.getElementById("reference-status");
+      const referenceOutput = document.getElementById("reference-result");
+      let referenceOptions;
+
+      function selectedSupplier() {
+        return referenceOptions.suppliers.find(
+          (supplier) => supplier.supplier_id === supplierSelect.value
+        );
+      }
+
+      function updatePeerOptions() {
+        const supplier = selectedSupplier();
+        const availablePeers = (supplier?.peer_buyer_ids || [])
+          .filter((buyerId) => buyerId !== requesterSelect.value)
+          .map((buyerId) => referenceOptions.buyers.find(
+            (buyer) => buyer.buyer_id === buyerId
+          ))
+          .filter(Boolean);
+        peerSelect.replaceChildren(...availablePeers.map((buyer) => {
+          const option = document.createElement("option");
+          option.value = buyer.buyer_id;
+          option.textContent = buyer.buyer_name;
+          return option;
+        }));
+        referenceButton.disabled = availablePeers.length === 0;
+        referenceStatus.textContent = availablePeers.length
+          ? "Ready. The peer must have a matching public counterpart record."
+          : "No other buyer profile has matching public evidence for this selection.";
+      }
+
+      async function loadReferenceOptions() {
+        const response = await fetch("/v1/agents/reference-options");
+        const result = await response.json();
+        if (!response.ok) {
+          throw new Error(result.detail || `Request failed (${response.status})`);
+        }
+        referenceOptions = result;
+        requesterSelect.replaceChildren(...result.buyers.map((buyer) => {
+          const option = document.createElement("option");
+          option.value = buyer.buyer_id;
+          option.textContent = buyer.buyer_name;
+          return option;
+        }));
+        supplierSelect.addEventListener("change", updatePeerOptions);
+        requesterSelect.addEventListener("change", updatePeerOptions);
+        supplierSelect.replaceChildren(...result.suppliers.map((supplier) => {
+          const option = document.createElement("option");
+          option.value = supplier.supplier_id;
+          option.textContent = supplier.supplier_name;
+          return option;
+        }));
+        if (!result.suppliers.length) {
+          referenceStatus.textContent = "No supplier-to-buyer profile matches were found.";
+          referenceButton.disabled = true;
+          return;
+        }
+        updatePeerOptions();
+      }
+
+      referenceButton.addEventListener("click", async () => {
+        referenceButton.disabled = true;
+        referenceStatus.textContent = "Sending a profile-scoped request...";
+        referenceOutput.textContent = "";
+        try {
+          const response = await fetch(
+            `/v1/agents/buyers/${encodeURIComponent(requesterSelect.value)}/reference-requests`,
+            {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                supplier_id: supplierSelect.value,
+                peer_buyer_id: peerSelect.value,
+              }),
+            }
+          );
+          const result = await response.json();
+          if (!response.ok) {
+            throw new Error(result.detail || `Request failed (${response.status})`);
+          }
+          referenceStatus.textContent = "Profile-backed agent request and response completed.";
+          referenceOutput.textContent = JSON.stringify(result, null, 2);
+        } catch (error) {
+          referenceStatus.textContent = "Reference request failed";
+          referenceOutput.textContent = error.message;
+        } finally {
+          updatePeerOptions();
+        }
+      });
+
+      loadReferenceOptions().catch((error) => {
+        referenceStatus.textContent = "Could not load actual profile options";
+        referenceOutput.textContent = error.message;
+        referenceButton.disabled = true;
+      });
 
       button.addEventListener("click", async () => {
         button.disabled = true;

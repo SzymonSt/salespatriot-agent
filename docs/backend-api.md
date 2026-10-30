@@ -94,6 +94,49 @@ does not run due-diligence checks itself.
 
 ## Manual demo routes
 
+### Profile-backed buyer-agent reference exchange
+
+`GET /v1/agents/reference-options` returns loaded buyer agents and suppliers
+for whom at least one buyer profile contains a matching public counterpart
+record. Options are built from the current `data/profiles/` files at startup.
+
+`POST /v1/agents/buyers/{requester_buyer_id}/reference-requests`
+
+Request:
+
+```json
+{
+  "supplier_id": "supplier-svn-2237741000",
+  "peer_buyer_id": "buyer-svn-5268923000"
+}
+```
+
+This example has Austria's buyer profile request a public-profile reference
+from Slovenia's buyer profile about PANNA PLUS. The backend routes a typed
+message between two in-process `BuyerProfileAgent` instances. The peer agent
+responds only from matching `top_counterparts` and `recent_notices` fields in
+its own profile.
+
+The response contains the request and response envelopes, the allowlisted
+evidence, and these safety indicators:
+
+```json
+{
+  "data_scope": "public_ted_profile_allowlist",
+  "private_profile_data_shared": false,
+  "external_organization_contacted": false,
+  "persisted": false
+}
+```
+
+The evidence may establish a public procurement relationship, but it does not
+establish delivery quality or satisfaction. The endpoint does not claim that a
+real public authority replied; no Gemini call or external network message is
+made. It returns `400` for self-requests, `404` for unknown profile IDs, and
+`409` when the selected peer has no matching public evidence.
+
+### Synthetic demo
+
 | Method and path | Purpose |
 |---|---|
 | `GET /demo` | Serves the local synthetic demo page. |

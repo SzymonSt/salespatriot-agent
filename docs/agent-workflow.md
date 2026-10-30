@@ -19,10 +19,12 @@ The current backend is a local FastAPI and Google ADK foundation:
 
 1. At startup, it reads `buyers.json` and `suppliers.json` from
    `data/profiles/` and keeps the validated records in memory.
-2. A caller submits a supplier preview or buyer draft request to FastAPI.
-3. FastAPI checks the requested profile's opt-in or buyer policy gate.
-4. The backend creates an ADK agent with a role-specific instruction and typed
-   output schema, then invokes Gemini through an ADK `Runner`.
+2. A caller submits a supplier preview or buyer draft request to FastAPI, or
+   asks one loaded buyer profile agent to request a reference from another.
+3. FastAPI checks the requested profile's opt-in or buyer policy gate for
+   preview/draft calls. A peer reference call is limited to public TED fields.
+4. Preview/draft calls create an ADK agent with a role-specific instruction and
+   typed output schema, then invoke Gemini through an ADK `Runner`.
 5. ADK uses an in-memory session for that invocation. The backend validates the
    final structured response and returns it to the caller.
 
@@ -32,11 +34,39 @@ Supabase is currently used only by the optional readiness probe, which runs
 
 ## Current interaction boundary
 
-Agent interactions are currently mediated by this backend. The supplier
-preview route invokes a supplier agent and returns its draft; the buyer draft
-route invokes a buyer agent and returns its draft. There is no remote
-agent-to-agent transport, buyer-agent directory, agent card exchange, or
-cross-organization message delivery yet.
+Agent interactions are mediated by this backend. It creates an in-process
+`BuyerProfileAgent` for each loaded buyer profile. One such agent can send a
+typed reference request to another through the backend's buyer-agent directory;
+the receiving agent returns only allowlisted public TED evidence from its own
+buyer profile. This path is deterministic and does not call Gemini.
+
+These are platform-hosted agents backed by profile data, not agents operated by
+the named public authorities. There is no remote A2A transport, agent-card
+exchange, external buyer endpoint, or cross-organization message delivery.
+The profile-backed exchange is a truthful local representation of what the
+loaded public data contains; it is not a statement or endorsement from the
+buyer organization.
+
+## Profile-backed peer reference
+
+The browser demo provides a separate reference-check flow based on
+`data/profiles/`:
+
+1. The requesting buyer agent selects a supplier and a different buyer agent
+   whose buyer profile lists that supplier as a counterpart.
+2. The requester sends an in-process message scoped to public TED profile
+   evidence.
+3. The peer agent reads only matching `top_counterparts` and
+   `recent_notices` fields from its own profile.
+4. The response identifies the public relationship and notice references, if
+   present, and explicitly reports that delivery/quality performance is not
+   available when the profile has no such data.
+
+The exchange cannot disclose KYC, due-diligence notes, internal communications,
+or other non-allowlisted profile fields. It is not persisted and makes no
+external message. In the current profile set, exact supplier-counterpart
+matches include PANNA PLUS with Slovenia's Ministry of Defence and Baltic Fox
+OÜ with Lithuania's Resource Agency under the Ministry of the Interior.
 
 The `/demo` page runs a synthetic workflow centrally:
 
@@ -74,7 +104,9 @@ The longer-term workflow discussed for the product is event-driven:
    non-binding introductions.
 4. Route permitted information to the buyer's agent.
 5. Evaluate the buyer-specific diligence policy and, where allowed, request
-   attributable supplier references from relevant peer-buyer agents.
+   attributable supplier references from relevant peer-buyer agents. The local
+   profile-backed public-evidence exchange exists, but authenticated remote
+   buyer-agent communication does not.
 6. Treat missing or conflicting reference evidence as unknown or escalated,
    not as an automatic pass.
 7. Only after the buyer's policy permits it, request indicative supplier

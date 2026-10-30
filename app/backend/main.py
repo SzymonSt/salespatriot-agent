@@ -67,6 +67,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     async def lifespan(app: FastAPI):
         app.state.settings = app_settings
         app.state.profiles = ProfileRegistry.load(app_settings.profiles_dir)
+        app.state.buyer_agent_directory = BuyerAgentDirectory(app.state.profiles)
         app.state.database_engine = create_database_engine(app_settings)
         if app_settings.google_api_key is not None:
             configure_gemini(app_settings)
@@ -82,8 +83,10 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         lifespan=lifespan,
     )
     from app.backend.demo import router as demo_router
+    from app.backend.agents.peer import BuyerAgentDirectory, router as peer_agent_router
 
     app.include_router(demo_router)
+    app.include_router(peer_agent_router)
 
     def request_settings(request: Request) -> Settings:
         return request.app.state.settings

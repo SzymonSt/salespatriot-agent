@@ -39,14 +39,16 @@ usable `DATABASE_URL` is configured.
 
 ## Manual A2A flow demo
 
-Open `http://127.0.0.1:8000/demo` and click **Run demo**. It calls the two
-supplier ADK agents and the buyer ADK agent, then displays the flow timeline,
-simulated peer-buyer reference, due-diligence checks, quote request, and
-deterministic quote comparison.
+Open `http://127.0.0.1:8000/demo` for two manual flows. The profile-backed
+reference check routes a public TED evidence request between in-process buyer
+profile agents using real records from `data/profiles/`; it makes no Gemini
+call and contacts no real organization. The separate synthetic ADK flow calls
+two supplier agents and one buyer agent, then displays simulated references,
+due-diligence checks, quote fixtures, and deterministic quote comparison.
 
-The demo uses synthetic non-controlled goods, organizations, references, and
+The synthetic flow uses non-controlled goods, organizations, references, and
 quotes. It sends no external messages, submits no bid, and does not persist to
-Supabase. It makes three Gemini API calls and may incur API usage charges.
+Supabase. It makes up to three Gemini API calls and may incur API usage charges.
 
 ## Agent previews
 
