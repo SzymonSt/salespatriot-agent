@@ -2,7 +2,7 @@
   {
     "id": "buyer-deu-991-19518-88",
     "role": "demand",
-    "name": "Bundesamt für Ausrüstung, Informationstechnik und Nutzung der Bundeswehr",
+    "name": "Federal Office of Bundeswehr Equipment, Information Technology and In-Service Support",
     "country": "DEU",
     "city": "Koblenz",
     "website": "http://www.evergabe-online.de/",
@@ -122,9 +122,9 @@
         "notice_number": "679921-2026",
         "published": "2026-10-02",
         "notice_type": "cn-standard",
-        "headline": "Germany – Grenades – Angestrebt wird für die Herstellung und Lieferung von Granaten, Abschussgerät (ASG), 76 mm, Nebel, Infrarot (IR), roter Phosphor (RP) eine Mehrpartnerrahmenvereinbarung mit Miniwettbewerb",
-        "title": "Angestrebt wird für die Herstellung und Lieferung von Granaten, Abschussgerät (ASG), 76 mm, Nebel, Infrarot (IR), roter Phosphor (RP) eine Mehrpartnerrahmenvereinbarung mit Miniwettbewerb",
-        "description": "Herstellung und Lieferung von Granaten, ASG, 76 mm, Nebel, IR, RP",
+        "headline": "Germany – Grenades – A multi-partner framework agreement with mini-competition is sought for the manufacture and delivery of grenades, launcher (ASG), 76 mm, smoke, infrared (IR), red phosphorus (RP)",
+        "title": "A multi-partner framework agreement with mini-competition is sought for the manufacture and delivery of grenades, launcher (ASG), 76 mm, smoke, infrared (IR), red phosphorus (RP)",
+        "description": "Manufacture and delivery of grenades, ASG, 76 mm, smoke, IR, RP",
         "cpv_codes": [
           "35331300",
           "35330000",
@@ -139,9 +139,9 @@
         "notice_number": "658617-2026",
         "published": "2026-09-24",
         "notice_type": "cn-standard",
-        "headline": "Germany – Weapons, ammunition and associated parts – Patronen 5,56mm x 45 Hartkern, DM31A1",
-        "title": "Patronen 5,56mm x 45 Hartkern, DM31A1",
-        "description": "Patronen 5,56mm x 45 Hartkern, DM31A1",
+        "headline": "Germany – Weapons, ammunition and associated parts – Cartridges 5.56mm x 45 hard-core, DM31A1",
+        "title": "Cartridges 5.56mm x 45 hard-core, DM31A1",
+        "description": "Cartridges 5.56mm x 45 hard-core, DM31A1",
         "cpv_codes": [
           "35300000",
           "35330000",
@@ -157,9 +157,9 @@
         "notice_number": "658554-2026",
         "published": "2026-09-24",
         "notice_type": "can-standard",
-        "headline": "Germany – Light firearms – Laserlichtausstattung Handwaffen",
-        "title": "Laserlichtausstattung Handwaffen",
-        "description": "Herstellung und Lieferung von Lasermodulen mit Lichtausstattungen und Bedieneinheit (Laser-Licht-Ausstattung - LLA) für Handwaffen der Bundeswehr.",
+        "headline": "Germany – Light firearms – Laser light equipment for small arms",
+        "title": "Laser light equipment for small arms",
+        "description": "Manufacture and delivery of laser modules with light equipment and control unit (laser light equipment - LLA) for Bundeswehr small arms.",
         "cpv_codes": [
           "35321000",
           "38636100"
@@ -175,9 +175,9 @@
         "notice_number": "658068-2026",
         "published": "2026-09-24",
         "notice_type": "cn-standard",
-        "headline": "Germany – Cartridges – Patronen 5,56mm x 45 Weichkern, DM41A1",
-        "title": "Patronen 5,56mm x 45 Weichkern, DM41A1",
-        "description": "Patronen 5,56mm x 45 Weichkern, DM41A1",
+        "headline": "Germany – Cartridges – Cartridges 5.56mm x 45 soft-core, DM41A1",
+        "title": "Cartridges 5.56mm x 45 soft-core, DM41A1",
+        "description": "Cartridges 5.56mm x 45 soft-core, DM41A1",
         "cpv_codes": [
           "35331500",
           "35330000",
@@ -193,9 +193,9 @@
         "notice_number": "645130-2026",
         "published": "2026-09-18",
         "notice_type": "cn-standard",
-        "headline": "Germany – Cartridges – Herstellung und Lieferung von Patrone 7,62 mm x 51, 1 DM111A2 Weichkern - 1 DM21A3 Weichkern-Leuchtspur, 200er Gurt AM22",
-        "title": "Herstellung und Lieferung von Patrone 7,62 mm x 51, 1 DM111A2 Weichkern - 1 DM21A3 Weichkern-Leuchtspur, 200er Gurt AM22",
-        "description": "Herstellung und Lieferung von Patrone 7,62 mm x 51, 1 DM111A2 Weichkern - 1 DM21A3 Weichkern-Leuchtspur, 200er Gurt AM22",
+        "headline": "Germany – Cartridges – Manufacture and supply of cartridge 7.62 mm x 51, 1 DM111A2 soft-core - 1 DM21A3 soft-core tracer, 200-round belt AM22",
+        "title": "Manufacture and delivery of 7.62 mm x 51 cartridges, 1 DM111A2 soft-core - 1 DM21A3 soft-core tracer, 200-round belt AM22",
+        "description": "Manufacture and delivery of 7.62 mm x 51 cartridges, 1 DM111A2 soft-core - 1 DM21A3 soft-core tracer, 200-round belt AM22",
         "cpv_codes": [
           "35331500",
           "35330000"
@@ -209,9 +209,9 @@
         "notice_number": "644101-2026",
         "published": "2026-09-18",
         "notice_type": "cn-standard",
-        "headline": "Germany – Ammunition – Herstellung und Lieferung von Patrone 7,62 mm x 51, 1 DM151 Hartkern - 1 DM21A3, Weichkern, Leuchtspur - 1 DM111A2, Weichkern, gegurtet 120er Gurt AM41",
-        "title": "Herstellung und Lieferung von Patrone 7,62 mm x 51, 1 DM151 Hartkern - 1 DM21A3, Weichkern, Leuchtspur - 1 DM111A2, Weichkern, gegurtet 120er Gurt AM41",
-        "description": "Herstellung und Lieferung von Patrone 7,62 mm x 51, 1 DM151 Hartkern - 1 DM21A3, Weichkern, Leuchtspur - 1 DM111A2, Weichkern, gegurtet 120er Gurt AM41",
+        "headline": "Germany – Ammunition – Manufacture and delivery of cartridge 7.62 mm x 51, 1 DM151 hard-core - 1 DM21A3, soft-core, tracer - 1 DM111A2, soft-core, linked 120-round belt AM41",
+        "title": "Manufacture and delivery of cartridge 7.62 mm x 51, 1 DM151 hard-core - 1 DM21A3, soft-core, tracer - 1 DM111A2, soft-core, linked 120-round belt AM41",
+        "description": "Manufacture and delivery of cartridge 7.62 mm x 51, 1 DM151 hard-core - 1 DM21A3, soft-core, tracer - 1 DM111A2, soft-core, linked 120-round belt AM41",
         "cpv_codes": [
           "35330000",
           "35331500"
@@ -225,9 +225,9 @@
         "notice_number": "634494-2026",
         "published": "2026-09-15",
         "notice_type": "cn-standard",
-        "headline": "Germany – Ammunition – Rahmenvereinbarung mit Miniwettbewerb Beschaffung von Patronen 30mm x 173 APFSDS-T",
-        "title": "Rahmenvereinbarung mit Miniwettbewerb Beschaffung von Patronen 30mm x 173 APFSDS-T",
-        "description": "Rahmenvereinbarung Beschaffung von Patronen 30mm x 173 APFSDS-T mit mehreren Wirtschaftsteilnehmern",
+        "headline": "Germany – Ammunition – Framework agreement with mini-competition, procurement of cartridges 30mm x 173 APFSDS-T",
+        "title": "Framework agreement with mini-competition: procurement of cartridges 30mm x 173 APFSDS-T",
+        "description": "Framework agreement for the procurement of 30mm x 173 APFSDS-T cartridges with multiple economic operators",
         "cpv_codes": [
           "35330000"
         ],
@@ -240,9 +240,9 @@
         "notice_number": "632032-2026",
         "published": "2026-09-14",
         "notice_type": "cn-standard",
-        "headline": "Germany – Ammunition – Herstellung und Lieferung von Patrone 7,62 mm x 51, 7 DM111A2 Weichkern - 4 DM21A3 Weichkern-Leuchtspur, 198er Gurt AM88",
-        "title": "Herstellung und Lieferung von Patrone 7,62 mm x 51, 7 DM111A2 Weichkern - 4 DM21A3 Weichkern-Leuchtspur, 198er Gurt AM88",
-        "description": "Herstellung und Lieferung von Patrone 7,62 mm x 51, 7 DM111A2 Weichkern - 4 DM21A3 Weichkern-Leuchtspur, 198er Gurt AM88 für 2026 und 2027",
+        "headline": "Germany – Ammunition – Manufacture and supply of 7.62 mm x 51 cartridges, 7 DM111A2 soft-core - 4 DM21A3 soft-core tracer, 198-round belt AM88",
+        "title": "Manufacture and supply of cartridge 7.62 mm x 51, 7 DM111A2 soft-core - 4 DM21A3 soft-core tracer, 198-round belt AM88",
+        "description": "Manufacture and supply of cartridge 7.62 mm x 51, 7 DM111A2 soft-core - 4 DM21A3 soft-core tracer, 198-round belt AM88 for 2026 and 2027",
         "cpv_codes": [
           "35330000",
           "35331500"
@@ -256,9 +256,9 @@
         "notice_number": "626989-2026",
         "published": "2026-09-11",
         "notice_type": "cn-standard",
-        "headline": "Germany – Pyrotechnics – Angestrebt wird für die Herstellung und Lieferung von Granate, Abschussgerät, DM75A1, 76 mm, Nebel, IR, RP eine Mehrpartnerrahmenvereinbarung mit Miniwettbewerb",
-        "title": "Angestrebt wird für die Herstellung und Lieferung von Granate, Abschussgerät, DM75A1, 76 mm, Nebel, IR, RP eine Mehrpartnerrahmenvereinbarung mit Miniwettbewerb",
-        "description": "Herstellung und Lieferung von Granate, Abschussgerät, DM75A1, 76 mm, Nebel, IR, RP VersNr.: 1330-12-409-8321 (bereits qualifiziert als GS30)",
+        "headline": "Germany – Pyrotechnics – For the manufacture and delivery of grenade, launcher, DM75A1, 76 mm, smoke, IR, RP, a multi-partner framework agreement with mini-competition is sought",
+        "title": "The aim is to conclude a multi-partner framework agreement with mini-competition for the manufacture and supply of grenade, launcher, DM75A1, 76 mm, smoke, IR, RP",
+        "description": "Manufacture and delivery of grenade, launcher, DM75A1, 76 mm, smoke, IR, RP VersNr.: 1330-12-409-8321 (already qualified as GS30)",
         "cpv_codes": [
           "39225500",
           "35330000",
@@ -274,9 +274,9 @@
         "notice_number": "625642-2026",
         "published": "2026-09-10",
         "notice_type": "cn-standard",
-        "headline": "Germany – Ammunition – Angestrebt wird für die Herstellung und Lieferung von Signalpatronen 26,5mm Signalpatronen Fallschirm (LL57) eine Mehrpartnerrahmenvereinbarung mit Miniwettbewerb",
-        "title": "Angestrebt wird für die Herstellung und Lieferung von Signalpatronen 26,5mm Signalpatronen Fallschirm (LL57) eine Mehrpartnerrahmenvereinbarung mit Miniwettbewerb",
-        "description": "Herstellung und Lieferung von 26,5mm Signalpatronen Fallschirm LL57",
+        "headline": "Germany – Ammunition – The aim is a multi-partner framework agreement with mini-competition for the manufacture and supply of 26.5mm signal cartridges, parachute signal cartridges (LL57)",
+        "title": "A multi-partner framework agreement with mini-competition is sought for the manufacture and delivery of signal cartridges 26.5mm signal cartridges parachute (LL57)",
+        "description": "Manufacture and delivery of 26.5mm parachute signal cartridges LL57",
         "cpv_codes": [
           "35330000",
           "39225500"
@@ -286,12 +286,13 @@
         "counterparts": [],
         "ted_url": "https://ted.europa.eu/en/notice/-/detail/625642-2026"
       }
-    ]
+    ],
+    "legal_name": "Bundesamt für Ausrüstung, Informationstechnik und Nutzung der Bundeswehr"
   },
   {
     "id": "buyer-esp-10000140000201",
     "role": "demand",
-    "name": "Jefatura de Asuntos Económicos del Mando de Apoyo Logístico",
+    "name": "Economic Affairs Headquarters of the Logistic Support Command",
     "country": "ESP",
     "city": "Madrid",
     "website": "",
@@ -411,9 +412,9 @@
         "notice_number": "752151-2026",
         "published": "2026-10-29",
         "notice_type": "cn-standard",
-        "headline": "Spain – Machine guns – Adquisición de Repuestos y Herramientas AMP 12,70 mm.",
-        "title": "Adquisición de Repuestos y Herramientas AMP 12,70 mm.",
-        "description": "Adquisición de Repuestos y Herramientas AMP 12,70 mm.",
+        "headline": "Spain – Machine guns – Acquisition of Spare Parts and Tools for 12.70 mm AMP.",
+        "title": "Acquisition of Spare Parts and Tools AMP 12.70 mm.",
+        "description": "Acquisition of Spare Parts and Tools AMP 12.70 mm.",
         "cpv_codes": [
           "35321300"
         ],
@@ -426,9 +427,9 @@
         "notice_number": "736511-2026",
         "published": "2026-10-23",
         "notice_type": "can-standard",
-        "headline": "Spain – Shells – Adquisición de munición ACA de 105 MM",
-        "title": "Adquisición de munición ACA de 105 MM",
-        "description": "Munición ACA 105 mm (ocho lotes)",
+        "headline": "Spain – Shells – Acquisition of 105 MM ACA ammunition",
+        "title": "Acquisition of 105 MM ACA ammunition",
+        "description": "105 mm ACA ammunition (eight lots)",
         "cpv_codes": [
           "35331200"
         ],
@@ -443,9 +444,9 @@
         "notice_number": "719421-2026",
         "published": "2026-10-19",
         "notice_type": "cn-standard",
-        "headline": "Spain – Ammunition – Adquisición de munición ACA de 155 mm",
-        "title": "Adquisición de munición ACA de 155 mm",
-        "description": "Adquisición de munición ACA de 155 mm",
+        "headline": "Spain – Ammunition – Acquisition of 155 mm ACA ammunition",
+        "title": "Acquisition of 155 mm ACA ammunition",
+        "description": "Acquisition of 155 mm ACA ammunition",
         "cpv_codes": [
           "35330000"
         ],
@@ -458,9 +459,9 @@
         "notice_number": "692945-2026",
         "published": "2026-10-08",
         "notice_type": "cn-standard",
-        "headline": "Spain – Machine guns – Adquisición Ametralladoras Pesadas AMP",
-        "title": "Adquisición Ametralladoras Pesadas AMP",
-        "description": "Adquisición Ametralladoras Pesadas AMP",
+        "headline": "Spain – Machine guns – Acquisition of AMP Heavy Machine Guns",
+        "title": "Acquisition of Heavy Machine Guns AMP",
+        "description": "Acquisition of Heavy Machine Guns AMP",
         "cpv_codes": [
           "35321300"
         ],
@@ -473,9 +474,9 @@
         "notice_number": "669397-2026",
         "published": "2026-09-29",
         "notice_type": "can-standard",
-        "headline": "Spain – Bullets – Adquisición de Cartuchos Calibre 308 Y 338 LM",
-        "title": "Adquisición de Cartuchos Calibre 308 Y 338 LM",
-        "description": "Adquisición de Cartuchos Calibre 308 Y 338 LM",
+        "headline": "Spain – Bullets – Acquisition of Calibre 308 and 338 LM Cartridges",
+        "title": "Acquisition of Calibre 308 And 338 LM Cartridges",
+        "description": "Acquisition of Calibre 308 And 338 LM Cartridges",
         "cpv_codes": [
           "35331100"
         ],
@@ -488,9 +489,9 @@
         "notice_number": "663681-2026",
         "published": "2026-09-25",
         "notice_type": "cn-standard",
-        "headline": "Spain – Ammunition – Adquisición de granadas de aturdimiento Stun",
-        "title": "Adquisición de granadas de aturdimiento Stun",
-        "description": "Adquisición de granadas de aturdimiento Stun",
+        "headline": "Spain – Ammunition – Acquisition of Stun grenades",
+        "title": "Acquisition of stun grenades",
+        "description": "Acquisition of stun grenades",
         "cpv_codes": [
           "35330000"
         ],
@@ -503,9 +504,9 @@
         "notice_number": "620149-2026",
         "published": "2026-09-09",
         "notice_type": "cn-standard",
-        "headline": "Spain – Ammunition – Adquisición de granadas de mortero",
-        "title": "Adquisición de granadas de mortero",
-        "description": "Adquisición de granadas de mortero",
+        "headline": "Spain – Ammunition – Acquisition of mortar rounds",
+        "title": "Acquisition of mortar rounds",
+        "description": "Acquisition of mortar rounds",
         "cpv_codes": [
           "35330000"
         ],
@@ -518,9 +519,9 @@
         "notice_number": "610878-2026",
         "published": "2026-09-04",
         "notice_type": "can-standard",
-        "headline": "Spain – Howitzer – Suministro para fabricación de bocas de Fuego Obús 155/52 SIAC/V07.",
-        "title": "Suministro para fabricación de bocas de Fuego Obús 155/52 SIAC/V07.",
-        "description": "Suministro para fabricación de bocas de Fuego Obús 155/52 SIAC/V07.",
+        "headline": "Spain – Howitzer – Supply for the manufacture of 155/52 SIAC/V07 Howitzer barrels.",
+        "title": "Supply for the manufacture of gun barrels for the 155/52 SIAC/V07 Howitzer.",
+        "description": "Supply for the manufacture of gun barrels for the 155/52 SIAC/V07 Howitzer.",
         "cpv_codes": [
           "35322500"
         ],
@@ -535,9 +536,9 @@
         "notice_number": "591796-2026",
         "published": "2026-08-27",
         "notice_type": "cn-standard",
-        "headline": "Spain – Ammunition – Adquisición de granadas de mortero",
-        "title": "Adquisición de granadas de mortero",
-        "description": "Adquisición de granadas de mortero",
+        "headline": "Spain – Ammunition – Acquisition of mortar rounds",
+        "title": "Acquisition of mortar rounds",
+        "description": "Acquisition of mortar rounds",
         "cpv_codes": [
           "35330000"
         ],
@@ -550,9 +551,9 @@
         "notice_number": "578655-2026",
         "published": "2026-08-21",
         "notice_type": "cn-standard",
-        "headline": "Spain – Ammunition – Adquisición de salvas 75 MM",
-        "title": "Adquisición de salvas 75 MM",
-        "description": "Adquisición de salvas 75 MM",
+        "headline": "Spain – Ammunition – Acquisition of 75 MM blank rounds",
+        "title": "Acquisition of 75 MM blanks",
+        "description": "Acquisition of 75 MM blanks",
         "cpv_codes": [
           "35330000"
         ],
@@ -561,12 +562,13 @@
         "counterparts": [],
         "ted_url": "https://ted.europa.eu/en/notice/-/detail/578655-2026"
       }
-    ]
+    ],
+    "legal_name": "Jefatura de Asuntos Económicos del Mando de Apoyo Logístico"
   },
   {
     "id": "buyer-svn-5268923000",
     "role": "demand",
-    "name": "MINISTRSTVO ZA OBRAMBO",
+    "name": "MINISTRY OF DEFENCE",
     "country": "SVN",
     "city": "Ljubljana",
     "website": "https://www.mo.gov.si",
@@ -686,9 +688,9 @@
         "notice_number": "721475-2026",
         "published": "2026-10-19",
         "notice_type": "veat",
-        "headline": "Slovenia – Security, fire-fighting, police and defence equipment – Sistem za elektronsko zaščito sil - Skyner",
-        "title": "Sistem za elektronsko zaščito sil - Skyner",
-        "description": "Sistem za elektronsko zaščito sil - Skyner",
+        "headline": "Slovenia – Security, fire-fighting, police and defence equipment – Electronic force protection system - Skyner",
+        "title": "Electronic force protection system - Skyner",
+        "description": "Electronic force protection system - Skyner",
         "cpv_codes": [
           "35000000",
           "35300000"
@@ -702,9 +704,9 @@
         "notice_number": "718011-2026",
         "published": "2026-10-16",
         "notice_type": "veat",
-        "headline": "Slovenia – Machine guns – Nakup mitraljezov M3M Mk3",
-        "title": "Nakup mitraljezov M3M Mk3",
-        "description": "Nakup mitraljezov M3M Mk3",
+        "headline": "Slovenia – Machine guns – Purchase of M3M Mk3 machine guns",
+        "title": "Purchase of M3M Mk3 machine guns",
+        "description": "Purchase of M3M Mk3 machine guns",
         "cpv_codes": [
           "35321300"
         ],
@@ -717,9 +719,9 @@
         "notice_number": "699594-2026",
         "published": "2026-10-09",
         "notice_type": "cn-standard",
-        "headline": "Slovenia – Ammunition – Nakup raket zrak-zemlja 2,75''",
-        "title": "Nakup raket zrak-zemlja 2,75''",
-        "description": "Nakup raket zrak-zemlja 2,75''",
+        "headline": "Slovenia – Ammunition – Purchase of 2.75'' air-to-ground rockets",
+        "title": "Purchase of 2.75'' air-to-ground rockets",
+        "description": "Purchase of 2.75'' air-to-ground rockets",
         "cpv_codes": [
           "35330000"
         ],
@@ -732,9 +734,9 @@
         "notice_number": "653973-2026",
         "published": "2026-09-23",
         "notice_type": "cn-standard",
-        "headline": "Slovenia – Weapons, ammunition and associated parts – Naboji 7,62 x 39 mm",
-        "title": "Naboji 7,62 x 39 mm",
-        "description": "Naboji 7,62 x 39 mm",
+        "headline": "Slovenia – Weapons, ammunition and associated parts – 7.62 x 39 mm cartridges",
+        "title": "Cartridges 7.62 x 39 mm",
+        "description": "Cartridges 7.62 x 39 mm",
         "cpv_codes": [
           "35300000",
           "35330000",
@@ -750,9 +752,9 @@
         "notice_number": "644252-2026",
         "published": "2026-09-18",
         "notice_type": "cn-standard",
-        "headline": "Slovenia – Ammunition – Topovske salve",
-        "title": "Topovske salve",
-        "description": "Topovske salve - 1024 kos",
+        "headline": "Slovenia – Ammunition – Cannon blanks",
+        "title": "Cannon salute rounds",
+        "description": "Cannon salute rounds - 1024 pcs",
         "cpv_codes": [
           "35330000",
           "35300000",
@@ -769,9 +771,9 @@
         "notice_number": "595754-2026",
         "published": "2026-08-28",
         "notice_type": "veat",
-        "headline": "Slovenia – Weapons, ammunition and associated parts – namerilne naprave in povečave",
-        "title": "namerilne naprave in povečave",
-        "description": "namerilne naprave in povečave",
+        "headline": "Slovenia – Weapons, ammunition and associated parts – sighting devices and magnifiers",
+        "title": "measuring devices and magnifiers",
+        "description": "measuring devices and magnifiers",
         "cpv_codes": [
           "35300000"
         ],
@@ -780,12 +782,13 @@
         "counterparts": [],
         "ted_url": "https://ted.europa.eu/en/notice/-/detail/595754-2026"
       }
-    ]
+    ],
+    "legal_name": "MINISTRSTVO ZA OBRAMBO"
   },
   {
     "id": "buyer-ltu-188729923",
     "role": "demand",
-    "name": "Išteklių agentūra prie Lietuvos Respublikos vidaus reikalų ministerijos",
+    "name": "Resource Agency under the Ministry of the Interior of the Republic of Lithuania",
     "country": "LTU",
     "city": "Vilnius",
     "website": "https://ia.lrv.lt",
@@ -905,9 +908,9 @@
         "notice_number": "745279-2026",
         "published": "2026-10-28",
         "notice_type": "cn-standard",
-        "headline": "Lithuania – Parts of firearms and ammunition – Kolimatorinis taikiklis su priartintoju automatiniam ginklui (PPR-583)",
-        "title": "Kolimatorinis taikiklis su priartintoju automatiniam ginklui (PPR-583)",
-        "description": "Preliminarus kiekis. 838 vnt.",
+        "headline": "Lithuania – Parts of firearms and ammunition – Collimator sight with magnifier for automatic weapon (PPR-583)",
+        "title": "Collimator sight with magnifier for automatic weapon (PPR-583)",
+        "description": "Preliminary quantity. 838 pcs.",
         "cpv_codes": [
           "35340000"
         ],
@@ -920,9 +923,9 @@
         "notice_number": "738010-2026",
         "published": "2026-10-26",
         "notice_type": "can-standard",
-        "headline": "Lithuania – Cartridges – 7,62x51 mm kalibro trasuojantys šoviniai (PPR-623)",
-        "title": "7,62x51 mm kalibro trasuojantys šoviniai (PPR-623)",
-        "description": "Pirkimas atliekamas pagal Lietuvos Respublikos viešųjų pirkimų, atliekamų gynybos ir saugumo srityje, įstatymą.",
+        "headline": "Lithuania – Cartridges – 7.62x51 mm calibre tracer cartridges (PPR-623)",
+        "title": "7.62x51 mm calibre tracer cartridges (PPR-623)",
+        "description": "The procurement is carried out in accordance with the Law of the Republic of Lithuania on Public Procurement in the Field of Defence and Security.",
         "cpv_codes": [
           "35331500"
         ],
@@ -935,9 +938,9 @@
         "notice_number": "726994-2026",
         "published": "2026-10-21",
         "notice_type": "can-standard",
-        "headline": "Lithuania – Cartridges – Šoviniai 7,62x51 mm juostose kulkosvaidžiui (imitaciniai) (PPR-496)",
-        "title": "Šoviniai 7,62x51 mm juostose kulkosvaidžiui (imitaciniai) (PPR-496)",
-        "description": "Pirkimas atliekamas pagal Lietuvos Respublikos viešųjų pirkimų, atliekamų gynybos ir saugumo srityje, įstatymą. 100 000 vnt.",
+        "headline": "Lithuania – Cartridges – 7.62x51 mm belted cartridges for machine gun (blank) (PPR-496)",
+        "title": "7.62x51 mm belted cartridges for machine gun (blank) (PPR-496)",
+        "description": "The procurement is carried out in accordance with the Law of the Republic of Lithuania on Public Procurement in the Field of Defence and Security. 100 000 pcs.",
         "cpv_codes": [
           "35331500"
         ],
@@ -952,9 +955,9 @@
         "notice_number": "692794-2026",
         "published": "2026-10-07",
         "notice_type": "can-standard",
-        "headline": "Lithuania – Cartridges – 5,56x45 kalibro garsiniai šoviniai (PPR-464)",
-        "title": "5,56x45 kalibro garsiniai šoviniai (PPR-464)",
-        "description": "Pirkimas atliekamas pagal Lietuvos Respublikos viešųjų pirkimų, atliekamų gynybos ir saugumo srityje, įstatymą. 394 000 vnt.",
+        "headline": "Lithuania – Cartridges – 5.56x45 calibre blank cartridges (PPR-464)",
+        "title": "5.56x45 calibre blank cartridges (PPR-464)",
+        "description": "The procurement is carried out in accordance with the Law of the Republic of Lithuania on Public Procurement in the Field of Defence and Security. 394 000 units.",
         "cpv_codes": [
           "35331500"
         ],
@@ -970,9 +973,9 @@
         "notice_number": "668765-2026",
         "published": "2026-09-29",
         "notice_type": "cn-standard",
-        "headline": "Lithuania – Cartridges – 12,7 x 99 mm kalibro šoviniai (PPR-468)",
-        "title": "12,7 x 99 mm kalibro šoviniai (PPR-468)",
-        "description": "9000 vnt.",
+        "headline": "Lithuania – Cartridges – 12.7 x 99 mm calibre cartridges (PPR-468)",
+        "title": "12.7 x 99 mm calibre cartridges (PPR-468)",
+        "description": "9000 pcs.",
         "cpv_codes": [
           "35331500"
         ],
@@ -985,9 +988,9 @@
         "notice_number": "626043-2026",
         "published": "2026-09-11",
         "notice_type": "can-standard",
-        "headline": "Lithuania – Cartridges – 12,7 x 99 mm kalibro šoviniai (PPR-468)",
-        "title": "12,7 x 99 mm kalibro šoviniai (PPR-468)",
-        "description": "Pirkimas atliekamas pagal Lietuvos Respublikos viešųjų pirkimų, atliekamų gynybos ir saugumo srityje, įstatymą. 9000 vnt.",
+        "headline": "Lithuania – Cartridges – 12.7 x 99 mm calibre cartridges (PPR-468)",
+        "title": "12.7 x 99 mm calibre cartridges (PPR-468)",
+        "description": "The procurement is carried out in accordance with the Law of the Republic of Lithuania on Public Procurement in the Field of Defence and Security. 9000 units.",
         "cpv_codes": [
           "35331500"
         ],
@@ -1000,9 +1003,9 @@
         "notice_number": "600598-2026",
         "published": "2026-09-01",
         "notice_type": "cn-standard",
-        "headline": "Lithuania – Cartridges – 7,62x51 mm kalibro trasuojantys šoviniai (PPR-623)",
-        "title": "7,62x51 mm kalibro trasuojantys šoviniai (PPR-623)",
-        "description": "Pirkimas atliekamas pagal Lietuvos Respublikos viešųjų pirkimų, atliekamų gynybos ir saugumo srityje, įstatymą.",
+        "headline": "Lithuania – Cartridges – 7.62x51 mm calibre tracer cartridges (PPR-623)",
+        "title": "7.62x51 mm calibre tracer cartridges (PPR-623)",
+        "description": "The procurement is carried out in accordance with the Law of the Republic of Lithuania on Public Procurement in the Field of Defence and Security.",
         "cpv_codes": [
           "35331500"
         ],
@@ -1015,9 +1018,9 @@
         "notice_number": "569735-2026",
         "published": "2026-08-18",
         "notice_type": "can-standard",
-        "headline": "Lithuania – Firearms – 5,56 x 45 mm kalibro šturmo karabinai (PPR-306)",
-        "title": "5,56 x 45 mm kalibro šturmo karabinai (PPR-306)",
-        "description": "Pirkimas atliekamas pagal Lietuvos Respublikos viešųjų pirkimų, atliekamų gynybos ir saugumo srityje, įstatymą",
+        "headline": "Lithuania – Firearms – 5.56 x 45 mm calibre assault rifles (PPR-306)",
+        "title": "5.56 x 45 mm calibre assault rifles (PPR-306)",
+        "description": "The procurement is carried out in accordance with the Law of the Republic of Lithuania on Public Procurement in the Field of Defence and Security",
         "cpv_codes": [
           "35320000"
         ],
@@ -1032,9 +1035,9 @@
         "notice_number": "562801-2026",
         "published": "2026-08-13",
         "notice_type": "can-standard",
-        "headline": "Lithuania – Cartridges – 5,45 x 39 mm kalibro šoviniai (PPR-349)",
-        "title": "5,45 x 39 mm kalibro šoviniai (PPR-349)",
-        "description": "Pirkimas atliekamas pagal Lietuvos Respublikos viešųjų pirkimų, atliekamų gynybos ir saugumo srityje, įstatymą. Maksimalus kiekis - 750 000 vnt.",
+        "headline": "Lithuania – Cartridges – 5.45 x 39 mm calibre cartridges (PPR-349)",
+        "title": "5.45 x 39 mm calibre cartridges (PPR-349)",
+        "description": "The procurement is carried out in accordance with the Law of the Republic of Lithuania on Public Procurement in the Field of Defence and Security. Maximum quantity - 750 000 units.",
         "cpv_codes": [
           "35331500"
         ],
@@ -1050,9 +1053,9 @@
         "notice_number": "513836-2026",
         "published": "2026-07-24",
         "notice_type": "cn-standard",
-        "headline": "Lithuania – Cartridges – Šoviniai 7,62x51 mm juostose kulkosvaidžiui (imitaciniai) (PPR-496)",
-        "title": "Šoviniai 7,62x51 mm juostose kulkosvaidžiui (imitaciniai) (PPR-496)",
-        "description": "Pirkimas atliekamas pagal Lietuvos Respublikos viešųjų pirkimų, atliekamų gynybos ir saugumo srityje, įstatymą. 100 000 vnt.",
+        "headline": "Lithuania – Cartridges – 7.62x51 mm belted cartridges for machine gun (blank) (PPR-496)",
+        "title": "7.62x51 mm belted cartridges for machine gun (blank) (PPR-496)",
+        "description": "The procurement is carried out in accordance with the Law of the Republic of Lithuania on Public Procurement in the Field of Defence and Security. 100 000 pcs.",
         "cpv_codes": [
           "35331500"
         ],
@@ -1061,14 +1064,15 @@
         "counterparts": [],
         "ted_url": "https://ted.europa.eu/en/notice/-/detail/513836-2026"
       }
-    ]
+    ],
+    "legal_name": "Išteklių agentūra prie Lietuvos Respublikos vidaus reikalų ministerijos"
   },
   {
     "id": "buyer-aut-9110010282738",
     "role": "demand",
-    "name": "REPUBLIK ÖSTERREICH (Bund) vertreten durch die Bundesministerin für Landesverteidigung",
+    "name": "REPUBLIC OF AUSTRIA (Federation) represented by the Federal Minister of Defence",
     "country": "AUT",
-    "city": "Wien",
+    "city": "Vienna",
     "website": "https://www.bundesheer.at/",
     "identifier": "9110010282738",
     "summary": "The Republic of Austria, represented by the Federal Minister of Defence (Vienna), buying for the Bundesheer. It runs large multi-year ammunition tenders: 40 million 5.56 mm M855 rounds for the StG77 (deliveries 2028–2031), 18 million 9×19 mm rounds, 12 million belted 7.62 mm rounds, 300,000 .338 Lapua Magnum sniper rounds and 12.7 mm M2 ammunition (about EUR 31M). It also buys colour-marking training rounds and demolition explosives (TNT charges, plastic explosives). Most of its other TED activity is construction and engineering.",
@@ -1186,9 +1190,9 @@
         "notice_number": "637078-2026",
         "published": "2026-09-16",
         "notice_type": "cn-standard",
-        "headline": "Austria – Ammunition – 12.000.000 Stück 7,62mm 4S : 1 L-Patronen/Maschinengewehr/gegurtet (7,62 mm 4 Ball : 1 Tracer, linked M13), Verhandlungsverfahren mit vorheriger Bekanntmachung im OSB gemäß 23 (3) BVergGVS 2012",
-        "title": "12.000.000 Stück 7,62mm 4S : 1 L-Patronen/Maschinengewehr/gegurtet (7,62 mm 4 Ball : 1 Tracer, linked M13), Verhandlungsverfahren mit vorheriger Bekanntmachung im OSB gemäß 23 (3) BVergGVS 2012",
-        "description": "EINHOLUNG VON TEILNAHMEANTRÄGEN für die Vergabe eines Lieferauftrages betreffend 12.000.000 Stück 7,62mm 4S : 1 L-Patronen/Maschinengewehr/gegurtet, (7,62 mm 4 Ball : 1 Tracer, linked M13), Verhandlungsverfahren mit vorheriger Bekanntmachung im OSB 1. Stufe/Interessentensuche gemäß 23 (3) BVergGVS 2012",
+        "headline": "Austria – Ammunition – 12.000.000 pieces 7.62mm 4 ball : 1 tracer cartridges/machine gun/linked (7,62 mm 4 Ball : 1 Tracer, linked M13), negotiated procedure with prior publication in the OSB pursuant to 23 (3) BVergGVS 2012",
+        "title": "12.000.000 pieces 7.62mm 4 ball : 1 tracer cartridges/machine gun/linked (7.62 mm 4 Ball : 1 Tracer, linked M13), negotiated procedure with prior publication in the OSB pursuant to 23 (3) BVergGVS 2012",
+        "description": "REQUEST FOR APPLICATIONS TO PARTICIPATE for the award of a supply contract concerning 12.000.000 pcs 7.62mm 4 ball : 1 tracer cartridges/machine gun/linked, (7,62 mm 4 Ball : 1 Tracer, linked M13), Negotiated procedure with prior publication in the OSB stage 1/search for interested parties pursuant to 23 (3) BVergGVS 2012",
         "cpv_codes": [
           "35330000"
         ],
@@ -1201,9 +1205,9 @@
         "notice_number": "622888-2026",
         "published": "2026-09-10",
         "notice_type": "can-standard",
-        "headline": "Austria – Ammunition – Zuschlag - Bohrpatrone 0,10 kg TNT",
-        "title": "Zuschlag - Bohrpatrone 0,10 kg TNT",
-        "description": "Zuschlag Bohrpatrone 0.10kg TNT VVmvB im OSB gem. BVergGVS 2012",
+        "headline": "Austria – Ammunition – Contract award - Borehole charge 0,10 kg TNT",
+        "title": "Contract award - Borehole charge 0,10 kg TNT",
+        "description": "Award - borehole charge 0.10kg TNT, negotiated procedure with prior publication in the OSB pursuant to BVergGVS 2012",
         "cpv_codes": [
           "35330000"
         ],
@@ -1218,9 +1222,9 @@
         "notice_number": "565775-2026",
         "published": "2026-08-14",
         "notice_type": "cn-standard",
-        "headline": "Austria – Ammunition – 8,6mm SS-Patr/mSSG",
-        "title": "8,6mm SS-Patr/mSSG",
-        "description": "EINHOLUNG VON TEILNAHMEANTRÄGEN für die Vergabe eines Lieferauftrages betreffend 300.000 Stk. 8,6mm Scharfschützenpatronen/mSSG, (Catridge 338 Lapua Magnum, Ball Sniper), Verhandlungsverfahren mit vorheriger Bekanntmachung im OSB 1. Stufe/Interessentensuche gemäß 23 (3) BVergGVS 2012",
+        "headline": "Austria – Ammunition – 8.6mm SS-Patr (sniper cartridge)/mSSG (medium sniper rifle)",
+        "title": "8.6mm sniper cartridge/mSSG",
+        "description": "REQUEST FOR APPLICATIONS TO PARTICIPATE for the award of a supply contract concerning 300.000 pcs 8.6mm sniper cartridges/mSSG, (Catridge 338 Lapua Magnum, Ball Sniper), negotiated procedure with prior publication in the OSB, 1st stage/call for expressions of interest pursuant to 23 (3) BVergGVS 2012",
         "cpv_codes": [
           "35330000"
         ],
@@ -1233,9 +1237,9 @@
         "notice_number": "474613-2026",
         "published": "2026-07-09",
         "notice_type": "cn-standard",
-        "headline": "Austria – Ammunition – 5,56 mm S-Patrone M855(SS109)/StG77 - Verhandlungsverfahren mit vorheriger Bekanntmachung gem. § 23 (3) BVergGVS 2012 im OSB",
-        "title": "5,56 mm S-Patrone M855(SS109)/StG77 - Verhandlungsverfahren mit vorheriger Bekanntmachung gem. § 23 (3) BVergGVS 2012 im OSB",
-        "description": "40.000.000 Stk 5,56 mm S-Patrone M855(SS109)/StG77, (davon jeweils 10.000.000 Stk für die Jahre 2028 bis 2031), Verhandlungsverfahren mit vorheriger Bekanntmachung im OSB 1. Stufe/Interessentensuche gemäß 23 (3) BVergGVS 2012",
+        "headline": "Austria – Ammunition – 5.56 mm ball cartridge M855(SS109)/StG77 - Negotiated procedure with prior publication pursuant to § 23 (3) BVergGVS 2012 in the OSB",
+        "title": "5.56 mm ball cartridge M855(SS109)/StG77 - negotiated procedure with prior publication pursuant to § 23 (3) BVergGVS 2012 in the OSB",
+        "description": "40.000.000 pcs 5.56 mm ball cartridge M855(SS109)/StG77, (of which 10.000.000 pcs each for the years 2028 to 2031), negotiated procedure with prior publication in the OSB, 1st stage/call for expressions of interest pursuant to 23 (3) BVergGVS 2012",
         "cpv_codes": [
           "35330000"
         ],
@@ -1248,9 +1252,9 @@
         "notice_number": "429373-2026",
         "published": "2026-06-24",
         "notice_type": "cn-standard",
-        "headline": "Austria – Ammunition – 9mm S-Patrone/P 80, (9mm x 19 CARTRIDGE, BALL, long), Verhandlungsverfahren mit vorheriger Bekanntmachung gem. BVergGVS 2012 im OSB, Einholung von Teilnahmeanträgen",
-        "title": "9mm S-Patrone/P 80, (9mm x 19 CARTRIDGE, BALL, long), Verhandlungsverfahren mit vorheriger Bekanntmachung gem. BVergGVS 2012 im OSB, Einholung von Teilnahmeanträgen",
-        "description": "18.000.000 Stk 9mm S-Patrone/P 80, (9mm x 19 CARTRIDGE, BALL, long), Lieferung von jeweils 6.000.000 Stk II. Quartal 2028, II. Quartal 2029 und II. Quartal 2030 erwünscht, Verhandlungsverfahren mit vorheriger Bekanntmachung im OSB 1. Stufe/Interessentensuche gemäß 23 (3) BVergGVS 2012",
+        "headline": "Austria – Ammunition – 9mm ball cartridge/P 80, (9mm x 19 CARTRIDGE, BALL, long), negotiated procedure with prior publication pursuant to BVergGVS 2012 in the OSB, request for applications to participate",
+        "title": "9mm ball cartridge/P 80, (9mm x 19 CARTRIDGE, BALL, long), negotiated procedure with prior publication pursuant to BVergGVS 2012 in the OSB, request for applications to participate",
+        "description": "18.000.000 pcs 9mm ball cartridge (S-Patrone)/P 80, (9mm x 19 CARTRIDGE, BALL, long), delivery of 6.000.000 pcs each desired in Q2 2028, Q2 2029 and Q2 2030, negotiated procedure with prior publication in the OSB, 1st stage/search for interested parties pursuant to 23 (3) BVergGVS 2012",
         "cpv_codes": [
           "35330000"
         ],
@@ -1263,9 +1267,9 @@
         "notice_number": "333932-2026",
         "published": "2026-05-15",
         "notice_type": "can-standard",
-        "headline": "Austria – Ammunition – Zuschlag - 12, 7mm 4 PzB : 1 PzBL-Patr/üsMG M2/geg",
-        "title": "Zuschlag - 12, 7mm 4 PzB : 1 PzBL-Patr/üsMG M2/geg",
-        "description": "Zuschlag - 12, 7mm 4 PzB : 1 PzBL-Patr/üsMG M2/geg",
+        "headline": "Austria – Ammunition – Contract award - 12.7mm 4 armour-piercing incendiary : 1 armour-piercing incendiary tracer cartridges/heavy MG M2/linked",
+        "title": "Award - 12.7mm 4 API : 1 API-T cartridges/heavy MG M2/linked",
+        "description": "Award - 12.7mm 4 API : 1 API-T cartridges/heavy MG M2/linked",
         "cpv_codes": [
           "35330000"
         ],
@@ -1280,9 +1284,9 @@
         "notice_number": "329175-2026",
         "published": "2026-05-13",
         "notice_type": "can-standard",
-        "headline": "Austria – Ammunition – Sportmunition",
-        "title": "Sportmunition",
-        "description": "Zuschlag - Sportmunition",
+        "headline": "Austria – Ammunition – Sport ammunition",
+        "title": "Sport ammunition",
+        "description": "Award - Sports ammunition",
         "cpv_codes": [
           "35330000",
           "35000000"
@@ -1300,9 +1304,9 @@
         "notice_number": "286278-2026",
         "published": "2026-04-27",
         "notice_type": "can-standard",
-        "headline": "Austria – Ammunition – Zuschlag - Plastischer Sprengkörper 11/1 kg",
-        "title": "Zuschlag - Plastischer Sprengkörper 11/1 kg",
-        "description": "Zuschlag - Plastischer Sprengkörper 11/1 kg",
+        "headline": "Austria – Ammunition – Award - plastic explosive charge 11/1 kg",
+        "title": "Award - Plastic explosive charge 11/1 kg",
+        "description": "Award - Plastic explosive charge 11/1 kg",
         "cpv_codes": [
           "35330000"
         ],
@@ -1317,9 +1321,9 @@
         "notice_number": "195804-2026",
         "published": "2026-03-20",
         "notice_type": "cn-standard",
-        "headline": "Austria – Ammunition – 5,56mm Farbmarkierpatrone/StG 77, Verhandlungsverfahren mit vorheriger Bekanntmachung im USB gemäß 23 (3) BVergGVS 2012, 1. Stufe/Interessentensuche",
-        "title": "5,56mm Farbmarkierpatrone/StG 77, Verhandlungsverfahren mit vorheriger Bekanntmachung im USB gemäß 23 (3) BVergGVS 2012, 1. Stufe/Interessentensuche",
-        "description": "120.000 Stück 5,56 mm Farbmarkierpatrone rot/StG77 und 120.000 Stück 5,56 mm Farbmarkierpatrone blau/StG77 Verhandlungsverfahren mit vorheriger Bekanntmachung im USB gemäß 23 (3) BVergGVS 2012, 1. Stufe/Interessentensuche",
+        "headline": "Austria – Ammunition – 5.56mm colour marking cartridge/StG 77, negotiated procedure with prior publication in the USB pursuant to 23 (3) BVergGVS 2012, 1st stage/search for interested parties",
+        "title": "5.56mm colour marking cartridge/StG 77, Negotiated procedure with prior publication in the USB pursuant to 23 (3) BVergGVS 2012, stage 1/search for interested parties",
+        "description": "120.000 pcs 5.56 mm colour marking cartridge red/StG77 and 120.000 pcs 5.56 mm colour marking cartridge blue/StG77 Negotiated procedure with prior publication in the USB pursuant to 23 (3) BVergGVS 2012, stage 1/search for interested parties",
         "cpv_codes": [
           "35330000"
         ],
@@ -1328,6 +1332,7 @@
         "counterparts": [],
         "ted_url": "https://ted.europa.eu/en/notice/-/detail/195804-2026"
       }
-    ]
+    ],
+    "legal_name": "REPUBLIK ÖSTERREICH (Bund) vertreten durch die Bundesministerin für Landesverteidigung"
   }
 ]

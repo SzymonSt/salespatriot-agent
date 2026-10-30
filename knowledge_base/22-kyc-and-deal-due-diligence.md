@@ -35,6 +35,20 @@ integrity 10%. Hard gates: sanctions match, RU/BY ownership, insolvency, dissolv
 Registers covered: CZ, PL, FR, RO, SK, DK, EE, LV + VIES, GLEIF, Wikidata, EU F&T, GDELT. Supplier
 documents go in `../data/supplier_evidence/`. The categories map to K1–K10 below; K11 (agent mandate) is still to build.
 
+Each supplier profile in `../data/profiles/suppliers.json` now carries three sections written by that script:
+- `due_diligence` — the 1–10 score, six category sub-scores with reasoning, `red_flags`, gates, confidence.
+- `kyc` — K1–K11, each `{gate, status, summary, sources, detail}` with status `pass | fail | review |
+  needs_upload | pending_platform | info`; plus `kyc_status` (`verified | limited | blocked`), `kyc_checked_at`,
+  `refresh_due` (+90 days) and `open_items`. K3 lists registered representatives and the signing rule
+  (CZ, PL masked, SK, FR); K6 lists PL bank accounts registered with the tax office (payout must match);
+  K7 passes only on licence wording in a register (e.g. CZ Act 38/1994 permit) or a verified upload —
+  a NACE 25.40 code alone is `needs_upload`.
+- `deal_baseline` — supplier facts the deal agent reuses: D1 freshness dates, D6 largest past lot,
+  D9 lot-value baseline per CPV (lot values, not unit prices), D10 revenue/employees vs largest lot,
+  D12 trader-not-manufacturer flag, single-bid share and suppliers sharing a corporate owner,
+  D13 reference buyers and count of TED contract modifications.
+  D2–D5, D7, D8, D11, D14 depend on the specific deal and are not precomputed.
+
 | # | Category | What we check | Source | Type |
 |---|---|---|---|---|
 | K1 | Legal identity | Exists, active, legal form, address | Home-country register (adapter: PL KRS, CZ ARES, FR SIRENE…), VIES, GLEIF | HARD |

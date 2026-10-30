@@ -121,13 +121,37 @@ An empty `deadline` usually means the notice uses a request-to-participate deadl
   Due diligence design (KYC on onboarding vs per-deal checks): `knowledge_base/22-kyc-and-deal-due-diligence.md`.
   Self-learning RAG over deals (TED + platform + uploaded): `knowledge_base/23-self-learning-rag.md`.
 - `ted_company_profiles.py` — builds company/buyer profiles into `data/profiles`
+- `web/` — local UI (no build step): Overview, Suppliers and Buyers lists, a page per supplier and buyer, plus floating
+  Messenger-style agent chat windows. Design follows the Apple design skill (github.com/dickwu/apple-design-skill): neutral
+  palette, blue only for interactive elements, status colours always with a text label; tokens are at the top of `web/styles.css`.
+  Run `python3 serve.py` from the repo root and open http://127.0.0.1:8000/ — pages: `/`, `/suppliers`, `/buyers`,
+  `/supplier/<id>` and `/buyer/<id>` (profile id without its `supplier-`/`buyer-` prefix, e.g. `/supplier/pol-9482182612`);
+  `/signin` and `/workspace` give a demo sign-in (no password, remembered in localStorage) and the signed-in company's agent
+  workspace: supplier (open KYC items, tenders its agent can answer, conversations, mandate) or buyer (approvals, post a
+  requirement, open tenders with best proven supplier, suppliers to consider, mandate). Chats then show that company's side
+  on the right. `?as=<profile id>` signs in from a link; add `?demo` to auto-open the demo negotiations. `serve.py` maps those URLs to `web/index.html` and serves `data/` at `/data/`. Matching and conversation scripts are in `web/agents.js`: simulated
+  dialogue on real tender/profile data; quantities, mandates and peer references are fictitious and labelled.
+- `translate_data.py` — keeps `data/profiles/*.json` in English via the translation memory `data/translations.json`
+  (original → English). Re-run it after any fetch or due-diligence script; `--extract pending.json` lists new strings
+  to translate. `name` is the English display name; `legal_name` keeps the registered name, which scripts use to match
+  TED and registers. Company names in Latin script stay as written; public bodies, titles and descriptions are translated.
+- `fetch_logos.py` — downloads company logos into `web/logos/` (Google favicon service, then icons the site declares,
+  then the Wikipedia emblem for a few organisations); `web/logos/logos.json` records each source. No logo → initials.
 - `cpv_codes.py`, `data/cpv_codes.csv`, `data/cpv_defence_codes.csv` — CPV reference data
 - `ted_notice_sample.py` — saves full sample notices (every non-empty Search API field + eForms XML) to `data/samples/`;
   field list in `data/ted_search_fields.txt`. Format explained in `knowledge_base/24-ted-notice-format.md`
 - `supplier_due_diligence.py` + `dd_sources.py` — 1–10 supplier due-diligence score from free open data,
   written to `due_diligence` in `suppliers.json` and to `data/profiles/due_diligence_summary.md`.
-  Method is in the module docstring; supplier-uploaded documents go in `data/supplier_evidence/`
-  (see its README). Source responses are cached in `.cache/dd/`; `--offline` re-scores from the cache.
+  Also writes `kyc` (K1–K11) and `deal_baseline`. Method is in the module docstring. Supplier-uploaded
+  documents live in the Supabase table `supplier_documents` (types: `data/supplier_evidence/README.md`).
+  Source responses are cached in `.cache/dd/`; `--offline` re-scores from the cache.
+- `supabase_sync.py` — pushes `data/profiles/*.json` into Supabase (project `aodxjmjnsqvadxcrepfr`, schema in
+  `supabase/migrations/`): `suppliers`, `buyers`, `supplier_contracts`, `supplier_due_diligence`, `supplier_kyc`,
+  `supplier_kyc_checks`, `supplier_deal_baseline`, `supplier_documents`, view `supplier_overview`. Needs
+  `SUPABASE_URL` + `SUPABASE_SERVICE_ROLE_KEY` in the gitignored `.env`. Anon key = read-only on everything
+  except `supplier_documents`.
+  Pipeline: `ted_company_profiles.py` → `ted_supplier_contracts.py` → `supplier_due_diligence.py` →
+  `translate_data.py` → `supplier_due_diligence.py --summary-only` → `supabase_sync.py`.
 
 ## Supabase (project `hackathon`, org SalesPatriot)
 

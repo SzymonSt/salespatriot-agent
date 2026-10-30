@@ -15,7 +15,6 @@ is kept in `legal_name`, which the scripts use to match TED and registers.
 from __future__ import annotations
 
 import argparse
-import fnmatch
 import json
 import re
 import sys
@@ -46,7 +45,15 @@ TRANSLATABLE = (
     "due_diligence.categories.*.reasoning",
     "due_diligence.categories.*.findings[]",
     "due_diligence.categories.*.evidence[].fact",
+    "due_diligence.categories.*.red_flags[]",
+    "due_diligence.red_flags[]",
     "due_diligence.gates[].detail",
+    # Registry wording (roles, share descriptions); names of people and owners stay as registered.
+    "kyc.checks.*.summary",
+    "kyc.checks.*.detail[].role",
+    "kyc.checks.*.detail[].share",
+    "deal_baseline.D13_reference_candidates[].buyer",
+    "deal_baseline.D6_capacity_hints.largest_lot",
 )
 
 
@@ -72,8 +79,15 @@ def walk(value: Any, path: str) -> Iterator[tuple[str, Any, Any]]:
                 yield from walk(child, f"{path}[]")
 
 
+# fnmatch would read "[]" as a character class, so build exact patterns: only "*" is a
+# wildcard, and it stands for one key.
+TRANSLATABLE_RE = re.compile(
+    "|".join(re.escape(p).replace(r"\*", r"[^.\[]+") for p in TRANSLATABLE)
+)
+
+
 def translatable(path: str) -> bool:
-    return any(fnmatch.fnmatchcase(path, pattern) for pattern in TRANSLATABLE)
+    return TRANSLATABLE_RE.fullmatch(path) is not None
 
 
 def strings(profile: dict[str, Any]) -> Iterator[tuple[Any, Any, str]]:
@@ -113,6 +127,8 @@ def main() -> int:
         json.loads(memory_path.read_text(encoding="utf-8")) if memory_path.exists() else {}
     )
     files = load_profiles(args.data_dir)
+    # Text that is already a translation needs nothing (the data was translated before).
+    done = set(memory.values())
 
     if args.extract:
         pending = sorted(
@@ -121,7 +137,7 @@ def main() -> int:
                 for profiles in files.values()
                 for profile in profiles
                 for _, _, text in strings(profile)
-                if text not in memory
+                if text not in memory and text not in done
             }
         )
         args.extract.write_text(
@@ -137,7 +153,7 @@ def main() -> int:
             for container, key, text in strings(profile):
                 if text in memory:
                     container[key] = memory[text]
-                else:
+                elif text not in done:
                     missing.add(text)
         path.write_text(
             json.dumps(profiles, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"

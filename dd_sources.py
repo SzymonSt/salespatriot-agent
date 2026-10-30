@@ -198,6 +198,8 @@ def _record(**kwargs: Any) -> dict[str, Any]:
         "name": "", "status_active": None, "status_text": "", "founded": "", "address": "",
         "activity_codes": [], "activity_text": [], "owners": None, "officers": [],
         "insolvency": None, "financials": None, "filings_last_year": None, "extra": {},
+        # K3: who may sign for the company, and how (alone / jointly).
+        "representatives": [], "representation_rule": "",
     }
     base.update(kwargs)
     return base
@@ -255,6 +257,10 @@ def cz_ares(ico: str) -> dict[str, Any] | None:
                 })
         rec["owners"] = owners
         for body in entry.get("statutarniOrgany", []):
+            if body.get("datumVymazu"):
+                continue
+            rules = [r["hodnota"] for r in body.get("zpusobJednani", []) if not r.get("datumVymazu")]
+            rec["representation_rule"] = rec["representation_rule"] or (rules[0] if rules else "")
             for member in body.get("clenoveOrganu", []):
                 if member.get("datumVymazu"):
                     continue
@@ -262,6 +268,8 @@ def cz_ares(ico: str) -> dict[str, Any] | None:
                 name = person.get("obchodniJmeno") or " ".join(filter(None, [person.get("jmeno"), person.get("prijmeni")]))
                 if name:
                     rec["officers"].append(name)
+                    role = ((member.get("clenstvi") or {}).get("funkce") or {}).get("nazev") or member.get("nazevAngazma", "")
+                    rec["representatives"].append({"name": name, "role": role})
     return rec
 
 
@@ -283,7 +291,12 @@ def pl_registers(nip: str) -> dict[str, Any] | None:
         status_text=f"VAT status: {subject.get('statusVat')}",
         founded=subject.get("registrationLegalDate") or "",
         address=subject.get("residenceAddress") or subject.get("workingAddress") or "",
-        extra={"krs": subject.get("krs"), "regon": subject.get("regon")},
+        extra={
+            "krs": subject.get("krs"),
+            "regon": subject.get("regon"),
+            # K6: accounts registered with the tax office; a payout account must be one of these.
+            "registered_bank_accounts": subject.get("accountNumbers") or [],
+        },
     )
     krs = subject.get("krs")
     if not krs:
@@ -310,6 +323,15 @@ def pl_registers(nip: str) -> dict[str, Any] | None:
             "kind": "company" if is_company else "person",
         })
     rec["owners"] = owners
+    board = (data.get("dzial2") or {}).get("reprezentacja") or {}
+    rec["representation_rule"] = (board.get("sposobReprezentacji") or "").replace("\n", " ")
+    for member in board.get("sklad", []) or []:
+        # KRS masks personal names (e.g. "J**** C*****"); enough to count, not to identify.
+        masked = " ".join(filter(None, [(member.get("imiona") or {}).get("imie"), (member.get("nazwisko") or {}).get("nazwiskoICzlon")]))
+        rec["representatives"].append({"name": masked, "role": member.get("funkcjaWOrganie", ""), "masked": True})
+    for clerk in (data.get("dzial2") or {}).get("prokurenci", []) or []:
+        masked = " ".join(filter(None, [(clerk.get("imiona") or {}).get("imie"), (clerk.get("nazwisko") or {}).get("nazwiskoICzlon")]))
+        rec["representatives"].append({"name": masked, "role": f"prokurent ({clerk.get('rodzajProkury', '').lower()})", "masked": True})
     # dzial6 lists liquidation, bankruptcy and restructuring; empty means none registered.
     dz6 = data.get("dzial6") or {}
     rec["insolvency"] = any(re.search(r"likwid|upadl|restruktur|sanacj|rozwiazan", k.lower()) and v for k, v in dz6.items())
@@ -352,6 +374,11 @@ def fr_sirene(identifier: str) -> dict[str, Any] | None:
         activity_codes=[hit.get("activite_principale", "")],
         owners=None,  # French register API does not expose shareholders
         officers=[d.get("denomination") or " ".join(filter(None, [d.get("prenoms"), d.get("nom")])) for d in hit.get("dirigeants", []) if d.get("type_dirigeant") == "personne physique"],
+        representatives=[
+            {"name": " ".join(filter(None, [d.get("prenoms"), d.get("nom")])), "role": d.get("qualite", "")}
+            for d in hit.get("dirigeants", [])
+            if d.get("type_dirigeant") == "personne physique"
+        ],
         insolvency=None,
         financials=fin,
         filings_last_year=fin["year"] if fin else None,
@@ -439,6 +466,12 @@ def sk_registers(ico: str) -> dict[str, Any] | None:
             for b in current(detail.get("statutoryBodies"))
         ],
     )
+    rec["representatives"] = [
+        {"name": officer, "role": (body.get("stakeholderType") or {}).get("value", "")}
+        for officer, body in zip(rec["officers"], current(detail.get("statutoryBodies")))
+    ]
+    rules = [f.get("value", "") for f in current(detail.get("otherLegalFacts")) if "kona" in fold(f.get("value", ""))]
+    rec["representation_rule"] = rules[0][:300] if rules else ""
     rpvs, _ = http(f"https://rpvs.gov.sk/opendatav2/PartneriVerejnehoSektora?$filter=Ico%20eq%20'{ico}'")
     if isinstance(rpvs, dict) and rpvs.get("value"):
         partner = rpvs["value"][0]
@@ -459,7 +492,8 @@ def sk_registers(ico: str) -> dict[str, Any] | None:
             rec["extra"]["employee_band"] = unit.get("velkostOrganizacie")
             closing_ids = unit.get("idUctovnychZavierok") or []
             years = []
-            for closing_id in closing_ids[-3:]:
+            # Ids are not in date order; check them all (responses are cached).
+            for closing_id in closing_ids:
                 closing, _ = http(f"https://www.registeruz.sk/cruz-public/api/uctovna-zavierka?id={closing_id}")
                 if isinstance(closing, dict) and closing.get("obdobieDo"):
                     years.append(int(closing["obdobieDo"][:4]))
@@ -639,6 +673,8 @@ def vies(country_iso3: str, identifier: str) -> dict[str, Any] | None:
     number = re.sub(r"[^0-9A-Z]", "", identifier.upper())
     if number.startswith(cc) or (cc == "EL" and number.startswith("GR")):
         number = number[2:]
+    if cc == "SE" and len(number) == 10:
+        number += "01"  # Swedish VAT = organisation number + "01"
     if not number:
         return None
     url = f"https://ec.europa.eu/taxation_customs/vies/rest-api/ms/{cc}/vat/{number}"
@@ -766,6 +802,29 @@ def eu_funding(name: str) -> dict[str, Any] | None:
             projects.append({"title": title, "call": calls[0], "url": result.get("url")})
     unique = {p["url"]: p for p in projects}
     return {"organisations": organisations, "defence_projects": list(unique.values()), "url": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/", "observed_at": observed}
+
+
+def ted_owner_nationality(identifier: str, name: str) -> dict[str, Any] | None:
+    """TED eForms award notices can state the winner's owner nationality (sparsely filled)."""
+    field = f'winner-identifier="{identifier}"' if identifier else f'winner-name="{name}"'
+    body = {
+        "query": f"{field} AND notice-type IN (can-standard can-desg can-social can-tran can-modif)",
+        "fields": ["publication-number", "winner-name", "winner-owner-nationality"],
+        "limit": 100,
+    }
+    data, observed = http("https://api.ted.europa.eu/v3/notices/search", data=body)
+    if data is None or is_error(data) or not isinstance(data, dict):
+        return data if is_error(data) else None
+    found: dict[str, list[str]] = {}
+    for notice in data.get("notices", []):
+        winners = notice.get("winner-name") or {}
+        names = next(iter(winners.values()), []) if isinstance(winners, dict) else winners
+        nationalities = notice.get("winner-owner-nationality") or []
+        # Only single-winner notices can be attributed to this supplier.
+        if len(set(names)) == 1 and nationalities:
+            for code in set(nationalities):
+                found.setdefault(code, []).append(notice["publication-number"])
+    return {"nationalities": found, "observed_at": observed, "url": "https://api.ted.europa.eu/v3/notices/search"}
 
 
 def adverse_media(name: str) -> dict[str, Any] | None:

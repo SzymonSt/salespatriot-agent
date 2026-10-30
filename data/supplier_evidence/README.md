@@ -4,7 +4,16 @@ Suppliers can add documents that free open data cannot show (licences, clearance
 certificates, accounts). One file per supplier, named after the profile id:
 `data/supplier_evidence/<supplier id>.json` (e.g. `supplier-cze-65414128.json`).
 
-After adding or changing a file, re-score from cached open data in a few seconds:
+**Now stored in Supabase**, table `supplier_documents` (one row per document; type-specific fields such as
+`revenue`, `year`, `owners` go in the `data` jsonb column). The scorer reads that table when `.env` has the
+Supabase credentials and falls back to the JSON files below otherwise. Import old JSON files once with
+`python3 supabase_sync.py --import-evidence`.
+
+After adding or changing a document, re-score from cached open data in a few seconds, then push:
+`python3 supplier_due_diligence.py --offline --only <id> && python3 supabase_sync.py --due-diligence-only`.
+(Re-run `translate_data.py` before pushing if you want the English text.)
+
+Re-score command for the JSON-file fallback:
 
 ```bash
 python3 supplier_due_diligence.py --offline --only supplier-cze-65414128

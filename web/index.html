@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SalesPatriot</title>
+  <meta name="description" content="EU defence marketplace where buyer and supplier agents match demand to proven capability, check references and close deals inside human-set mandates.">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="nav">
+    <div class="nav-inner">
+      <a class="brand" href="/">SalesPatriot</a>
+      <nav aria-label="Pages">
+        <a href="/" data-route="">Overview</a>
+        <a href="/suppliers" data-route="suppliers">Suppliers</a>
+        <a href="/buyers" data-route="buyers">Buyers</a>
+        <a id="session-link" class="session" href="/signin" data-route="workspace">Sign in</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" tabindex="-1">
+    <p class="page loading">Loading…</p>
+  </main>
+
+  <footer class="footer">
+    <p>Profiles come from public TED award notices and company sources (30 October 2026).
+      Agent conversations are simulated on that data; quantities, mandates and peer references are fictitious.</p>
+  </footer>
+
+  <div id="chat-dock" class="chat-dock"></div>
+  <div id="chat-heads" class="chat-heads"></div>
+
+  <script src="/agents.js"></script>
+  <script src="/app.js"></script>
+</body>
+</html>

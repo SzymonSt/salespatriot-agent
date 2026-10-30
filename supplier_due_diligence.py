@@ -23,7 +23,7 @@ import json
 import re
 import sys
 from collections import Counter
-from datetime import date
+from datetime import date, timedelta
 from pathlib import Path
 from typing import Any
 
@@ -76,6 +76,9 @@ DOCUMENT_POINTS = {
     "ubo_declaration": ("ownership", 0.0, "Declaration of shareholders / beneficial owners"),
 }
 DECLARED_FACTOR = 0.6
+ISO3_TO_ISO2_EXTRA = {"RUS": "RU", "BLR": "BY", "CHN": "CN", "IRN": "IR", "PRK": "KP", "SYR": "SY", "TUR": "TR", "ISR": "IL", "CAN": "CA"}
+KYC_REFRESH_DAYS = 90
+LICENCE_WORDS = re.compile(r"povolen|licenc|licenz|koncese|koncesj|koncesi|zezwol|permit|genehmigung|autoris|autoriz", re.I)
 SIZE_REVENUE_CEILING_EUR = {"micro": 2e6, "small": 10e6, "sme": 50e6, "medium": 50e6}
 DISCLAIMER = (
     "Automated screening of free public data on the date shown. It is not legal advice, not a "
@@ -160,6 +163,13 @@ def years_between(start: str, end: str | None = None) -> float | None:
 
 
 def load_documents(evidence_dir: Path, supplier_id: str) -> list[dict[str, Any]]:
+    """Supplier uploads: Supabase table supplier_documents when configured, else JSON files."""
+    from supabase_sync import Supabase
+
+    db = Supabase.from_env()
+    if db is not None:
+        rows = db.select("supplier_documents", f"supplier_id=eq.{supplier_id}&select=*")
+        return [{**(row.get("data") or {}), **{k: v for k, v in row.items() if k != "data" and v is not None}} for row in rows]
     path = evidence_dir / f"{supplier_id}.json"
     if not path.exists():
         return []
@@ -204,6 +214,7 @@ def collect(profile: dict[str, Any], sanctions: dict[str, Any], with_media: bool
     ultimate = ((gleif or {}).get("parents") or {}).get("ultimate-parent") or ((gleif or {}).get("parents") or {}).get("direct-parent")
     data["parent_wikidata"] = src.wikidata(ultimate["lei"], ultimate["name"], country) if ultimate else None
     data["eu_funding"] = src.eu_funding(name)
+    data["ted_owner_nationality"] = src.ted_owner_nationality(identifier, name)
     data["media"] = src.adverse_media(name) if with_media else None
     data["sources"] += ["vies", "gleif", "wikidata", "eu_funding"] + (["gdelt"] if with_media else [])
 
@@ -236,6 +247,10 @@ def owner_list(data: dict[str, Any]) -> list[dict[str, Any]]:
     if isinstance(gleif, dict):
         for relation, parent in (gleif.get("parents") or {}).items():
             owners.append({"name": parent["name"], "country": parent["country"], "share": None, "kind": relation, "source": "GLEIF"})
+    ted = data.get("ted_owner_nationality")
+    if isinstance(ted, dict):
+        for code, notices in (ted.get("nationalities") or {}).items():
+            owners.append({"name": f"(owner nationality stated in {len(notices)} TED award notice(s))", "country": ISO3_TO_ISO2_EXTRA.get(code, src.ISO3_TO_ISO2.get(code, code)), "share": None, "kind": "owner nationality", "source": "TED"})
     wiki = data.get("wikidata")
     if isinstance(wiki, dict):
         for parent in wiki.get("parents", []) + wiki.get("owners", []):
@@ -336,8 +351,11 @@ def score_identity(cat: Category, profile, registry, gleif, vies, wiki, data, ga
                 cat.note(f"(TED lists identifier {data['ted_identifier_invalid']}, which is not a valid VAT number; matched via GLEIF instead — a data error in the award notice, not counted against the supplier)")
         elif gleif:
             cat.note(f"(Identifier {vies['vat']} from TED is not a valid VAT number; the company was matched by name in GLEIF instead)")
+        elif re.match(r"^[A-Z]{2}", (profile.get("identifier") or "").upper()):
+            cat.flag(0, f"VAT number {vies['vat']} is not valid in VIES and no other register matched")
         else:
-            cat.flag(0, f"Identifier {vies['vat']} is not a valid EU VAT number and no other register matched")
+            # TED often gives a national register number (KvK, CRO, matična...), not a VAT number.
+            cat.note(f"(Identifier {profile.get('identifier')} looks like a national register number, not a VAT number; no free register for this country — ask for a register extract)")
     if gleif:
         cat.evidence.append(src.evidence("GLEIF", gleif["url"], gleif["observed_at"], f"LEI {gleif['lei']} {gleif['registration_status']}, matched by {gleif['match']}"))
         if gleif["registration_status"] == "ISSUED" and gleif["entity_status"] == "ACTIVE":
@@ -481,7 +499,8 @@ def score_financial(cat: Category, profile, registry, annual_eur, rates) -> None
         else:
             cat.add(1, "(No award value to compare with revenue)")
     elif fin.get("employees"):
-        cat.add(2, f"{fin['employees']:.0f} employees reported")
+        # Headcount alone says nothing about financial health; keep it as context only.
+        cat.note(f"({fin['employees']:.0f} employees reported; no published accounts)")
     if registry and registry.get("extra", {}).get("registered_arrears"):
         cat.flag(-2, "Registered arrears/claims in the court register")
 
@@ -604,6 +623,259 @@ def apply_documents(cats: dict[str, Category], documents: list[dict[str, Any]]) 
             cat.add(points * factor, f"{label} ({status})")
 
 
+# --------------------------------------------------------------------------- KYC (K1-K11)
+# Statuses: pass · fail · review (a person must look) · needs_upload (supplier must provide)
+#           · pending_platform (checked during onboarding on our platform) · info
+
+
+def kyc_item(title: str, gate: str, status: str, summary: str, sources: list[str], detail: Any = None) -> dict[str, Any]:
+    item = {"title": title, "gate": gate, "status": status, "summary": summary, "sources": sources}
+    if detail:
+        item["detail"] = detail
+    return item
+
+
+def gate_status(dd: dict[str, Any], check_prefix: str) -> dict[str, str] | None:
+    return next((g for g in dd["gates"] if g["check"].startswith(check_prefix)), None)
+
+
+def best_document(documents: list[dict[str, Any]], kinds: tuple[str, ...]) -> tuple[dict[str, Any] | None, str]:
+    """Return the strongest valid document of these kinds and its status label."""
+    ranked = []
+    for doc in documents:
+        if doc.get("type") in kinds:
+            factor, label = document_status(doc)
+            ranked.append((factor, doc, label))
+    if not ranked:
+        return None, ""
+    factor, doc, label = max(ranked, key=lambda r: r[0])
+    return doc, label
+
+
+def build_kyc(profile: dict[str, Any], data: dict[str, Any], dd: dict[str, Any], documents: list[dict[str, Any]]) -> dict[str, Any]:
+    registry = data["registry"] if isinstance(data["registry"], dict) and "error" not in data["registry"] else None
+    gleif = data["gleif"] if isinstance(data["gleif"], dict) and "lei" in data["gleif"] else None
+    vies = data["vies"] if isinstance(data["vies"], dict) and "valid" in data["vies"] else None
+    reg_source = registry["source"] if registry else ""
+    items: dict[str, dict[str, Any]] = {}
+
+    # K1 legal identity
+    active_gate = gate_status(dd, "Company active")
+    if active_gate and active_gate["status"] == "fail":
+        items["K1"] = kyc_item("Legal identity: company exists and is active", "HARD", "fail", active_gate["detail"], [reg_source])
+    elif registry:
+        items["K1"] = kyc_item("Legal identity: company exists and is active", "HARD", "pass",
+                               f"{registry['name']} — {registry.get('status_text') or 'active'}, founded {registry.get('founded') or '?'}; {registry.get('address', '')}".strip("; "),
+                               [reg_source] + (["VIES"] if vies else []) + (["GLEIF"] if gleif else []))
+    elif (vies and vies["valid"]) or (gleif and gleif["entity_status"] == "ACTIVE"):
+        what = []
+        if vies and vies["valid"]:
+            what.append(f"VAT {vies['vat']} valid")
+        if gleif:
+            what.append(f"LEI {gleif['lei']} entity {gleif['entity_status'].lower()}, registration {gleif['registration_status'].lower()}")
+        items["K1"] = kyc_item("Legal identity: company exists and is active", "HARD", "pass",
+                               "EU-level sources only (no free national register adapter): " + "; ".join(what),
+                               (["VIES"] if vies else []) + (["GLEIF"] if gleif else []))
+    else:
+        items["K1"] = kyc_item("Legal identity: company exists and is active", "HARD", "needs_upload",
+                               "Not found in any free register — upload a current register extract", [])
+
+    # K2 insolvency
+    insolvency = gate_status(dd, "No insolvency")
+    status = {"fail": "fail", "pass": "pass"}.get(insolvency["status"] if insolvency else "", "needs_upload")
+    items["K2"] = kyc_item("No bankruptcy, liquidation or restructuring", "HARD", status,
+                           {"fail": f"Registered in {reg_source}", "pass": f"Nothing registered in {reg_source}"}.get(status, "No free insolvency source for this country — upload a register extract (< 3 months old)"),
+                           [reg_source] if registry else [])
+
+    # K3 authority to sign
+    reps = (registry or {}).get("representatives") or []
+    if reps:
+        items["K3"] = kyc_item("Person signing the agent mandate may represent the company", "HARD", "pending_platform",
+                               f"{len(reps)} registered representative(s); rule: {(registry.get('representation_rule') or 'not stated')[:200]}. Match the signer at onboarding, or require a power of attorney.",
+                               [reg_source], [{"name": r["name"], "role": r["role"]} for r in reps])
+    else:
+        items["K3"] = kyc_item("Person signing the agent mandate may represent the company", "HARD", "needs_upload",
+                               "Representatives not available from free sources — upload a register extract or power of attorney", [])
+
+    # K4 ownership
+    rb = gate_status(dd, "No Russian/Belarusian")
+    owners = owner_list(data)
+    ubo_doc, ubo_label = best_document(documents, ("ubo_declaration",))
+    if rb and rb["status"] == "fail":
+        k4 = ("fail", "Russian/Belarusian owner or parent: " + rb["detail"])
+    elif owners:
+        non_allied = [o for o in owners if (o.get("country") or "").upper() in NON_ALLIED_OWNER_COUNTRIES]
+        k4 = ("review" if non_allied else "pass", f"{len(owners)} owner/parent record(s); countries: {sorted({o.get('country') or '?' for o in owners})}")
+    elif ubo_doc:
+        k4 = ("review" if "declared" in ubo_label else "pass", f"Ownership from supplier declaration ({ubo_label})")
+    else:
+        k4 = ("needs_upload", "Ownership not public for this country — upload a shareholder / beneficial-owner declaration")
+    items["K4"] = kyc_item("Ownership and non-EU control", "SCORE (HARD if sanctioned owner)", k4[0], k4[1],
+                           sorted({o["source"] for o in owners}),
+                           [{"name": o["name"] if o.get("kind") != "person" else "natural person", "country": o.get("country"), "share": o.get("share"), "kind": o.get("kind"), "source": o.get("source")} for o in owners])
+
+    # K5 sanctions and debarment
+    sanctions = gate_status(dd, "No sanctions")
+    close = any("Similar (not identical)" in f for f in dd["categories"]["integrity"]["findings"])
+    k5 = sanctions["status"] if sanctions else "not_checked"
+    k5 = "review" if k5 == "pass" and close else k5
+    items["K5"] = kyc_item("Sanctions and debarment: company, owners, board", "HARD", k5,
+                           (sanctions["detail"] if sanctions else "Sanctions lists not loaded") + ". Debarment lists (EDES, World Bank) not covered by free APIs.",
+                           sorted(dd["sanctions_lists_loaded"]))
+
+    # K6 VAT and payout account
+    accounts = (registry or {}).get("extra", {}).get("registered_bank_accounts") or []
+    if vies and vies["valid"]:
+        summary = f"VAT {vies['vat']} active in VIES."
+        summary += f" {len(accounts)} bank account(s) registered with the tax office — the payout account must be one of them." if accounts else " Payout account ownership to be checked at onboarding."
+        items["K6"] = kyc_item("Active EU VAT; payout account belongs to the company", "HARD for payouts", "pass", summary,
+                               ["VIES"] + (["PL VAT white list"] if accounts else []), {"registered_bank_accounts": accounts} if accounts else None)
+    elif profile["country"] in ("GBR", "ZAF", "NOR", "CHE"):
+        items["K6"] = kyc_item("Active EU VAT; payout account belongs to the company", "HARD for payouts", "needs_upload", "Non-EU company: no VIES; upload tax registration and bank confirmation", [])
+    else:
+        items["K6"] = kyc_item("Active EU VAT; payout account belongs to the company", "HARD for payouts", "review", "No valid EU VAT number confirmed — ask for the VAT number", ["VIES"])
+
+    # K7 sector licence (HARD for the four weapons/ammunition CPV classes)
+    in_scope = any(c.startswith("353") for c in (x["code"] for x in profile.get("top_cpv", [])))
+    licence_doc, licence_label = best_document(documents, ("arms_trade_licence", "export_licence", "certider"))
+    # Only wording that names a permit/licence/concession counts; an activity description
+    # ("manufacture of weapons") is a NACE code, not proof of a licence.
+    register_licence = [t for t in (registry or {}).get("activity_text", []) if DEFENCE_WORDS.search(t) and LICENCE_WORDS.search(t)]
+    defence_activity = [t for t in (registry or {}).get("activity_text", []) if DEFENCE_WORDS.search(t)]
+    defence_code = bool(defence_activity) or any(re.sub(r"\D", "", c).startswith(DEFENCE_NACE) for c in (registry or {}).get("activity_codes", []))
+    if licence_doc and "verified" in licence_label:
+        k7 = ("pass", f"{licence_doc.get('title') or licence_doc['type']} ({licence_label})")
+    elif licence_doc and "declared" in licence_label:
+        k7 = ("review", f"{licence_doc.get('title') or licence_doc['type']} uploaded — verify with the issuing authority")
+    elif register_licence:
+        k7 = ("pass", f"Licensed activity recorded in {reg_source}: {register_licence[0][:150]}")
+    elif defence_code:
+        k7 = ("needs_upload", f"Register shows a weapons/ammunition activity ({(defence_activity or ['NACE 25.40'])[0][:80]}), but the licence itself is not in the register — upload it")
+    else:
+        k7 = ("needs_upload", "No licence visible in free registers — upload the home-state licence (e.g. PL MSWiA concession, DE WaffG/KrWaffKontrG permit, FR AFC authorisation)")
+    items["K7"] = kyc_item("Home-state licence to make or trade weapons and ammunition", "HARD" if in_scope else "SCORE", k7[0], k7[1], [reg_source] if register_licence or defence_code else [])
+
+    # K8 quality certificates
+    cert, cert_label = best_document(documents, ("iso_9001", "en_9100"))
+    items["K8"] = kyc_item("Quality certificates (ISO 9001, EN 9100) with expiry", "SCORE",
+                           ("pass" if "verified" in cert_label else "review" if cert_label.startswith("declared") else "fail" if cert_label.startswith("expired") else "needs_upload"),
+                           f"{cert.get('title') or cert['type']}, valid until {cert.get('valid_until', '?')} ({cert_label})" if cert else "Upload certificate; verify on IAF CertSearch / IAQG OASIS",
+                           [])
+
+    # K9 track record
+    track = profile.get("track_record") or {}
+    items["K9"] = kyc_item("Track record: past public contracts", "SCORE", "pass" if track.get("lots_won") else "info",
+                           f"{track.get('lots_won', 0)} lots from {track.get('distinct_buyers', 0)} buyer(s) in {len(track.get('buyer_countries') or {})} country(ies), {track.get('first_award', '?')} – {track.get('last_award', '?')}; track-record score {dd['categories']['track_record']['score']}",
+                           ["TED"])
+
+    # K10 capability baseline
+    items["K10"] = kyc_item("Capabilities: NACE code, CPVs, declared capacity", "INFO", "info",
+                            f"Register activity codes {(registry or {}).get('activity_codes', [])[:6]}; TED CPVs {[c['code'] for c in profile.get('top_cpv', [])][:6]}"
+                            + (f"; {len(profile['catalogue'])} catalogue items" if isinstance(profile.get("catalogue"), list) else "")
+                            + "; declared capacity: not provided",
+                            ([reg_source] if registry else []) + ["TED"])
+
+    # K11 agent mandate
+    items["K11"] = kyc_item("Agent mandate signed: limits, categories, escalation contact", "HARD", "pending_platform",
+                            "Signed on the platform during onboarding", ["Platform"])
+
+    hard_fail = [k for k, v in items.items() if v["status"] == "fail" and v["gate"].startswith("HARD")]
+    open_items = [f"{k}: {v['status']}" for k, v in items.items() if v["status"] not in ("pass", "info")]
+    return {
+        "kyc_status": "blocked" if hard_fail or dd["verdict"].startswith("Blocked") else ("verified" if not open_items else "limited"),
+        "kyc_checked_at": dd["assessed_at"],
+        "refresh_due": (date.fromisoformat(dd["assessed_at"]) + timedelta(days=KYC_REFRESH_DAYS)).isoformat(),
+        "open_items": open_items,
+        "checks": items,
+    }
+
+
+# --------------------------------------------------------------------------- deal baseline
+# Per-deal checks (D1-D14) run inside each deal, but some inputs are supplier facts that can be
+# computed once from open data and kept on the profile.
+
+
+def build_deal_baseline(profile: dict[str, Any], data: dict[str, Any], rates: dict[str, float]) -> dict[str, Any]:
+    contracts = profile.get("contracts") or []
+    lots = []
+    for contract in contracts:
+        value = contract.get("awarded_value") or {}
+        rate = rates.get(value.get("currency") or "EUR")
+        if value.get("value") and rate:
+            lots.append((value["value"] / rate, contract))
+    lots.sort(key=lambda item: item[0])
+    registry = data["registry"] if isinstance(data["registry"], dict) and "error" not in data["registry"] else None
+    fin = (registry or {}).get("financials") or {}
+    revenue_eur = fin["revenue"] / rates.get(fin.get("currency") or "EUR", 1.0) if fin.get("revenue") else None
+
+    by_cpv: dict[str, list[float]] = {}
+    for value, contract in lots:
+        for code in contract.get("cpv_codes") or []:
+            by_cpv.setdefault(code, []).append(value)
+    price_baseline = {
+        code: {"lots": len(values), "median_lot_eur": round(sorted(values)[len(values) // 2]), "min_lot_eur": round(min(values)), "max_lot_eur": round(max(values))}
+        for code, values in by_cpv.items()
+    }
+    largest = lots[-1] if lots else None
+    track = profile.get("track_record") or {}
+    modifications = sum(1 for c in contracts if c.get("notice_type") == "can-modif")
+    activity_text = " ".join((registry or {}).get("activity_text", []))
+    trader = bool(registry) and not any(re.sub(r"\D", "", c).startswith(DEFENCE_NACE) for c in registry.get("activity_codes", [])) and not DEFENCE_WORDS.search(activity_text)
+    return {
+        "D1_freshness": {"kyc_checked_at": src.today(), "sanctions_screened_at": src.today(), "rescreen_every_deal": True},
+        "D6_capacity_hints": {
+            "largest_lot_eur": round(largest[0]) if largest else None,
+            "largest_lot": (largest[1].get("title") or "")[:120] if largest else None,
+            "largest_lot_quantity": largest[1].get("quantity") if largest else None,
+            "framework_lots": track.get("framework_agreement_lots"),
+            "note": "Largest past delivery on TED; certificates do not prove free capacity — ask for a dated capacity statement.",
+        },
+        "D9_price_baseline_by_cpv": price_baseline,
+        "D9_note": "Lot values, not unit prices; framework lots are ceilings. Compare offers against lots in the same CPV.",
+        "D10_financial_capacity": {
+            "revenue_eur": round(revenue_eur) if revenue_eur else None,
+            "revenue_year": fin.get("year"),
+            "employees": fin.get("employees"),
+            "largest_lot_to_revenue": round(largest[0] / revenue_eur, 2) if largest and revenue_eur else None,
+            "company_size_ted": profile.get("company_size"),
+        },
+        "D12_integrity_signals": {
+            "registered_as_trader_not_manufacturer": trader,
+            "related_suppliers_same_owner": [],
+            "single_bid_share": dd_single_bid_share(contracts),
+        },
+        "D13_reference_candidates": [
+            {"buyer": b["name"], "lots": b["lots"]} for b in (track.get("repeat_buyers") or [])[:5]
+        ],
+        "D13_contract_modifications_on_ted": modifications,
+    }
+
+
+def dd_single_bid_share(contracts: list[dict[str, Any]]) -> float | None:
+    received = [c.get("tenders_received") for c in contracts if isinstance(c.get("tenders_received"), (int, float))]
+    return round(sum(1 for r in received if r < 2) / len(received), 2) if received else None
+
+
+def link_related_parties(profiles: list[dict[str, Any]]) -> None:
+    """D12: suppliers in our data set that share a named corporate owner or parent."""
+    by_owner: dict[str, set[str]] = {}
+    for profile in profiles:
+        for owner in ((profile.get("kyc") or {}).get("checks", {}).get("K4", {}).get("detail") or []):
+            name = owner.get("name") or ""
+            if owner.get("kind") in ("person", "ubo", "owner nationality") or name.startswith("(") or name == "natural person":
+                continue
+            by_owner.setdefault(src.norm_name(name), set()).add(profile["id"])
+    for profile in profiles:
+        baseline = profile.get("deal_baseline")
+        if not baseline:
+            continue
+        related = set()
+        for owner_ids in by_owner.values():
+            if profile["id"] in owner_ids:
+                related |= owner_ids - {profile["id"]}
+        baseline["D12_integrity_signals"]["related_suppliers_same_owner"] = sorted(related)
+
+
 # --------------------------------------------------------------------------- CLI
 
 
@@ -620,16 +892,61 @@ def summary_table(profiles: list[dict[str, Any]]) -> str:
     return "\n".join(rows)
 
 
+KYC_ICONS = {"pass": "✅", "fail": "❌", "review": "👀", "needs_upload": "📄", "pending_platform": "⏳", "info": "ℹ️", "not_checked": "–"}
+
+
+def kyc_table(profiles: list[dict[str, Any]]) -> str:
+    keys = [f"K{i}" for i in range(1, 12)]
+    rows = [
+        "| Supplier | KYC status | " + " | ".join(keys) + " |",
+        "|" + "---|" * (2 + len(keys)),
+    ]
+    details = []
+    for p in profiles:
+        kyc = p.get("kyc")
+        if not kyc:
+            continue
+        cells = [KYC_ICONS.get(kyc["checks"][k]["status"], kyc["checks"][k]["status"]) for k in keys]
+        rows.append(f"| {p['name'][:40]} | **{kyc['kyc_status']}** | " + " | ".join(cells) + " |")
+        open_lines = [f"  - {k} {kyc['checks'][k]['title']}: {kyc['checks'][k]['status']} — {kyc['checks'][k]['summary'][:160]}" for k in keys if kyc["checks"][k]["status"] not in ("pass", "info")]
+        details.append(f"- **{p['name']}** (checked {kyc['kyc_checked_at']}, refresh due {kyc['refresh_due']})\n" + "\n".join(open_lines))
+    legend = "Legend: " + " · ".join(f"{icon} {status}" for status, icon in KYC_ICONS.items())
+    return "\n".join(rows) + "\n\n" + legend + "\n\n### Open items per supplier\n\n" + "\n".join(details)
+
+
+def write_summary(data_dir: Path, profiles: list[dict[str, Any]]) -> str:
+    table = summary_table(profiles)
+    (data_dir / "profiles" / "due_diligence_summary.md").write_text(
+        f"# Supplier due diligence — {src.today()} ({METHOD_VERSION})\n\n"
+        "## Scores\n\n"
+        "Total = weighted mean of category scores (identity 15%, ownership 20%, track record 25%, "
+        "financial 15%, defence credentials 15%, integrity 10%), mapped to 1–10. "
+        "'–' = no free open data for that category (excluded, lowers confidence).\n\n"
+        f"{table}\n\n"
+        "## KYC checks K1–K11\n\n"
+        "K1 identity · K2 insolvency · K3 authority to sign · K4 ownership · K5 sanctions · K6 VAT & payout · "
+        "K7 weapons licence · K8 quality certificates · K9 track record · K10 capabilities · K11 agent mandate. "
+        "Full detail per check: `kyc.checks` in `suppliers.json`.\n\n"
+        f"{kyc_table(profiles)}\n\n> {DISCLAIMER}\n",
+        encoding="utf-8",
+    )
+    return table
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Score suppliers 1-10 from free open data (see module docstring for the method).")
     parser.add_argument("--data-dir", type=Path, default=Path("data"))
     parser.add_argument("--only", help="score only this supplier id")
     parser.add_argument("--offline", action="store_true", help="use cached source data only (fast re-score after a document upload)")
     parser.add_argument("--no-media", action="store_true", help="skip the GDELT news check (it is rate-limited to 1 request / 5 s)")
+    parser.add_argument("--summary-only", action="store_true", help="only rewrite due_diligence_summary.md from suppliers.json")
     args = parser.parse_args()
 
     src.OFFLINE = args.offline
     profiles_path = args.data_dir / "profiles" / "suppliers.json"
+    if args.summary_only:
+        print(write_summary(args.data_dir, json.loads(profiles_path.read_text(encoding="utf-8"))))
+        return 0
     evidence_dir = args.data_dir / "supplier_evidence"
     profiles = json.loads(profiles_path.read_text(encoding="utf-8"))
     print("Loading sanctions lists (EU, UN, OFAC, UK)...", file=sys.stderr)
@@ -644,19 +961,21 @@ def main() -> int:
         data = collect(profile, sanctions, with_media=not args.no_media)
         documents = load_documents(evidence_dir, profile["id"])
         profile["due_diligence"] = score_supplier(profile, data, documents, rates)
+        profile["kyc"] = build_kyc(profile, data, profile["due_diligence"], documents)
+        profile["deal_baseline"] = build_deal_baseline(profile, data, rates)
         dd = profile["due_diligence"]
-        print(f"  → {dd['total_score']:.1f}/10  {dd['verdict']}  (confidence {dd['confidence']})", file=sys.stderr)
+        print(f"  → {dd['total_score']:.1f}/10  {dd['verdict']}  (confidence {dd['confidence']}), KYC {profile['kyc']['kyc_status']}", file=sys.stderr)
+    link_related_parties(profiles)
 
-    profiles_path.write_text(json.dumps(profiles, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
-    table = summary_table(profiles)
-    (args.data_dir / "profiles" / "due_diligence_summary.md").write_text(
-        f"# Supplier due diligence — {src.today()} ({METHOD_VERSION})\n\n"
-        "Total = weighted mean of category scores (identity 15%, ownership 20%, track record 25%, "
-        "financial 15%, defence credentials 15%, integrity 10%), mapped to 1–10. "
-        "'–' = no free open data for that category (excluded, lowers confidence).\n\n"
-        f"{table}\n\n> {DISCLAIMER}\n",
-        encoding="utf-8",
-    )
+    # Other scripts edit suppliers.json too: re-read it and merge only the keys this script owns.
+    current = json.loads(profiles_path.read_text(encoding="utf-8"))
+    ours = {p["id"]: p for p in profiles}
+    for profile in current:
+        for key in ("due_diligence", "kyc", "deal_baseline"):
+            if key in ours.get(profile["id"], {}):
+                profile[key] = ours[profile["id"]][key]
+    profiles_path.write_text(json.dumps(current, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+    table = write_summary(args.data_dir, current)
     print(table)
     return 0
 
