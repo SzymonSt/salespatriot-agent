@@ -20,7 +20,9 @@ from app.backend.database import check_database_connection, create_database_engi
 from app.backend.knowledge.client import KnowledgeClient
 from app.backend.knowledge.embeddings import QueryEmbedder
 from app.backend.profiles import CompanyProfile, ProfileRegistry
-from app.backend.settings import Settings, get_settings
+from app.backend.knowledge import ConversationOrchestrator, SimulatedKnowledgeClient
+from app.backend.knowledge.routes import router as knowledge_router
+from app.backend.settings import REPOSITORY_ROOT, Settings, get_settings
 
 class DemandContext(BaseModel):
     model_config = ConfigDict(extra="forbid")
@@ -70,6 +72,13 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         app.state.settings = app_settings
         app.state.profiles = ProfileRegistry.load(app_settings.profiles_dir)
         app.state.buyer_agent_directory = BuyerAgentDirectory(app.state.profiles)
+        # Company agents and their conversations, on the simulated knowledge database for now.
+        companies = {p.id: p.model_dump() for p in [*app.state.profiles.buyers.values(), *app.state.profiles.suppliers.values()]}
+        app.state.knowledge = SimulatedKnowledgeClient(REPOSITORY_ROOT / "data" / "demo" / "agent_db.json", companies)
+        # Demo flow: agents negotiate on their own (the buyer agent first asks about the deal check);
+        # a person approves only the agreed deal at the end (POST /v1/conversations/{id}/approval).
+        app.state.orchestrator = ConversationOrchestrator(app.state.knowledge, companies, app_settings.gemini_model,
+                                                          clarify_first=True)
         app.state.database_engine = create_database_engine(app_settings)
         app.state.knowledge_client = (
             KnowledgeClient(app.state.database_engine)
@@ -82,6 +91,8 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         try:
             yield
         finally:
+            for task in list(app.state.orchestrator.tasks):
+                task.cancel()
             if app.state.database_engine is not None:
                 await app.state.database_engine.dispose()
 
@@ -95,6 +106,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     from app.backend.knowledge.routes import router as knowledge_router
 
     app.include_router(demo_router)
+    app.include_router(knowledge_router)
     app.include_router(peer_agent_router)
     app.include_router(knowledge_router)
 

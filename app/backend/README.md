@@ -17,7 +17,7 @@ uv sync --project app/backend --extra dev
 Add these values to the existing `app/backend/.env` file:
 
 - `GOOGLE_API_KEY`: Gemini Developer API key from Google AI Studio.
-- `GEMINI_MODEL`: `gemini-2.5-flash` (the default).
+- `GEMINI_MODEL`: `gemini-3.8-flash` (the default; `gemini-2.5-flash` is no longer available to new API keys).
 - `DATABASE_URL`: the Supabase session-pooler URI, with the database password URL-encoded.
 
 Do not commit `app/backend/.env` or send its contents through chat. The tracked

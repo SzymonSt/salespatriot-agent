@@ -18,6 +18,8 @@ Create `app/backend/.env` from the tracked `app/backend/.env.example` and set:
 | `DATABASE_URL` | Supabase/PostgreSQL connection string (session pooler, `postgres` user) for the readiness probe, the knowledge and conversation routes and `load_kb_docs`. |
 | `EMBEDDING_MODEL` | Query embedding model; defaults to `gemini-embedding-001` (768 dimensions are fixed by the database contract). |
 | `EMBEDDING_TIMEOUT_SECONDS` | Timeout of one query embedding; defaults to `3`. On timeout, search falls back to full text. |
+| `GEMINI_MODEL` | Model ID passed to ADK; defaults to `gemini-3.8-flash` when omitted (`gemini-2.5-flash` is closed to new API keys). |
+| `DATABASE_URL` | Optional Supabase/PostgreSQL connection string used by the readiness probe. |
 
 Keep `.env` local and never commit or share its contents. The service is
 unauthenticated in this development slice; keep it bound to `127.0.0.1`.

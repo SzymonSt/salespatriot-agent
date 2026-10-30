@@ -25,6 +25,7 @@
 
   const state = { suppliers: [], buyers: [], byId: new Map(), logos: {}, matches: [], demo: [], convs: new Map(), open: [],
     sessionId: null, liveViews: [], requests: {}, requestsSeeded: new Set(), ontViews: [], expanded: new Set() };
+    sessionId: null, liveViews: [], requests: {}, requestsSeeded: new Set(), agentsSeeded: new Set(), seenAssessments: new Set(), assessments: {} };
 
   /* ---------- DOM helpers ---------- */
   function h(tag, props, ...children) {
@@ -290,6 +291,10 @@
         h("div", { class: "hero-actions" },
           h("button", { class: "btn", type: "button", onclick: runDemo }, "Watch a negotiation"),
           link("/suppliers", { class: "btn btn-quiet" }, "Browse suppliers ›"))),
+      sessionCompany()?.role === "demand"
+        ? liveSection("Deals agreed by your agent — your approval", () => approvalRows(sessionCompany()),
+          "Nothing to approve yet. Agreed deals from your agent appear here.")
+        : null,
       transcript(state.demo[0]),
       h("section", { class: "points", "aria-label": "How it works" },
         point("Proven, not claimed", "Supplier agents answer with products they have delivered under real TED contracts."),
@@ -629,6 +634,7 @@
       ], "Nothing right now."),
       liveSection("Requests from buyers", () => supplierRequestRows(s),
         "No new requests. When a buyer posts a requirement that matches your products, it pops up here with your deal check."),
+<<<<<<< HEAD
       ontView(() => {
         const opps = oppsNow();
         return section(`Opportunities your agent found (${opps.length})`, opps.length ? expandable(opps, (m) => row(
@@ -639,6 +645,14 @@
           h("button", { class: "btn btn-quiet", type: "button", onclick: () => openMatch(m) },
             m.item.evidence.verification_status === "document_verified" ? "Let agent respond" : "Respond (needs you)")), "opportunities") : rowsGroup([], "No open tender matches your proven products yet. Your agent keeps watching new TED notices."));
       }),
+=======
+      section(`Opportunities your agent found (${opps.length})`, opps.length ? expandable(opps, (m) => row(
+        m.notice.title,
+        [`${m.buyer.name} · ${country(m.buyer.country)} · ${m.notice.published} · `, external(m.notice.ted_url, "TED ›"),
+          h("br"), `Your match: ${m.item.product} `, status(EVIDENCE[m.item.evidence.verification_status][0], EVIDENCE[m.item.evidence.verification_status][1])],
+        h("button", { class: "btn btn-quiet", type: "button", onclick: (e) => startAgentOnTender(m, e.currentTarget) },
+          m.item.evidence.verification_status === "document_verified" ? "Let agent respond" : "Respond (needs you)"))) : rowsGroup([], "No open tender matches your proven products yet. Your agent keeps watching new TED notices.")),
+>>>>>>> 948dddf (s)
       liveSection("Conversations", () => conversationRows(s), "No conversations yet. Your agent starts one when it responds to a tender."),
       section("Your agent's mandate", mandate([
         ["Sells", categories.join(", ") || "Nothing proven yet"],
@@ -667,6 +681,7 @@
     const buys = (b.top_cpv || []).filter((c) => c.code.startsWith("353")).map((c) => c.label).slice(0, 3);
     return h("div", { class: "page" },
       workspaceHeader(b, "your agent sources suppliers for your tenders and negotiates inside your mandate"),
+<<<<<<< HEAD
       ontView(() => {
         const ranked = rankAll();
         return h("div", { class: "stats" },
@@ -675,9 +690,18 @@
           stat(recommendedFrom(ranked).length, "suppliers to consider"));
       }),
       liveSection("Needs your attention", () => [...state.convs.values()]
+=======
+      h("div", { class: "stats" },
+        stat(notices.length, "open tenders"),
+        stat([...ranked.values()].filter((l) => l.length).length, "with a proven supplier"),
+        stat(recommended.length, "suppliers to consider")),
+      liveSection("Deals agreed by your agent — your approval", () => approvalRows(b),
+        "Nothing to approve yet. Post a requirement: supplier agents check it, negotiate with your agent, and agreed deals arrive here."),
+      liveSection("Needs your attention", () => [...reviewRows(b), ...[...state.convs.values()]
+>>>>>>> 948dddf (s)
         .filter((v) => v.people.buyer.id === b.id && v.waiting)
         .map((v) => row(`Approve deal with ${v.people.supplier.name}`, `${v.topic}. Your mandate needs a person for suppliers with risk flags or low due diligence.`,
-          h("button", { class: "btn", type: "button", onclick: () => showConv(v.id) }, "Review"))), "Nothing to approve right now."),
+          h("button", { class: "btn", type: "button", onclick: () => showConv(v.id) }, "Review")))], "Nothing to approve right now."),
       section("Post a requirement", requirementForm(b)),
       liveSection("Your posted requests", () => buyerRequestRows(b), "Nothing posted yet. Post a requirement above; matched suppliers see it immediately."),
       section(`Your open tenders (${notices.length})`, expandable(notices, (n) => h("li", { class: "row" },
@@ -755,8 +779,9 @@
   const CHECK_STATUS = { pass: ["Pass", "verified"], condition: ["Condition", "neutral"], escalate: ["Escalate", "caution"], fail: ["Fail", "risk"], info: ["Info", "neutral"] };
   const decisionPill = (check) => !check ? status("Checking…", "neutral")
     : check.error ? status("Check unavailable", "neutral") : status(check.decision, DECISION_TONE[check.decision] || "neutral");
-  const requestFacts = (r) => [r.quantity ? `${Number(r.quantity).toLocaleString("en-GB")} ${r.unit}` : null,
-    r.budget ? `budget ${money(r.budget, r.currency)}` : null, r.need_by ? `needed by ${r.need_by}` : null].filter(Boolean).join(" · ");
+  // The budget is the buyer's private ceiling: only the buyer's own views show it.
+  const requestFacts = (r, withBudget = false) => [r.quantity ? `${Number(r.quantity).toLocaleString("en-GB")} ${r.unit}` : null,
+    withBudget && r.budget ? `budget ${money(r.budget, r.currency)}` : null, r.need_by ? `needed by ${r.need_by}` : null].filter(Boolean).join(" · ");
 
   function postRequest(b, notice, list, terms, sent) {
     if (!list.length) { sent.textContent = "No supplier has proven this item yet, so nothing was sent."; return; }
@@ -776,24 +801,144 @@
         `Your match: ${r.match.item_product} · `, decisionPill(r.match.check)],
       h("div", { class: "row-actions" },
         r.match.check?.checks ? h("button", { class: "btn btn-quiet", type: "button", onclick: () => showChecks(r, r.match) }, "Checks") : null,
-        h("button", { class: "btn", type: "button", onclick: () => respondToRequest(r) }, "Let agent respond")));
+        agentState(r)));
     });
   }
 
-  function buyerRequestRows(b) {
-    return (state.requests[b.id] || []).slice().reverse().map((r) => row(r.title,
-      [requestFacts(r) || r.created_at.replace("T", " "), h("br"), ...r.matches.flatMap((m, i) => [i ? " · " : "",
-        `${state.byId.get(m.supplier_id)?.name || m.supplier_id} `, decisionPill(m.check)])],
-      status(`${r.matches.length} supplier${r.matches.length === 1 ? "" : "s"}`, "neutral")));
+  /** Agents start on their own: show what this supplier's agent did with the request. */
+  function agentState(r) {
+    const live = liveConvFor(r, sessionCompany()?.id);
+    if (live) return h("button", { class: "btn", type: "button", onclick: () => showConv(live.id) }, "Open chat");
+    const assessment = (state.assessments[sessionCompany()?.id] || []).find((a) => a.request_id === r.id);
+    if (assessment?.error) return status("Agent couldn't assess it", "caution");
+    if (assessment && !assessment.can_supply) return status("Your agent: can't supply", "neutral");
+    return status("Your agent is checking…", "neutral");
   }
 
-  function respondToRequest(r) {
-    const supplier = state.byId.get(r.match ? sessionCompany()?.id : r.matches[0].supplier_id);
-    const buyer = state.byId.get(r.buyer_id);
-    if (!supplier || !buyer) return;
-    const item = (supplier.catalogue?.items || []).find((i) => i.product === r.match?.item_product) || supplier.catalogue?.items?.[0];
-    const notice = { notice_number: r.id, title: r.title, description: "", cpv_codes: r.cpv_codes, published: r.created_at.slice(0, 10), ted_url: "" };
-    openMatch({ buyer, supplier, notice, item, score: 1 });
+  // The live (Gemini) conversation about one request with one supplier, if its agent started one.
+  const liveConvFor = (r, supplierId) => [...state.convs.values()].find((c) => c.live && c.requestRef === `request:${r.id}`
+    && c.people.supplier.id === supplierId);
+
+  function buyerRequestRows(b) {
+    return (state.requests[b.id] || []).slice().reverse().map((r) => h("li", { class: "row request-row" },
+      h("div", { class: "row-main" },
+        h("div", { class: "row-title wrap" }, r.title),
+        h("div", { class: "row-sub wrap" }, requestFacts(r, true) || r.created_at.replace("T", " ")),
+        h("ul", { class: "request-suppliers" }, r.matches.map((m) => {
+          const supplier = state.byId.get(m.supplier_id);
+          const dd = supplier?.due_diligence;
+          const conv = liveConvFor(r, m.supplier_id);
+          const waiting = conv?.liveStatus === "awaiting_review";
+          return h("li", {},
+            h("div", { class: "request-supplier" },
+              supplier ? avatar(supplier, "sm") : null,
+              h("div", { style: "min-width:0" },
+                h("b", {}, supplier?.name || m.supplier_id),
+                h("div", { class: "caption" },
+                  dd ? [status(`DD ${dd.total_score.toFixed(1)} ${dd.verdict}`, verdictTone(dd.verdict)), " · "] : null,
+                  "Deal check ", decisionPill(m.check),
+                  conv ? [" · ", status(LIVE_STATUS[conv.liveStatus] || "Agent writing", waiting ? "caution" : "neutral")] : null))),
+            h("div", { class: "row-actions" },
+              m.check?.checks ? h("button", { class: waiting ? "btn" : "btn btn-quiet", type: "button", onclick: () => showReview(r, m) },
+                waiting ? "Review and negotiate" : "Review") : null,
+              conv ? h("button", { class: "btn btn-quiet", type: "button", onclick: () => showConv(conv.id) }, "Chat") : null));
+        }))),
+      h("div", { class: "row-end" }, status(`${r.matches.length} supplier${r.matches.length === 1 ? "" : "s"}`, "neutral"))));
+  }
+
+  /** Deals the agents agreed on their own; a person on the buyer's side approves or rejects them (the only human step). */
+  function approvalRows(b) {
+    return [...state.convs.values()].filter((v) => v.live && v.people.buyer.id === b.id && v.liveStatus === "accepted")
+      .map((v) => {
+        const r = (state.requests[b.id] || []).find((x) => `request:${x.id}` === v.requestRef);
+        const m = r?.matches.find((x) => x.supplier_id === v.people.supplier.id);
+        const o = v.outcome || {};
+        const dd = v.people.supplier.due_diligence;
+        const terms = [o.unit_price ? `${money(o.unit_price, o.currency || "EUR")} per unit` : null,
+          o.quantity ? `× ${Number(o.quantity).toLocaleString("en-GB")}` : null,
+          o.total ? `= ${money(o.total, o.currency || "EUR")}` : null,
+          o.lead_time_days ? `· ${o.lead_time_days} days` : null].filter(Boolean).join(" ");
+        const decide = (decision) => async (e) => {
+          e.target.closest(".row-actions").querySelectorAll("button").forEach((x) => { x.disabled = true; });
+          await fetch(`/v1/conversations/${v.live}/approval`, { method: "POST", headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ decision, approver: "procurement officer" }) }).catch(() => null);
+          pollAgents();
+        };
+        return row([v.people.supplier.name, " · ", v.topic],
+          [terms || "Terms in the chat", h("br"),
+            dd ? [status(`DD ${dd.total_score.toFixed(1)} ${dd.verdict}`, verdictTone(dd.verdict)), " · "] : null,
+            "Deal check ", decisionPill(m?.check)],
+          v.approval ? status(v.approval === "approved" ? "Approved" : "Rejected", v.approval === "approved" ? "verified" : "risk")
+            : h("div", { class: "row-actions" },
+              r && m?.check ? h("button", { class: "btn btn-quiet", type: "button", onclick: () => showReview(r, m) }, "Review") : null,
+              h("button", { class: "btn btn-quiet", type: "button", onclick: () => showConv(v.id) }, "Chat"),
+              h("button", { class: "btn btn-quiet", type: "button", onclick: decide("rejected") }, "Reject"),
+              h("button", { class: "btn", type: "button", onclick: decide("approved") }, "Approve")));
+      });
+  }
+
+  /** Supplier agents that wrote and now wait for the buyer to review the checks. */
+  function reviewRows(b) {
+    return [...state.convs.values()].filter((v) => v.live && v.people.buyer.id === b.id && v.liveStatus === "awaiting_review")
+      .map((v) => {
+        const r = (state.requests[b.id] || []).find((x) => `request:${x.id}` === v.requestRef);
+        const m = r?.matches.find((x) => x.supplier_id === v.people.supplier.id);
+        return row(`Review ${v.people.supplier.name} before your agent negotiates`,
+          `${v.topic}. Its agent wrote to you; check its due diligence and the D1–D14 deal check.`,
+          h("button", { class: "btn", type: "button", onclick: () => (r && m?.check ? showReview(r, m) : showConv(v.id)) }, "Review"));
+      });
+  }
+
+  function checksList(match) {
+    return h("ul", { class: "rows" }, match.check.checks.map((c) => h("li", { class: "row" },
+      h("div", { class: "row-main" },
+        h("div", { class: "row-title wrap" }, `${c.code} · ${c.title}`),
+        h("div", { class: "row-sub wrap" }, c.summary),
+        c.conditions.length ? h("ul", { class: "conditions" }, c.conditions.map((x) => h("li", {}, x))) : null),
+      h("div", { class: "row-end" }, status(...(CHECK_STATUS[c.status] || [c.status, "neutral"]))))));
+  }
+
+  /** Buyer's review before its agent negotiates: supplier due diligence + KYC + the live D1-D14 deal check. */
+  function showReview(r, match) {
+    const supplier = state.byId.get(match.supplier_id);
+    const dd = supplier?.due_diligence;
+    const kyc = supplier?.kyc;
+    const conv = liveConvFor(r, match.supplier_id);
+    const kycLabel = { pass: ["Pass", "verified"], fail: ["Fail", "risk"], review: ["Review", "caution"], needs_upload: ["Upload needed", "caution"],
+      pending_platform: ["Pending", "neutral"], info: ["Info", "neutral"] };
+    const dialog = h("dialog", { class: "checks-dialog", "aria-labelledby": "review-title", onclose: () => dialog.remove() },
+      h("div", { class: "checks-head" },
+        h("div", {}, h("h2", { id: "review-title" }, `Review ${supplier?.name || match.supplier_id}`),
+          h("p", { class: "secondary" }, `${r.title} · before your agent negotiates`)),
+        h("button", { class: "btn btn-quiet", type: "button", onclick: () => dialog.close() }, "Close")),
+      dd ? h("section", { class: "review-block" },
+        h("h3", {}, "Due diligence (company)"),
+        h("p", { class: "review-score" }, h("b", {}, `${dd.total_score.toFixed(1)}/10`), " ", status(dd.verdict, verdictTone(dd.verdict)),
+          h("span", { class: "caption" }, ` · confidence ${dd.confidence} · checked ${dd.assessed_at} · `),
+          supplier ? link(pathFor(supplier), {}, "Full profile ›") : null),
+        h("ul", { class: "rows" }, Object.values(dd.categories).map((c) => h("li", { class: "row" },
+          h("div", { class: "row-main" }, h("div", { class: "row-title" }, c.label), h("div", { class: "row-sub wrap" }, c.reasoning)),
+          h("div", { class: "row-end" }, h("b", {}, c.score == null ? "–" : c.score.toFixed(1)))))),
+        dd.red_flags?.length ? h("ul", { class: "conditions" }, dd.red_flags.map((f) => h("li", {}, `Red flag: ${f}`))) : null) : null,
+      kyc ? h("section", { class: "review-block" },
+        h("h3", {}, `KYC K1–K11 · ${kyc.kyc_status}`),
+        h("p", { class: "kyc-chips" }, Object.entries(kyc.checks).map(([code, k]) => h("span", { title: `${k.title}: ${k.summary}` },
+          `${code} `, status(...(kycLabel[k.status] || [k.status, "neutral"])))))) : null,
+      h("section", { class: "review-block" },
+        h("h3", {}, "Deal check D1–D14 (this deal)"),
+        h("p", {}, decisionPill(match.check), match.check.blocking.length ? ` ${match.check.blocking.length} item(s) need a person`
+          : ` ${match.check.conditions.length} condition(s) go into the contract`),
+        checksList(match)),
+      h("div", { class: "toast-actions" },
+        conv?.liveStatus === "awaiting_review" ? h("button", { class: "btn", type: "button", onclick: async (e) => {
+          e.target.disabled = true;
+          await fetch(`/v1/conversations/${conv.live}/resume`, { method: "POST" }).catch(() => null);
+          dialog.close();
+          showConv(conv.id);
+          pollAgents();
+        } }, "Checks reviewed — let my agent negotiate") : null));
+    document.body.append(dialog);
+    dialog.showModal();
   }
 
   function showChecks(r, match) {
@@ -804,15 +949,19 @@
           h("p", { class: "secondary" }, `${r.title} · ${buyer?.name || r.buyer_id} → ${state.byId.get(match.supplier_id)?.name || match.supplier_id}`)),
         h("button", { class: "btn btn-quiet", type: "button", "aria-label": "Close", onclick: () => dialog.close() }, "Close")),
       h("p", {}, decisionPill(match.check), match.check.blocking.length ? ` ${match.check.blocking.length} item(s) need a person` : ` ${match.check.conditions.length} condition(s) for the contract`),
-      h("ul", { class: "rows" }, match.check.checks.map((c) => h("li", { class: "row" },
-        h("div", { class: "row-main" },
-          h("div", { class: "row-title wrap" }, `${c.code} · ${c.title}`),
-          h("div", { class: "row-sub wrap" }, c.summary),
-          c.conditions.length ? h("ul", { class: "conditions" }, c.conditions.map((x) => h("li", {}, x))) : null),
-        h("div", { class: "row-end" }, status(...(CHECK_STATUS[c.status] || [c.status, "neutral"])))))),
+      checksList(match),
       h("p", { class: "caption" }, "Rule tables (Military List, ADR, embargoes, licences) encode common EU practice and are not legal advice."));
     document.body.append(dialog);
     dialog.showModal();
+  }
+
+  function popNote(title, text) {
+    const toast = h("div", { class: "toast", role: "status" },
+      h("div", { class: "toast-head" }, h("b", { style: "flex:1" }, title),
+        h("button", { class: "toast-close", type: "button", "aria-label": "Dismiss", onclick: () => toast.remove() }, "×")),
+      h("div", { class: "secondary" }, text));
+    toastStack().prepend(toast);
+    setTimeout(() => toast.remove(), 8000);
   }
 
   function toastStack() {
@@ -838,8 +987,8 @@
       reasons.length ? h("ul", { class: "conditions" }, reasons.slice(0, 3).map((x) => h("li", {}, trim(x, 110))),
         reasons.length > 3 ? h("li", { class: "secondary" }, `+${reasons.length - 3} more`) : null) : null,
       h("div", { class: "toast-actions" },
-        check?.checks ? h("button", { class: "btn btn-quiet", type: "button", onclick: () => showChecks(r, r.match) }, "View checks") : null,
-        h("button", { class: "btn", type: "button", onclick: () => { toast.remove(); respondToRequest(r); } }, "Let agent respond")));
+        check?.checks ? h("button", { class: "btn btn-quiet", type: "button", onclick: () => showChecks(r, r.match) }, "View checks") : null),
+      h("p", { class: "caption" }, "Your agent is already checking whether you can supply this. The chat opens when it writes to the buyer."));
     toastStack().prepend(toast);
   }
 
@@ -876,6 +1025,199 @@
       saveSeen(c.id, seen);
     }
     if (JSON.stringify(list) !== before) refreshLive();
+  }
+
+
+  /* ---------- live agent conversations: Gemini company agents (app/backend) via serve.py's /v1 proxy ---------- */
+  // Each company has its own agent; the backend runs the assessment and the turns, we poll and render.
+  const LIVE_STATUS = { open: "Negotiating", awaiting_review: "Waiting for the buyer's review", quoted: "Quote on the table", accepted: "Deal agreed (non-binding)",
+    rejected: "Declined", escalated: "Waiting for a person", closed: "Closed" };
+  const TYPE_LABEL = { introduction: "Introduction", rfq: "Request for quote", quote: "Quote", counter: "Counter-offer",
+    accept: "Accepts", reject: "Declines", question: "Question", answer: "Answer", escalate: "Escalates to a person" };
+
+  function catalogueItem(ref) {
+    const [, sid, index] = /^catalogue:(.+)\/(\d+)$/.exec(ref) || [];
+    return sid ? state.byId.get(sid)?.catalogue?.items?.[Number(index)] : null;
+  }
+  function refChip(ref) {
+    const ted = /^ted:(.+)$/.exec(ref);
+    if (ted) return { label: `TED ${ted[1]}`, url: `https://ted.europa.eu/en/notice/-/detail/${ted[1]}` };
+    const item = catalogueItem(ref);
+    if (item) return { label: `Catalogue: ${trim(item.product, 32)}` };
+    return ref.startsWith("request:") ? null : { label: ref };
+  }
+  const refName = (ref) => catalogueItem(ref)?.product || ref;
+
+  async function pollAgents() {
+    const c = sessionCompany();
+    if (!c) return;
+    let conversations, assessments;
+    try {
+      const [r1, r2] = await Promise.all([fetch(`/v1/conversations?company_id=${encodeURIComponent(c.id)}`),
+        fetch(`/v1/agents/assessments?company_id=${encodeURIComponent(c.id)}`)]);
+      if (!r1.ok || !r2.ok) return;
+      [conversations, assessments] = await Promise.all([r1.json(), r2.json()]);
+    } catch { return; /* no agents backend: the scripted demo still works */ }
+    // Conversations that existed when this page first looked are history: chat heads, not pop-ups.
+    const firstLook = !state.agentsSeeded.has(c.id);
+    state.agentsSeeded.add(c.id);
+    for (const data of conversations) {
+      const id = `agent:${data.id}`;
+      let conv = state.convs.get(id);
+      if (!conv) {
+        conv = newLiveConv(id, data);
+        if (!conv) continue;
+        state.convs.set(id, conv);
+        if (firstLook) renderHeads(); else showConv(id);
+      }
+      syncLive(conv, data);
+    }
+    // A supplier hears when its agent decided it cannot supply (a "yes" opens a conversation instead).
+    const assessmentsChanged = (state.assessments[c.id] || []).length !== assessments.length;
+    state.assessments[c.id] = assessments;
+    if (assessmentsChanged) refreshLive();
+    for (const a of assessments) {
+      if (state.seenAssessments.has(a.id)) continue;
+      state.seenAssessments.add(a.id);
+      if (!firstLook && c.role === "supply" && a.supplier_id === c.id && !a.can_supply) popAssessment(a);
+    }
+  }
+
+  function popAssessment(a) {
+    const buyer = state.byId.get(a.buyer_id);
+    const toast = h("div", { class: "toast", role: "status" },
+      h("div", { class: "toast-head" },
+        buyer ? avatar(buyer, "sm") : null,
+        h("div", { class: "toast-who" }, h("span", { class: "caption" }, "Your agent assessed a request"),
+          h("b", {}, a.title), h("span", { class: "caption" }, buyer?.name || a.buyer_id)),
+        h("button", { class: "toast-close", type: "button", "aria-label": "Dismiss", onclick: () => toast.remove() }, "×")),
+      a.error ? h("div", { class: "secondary" }, `The agent could not assess it: ${a.error}`)
+        : [h("div", {}, status("Can't supply", "neutral"), ` ${a.reasoning}`),
+          a.gaps?.length ? h("ul", { class: "conditions" }, a.gaps.slice(0, 3).map((g) => h("li", {}, trim(g, 110)))) : null]);
+    toastStack().prepend(toast);
+  }
+
+  function newLiveConv(id, data) {
+    const buyer = state.byId.get(data.buyer_id);
+    const supplier = state.byId.get(data.supplier_id);
+    if (!buyer || !supplier) return null;
+    const me = sessionCompany()?.id === supplier.id ? "supplier" : "buyer";
+    const conv = { id, live: data.id, requestRef: data.publication_number, people: { buyer, supplier }, topic: trim(data.title, 44),
+      me, unread: 0, minimized: false, lastFrom: null, rendered: 0, typingRole: null };
+    conv.body = h("div", { class: "chat-body", role: "log", "aria-live": "polite" });
+    conv.subtitle = h("span", {}, `Connecting · ${conv.topic}`);
+    conv.el = buildChat(conv);
+    return conv;
+  }
+
+  function syncLive(conv, data) {
+    const approval = data.approval?.decision || null;
+    if (conv.liveStatus !== data.status || conv.approval !== approval) {
+      conv.liveStatus = data.status;
+      conv.approval = approval;
+      conv.outcome = data.outcome || null;
+      refreshLive();  // request rows and the approvals list follow the conversation
+    }
+    for (const m of data.messages) {
+      if (m.seq <= conv.rendered) continue;
+      conv.typingEl?.remove();
+      conv.typingRole = null;
+      renderLiveMessage(conv, m);
+      conv.rendered = m.seq;
+    }
+    if ((data.typing || null) !== conv.typingRole) {
+      conv.typingEl?.remove();
+      conv.typingRole = data.typing || null;
+      conv.typingEl = data.typing ? h("div", { class: `typing ${data.typing === conv.me ? "right" : ""}` },
+        avatar(conv.people[data.typing], "sm"), h("span", { class: "dots", "aria-hidden": "true" }, h("i"), h("i"), h("i"))) : null;
+      if (conv.typingEl) { conv.body.append(conv.typingEl); scrollDown(conv); }
+    }
+    const text = data.typing ? `${A.shortName(conv.people[data.typing].name, 22)} agent is writing…`
+      : approval ? (approval === "approved" ? "Approved by the buyer" : "Rejected by the buyer")
+      : data.status === "accepted" ? "Agreed by the agents · awaiting the buyer's approval" : LIVE_STATUS[data.status] || data.status;
+    if (conv.subtitle.textContent !== `${text} · ${conv.topic}`) setStatus(conv, text);
+  }
+
+  function renderLiveMessage(conv, m) {
+    const terms = m.payload || {};
+    if (m.sender_role === "system") {
+      const a = terms.assessment;
+      const bc = terms.buyer_checks;
+      if (bc) {
+        const dd = bc.due_diligence, deal = bc.deal_check;
+        appendEvent(conv, { from: "system", type: "card", kind: dd.decision === "BLOCKED" || ["ESCALATE", "NO-GO"].includes(deal.decision) ? "warn" : "info", data: {
+          title: `${A.shortName(conv.people.buyer.name, 26)}'s agent ran due diligence`,
+          rows: [["Supplier score", `${dd.score}/10 · ${dd.verdict}`],
+            ["Hard gates", `${dd.gates.filter((g) => g.status === "pass").length}/${dd.gates.length} passed`],
+            ["KYC", dd.kyc_status || "–"],
+            ["Deal check D1–D14", deal.decision || "not available"],
+            ["Contract conditions", String(deal.conditions)]],
+          audit: [...(dd.red_flags || []).map((f) => `Red flag: ${f}`), ...(deal.blocking || [])].filter(Boolean).slice(0, 4).concat().length
+            ? [...(dd.red_flags || []).map((f) => `Red flag: ${f}`), ...(deal.blocking || [])].slice(0, 4) : null,
+          note: "Checked before its first reply; the reply builds on these results." } });
+        return;
+      }
+      if (a) {
+        appendEvent(conv, { from: "system", type: "card", kind: "info", data: {
+          title: `${A.shortName(conv.people.supplier.name, 26)}'s agent assessed the request`,
+          rows: [["Can supply", a.can_supply ? "Yes" : "No"], ["Confidence", a.confidence],
+            ...(a.matched_products?.length ? [["Matches", a.matched_products.map((r) => trim(refName(r), 60)).join("; ")]] : [])],
+          audit: a.gaps?.length ? a.gaps.map((g) => `Gap: ${g}`) : null, note: a.reasoning } });
+      } else if (m.type === "escalate" || m.type === "check") {
+        appendEvent(conv, { from: "system", type: "card", kind: m.type === "escalate" ? "warn" : "info",
+          data: { title: m.type === "escalate" ? "Handed to a person" : "Platform rule", note: m.text } });
+      } else {
+        appendEvent(conv, { from: "system", type: "system", text: m.text });
+      }
+      return;
+    }
+    const mine = m.sender_role === conv.me;
+    const from = terms.human && mine ? "human" : m.sender_role;
+    appendEvent(conv, { from, type: "text", text: terms.human && !mine ? `(their team) ${m.text}` : m.text,
+      evidence: [{ label: TYPE_LABEL[m.type] || m.type }, ...(m.refs || []).map(refChip).filter(Boolean)] });
+    if (terms.unit_price && ["quote", "counter", "accept"].includes(m.type)) {
+      const cur = terms.currency || "EUR";
+      const total = terms.total || (terms.quantity ? terms.unit_price * terms.quantity : null);
+      appendEvent(conv, { from: m.sender_role, type: "card", kind: m.type === "accept" ? "deal" : "quote", data: {
+        title: m.type === "accept" ? "Agreed terms (non-binding until signed)" : m.type === "counter" ? "Counter-offer" : "Quote",
+        rows: [["Unit price", money(terms.unit_price, cur)],
+          terms.quantity ? ["Quantity", Number(terms.quantity).toLocaleString("en-GB")] : null,
+          total ? ["Total", money(total, cur)] : null,
+          terms.lead_time_days ? ["Lead time", `${terms.lead_time_days} days`] : null].filter(Boolean),
+        note: terms.overridden_from ? `The platform changed "${terms.overridden_from}" to keep the agent inside its mandate.` : null } });
+    }
+  }
+
+  async function postHuman(conv, text) {
+    const c = sessionCompany();
+    if (!c || ![conv.people.buyer.id, conv.people.supplier.id].includes(c.id)) {
+      appendEvent(conv, { from: "system", type: "system", text: "Sign in as one of these companies to write in this conversation." });
+      return;
+    }
+    try {
+      const r = await fetch(`/v1/conversations/${conv.live}/messages`, { method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ sender_role: conv.me, sender_id: c.id, text }) });
+      if (!r.ok) throw new Error((await r.json().catch(() => ({}))).detail || `HTTP ${r.status}`);
+      pollAgents();
+    } catch (err) {
+      appendEvent(conv, { from: "system", type: "system", text: `Couldn't send: ${err.message}` });
+    }
+  }
+
+  async function startAgentOnTender(m, button) {
+    button.disabled = true;
+    button.textContent = "Agent is assessing…";
+    try {
+      const r = await fetch("/v1/conversations", { method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ buyer_id: m.buyer.id, supplier_id: m.supplier.id, publication_number: m.notice.notice_number }) });
+      if (!r.ok) throw new Error(`HTTP ${r.status}`);
+      button.textContent = "Agent is on it";
+    } catch {
+      // Agents backend not running: fall back to the scripted negotiation.
+      button.disabled = false;
+      button.textContent = "Let agent respond";
+      openMatch(m);
+    }
   }
 
   /* ---------- conversations ---------- */
@@ -923,6 +1265,7 @@
       const text = input.value.trim();
       if (!text) return;
       input.value = "";
+      if (conv.live) return postHuman(conv, text);
       appendEvent(conv, { from: "human", type: "text", text });
       setTimeout(() => appendEvent(conv, { from: conv.me, type: "text",
         text: "Noted. I stay inside the mandate; anything outside it comes back to you." }), 900);
@@ -969,7 +1312,7 @@
   }
 
   function appendEvent(conv, ev) {
-    trackStatus(conv, ev);
+    if (!conv.live) trackStatus(conv, ev);
     if (ev.type === "system") {
       conv.body.append(h("div", { class: "sys" }, ev.text));
       conv.lastFrom = null;
@@ -1121,6 +1464,8 @@
     route();
     pollRequests();
     setInterval(pollRequests, 2000);
+    pollAgents();
+    setInterval(pollAgents, 2000);
     // ?demo opens the demo negotiations on load (handy for presentations).
     if (new URLSearchParams(location.search).has("demo")) runDemo();
   }).catch((err) => {

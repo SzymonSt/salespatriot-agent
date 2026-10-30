@@ -400,6 +400,17 @@ h3 { font-size: 13px; font-weight: 600; color: var(--secondary); margin: 0 0 8px
 .checks-head h2 { font-size: 20px; }
 .checks-dialog .rows { margin: 12px 0; }
 
+/* ---------- buyer review: due diligence + deal check per supplier ---------- */
+.request-suppliers { list-style: none; margin: 10px 0 0; padding: 0; display: grid; gap: 10px; }
+.request-suppliers > li { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap;
+  padding-top: 10px; border-top: 1px solid var(--separator); }
+.request-supplier { display: flex; gap: 10px; align-items: center; min-width: 0; }
+.review-block { margin-top: 18px; }
+.review-block h3 { font-size: 15px; font-weight: 600; margin-bottom: 6px; }
+.review-score { display: flex; align-items: baseline; gap: 6px; flex-wrap: wrap; }
+.review-score b { font-size: 24px; letter-spacing: -0.01em; }
+.kyc-chips { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 13px; }
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }

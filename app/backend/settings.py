@@ -12,7 +12,8 @@ REPOSITORY_ROOT = BACKEND_DIR.parents[1]
 
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(
-        env_file=BACKEND_DIR / ".env",
+        # Repository-root .env first, then app/backend/.env (later files win).
+        env_file=(REPOSITORY_ROOT / ".env", BACKEND_DIR / ".env"),
         env_file_encoding="utf-8",
         extra="ignore",
     )
@@ -22,6 +23,8 @@ class Settings(BaseSettings):
     gemini_model: str = "gemini-2.5-flash"
     embedding_model: str = "gemini-embedding-001"
     embedding_timeout_seconds: float = Field(default=3.0, gt=0, le=30)
+    # gemini-2.5-flash is closed to new API keys (2026); Google recommends gemini-3.8-flash.
+    gemini_model: str = "gemini-3.8-flash"
     profiles_dir: Path = REPOSITORY_ROOT / "data" / "profiles"
     knowledge_base_dir: Path = REPOSITORY_ROOT / "knowledge_base"
 

@@ -124,7 +124,7 @@ An empty `deadline` usually means the notice uses a request-to-participate deadl
 - `web/` — local UI (no build step): Overview, Suppliers and Buyers lists, a page per supplier and buyer, plus floating
   Messenger-style agent chat windows. Design follows the Apple design skill (github.com/dickwu/apple-design-skill): neutral
   palette, blue only for interactive elements, status colours always with a text label; tokens are at the top of `web/styles.css`.
-  Run `python3 serve.py` from the repo root and open http://127.0.0.1:8000/ — pages: `/`, `/suppliers`, `/buyers`,
+  Run `python3 serve.py` from the repo root and open http://127.0.0.1:8765/ — pages: `/`, `/suppliers`, `/buyers`,
   `/supplier/<id>` and `/buyer/<id>` (profile id without its `supplier-`/`buyer-` prefix, e.g. `/supplier/pol-9482182612`);
   `/signin` and `/workspace` give a demo sign-in (no password, remembered in localStorage) and the signed-in company's agent
   workspace: supplier (open KYC items, tenders its agent can answer, conversations, mandate) or buyer (approvals, post a
@@ -135,6 +135,19 @@ An empty `deadline` usually means the notice uses a request-to-participate deadl
   (dd-v1, same code as `supplier_due_diligence.py`), gates, categories, K1–K11 as `{id, status, evidence}` and a
   decision (BLOCKED / NEEDS_DOCUMENTS / CLEARED). Needs the backend env, not system python3:
   `uv run --project app/backend python -m app.backend.due_diligence <supplier id> [--recompute]`.
+- **Company agents (Gemini, live):** every supplier and buyer has its own agent whose system instruction is built from
+  its profile (`app/backend/agents/company.py`). When a buyer posts a requirement (`/workspace` → Post to suppliers),
+  `serve.py` runs the D1–D14 deal check per matched supplier, then calls the backend (`POST /v1/agents/offers`): the
+  supplier agent assesses whether its company can ever supply it and, if yes, talks to the buyer agent. Both sides see
+  the conversation as a pop-up chat; a person can write into it (e.g. approve an escalation) and the agents resume.
+  Mandate rules run in Python (`app/backend/knowledge/conversations.py`): accept needs a quote within budget, deal check
+  ESCALATE/NO-GO or risk flags need a person, max 2 counters, one award per request, quotes not below 97% of the
+  awarded TED price; suppliers never see the buyer's budget. Data: simulated knowledge DB
+  (`app/backend/knowledge/simulated.py`, `data/demo/agent_db.json`) behind the `KnowledgeClient` contract of
+  `docs/agent-context-rag-implementation.md` §3, to be swapped for Supabase. Run both processes from the repo root:
+  `uv run --project app/backend uvicorn app.backend.main:app --host 127.0.0.1 --port 8000` and `python3 serve.py`
+  (port 8765; proxies `/v1/*` to the backend). Needs `GOOGLE_API_KEY` in `.env`; model `gemini-3.8-flash`
+  (`gemini-2.5-flash` is closed to new keys). A conversation takes ~1–2 min (~10 s per agent turn).
 - `translate_data.py` — keeps `data/profiles/*.json` in English via the translation memory `data/translations.json`
   (original → English). Re-run it after any fetch or due-diligence script; `--extract pending.json` lists new strings
   to translate. `name` is the English display name; `legal_name` keeps the registered name, which scripts use to match
@@ -205,3 +218,17 @@ details, API examples and limits in `knowledge_base/25-supabase-ted-sync.md`. Ne
 Not free / not covered: DE, NL, ES, IT, IE, SE, SI, BG, CY, PT registers (VIES + GLEIF only);
 UK Companies House needs a free key; OpenSanctions needs a commercial licence; EDES and World Bank
 debarment lists have no clean public API; GDELT rate-limits to 1 request / 5 s.
+
+## Live demo (agents negotiate on their own; a person approves only the agreed deal)
+
+`./demo_reset.sh` stops both servers, clears `data/demo/` (posted requests, agent conversations), starts the agents
+backend (:8000) and the UI (:8765) and waits until ready (`./demo_reset.sh stop` stops them).
+1. Open the supplier window `/workspace?as=supplier-pol-9482182612` (Łucznik) and the buyer window
+`/workspace?as=buyer-deu-991-19518-88` (BAAINBw). 2. Buyer posts: "Spare parts for 5.56 mm MSBS GROT carbines", Parts of
+firearms and ammunition, 400 sets, budget 200000. 3. Every matched supplier gets the D1–D14 deal check and its agent starts
+automatically (`serve.py --manual-agents` waits for "Let agent respond" instead). Łucznik's agent quotes from
+`data/price_lists.json` (declared demo price list, €430/set); C.I.D Praha and Baltic Fox decline. 4. Before its first reply the
+buyer agent runs due diligence (company score, hard gates, KYC, deal check; a card in the chat), asks one question about the
+deal check, then accepts within its mandate. 5. The agreed deal appears under "Deals agreed by your agent — your approval"
+(buyer workspace and overview page): Review / Chat / Reject / Approve → `POST /v1/conversations/{id}/approval`.
+Orchestrator options in `app/backend/main.py`: `clarify_first=True`; `review_gate` (pause for a human review mid-way) is off.

@@ -1,0 +1,23 @@
+{
+  "_about": "Declared supplier price lists for the demo (not from TED). Used as the price basis in the supplier agent's mandate when TED has no awarded unit price. Keywords must all appear in the request title (case-insensitive).",
+  "supplier-pol-9482182612": [
+    {
+      "keywords": ["grot", "spare"],
+      "item": "Spare-parts set for the 5.56 mm MSBS GROT carbine (standard factory package)",
+      "unit": "set",
+      "unit_price": 430,
+      "currency": "EUR",
+      "lead_time_days": 98,
+      "basis": "declared price list 2026, demo"
+    },
+    {
+      "keywords": ["vis 100", "spare"],
+      "item": "Spare-parts set for the 9 mm VIS 100 pistol",
+      "unit": "set",
+      "unit_price": 120,
+      "currency": "EUR",
+      "lead_time_days": 70,
+      "basis": "declared price list 2026, demo"
+    }
+  ]
+}
