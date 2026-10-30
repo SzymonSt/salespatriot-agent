@@ -1,0 +1,1333 @@
+[
+  {
+    "id": "buyer-deu-991-19518-88",
+    "role": "demand",
+    "name": "Bundesamt für Ausrüstung, Informationstechnik und Nutzung der Bundeswehr",
+    "country": "DEU",
+    "city": "Koblenz",
+    "website": "http://www.evergabe-online.de/",
+    "identifier": "991-19518-88",
+    "summary": "Germany's federal procurement office for Bundeswehr equipment (BAAINBw, Koblenz) and the country's largest defence buyer on TED. Its weapons and ammunition demand is mainly small-arms ammunition in NATO calibres: 5.56×45 mm (DM31A1 hard-core, DM41A1 soft-core), 7.62×51 mm linked belts, and 30×173 mm APFSDS-T for infantry fighting vehicles. It also buys 76 mm smoke/IR grenades, signal cartridges and laser-light modules for small arms. Outside this category it buys military vehicle parts, often through framework agreements with several suppliers.",
+    "legal_type": "cga",
+    "main_activity": "defence",
+    "ted_activity": {
+      "notices_total": 1443,
+      "notices_analysed": 89,
+      "weapons_ammo_notices_analysed": 14,
+      "first_seen": "2026-08-24",
+      "last_seen": "2026-10-30"
+    },
+    "top_cpv": [
+      {
+        "code": "35400000",
+        "label": "Military vehicles and associated parts",
+        "notices": 17
+      },
+      {
+        "code": "35330000",
+        "label": "Ammunition",
+        "notices": 13
+      },
+      {
+        "code": "35420000",
+        "label": "Parts of military vehicles",
+        "notices": 10
+      },
+      {
+        "code": "35331500",
+        "label": "Cartridges",
+        "notices": 9
+      },
+      {
+        "code": "35000000",
+        "label": "Security, fire-fighting, police and defence equipment",
+        "notices": 6
+      },
+      {
+        "code": "39225500",
+        "label": "Pyrotechnics",
+        "notices": 5
+      },
+      {
+        "code": "35331300",
+        "label": "Grenades",
+        "notices": 4
+      },
+      {
+        "code": "35300000",
+        "label": "Weapons, ammunition and associated parts",
+        "notices": 4
+      },
+      {
+        "code": "35331000",
+        "label": "Ammunition for firearms and warfare",
+        "notices": 3
+      },
+      {
+        "code": "31000000",
+        "label": "Electrical machinery, apparatus, equipment and consumables; lighting",
+        "notices": 2
+      }
+    ],
+    "top_counterparts": [
+      {
+        "name": "Global Logistics Support GmbH",
+        "notices": 3
+      },
+      {
+        "name": "ZF Friedrichshafen AG",
+        "notices": 2
+      },
+      {
+        "name": "Hensoldt Optronics GmbH",
+        "notices": 2
+      },
+      {
+        "name": "Kärcher Futuretech GmbH",
+        "notices": 2
+      },
+      {
+        "name": "Bonner Eisenwaren Großhandel Wilhelm Nonnen",
+        "notices": 2
+      },
+      {
+        "name": "Rheinmetall MAN Military Vehicles GmbH",
+        "notices": 2
+      },
+      {
+        "name": "Rheinmetall Electronics GmbH",
+        "notices": 2
+      },
+      {
+        "name": "Dönges",
+        "notices": 1
+      },
+      {
+        "name": "Recon Company by Ranger Outdoor GmbH Krätzschmar",
+        "notices": 1
+      },
+      {
+        "name": "Sun Test Systems",
+        "notices": 1
+      }
+    ],
+    "weapons_ammo_categories": {
+      "Ammunition": 13,
+      "Firearms": 1,
+      "Parts of firearms and ammunition": 0,
+      "Miscellaneous weapons": 0
+    },
+    "recent_notices": [
+      {
+        "notice_number": "679921-2026",
+        "published": "2026-10-02",
+        "notice_type": "cn-standard",
+        "headline": "Germany – Grenades – Angestrebt wird für die Herstellung und Lieferung von Granaten, Abschussgerät (ASG), 76 mm, Nebel, Infrarot (IR), roter Phosphor (RP) eine Mehrpartnerrahmenvereinbarung mit Miniwettbewerb",
+        "title": "Angestrebt wird für die Herstellung und Lieferung von Granaten, Abschussgerät (ASG), 76 mm, Nebel, Infrarot (IR), roter Phosphor (RP) eine Mehrpartnerrahmenvereinbarung mit Miniwettbewerb",
+        "description": "Herstellung und Lieferung von Granaten, ASG, 76 mm, Nebel, IR, RP",
+        "cpv_codes": [
+          "35331300",
+          "35330000",
+          "39225500"
+        ],
+        "value": "",
+        "currency": "",
+        "counterparts": [],
+        "ted_url": "https://ted.europa.eu/en/notice/-/detail/679921-2026"
+      },
+      {
+        "notice_number": "658617-2026",
+        "published": "2026-09-24",
+        "notice_type": "cn-standard",
+        "headline": "Germany – Weapons, ammunition and associated parts – Patronen 5,56mm x 45 Hartkern, DM31A1",
+        "title": "Patronen 5,56mm x 45 Hartkern, DM31A1",
+        "description": "Patronen 5,56mm x 45 Hartkern, DM31A1",
+        "cpv_codes": [
+          "35300000",
+          "35330000",
+          "35331000",
+          "35331500"
+        ],
+        "value": "",
+        "currency": "",
+        "counterparts": [],
+        "ted_url": "https://ted.europa.eu/en/notice/-/detail/658617-2026"
+      },
+      {
+        "notice_number": "658554-2026",
+        "published": "2026-09-24",
+        "notice_type": "can-standard",
+        "headline": "Germany – Light firearms – Laserlichtausstattung Handwaffen",
+        "title": "Laserlichtausstattung Handwaffen",
+        "description": "Herstellung und Lieferung von Lasermodulen mit Lichtausstattungen und Bedieneinheit (Laser-Licht-Ausstattung - LLA) für Handwaffen der Bundeswehr.",
+        "cpv_codes": [
+          "35321000",
+          "38636100"
+        ],
+        "value": "",
+        "currency": "",
+        "counterparts": [
+          "Rheinmetall Soldier Electronics GmbH"
+        ],
+        "ted_url": "https://ted.europa.eu/en/notice/-/detail/658554-2026"
+      },
+      {
+        "notice_number": "658068-2026",
+        "published": "2026-09-24",
+        "notice_type": "cn-standard",
+        "headline": "Germany – Cartridges – Patronen 5,56mm x 45 Weichkern, DM41A1",
+        "title": "Patronen 5,56mm x 45 Weichkern, DM41A1",
+        "description": "Patronen 5,56mm x 45 Weichkern, DM41A1",
+        "cpv_codes": [
+          "35331500",
+          "35330000",
+          "35331000",
+          "35300000"
+        ],
+        "value": "",
+        "currency": "",
+        "counterparts": [],
+        "ted_url": "https://ted.europa.eu/en/notice/-/detail/658068-2026"
+      },
+      {
+        "notice_number": "645130-2026",
+        "published": "2026-09-18",
+        "notice_type": "cn-standard",
+        "headline": "Germany – Cartridges – Herstellung und Lieferung von Patrone 7,62 mm x 51, 1 DM111A2 Weichkern - 1 DM21A3 Weichkern-Leuchtspur, 200er Gurt AM22",
+        "title": "Herstellung und Lieferung von Patrone 7,62 mm x 51, 1 DM111A2 Weichkern - 1 DM21A3 Weichkern-Leuchtspur, 200er Gurt AM22",
+        "description": "Herstellung und Lieferung von Patrone 7,62 mm x 51, 1 DM111A2 Weichkern - 1 DM21A3 Weichkern-Leuchtspur, 200er Gurt AM22",
+        "cpv_codes": [
+          "35331500",
+          "35330000"
+        ],
+        "value": "",
+        "currency": "",
+        "counterparts": [],
+        "ted_url": "https://ted.europa.eu/en/notice/-/detail/645130-2026"
+      },
+      {
+        "notice_number": "644101-2026",
+        "published": "2026-09-18",
+        "notice_type": "cn-standard",
+        "headline": "Germany – Ammunition – Herstellung und Lieferung von Patrone 7,62 mm x 51, 1 DM151 Hartkern - 1 DM21A3, Weichkern, Leuchtspur - 1 DM111A2, Weichkern, gegurtet 120er Gurt AM41",
+        "title": "Herstellung und Lieferung von Patrone 7,62 mm x 51, 1 DM151 Hartkern - 1 DM21A3, Weichkern, Leuchtspur - 1 DM111A2, Weichkern, gegurtet 120er Gurt AM41",
+        "description": "Herstellung und Lieferung von Patrone 7,62 mm x 51, 1 DM151 Hartkern - 1 DM21A3, Weichkern, Leuchtspur - 1 DM111A2, Weichkern, gegurtet 120er Gurt AM41",
+        "cpv_codes": [
+          "35330000",
+          "35331500"
+        ],
+        "value": "",
+        "currency": "",
+        "counterparts": [],
+        "ted_url": "https://ted.europa.eu/en/notice/-/detail/644101-2026"
+      },
+      {
+        "notice_number": "634494-2026",
+        "published": "2026-09-15",
+        "notice_type": "cn-standard",
+        "headline": "Germany – Ammunition – Rahmenvereinbarung mit Miniwettbewerb Beschaffung von Patronen 30mm x 173 APFSDS-T",
+        "title": "Rahmenvereinbarung mit Miniwettbewerb Beschaffung von Patronen 30mm x 173 APFSDS-T",
+        "description": "Rahmenvereinbarung Beschaffung von Patronen 30mm x 173 APFSDS-T mit mehreren Wirtschaftsteilnehmern",
+        "cpv_codes": [
+          "35330000"
+        ],
+        "value": "",
+        "currency": "",
+        "counterparts": [],
+        "ted_url": "https://ted.europa.eu/en/notice/-/detail/634494-2026"
+      },
+      {
+        "notice_number": "632032-2026",
+        "published": "2026-09-14",
+        "notice_type": "cn-standard",
+        "headline": "Germany – Ammunition – Herstellung und Lieferung von Patrone 7,62 mm x 51, 7 DM111A2 Weichkern - 4 DM21A3 Weichkern-Leuchtspur, 198er Gurt AM88",
+        "title": "Herstellung und Lieferung von Patrone 7,62 mm x 51, 7 DM111A2 Weichkern - 4 DM21A3 Weichkern-Leuchtspur, 198er Gurt AM88",
+        "description": "Herstellung und Lieferung von Patrone 7,62 mm x 51, 7 DM111A2 Weichkern - 4 DM21A3 Weichkern-Leuchtspur, 198er Gurt AM88 für 2026 und 2027",
+        "cpv_codes": [
+          "35330000",
+          "35331500"
+        ],
+        "value": "",
+        "currency": "",
+        "counterparts": [],
+        "ted_url": "https://ted.europa.eu/en/notice/-/detail/632032-2026"
+      },
+      {
+        "notice_number": "626989-2026",
+        "published": "2026-09-11",
+        "notice_type": "cn-standard",
+        "headline": "Germany – Pyrotechnics – Angestrebt wird für die Herstellung und Lieferung von Granate, Abschussgerät, DM75A1, 76 mm, Nebel, IR, RP eine Mehrpartnerrahmenvereinbarung mit Miniwettbewerb",
+        "title": "Angestrebt wird für die Herstellung und Lieferung von Granate, Abschussgerät, DM75A1, 76 mm, Nebel, IR, RP eine Mehrpartnerrahmenvereinbarung mit Miniwettbewerb",
+        "description": "Herstellung und Lieferung von Granate, Abschussgerät, DM75A1, 76 mm, Nebel, IR, RP VersNr.: 1330-12-409-8321 (bereits qualifiziert als GS30)",
+        "cpv_codes": [
+          "39225500",
+          "35330000",
+          "35331500",
+          "35331300"
+        ],
+        "value": "",
+        "currency": "",
+        "counterparts": [],
+        "ted_url": "https://ted.europa.eu/en/notice/-/detail/626989-2026"
+      },
+      {
+        "notice_number": "625642-2026",
+        "published": "2026-09-10",
+        "notice_type": "cn-standard",
+        "headline": "Germany – Ammunition – Angestrebt wird für die Herstellung und Lieferung von Signalpatronen 26,5mm Signalpatronen Fallschirm (LL57) eine Mehrpartnerrahmenvereinbarung mit Miniwettbewerb",
+        "title": "Angestrebt wird für die Herstellung und Lieferung von Signalpatronen 26,5mm Signalpatronen Fallschirm (LL57) eine Mehrpartnerrahmenvereinbarung mit Miniwettbewerb",
+        "description": "Herstellung und Lieferung von 26,5mm Signalpatronen Fallschirm LL57",
+        "cpv_codes": [
+          "35330000",
+          "39225500"
+        ],
+        "value": "",
+        "currency": "",
+        "counterparts": [],
+        "ted_url": "https://ted.europa.eu/en/notice/-/detail/625642-2026"
+      }
+    ]
+  },
+  {
+    "id": "buyer-esp-10000140000201",
+    "role": "demand",
+    "name": "Jefatura de Asuntos Económicos del Mando de Apoyo Logístico",
+    "country": "ESP",
+    "city": "Madrid",
+    "website": "",
+    "identifier": "10000140000201",
+    "summary": "The Spanish Army's Logistics Support Command economic affairs office (Madrid), which buys equipment for the land forces. Its weapons and ammunition tenders cover artillery ammunition (105 mm and 155 mm, the latter about EUR 46M), mortar bombs (about EUR 111M), heavy machine guns and 12.7 mm spare parts, .308 and .338 LM sniper cartridges, stun grenades and 155/52 howitzer barrel manufacturing. It also buys UAS, EOD robots, JTAC laser designators and vehicle maintenance. Known suppliers include Fábrica de Municiones de Granada.",
+    "legal_type": "cga",
+    "main_activity": "defence",
+    "ted_activity": {
+      "notices_total": 704,
+      "notices_analysed": 80,
+      "weapons_ammo_notices_analysed": 17,
+      "first_seen": "2026-07-01",
+      "last_seen": "2026-10-30"
+    },
+    "top_cpv": [
+      {
+        "code": "35330000",
+        "label": "Ammunition",
+        "notices": 8
+      },
+      {
+        "code": "35613000",
+        "label": "Unmanned aerial vehicles",
+        "notices": 3
+      },
+      {
+        "code": "50630000",
+        "label": "Repair and maintenance services of military vehicles",
+        "notices": 3
+      },
+      {
+        "code": "34221000",
+        "label": "Special-purpose mobile containers",
+        "notices": 3
+      },
+      {
+        "code": "50530000",
+        "label": "Repair and maintenance services of machinery",
+        "notices": 3
+      },
+      {
+        "code": "50114200",
+        "label": "Truck maintenance services",
+        "notices": 3
+      },
+      {
+        "code": "38546000",
+        "label": "Explosives detection system",
+        "notices": 2
+      },
+      {
+        "code": "35321300",
+        "label": "Machine guns",
+        "notices": 2
+      },
+      {
+        "code": "35331200",
+        "label": "Shells",
+        "notices": 2
+      },
+      {
+        "code": "50222000",
+        "label": "Repair and maintenance services of rolling stock",
+        "notices": 2
+      }
+    ],
+    "top_counterparts": [
+      {
+        "name": "Fabrica de Municiones de Granada S.L.",
+        "notices": 2
+      },
+      {
+        "name": "EUROPAVIA ESPAÑA S.A",
+        "notices": 2
+      },
+      {
+        "name": "YUMA, S. A.",
+        "notices": 2
+      },
+      {
+        "name": "Fabrica Española de Confecciones S.A",
+        "notices": 2
+      },
+      {
+        "name": "INTEGRACION TECNOLOGICA EMPRESARIAL, S.L.",
+        "notices": 2
+      },
+      {
+        "name": "TRC INFORMATICA, S.L.",
+        "notices": 1
+      },
+      {
+        "name": "IBERDEFENSA MANTENIMIENTO TECNICO SL",
+        "notices": 1
+      },
+      {
+        "name": "COMPAÑÍA INTERNACIONAL DE ANALIZADORES Y CONTROL S.L.",
+        "notices": 1
+      },
+      {
+        "name": "SUMINISTROS INTEGRALES GAMEZ S.L",
+        "notices": 1
+      },
+      {
+        "name": "DOGBOX ONLINE S.C.",
+        "notices": 1
+      }
+    ],
+    "weapons_ammo_categories": {
+      "Ammunition": 11,
+      "Firearms": 5,
+      "Parts of firearms and ammunition": 0,
+      "Miscellaneous weapons": 0
+    },
+    "recent_notices": [
+      {
+        "notice_number": "752151-2026",
+        "published": "2026-10-29",
+        "notice_type": "cn-standard",
+        "headline": "Spain – Machine guns – Adquisición de Repuestos y Herramientas AMP 12,70 mm.",
+        "title": "Adquisición de Repuestos y Herramientas AMP 12,70 mm.",
+        "description": "Adquisición de Repuestos y Herramientas AMP 12,70 mm.",
+        "cpv_codes": [
+          "35321300"
+        ],
+        "value": "3305785.12",
+        "currency": "EUR",
+        "counterparts": [],
+        "ted_url": "https://ted.europa.eu/en/notice/-/detail/752151-2026"
+      },
+      {
+        "notice_number": "736511-2026",
+        "published": "2026-10-23",
+        "notice_type": "can-standard",
+        "headline": "Spain – Shells – Adquisición de munición ACA de 105 MM",
+        "title": "Adquisición de munición ACA de 105 MM",
+        "description": "Munición ACA 105 mm (ocho lotes)",
+        "cpv_codes": [
+          "35331200"
+        ],
+        "value": "",
+        "currency": "",
+        "counterparts": [
+          "Fabrica de Municiones de Granada S.L."
+        ],
+        "ted_url": "https://ted.europa.eu/en/notice/-/detail/736511-2026"
+      },
+      {
+        "notice_number": "719421-2026",
+        "published": "2026-10-19",
+        "notice_type": "cn-standard",
+        "headline": "Spain – Ammunition – Adquisición de munición ACA de 155 mm",
+        "title": "Adquisición de munición ACA de 155 mm",
+        "description": "Adquisición de munición ACA de 155 mm",
+        "cpv_codes": [
+          "35330000"
+        ],
+        "value": "46260150",
+        "currency": "EUR",
+        "counterparts": [],
+        "ted_url": "https://ted.europa.eu/en/notice/-/detail/719421-2026"
+      },
+      {
+        "notice_number": "692945-2026",
+        "published": "2026-10-08",
+        "notice_type": "cn-standard",
+        "headline": "Spain – Machine guns – Adquisición Ametralladoras Pesadas AMP",
+        "title": "Adquisición Ametralladoras Pesadas AMP",
+        "description": "Adquisición Ametralladoras Pesadas AMP",
+        "cpv_codes": [
+          "35321300"
+        ],
+        "value": "22689261.87",
+        "currency": "EUR",
+        "counterparts": [],
+        "ted_url": "https://ted.europa.eu/en/notice/-/detail/692945-2026"
+      },
+      {
+        "notice_number": "669397-2026",
+        "published": "2026-09-29",
+        "notice_type": "can-standard",
+        "headline": "Spain – Bullets – Adquisición de Cartuchos Calibre 308 Y 338 LM",
+        "title": "Adquisición de Cartuchos Calibre 308 Y 338 LM",
+        "description": "Adquisición de Cartuchos Calibre 308 Y 338 LM",
+        "cpv_codes": [
+          "35331100"
+        ],
+        "value": "",
+        "currency": "",
+        "counterparts": [],
+        "ted_url": "https://ted.europa.eu/en/notice/-/detail/669397-2026"
+      },
+      {
+        "notice_number": "663681-2026",
+        "published": "2026-09-25",
+        "notice_type": "cn-standard",
+        "headline": "Spain – Ammunition – Adquisición de granadas de aturdimiento Stun",
+        "title": "Adquisición de granadas de aturdimiento Stun",
+        "description": "Adquisición de granadas de aturdimiento Stun",
+        "cpv_codes": [
+          "35330000"
+        ],
+        "value": "831600",
+        "currency": "EUR",
+        "counterparts": [],
+        "ted_url": "https://ted.europa.eu/en/notice/-/detail/663681-2026"
+      },
+      {
+        "notice_number": "620149-2026",
+        "published": "2026-09-09",
+        "notice_type": "cn-standard",
+        "headline": "Spain – Ammunition – Adquisición de granadas de mortero",
+        "title": "Adquisición de granadas de mortero",
+        "description": "Adquisición de granadas de mortero",
+        "cpv_codes": [
+          "35330000"
+        ],
+        "value": "111348930",
+        "currency": "EUR",
+        "counterparts": [],
+        "ted_url": "https://ted.europa.eu/en/notice/-/detail/620149-2026"
+      },
+      {
+        "notice_number": "610878-2026",
+        "published": "2026-09-04",
+        "notice_type": "can-standard",
+        "headline": "Spain – Howitzer – Suministro para fabricación de bocas de Fuego Obús 155/52 SIAC/V07.",
+        "title": "Suministro para fabricación de bocas de Fuego Obús 155/52 SIAC/V07.",
+        "description": "Suministro para fabricación de bocas de Fuego Obús 155/52 SIAC/V07.",
+        "cpv_codes": [
+          "35322500"
+        ],
+        "value": "",
+        "currency": "",
+        "counterparts": [
+          "Santa Bárbara Sistemas, S.A.U."
+        ],
+        "ted_url": "https://ted.europa.eu/en/notice/-/detail/610878-2026"
+      },
+      {
+        "notice_number": "591796-2026",
+        "published": "2026-08-27",
+        "notice_type": "cn-standard",
+        "headline": "Spain – Ammunition – Adquisición de granadas de mortero",
+        "title": "Adquisición de granadas de mortero",
+        "description": "Adquisición de granadas de mortero",
+        "cpv_codes": [
+          "35330000"
+        ],
+        "value": "9014520",
+        "currency": "EUR",
+        "counterparts": [],
+        "ted_url": "https://ted.europa.eu/en/notice/-/detail/591796-2026"
+      },
+      {
+        "notice_number": "578655-2026",
+        "published": "2026-08-21",
+        "notice_type": "cn-standard",
+        "headline": "Spain – Ammunition – Adquisición de salvas 75 MM",
+        "title": "Adquisición de salvas 75 MM",
+        "description": "Adquisición de salvas 75 MM",
+        "cpv_codes": [
+          "35330000"
+        ],
+        "value": "684000",
+        "currency": "EUR",
+        "counterparts": [],
+        "ted_url": "https://ted.europa.eu/en/notice/-/detail/578655-2026"
+      }
+    ]
+  },
+  {
+    "id": "buyer-svn-5268923000",
+    "role": "demand",
+    "name": "MINISTRSTVO ZA OBRAMBO",
+    "country": "SVN",
+    "city": "Ljubljana",
+    "website": "https://www.mo.gov.si",
+    "identifier": "5268923000",
+    "summary": "Slovenia's Ministry of Defence (Ljubljana), which buys for the Slovenian Armed Forces. Its weapons and ammunition purchases are smaller but regular: 7.62×39 mm cartridges, artillery blank salvoes, 2.75-inch air-to-ground rockets, M3M Mk3 heavy machine guns, and sights and magnifiers. Some go through direct awards (VEAT notices). Most of its other TED activity is IT systems, software and general supplies.",
+    "legal_type": "eu-ins-bod-ag",
+    "main_activity": "defence",
+    "ted_activity": {
+      "notices_total": 3092,
+      "notices_analysed": 86,
+      "weapons_ammo_notices_analysed": 6,
+      "first_seen": "2026-08-21",
+      "last_seen": "2026-10-30"
+    },
+    "top_cpv": [
+      {
+        "code": "48800000",
+        "label": "Information systems and servers",
+        "notices": 6
+      },
+      {
+        "code": "35300000",
+        "label": "Weapons, ammunition and associated parts",
+        "notices": 4
+      },
+      {
+        "code": "72262000",
+        "label": "Software development services",
+        "notices": 4
+      },
+      {
+        "code": "30233141",
+        "label": "Redundant Array of Independent Disk (RAID)",
+        "notices": 4
+      },
+      {
+        "code": "35330000",
+        "label": "Ammunition",
+        "notices": 3
+      },
+      {
+        "code": "24000000",
+        "label": "Chemical products",
+        "notices": 3
+      },
+      {
+        "code": "72260000",
+        "label": "Software-related services",
+        "notices": 2
+      },
+      {
+        "code": "33600000",
+        "label": "Pharmaceutical products",
+        "notices": 2
+      },
+      {
+        "code": "35812000",
+        "label": "Combat uniforms",
+        "notices": 2
+      },
+      {
+        "code": "72267100",
+        "label": "Maintenance of information technology software",
+        "notices": 2
+      }
+    ],
+    "top_counterparts": [
+      {
+        "name": "Kontron SI, sistemske integracije, d.o.o.",
+        "notices": 3
+      },
+      {
+        "name": "PROJEKT IP, sodobne IP komunikacije d.o.o.",
+        "notices": 2
+      },
+      {
+        "name": "INPOS, Tehnična trgovina na debelo in drobno, d.o.o., Celje",
+        "notices": 2
+      },
+      {
+        "name": "RIKO RIBNICA d.o.o. Ribniška industrija kovinske opreme",
+        "notices": 2
+      },
+      {
+        "name": "PANNA PLUS storitve in trgovina d.o.o.",
+        "notices": 2
+      },
+      {
+        "name": "OUR SPACE APPLIANCES, družba za informacijski inženiring d.o.o.",
+        "notices": 2
+      },
+      {
+        "name": "ABAKUS TRADING, Proizvodnja, servis in trgovina, d.o.o.",
+        "notices": 1
+      },
+      {
+        "name": "HIT PRELESS, proizvodnja in trgovina, d.o.o.",
+        "notices": 1
+      },
+      {
+        "name": "AVTOHIŠA SEVER servisiranje in trgovina, d.o.o.",
+        "notices": 1
+      },
+      {
+        "name": "KRULC, Servis in prodaja vozil, d.o.o.",
+        "notices": 1
+      }
+    ],
+    "weapons_ammo_categories": {
+      "Ammunition": 3,
+      "Firearms": 1,
+      "Parts of firearms and ammunition": 0,
+      "Miscellaneous weapons": 0
+    },
+    "recent_notices": [
+      {
+        "notice_number": "721475-2026",
+        "published": "2026-10-19",
+        "notice_type": "veat",
+        "headline": "Slovenia – Security, fire-fighting, police and defence equipment – Sistem za elektronsko zaščito sil - Skyner",
+        "title": "Sistem za elektronsko zaščito sil - Skyner",
+        "description": "Sistem za elektronsko zaščito sil - Skyner",
+        "cpv_codes": [
+          "35000000",
+          "35300000"
+        ],
+        "value": "1804860.0000",
+        "currency": "EUR",
+        "counterparts": [],
+        "ted_url": "https://ted.europa.eu/en/notice/-/detail/721475-2026"
+      },
+      {
+        "notice_number": "718011-2026",
+        "published": "2026-10-16",
+        "notice_type": "veat",
+        "headline": "Slovenia – Machine guns – Nakup mitraljezov M3M Mk3",
+        "title": "Nakup mitraljezov M3M Mk3",
+        "description": "Nakup mitraljezov M3M Mk3",
+        "cpv_codes": [
+          "35321300"
+        ],
+        "value": "756360.0000",
+        "currency": "EUR",
+        "counterparts": [],
+        "ted_url": "https://ted.europa.eu/en/notice/-/detail/718011-2026"
+      },
+      {
+        "notice_number": "699594-2026",
+        "published": "2026-10-09",
+        "notice_type": "cn-standard",
+        "headline": "Slovenia – Ammunition – Nakup raket zrak-zemlja 2,75''",
+        "title": "Nakup raket zrak-zemlja 2,75''",
+        "description": "Nakup raket zrak-zemlja 2,75''",
+        "cpv_codes": [
+          "35330000"
+        ],
+        "value": "",
+        "currency": "",
+        "counterparts": [],
+        "ted_url": "https://ted.europa.eu/en/notice/-/detail/699594-2026"
+      },
+      {
+        "notice_number": "653973-2026",
+        "published": "2026-09-23",
+        "notice_type": "cn-standard",
+        "headline": "Slovenia – Weapons, ammunition and associated parts – Naboji 7,62 x 39 mm",
+        "title": "Naboji 7,62 x 39 mm",
+        "description": "Naboji 7,62 x 39 mm",
+        "cpv_codes": [
+          "35300000",
+          "35330000",
+          "35331000",
+          "35331500"
+        ],
+        "value": "",
+        "currency": "",
+        "counterparts": [],
+        "ted_url": "https://ted.europa.eu/en/notice/-/detail/653973-2026"
+      },
+      {
+        "notice_number": "644252-2026",
+        "published": "2026-09-18",
+        "notice_type": "cn-standard",
+        "headline": "Slovenia – Ammunition – Topovske salve",
+        "title": "Topovske salve",
+        "description": "Topovske salve - 1024 kos",
+        "cpv_codes": [
+          "35330000",
+          "35300000",
+          "35331200",
+          "35331000",
+          "35331300"
+        ],
+        "value": "",
+        "currency": "",
+        "counterparts": [],
+        "ted_url": "https://ted.europa.eu/en/notice/-/detail/644252-2026"
+      },
+      {
+        "notice_number": "595754-2026",
+        "published": "2026-08-28",
+        "notice_type": "veat",
+        "headline": "Slovenia – Weapons, ammunition and associated parts – namerilne naprave in povečave",
+        "title": "namerilne naprave in povečave",
+        "description": "namerilne naprave in povečave",
+        "cpv_codes": [
+          "35300000"
+        ],
+        "value": "1608700.0000",
+        "currency": "EUR",
+        "counterparts": [],
+        "ted_url": "https://ted.europa.eu/en/notice/-/detail/595754-2026"
+      }
+    ]
+  },
+  {
+    "id": "buyer-ltu-188729923",
+    "role": "demand",
+    "name": "Išteklių agentūra prie Lietuvos Respublikos vidaus reikalų ministerijos",
+    "country": "LTU",
+    "city": "Vilnius",
+    "website": "https://ia.lrv.lt",
+    "identifier": "188729923",
+    "summary": "The Resource Agency under Lithuania's Ministry of the Interior (Vilnius), a central purchasing body for the interior and security services (police, border guard and similar). It buys small-arms ammunition often, under Lithuania's defence and security procurement law: 5.45×39, 5.56×45 (including subsonic), 7.62×51 tracer and belted training rounds, and 12.7×99 mm. It also buys 5.56 mm assault rifles and collimator sights for automatic weapons. The rest of its demand is mostly IT and software services.",
+    "legal_type": "",
+    "main_activity": "",
+    "ted_activity": {
+      "notices_total": 909,
+      "notices_analysed": 88,
+      "weapons_ammo_notices_analysed": 18,
+      "first_seen": "2025-10-22",
+      "last_seen": "2026-10-28"
+    },
+    "top_cpv": [
+      {
+        "code": "72200000",
+        "label": "Software programming and consultancy services",
+        "notices": 22
+      },
+      {
+        "code": "35331500",
+        "label": "Cartridges",
+        "notices": 14
+      },
+      {
+        "code": "72261000",
+        "label": "Software support services",
+        "notices": 10
+      },
+      {
+        "code": "64200000",
+        "label": "Telecommunications services",
+        "notices": 7
+      },
+      {
+        "code": "48461000",
+        "label": "Analytical or scientific software package",
+        "notices": 4
+      },
+      {
+        "code": "79132100",
+        "label": "Electronic signature certification services",
+        "notices": 4
+      },
+      {
+        "code": "30233310",
+        "label": "Fingerprint readers",
+        "notices": 3
+      },
+      {
+        "code": "30200000",
+        "label": "Computer equipment and supplies",
+        "notices": 3
+      },
+      {
+        "code": "35320000",
+        "label": "Firearms",
+        "notices": 3
+      },
+      {
+        "code": "33696500",
+        "label": "Laboratory reagents",
+        "notices": 2
+      }
+    ],
+    "top_counterparts": [
+      {
+        "name": "UAB Asseco Lietuva",
+        "notices": 6
+      },
+      {
+        "name": "UAB DEFENSA",
+        "notices": 3
+      },
+      {
+        "name": "Blue Bridge MSP UAB",
+        "notices": 3
+      },
+      {
+        "name": "UAB Insoft",
+        "notices": 2
+      },
+      {
+        "name": "Telia Lietuva AB",
+        "notices": 2
+      },
+      {
+        "name": "UAB iTree Lietuva",
+        "notices": 1
+      },
+      {
+        "name": "Banzai spol. s r.o.",
+        "notices": 1
+      },
+      {
+        "name": "MB Audiovizija",
+        "notices": 1
+      },
+      {
+        "name": "Baltic Fox OÜ",
+        "notices": 1
+      },
+      {
+        "name": "UAB \"Lexita\"",
+        "notices": 1
+      }
+    ],
+    "weapons_ammo_categories": {
+      "Ammunition": 14,
+      "Firearms": 3,
+      "Parts of firearms and ammunition": 1,
+      "Miscellaneous weapons": 0
+    },
+    "recent_notices": [
+      {
+        "notice_number": "745279-2026",
+        "published": "2026-10-28",
+        "notice_type": "cn-standard",
+        "headline": "Lithuania – Parts of firearms and ammunition – Kolimatorinis taikiklis su priartintoju automatiniam ginklui (PPR-583)",
+        "title": "Kolimatorinis taikiklis su priartintoju automatiniam ginklui (PPR-583)",
+        "description": "Preliminarus kiekis. 838 vnt.",
+        "cpv_codes": [
+          "35340000"
+        ],
+        "value": "1145504.13",
+        "currency": "EUR",
+        "counterparts": [],
+        "ted_url": "https://ted.europa.eu/en/notice/-/detail/745279-2026"
+      },
+      {
+        "notice_number": "738010-2026",
+        "published": "2026-10-26",
+        "notice_type": "can-standard",
+        "headline": "Lithuania – Cartridges – 7,62x51 mm kalibro trasuojantys šoviniai (PPR-623)",
+        "title": "7,62x51 mm kalibro trasuojantys šoviniai (PPR-623)",
+        "description": "Pirkimas atliekamas pagal Lietuvos Respublikos viešųjų pirkimų, atliekamų gynybos ir saugumo srityje, įstatymą.",
+        "cpv_codes": [
+          "35331500"
+        ],
+        "value": "76859.5",
+        "currency": "EUR",
+        "counterparts": [],
+        "ted_url": "https://ted.europa.eu/en/notice/-/detail/738010-2026"
+      },
+      {
+        "notice_number": "726994-2026",
+        "published": "2026-10-21",
+        "notice_type": "can-standard",
+        "headline": "Lithuania – Cartridges – Šoviniai 7,62x51 mm juostose kulkosvaidžiui (imitaciniai) (PPR-496)",
+        "title": "Šoviniai 7,62x51 mm juostose kulkosvaidžiui (imitaciniai) (PPR-496)",
+        "description": "Pirkimas atliekamas pagal Lietuvos Respublikos viešųjų pirkimų, atliekamų gynybos ir saugumo srityje, įstatymą. 100 000 vnt.",
+        "cpv_codes": [
+          "35331500"
+        ],
+        "value": "64700",
+        "currency": "EUR",
+        "counterparts": [
+          "Banzai spol. s r.o."
+        ],
+        "ted_url": "https://ted.europa.eu/en/notice/-/detail/726994-2026"
+      },
+      {
+        "notice_number": "692794-2026",
+        "published": "2026-10-07",
+        "notice_type": "can-standard",
+        "headline": "Lithuania – Cartridges – 5,56x45 kalibro garsiniai šoviniai (PPR-464)",
+        "title": "5,56x45 kalibro garsiniai šoviniai (PPR-464)",
+        "description": "Pirkimas atliekamas pagal Lietuvos Respublikos viešųjų pirkimų, atliekamų gynybos ir saugumo srityje, įstatymą. 394 000 vnt.",
+        "cpv_codes": [
+          "35331500"
+        ],
+        "value": "126040.60",
+        "currency": "EUR",
+        "counterparts": [
+          "UAB DEFENSA",
+          "Baltic Fox OÜ"
+        ],
+        "ted_url": "https://ted.europa.eu/en/notice/-/detail/692794-2026"
+      },
+      {
+        "notice_number": "668765-2026",
+        "published": "2026-09-29",
+        "notice_type": "cn-standard",
+        "headline": "Lithuania – Cartridges – 12,7 x 99 mm kalibro šoviniai (PPR-468)",
+        "title": "12,7 x 99 mm kalibro šoviniai (PPR-468)",
+        "description": "9000 vnt.",
+        "cpv_codes": [
+          "35331500"
+        ],
+        "value": "",
+        "currency": "",
+        "counterparts": [],
+        "ted_url": "https://ted.europa.eu/en/notice/-/detail/668765-2026"
+      },
+      {
+        "notice_number": "626043-2026",
+        "published": "2026-09-11",
+        "notice_type": "can-standard",
+        "headline": "Lithuania – Cartridges – 12,7 x 99 mm kalibro šoviniai (PPR-468)",
+        "title": "12,7 x 99 mm kalibro šoviniai (PPR-468)",
+        "description": "Pirkimas atliekamas pagal Lietuvos Respublikos viešųjų pirkimų, atliekamų gynybos ir saugumo srityje, įstatymą. 9000 vnt.",
+        "cpv_codes": [
+          "35331500"
+        ],
+        "value": "",
+        "currency": "",
+        "counterparts": [],
+        "ted_url": "https://ted.europa.eu/en/notice/-/detail/626043-2026"
+      },
+      {
+        "notice_number": "600598-2026",
+        "published": "2026-09-01",
+        "notice_type": "cn-standard",
+        "headline": "Lithuania – Cartridges – 7,62x51 mm kalibro trasuojantys šoviniai (PPR-623)",
+        "title": "7,62x51 mm kalibro trasuojantys šoviniai (PPR-623)",
+        "description": "Pirkimas atliekamas pagal Lietuvos Respublikos viešųjų pirkimų, atliekamų gynybos ir saugumo srityje, įstatymą.",
+        "cpv_codes": [
+          "35331500"
+        ],
+        "value": "76859.5",
+        "currency": "EUR",
+        "counterparts": [],
+        "ted_url": "https://ted.europa.eu/en/notice/-/detail/600598-2026"
+      },
+      {
+        "notice_number": "569735-2026",
+        "published": "2026-08-18",
+        "notice_type": "can-standard",
+        "headline": "Lithuania – Firearms – 5,56 x 45 mm kalibro šturmo karabinai (PPR-306)",
+        "title": "5,56 x 45 mm kalibro šturmo karabinai (PPR-306)",
+        "description": "Pirkimas atliekamas pagal Lietuvos Respublikos viešųjų pirkimų, atliekamų gynybos ir saugumo srityje, įstatymą",
+        "cpv_codes": [
+          "35320000"
+        ],
+        "value": "566000",
+        "currency": "EUR",
+        "counterparts": [
+          "Heckler Koch GmbH"
+        ],
+        "ted_url": "https://ted.europa.eu/en/notice/-/detail/569735-2026"
+      },
+      {
+        "notice_number": "562801-2026",
+        "published": "2026-08-13",
+        "notice_type": "can-standard",
+        "headline": "Lithuania – Cartridges – 5,45 x 39 mm kalibro šoviniai (PPR-349)",
+        "title": "5,45 x 39 mm kalibro šoviniai (PPR-349)",
+        "description": "Pirkimas atliekamas pagal Lietuvos Respublikos viešųjų pirkimų, atliekamų gynybos ir saugumo srityje, įstatymą. Maksimalus kiekis - 750 000 vnt.",
+        "cpv_codes": [
+          "35331500"
+        ],
+        "value": "344250",
+        "currency": "EUR",
+        "counterparts": [
+          "UAB DEFENSA",
+          "Baltic Fox OU"
+        ],
+        "ted_url": "https://ted.europa.eu/en/notice/-/detail/562801-2026"
+      },
+      {
+        "notice_number": "513836-2026",
+        "published": "2026-07-24",
+        "notice_type": "cn-standard",
+        "headline": "Lithuania – Cartridges – Šoviniai 7,62x51 mm juostose kulkosvaidžiui (imitaciniai) (PPR-496)",
+        "title": "Šoviniai 7,62x51 mm juostose kulkosvaidžiui (imitaciniai) (PPR-496)",
+        "description": "Pirkimas atliekamas pagal Lietuvos Respublikos viešųjų pirkimų, atliekamų gynybos ir saugumo srityje, įstatymą. 100 000 vnt.",
+        "cpv_codes": [
+          "35331500"
+        ],
+        "value": "",
+        "currency": "",
+        "counterparts": [],
+        "ted_url": "https://ted.europa.eu/en/notice/-/detail/513836-2026"
+      }
+    ]
+  },
+  {
+    "id": "buyer-aut-9110010282738",
+    "role": "demand",
+    "name": "REPUBLIK ÖSTERREICH (Bund) vertreten durch die Bundesministerin für Landesverteidigung",
+    "country": "AUT",
+    "city": "Wien",
+    "website": "https://www.bundesheer.at/",
+    "identifier": "9110010282738",
+    "summary": "The Republic of Austria, represented by the Federal Minister of Defence (Vienna), buying for the Bundesheer. It runs large multi-year ammunition tenders: 40 million 5.56 mm M855 rounds for the StG77 (deliveries 2028–2031), 18 million 9×19 mm rounds, 12 million belted 7.62 mm rounds, 300,000 .338 Lapua Magnum sniper rounds and 12.7 mm M2 ammunition (about EUR 31M). It also buys colour-marking training rounds and demolition explosives (TNT charges, plastic explosives). Most of its other TED activity is construction and engineering.",
+    "legal_type": "cga",
+    "main_activity": "defence",
+    "ted_activity": {
+      "notices_total": 487,
+      "notices_analysed": 94,
+      "weapons_ammo_notices_analysed": 9,
+      "first_seen": "2026-03-20",
+      "last_seen": "2026-10-30"
+    },
+    "top_cpv": [
+      {
+        "code": "45000000",
+        "label": "Construction work",
+        "notices": 23
+      },
+      {
+        "code": "71000000",
+        "label": "Architectural, construction, engineering and inspection services",
+        "notices": 12
+      },
+      {
+        "code": "35330000",
+        "label": "Ammunition",
+        "notices": 9
+      },
+      {
+        "code": "45231300",
+        "label": "Construction work for water and sewage pipelines",
+        "notices": 3
+      },
+      {
+        "code": "09323000",
+        "label": "District heating",
+        "notices": 2
+      },
+      {
+        "code": "71541000",
+        "label": "Construction project management services",
+        "notices": 2
+      },
+      {
+        "code": "19245000",
+        "label": "Lining fabrics",
+        "notices": 2
+      },
+      {
+        "code": "35812000",
+        "label": "Combat uniforms",
+        "notices": 2
+      },
+      {
+        "code": "71240000",
+        "label": "Architectural, engineering and planning services",
+        "notices": 2
+      },
+      {
+        "code": "18443320",
+        "label": "Field caps",
+        "notices": 2
+      }
+    ],
+    "top_counterparts": [
+      {
+        "name": "STV GROUP A.S.",
+        "notices": 2
+      },
+      {
+        "name": "pro event team für wien gmbh",
+        "notices": 2
+      },
+      {
+        "name": "Pittel+Brausewetter Gesellschaft m.b.H.",
+        "notices": 2
+      },
+      {
+        "name": "Erhardt Maschinenbau GmbH",
+        "notices": 1
+      },
+      {
+        "name": "EVN Wärme GmbH",
+        "notices": 1
+      },
+      {
+        "name": "Josef Ozepek GmbH",
+        "notices": 1
+      },
+      {
+        "name": "GRAUSAM",
+        "notices": 1
+      },
+      {
+        "name": "tlb21 agenturen",
+        "notices": 1
+      },
+      {
+        "name": "HT Generalunternehmer & Industriebau GmbH",
+        "notices": 1
+      },
+      {
+        "name": "IKK Group GmbH",
+        "notices": 1
+      }
+    ],
+    "weapons_ammo_categories": {
+      "Ammunition": 9,
+      "Firearms": 0,
+      "Parts of firearms and ammunition": 0,
+      "Miscellaneous weapons": 0
+    },
+    "recent_notices": [
+      {
+        "notice_number": "637078-2026",
+        "published": "2026-09-16",
+        "notice_type": "cn-standard",
+        "headline": "Austria – Ammunition – 12.000.000 Stück 7,62mm 4S : 1 L-Patronen/Maschinengewehr/gegurtet (7,62 mm 4 Ball : 1 Tracer, linked M13), Verhandlungsverfahren mit vorheriger Bekanntmachung im OSB gemäß 23 (3) BVergGVS 2012",
+        "title": "12.000.000 Stück 7,62mm 4S : 1 L-Patronen/Maschinengewehr/gegurtet (7,62 mm 4 Ball : 1 Tracer, linked M13), Verhandlungsverfahren mit vorheriger Bekanntmachung im OSB gemäß 23 (3) BVergGVS 2012",
+        "description": "EINHOLUNG VON TEILNAHMEANTRÄGEN für die Vergabe eines Lieferauftrages betreffend 12.000.000 Stück 7,62mm 4S : 1 L-Patronen/Maschinengewehr/gegurtet, (7,62 mm 4 Ball : 1 Tracer, linked M13), Verhandlungsverfahren mit vorheriger Bekanntmachung im OSB 1. Stufe/Interessentensuche gemäß 23 (3) BVergGVS 2012",
+        "cpv_codes": [
+          "35330000"
+        ],
+        "value": "",
+        "currency": "",
+        "counterparts": [],
+        "ted_url": "https://ted.europa.eu/en/notice/-/detail/637078-2026"
+      },
+      {
+        "notice_number": "622888-2026",
+        "published": "2026-09-10",
+        "notice_type": "can-standard",
+        "headline": "Austria – Ammunition – Zuschlag - Bohrpatrone 0,10 kg TNT",
+        "title": "Zuschlag - Bohrpatrone 0,10 kg TNT",
+        "description": "Zuschlag Bohrpatrone 0.10kg TNT VVmvB im OSB gem. BVergGVS 2012",
+        "cpv_codes": [
+          "35330000"
+        ],
+        "value": "1390000",
+        "currency": "EUR",
+        "counterparts": [
+          "STV GROUP A.S."
+        ],
+        "ted_url": "https://ted.europa.eu/en/notice/-/detail/622888-2026"
+      },
+      {
+        "notice_number": "565775-2026",
+        "published": "2026-08-14",
+        "notice_type": "cn-standard",
+        "headline": "Austria – Ammunition – 8,6mm SS-Patr/mSSG",
+        "title": "8,6mm SS-Patr/mSSG",
+        "description": "EINHOLUNG VON TEILNAHMEANTRÄGEN für die Vergabe eines Lieferauftrages betreffend 300.000 Stk. 8,6mm Scharfschützenpatronen/mSSG, (Catridge 338 Lapua Magnum, Ball Sniper), Verhandlungsverfahren mit vorheriger Bekanntmachung im OSB 1. Stufe/Interessentensuche gemäß 23 (3) BVergGVS 2012",
+        "cpv_codes": [
+          "35330000"
+        ],
+        "value": "",
+        "currency": "",
+        "counterparts": [],
+        "ted_url": "https://ted.europa.eu/en/notice/-/detail/565775-2026"
+      },
+      {
+        "notice_number": "474613-2026",
+        "published": "2026-07-09",
+        "notice_type": "cn-standard",
+        "headline": "Austria – Ammunition – 5,56 mm S-Patrone M855(SS109)/StG77 - Verhandlungsverfahren mit vorheriger Bekanntmachung gem. § 23 (3) BVergGVS 2012 im OSB",
+        "title": "5,56 mm S-Patrone M855(SS109)/StG77 - Verhandlungsverfahren mit vorheriger Bekanntmachung gem. § 23 (3) BVergGVS 2012 im OSB",
+        "description": "40.000.000 Stk 5,56 mm S-Patrone M855(SS109)/StG77, (davon jeweils 10.000.000 Stk für die Jahre 2028 bis 2031), Verhandlungsverfahren mit vorheriger Bekanntmachung im OSB 1. Stufe/Interessentensuche gemäß 23 (3) BVergGVS 2012",
+        "cpv_codes": [
+          "35330000"
+        ],
+        "value": "",
+        "currency": "",
+        "counterparts": [],
+        "ted_url": "https://ted.europa.eu/en/notice/-/detail/474613-2026"
+      },
+      {
+        "notice_number": "429373-2026",
+        "published": "2026-06-24",
+        "notice_type": "cn-standard",
+        "headline": "Austria – Ammunition – 9mm S-Patrone/P 80, (9mm x 19 CARTRIDGE, BALL, long), Verhandlungsverfahren mit vorheriger Bekanntmachung gem. BVergGVS 2012 im OSB, Einholung von Teilnahmeanträgen",
+        "title": "9mm S-Patrone/P 80, (9mm x 19 CARTRIDGE, BALL, long), Verhandlungsverfahren mit vorheriger Bekanntmachung gem. BVergGVS 2012 im OSB, Einholung von Teilnahmeanträgen",
+        "description": "18.000.000 Stk 9mm S-Patrone/P 80, (9mm x 19 CARTRIDGE, BALL, long), Lieferung von jeweils 6.000.000 Stk II. Quartal 2028, II. Quartal 2029 und II. Quartal 2030 erwünscht, Verhandlungsverfahren mit vorheriger Bekanntmachung im OSB 1. Stufe/Interessentensuche gemäß 23 (3) BVergGVS 2012",
+        "cpv_codes": [
+          "35330000"
+        ],
+        "value": "",
+        "currency": "",
+        "counterparts": [],
+        "ted_url": "https://ted.europa.eu/en/notice/-/detail/429373-2026"
+      },
+      {
+        "notice_number": "333932-2026",
+        "published": "2026-05-15",
+        "notice_type": "can-standard",
+        "headline": "Austria – Ammunition – Zuschlag - 12, 7mm 4 PzB : 1 PzBL-Patr/üsMG M2/geg",
+        "title": "Zuschlag - 12, 7mm 4 PzB : 1 PzBL-Patr/üsMG M2/geg",
+        "description": "Zuschlag - 12, 7mm 4 PzB : 1 PzBL-Patr/üsMG M2/geg",
+        "cpv_codes": [
+          "35330000"
+        ],
+        "value": "30912000.00",
+        "currency": "EUR",
+        "counterparts": [
+          "AALTECH Gmbh"
+        ],
+        "ted_url": "https://ted.europa.eu/en/notice/-/detail/333932-2026"
+      },
+      {
+        "notice_number": "329175-2026",
+        "published": "2026-05-13",
+        "notice_type": "can-standard",
+        "headline": "Austria – Ammunition – Sportmunition",
+        "title": "Sportmunition",
+        "description": "Zuschlag - Sportmunition",
+        "cpv_codes": [
+          "35330000",
+          "35000000"
+        ],
+        "value": "363591.24",
+        "currency": "EUR",
+        "counterparts": [
+          "UMAREX AUSTRIA GmbH & Co KG",
+          "AMMOTEC AUSTRIA GmbH",
+          "GTML GmbH"
+        ],
+        "ted_url": "https://ted.europa.eu/en/notice/-/detail/329175-2026"
+      },
+      {
+        "notice_number": "286278-2026",
+        "published": "2026-04-27",
+        "notice_type": "can-standard",
+        "headline": "Austria – Ammunition – Zuschlag - Plastischer Sprengkörper 11/1 kg",
+        "title": "Zuschlag - Plastischer Sprengkörper 11/1 kg",
+        "description": "Zuschlag - Plastischer Sprengkörper 11/1 kg",
+        "cpv_codes": [
+          "35330000"
+        ],
+        "value": "1475740",
+        "currency": "EUR",
+        "counterparts": [
+          "STV GROUP A.S."
+        ],
+        "ted_url": "https://ted.europa.eu/en/notice/-/detail/286278-2026"
+      },
+      {
+        "notice_number": "195804-2026",
+        "published": "2026-03-20",
+        "notice_type": "cn-standard",
+        "headline": "Austria – Ammunition – 5,56mm Farbmarkierpatrone/StG 77, Verhandlungsverfahren mit vorheriger Bekanntmachung im USB gemäß 23 (3) BVergGVS 2012, 1. Stufe/Interessentensuche",
+        "title": "5,56mm Farbmarkierpatrone/StG 77, Verhandlungsverfahren mit vorheriger Bekanntmachung im USB gemäß 23 (3) BVergGVS 2012, 1. Stufe/Interessentensuche",
+        "description": "120.000 Stück 5,56 mm Farbmarkierpatrone rot/StG77 und 120.000 Stück 5,56 mm Farbmarkierpatrone blau/StG77 Verhandlungsverfahren mit vorheriger Bekanntmachung im USB gemäß 23 (3) BVergGVS 2012, 1. Stufe/Interessentensuche",
+        "cpv_codes": [
+          "35330000"
+        ],
+        "value": "",
+        "currency": "",
+        "counterparts": [],
+        "ted_url": "https://ted.europa.eu/en/notice/-/detail/195804-2026"
+      }
+    ]
+  }
+]

@@ -1,0 +1,1212 @@
+[
+  {
+    "id": "supplier-cze-65414128",
+    "role": "supply",
+    "name": "C.I.D Praha s.r.o.",
+    "country": "CZE",
+    "city": "Praha - Nové Město",
+    "website": "",
+    "identifier": "65414128",
+    "summary": "Czech arms supplier and SME based in Prague. It wins weapons contracts from the Czech Ministry of the Interior (Police of the Czech Republic) and the Ministry of Defence. Its main business on TED is 4.6×30 mm personal defence weapons (PDW submachine guns), supplied under framework agreements with spare parts and accessories. It also supplies spare parts and components for police long-gun systems. All its TED awards are in CPV 35300000.",
+    "company_size": "sme",
+    "ted_activity": {
+      "notices_total": 18,
+      "notices_analysed": 17,
+      "weapons_ammo_notices_analysed": 17,
+      "first_seen": "2024-05-02",
+      "last_seen": "2026-10-30",
+      "sole_winner_awarded_value": {
+        "CZK": 1156057528.0
+      }
+    },
+    "top_cpv": [
+      {
+        "code": "35300000",
+        "label": "Weapons, ammunition and associated parts",
+        "notices": 17
+      }
+    ],
+    "top_counterparts": [
+      {
+        "name": "Ministerstvo vnitra",
+        "notices": 14
+      },
+      {
+        "name": "Ministerstvo obrany",
+        "notices": 3
+      }
+    ],
+    "weapons_ammo_categories": {
+      "Ammunition": 0,
+      "Firearms": 0,
+      "Parts of firearms and ammunition": 0,
+      "Miscellaneous weapons": 0
+    },
+    "recent_notices": [
+      {
+        "notice_number": "756226-2026",
+        "published": "2026-10-30",
+        "notice_type": "can-standard",
+        "headline": "Czechia – Weapons, ammunition and associated parts – Rámcová dohoda na dodávky náhradních dílů a dalších komponentů pro zbraňové komplety na bázi dlouhých zbraní z výzbroje Policie ČR",
+        "title": "Rámcová dohoda na dodávky náhradních dílů a dalších komponentů pro zbraňové komplety na bázi dlouhých zbraní z výzbroje Policie ČR",
+        "description": "Předmětem zadávacího řízení je uzavření rámcové dohody na dodávky mnoha desítek položek náhradních dílů a dalších výzbrojních komponentů pro zbraňové komplety na bázi dlouhých zbraní z výzbroje Policie ČR. Předmět plnění je rozdělen na šest vymezených části veřejné zakázky. Bližší informace jsou uvedeny v zadávací dokumentaci.",
+        "cpv_codes": [
+          "35300000"
+        ],
+        "value": "12987600",
+        "currency": "CZK",
+        "counterparts": [
+          "Ministerstvo vnitra"
+        ],
+        "ted_url": "https://ted.europa.eu/en/notice/-/detail/756226-2026"
+      },
+      {
+        "notice_number": "731131-2026",
+        "published": "2026-10-22",
+        "notice_type": "can-standard",
+        "headline": "Czechia – Weapons, ammunition and associated parts – Výzva č. 26221000444 - PDW",
+        "title": "Výzva č. 26221000444 - PDW",
+        "description": "osobní obranná zbraň",
+        "cpv_codes": [
+          "35300000"
+        ],
+        "value": "28333730",
+        "currency": "CZK",
+        "counterparts": [
+          "Ministerstvo obrany"
+        ],
+        "ted_url": "https://ted.europa.eu/en/notice/-/detail/731131-2026"
+      },
+      {
+        "notice_number": "702786-2026",
+        "published": "2026-10-12",
+        "notice_type": "can-standard",
+        "headline": "Czechia – Weapons, ammunition and associated parts – Výzva č. 24221000000254",
+        "title": "Výzva č. 24221000000254",
+        "description": "Osobní obranná zbraň PDW 4,60x30 mm",
+        "cpv_codes": [
+          "35300000"
+        ],
+        "value": "222111050",
+        "currency": "CZK",
+        "counterparts": [
+          "Ministerstvo obrany"
+        ],
+        "ted_url": "https://ted.europa.eu/en/notice/-/detail/702786-2026"
+      },
+      {
+        "notice_number": "702041-2026",
+        "published": "2026-10-12",
+        "notice_type": "can-standard",
+        "headline": "Czechia – Weapons, ammunition and associated parts – Výzva č. 26221000090",
+        "title": "Výzva č. 26221000090",
+        "description": "osobní obranná zbraň PDW ráže 4,60 x 30mm",
+        "cpv_codes": [
+          "35300000"
+        ],
+        "value": "16887642",
+        "currency": "CZK",
+        "counterparts": [
+          "Ministerstvo obrany"
+        ],
+        "ted_url": "https://ted.europa.eu/en/notice/-/detail/702041-2026"
+      },
+      {
+        "notice_number": "266930-2026",
+        "published": "2026-04-20",
+        "notice_type": "can-standard",
+        "headline": "Czechia – Weapons, ammunition and associated parts – Rámcová dohoda na dodávky náhradních dílů a dalších komponentů pro zbraňové komplety na bázi dlouhých zbraní z výzbroje Policie ČR",
+        "title": "Rámcová dohoda na dodávky náhradních dílů a dalších komponentů pro zbraňové komplety na bázi dlouhých zbraní z výzbroje Policie ČR",
+        "description": "Předmětem zadávacího řízení je uzavření rámcové dohody na dodávky mnoha desítek položek náhradních dílů a dalších výzbrojních komponentů pro zbraňové komplety na bázi dlouhých zbraní z výzbroje Policie ČR. Předmět plnění je rozdělen na šest vymezených části veřejné zakázky. Bližší informace jsou uvedeny v zadávací dokumentaci.",
+        "cpv_codes": [
+          "35300000"
+        ],
+        "value": "43922999",
+        "currency": "CZK",
+        "counterparts": [
+          "Ministerstvo vnitra"
+        ],
+        "ted_url": "https://ted.europa.eu/en/notice/-/detail/266930-2026"
+      },
+      {
+        "notice_number": "68673-2026",
+        "published": "2026-01-30",
+        "notice_type": "can-standard",
+        "headline": "Czechia – Weapons, ammunition and associated parts – Rámcová dohoda na mikrorážové samopaly třídy PDW včetně náhradních dílů a příslušenství",
+        "title": "Rámcová dohoda na mikrorážové samopaly třídy PDW včetně náhradních dílů a příslušenství",
+        "description": "Předmětem zadávacího řízení je uzavření rámcové dohody na dodávku kompaktní „mikrorážové“ automatické zbraně jednotlivce třídy PDW (samopal), vyhovující standardům pro ozbrojené složky, účinné i proti lehce chráněné živé síle osobními ochrannými balistickými prostředky jednotlivce (NATO CRISAT), s příslušenstvím, výukově-výcvikovými variantami samopalu a náhradními díly k nim, a to dle specifikace uvedené v zadávací dokumentaci. Veškeré bližší informace jsou uvedeny v zadávací dokumentaci.",
+        "cpv_codes": [
+          "35300000"
+        ],
+        "value": "54737299",
+        "currency": "CZK",
+        "counterparts": [
+          "Ministerstvo vnitra"
+        ],
+        "ted_url": "https://ted.europa.eu/en/notice/-/detail/68673-2026"
+      },
+      {
+        "notice_number": "68201-2026",
+        "published": "2026-01-30",
+        "notice_type": "can-standard",
+        "headline": "Czechia – Weapons, ammunition and associated parts – Rámcová dohoda na dodávky náhradních dílů a dalších komponentů pro zbraňové komplety na bázi dlouhých zbraní z výzbroje Policie ČR",
+        "title": "Rámcová dohoda na dodávky náhradních dílů a dalších komponentů pro zbraňové komplety na bázi dlouhých zbraní z výzbroje Policie ČR",
+        "description": "Předmětem zadávacího řízení je uzavření rámcové dohody na dodávky mnoha desítek položek náhradních dílů a dalších výzbrojních komponentů pro zbraňové komplety na bázi dlouhých zbraní z výzbroje Policie ČR. Předmět plnění je rozdělen na šest vymezených části veřejné zakázky. Bližší informace jsou uvedeny v zadávací dokumentaci.",
+        "cpv_codes": [
+          "35300000"
+        ],
+        "value": "9801000",
+        "currency": "CZK",
+        "counterparts": [
+          "Ministerstvo vnitra"
+        ],
+        "ted_url": "https://ted.europa.eu/en/notice/-/detail/68201-2026"
+      },
+      {
+        "notice_number": "721305-2025",
+        "published": "2025-10-31",
+        "notice_type": "can-standard",
+        "headline": "Czechia – Weapons, ammunition and associated parts – Rámcová dohoda na mikrorážové samopaly třídy PDW včetně náhradních dílů a příslušenství",
+        "title": "Rámcová dohoda na mikrorážové samopaly třídy PDW včetně náhradních dílů a příslušenství",
+        "description": "Předmětem zadávacího řízení je uzavření rámcové dohody na dodávku kompaktní „mikrorážové“ automatické zbraně jednotlivce třídy PDW (samopal), vyhovující standardům pro ozbrojené složky, účinné i proti lehce chráněné živé síle osobními ochrannými balistickými prostředky jednotlivce (NATO CRISAT), s příslušenstvím, výukově-výcvikovými variantami samopalu a náhradními díly k nim, a to dle specifikace uvedené v zadávací dokumentaci. Veškeré bližší informace jsou uvedeny v zadávací dokumentaci.",
+        "cpv_codes": [
+          "35300000"
+        ],
+        "value": "136130000",
+        "currency": "CZK",
+        "counterparts": [
+          "Ministerstvo vnitra"
+        ],
+        "ted_url": "https://ted.europa.eu/en/notice/-/detail/721305-2025"
+      },
+      {
+        "notice_number": "499720-2025",
+        "published": "2025-07-30",
+        "notice_type": "can-standard",
+        "headline": "Czechia – Weapons, ammunition and associated parts – Rámcová dohoda na mikrorážové samopaly třídy PDW včetně náhradních dílů a příslušenství",
+        "title": "Rámcová dohoda na mikrorážové samopaly třídy PDW včetně náhradních dílů a příslušenství",
+        "description": "Předmětem zadávacího řízení je uzavření rámcové dohody na dodávku kompaktní „mikrorážové“ automatické zbraně jednotlivce třídy PDW (samopal), vyhovující standardům pro ozbrojené složky, účinné i proti lehce chráněné živé síle osobními ochrannými balistickými prostředky jednotlivce (NATO CRISAT), s příslušenstvím, výukově-výcvikovými variantami samopalu a náhradními díly k nim, a to dle specifikace uvedené v zadávací dokumentaci. Veškeré bližší informace jsou uvedeny v zadávací dokumentaci.",
+        "cpv_codes": [
+          "35300000"
+        ],
+        "value": "20468000",
+        "currency": "CZK",
+        "counterparts": [
+          "Ministerstvo vnitra"
+        ],
+        "ted_url": "https://ted.europa.eu/en/notice/-/detail/499720-2025"
+      },
+      {
+        "notice_number": "499332-2025",
+        "published": "2025-07-30",
+        "notice_type": "can-standard",
+        "headline": "Czechia – Weapons, ammunition and associated parts – Rámcová dohoda na dodávky náhradních dílů a dalších komponentů pro zbraňové komplety na bázi dlouhých zbraní z výzbroje Policie ČR",
+        "title": "Rámcová dohoda na dodávky náhradních dílů a dalších komponentů pro zbraňové komplety na bázi dlouhých zbraní z výzbroje Policie ČR",
+        "description": "Předmětem zadávacího řízení je uzavření rámcové dohody na dodávky mnoha desítek položek náhradních dílů a dalších výzbrojních komponentů pro zbraňové komplety na bázi dlouhých zbraní z výzbroje Policie ČR. Předmět plnění je rozdělen na šest vymezených části veřejné zakázky. Bližší informace jsou uvedeny v zadávací dokumentaci.",
+        "cpv_codes": [
+          "35300000"
+        ],
+        "value": "32509300",
+        "currency": "CZK",
+        "counterparts": [
+          "Ministerstvo vnitra"
+        ],
+        "ted_url": "https://ted.europa.eu/en/notice/-/detail/499332-2025"
+      }
+    ]
+  },
+  {
+    "id": "supplier-esp-b88295209",
+    "role": "supply",
+    "name": "Fabrica de Municiones de Granada S.L.",
+    "country": "ESP",
+    "city": "Granada",
+    "website": "",
+    "identifier": "B88295209",
+    "summary": "Large Spanish ammunition manufacturer based in Granada and a regular supplier to the Spanish Army Logistics Support Command. It wins contracts for 105 mm and 155 mm field artillery ammunition (one 105 mm award was about EUR 22M) and 76/62 mm naval practice rounds. It also supplies special explosive shaped charges, including to the Guardia Civil.",
+    "company_size": "large",
+    "ted_activity": {
+      "notices_total": 7,
+      "notices_analysed": 7,
+      "weapons_ammo_notices_analysed": 5,
+      "first_seen": "2024-04-26",
+      "last_seen": "2026-10-23",
+      "sole_winner_awarded_value": {
+        "EUR": 27205391.83
+      }
+    },
+    "top_cpv": [
+      {
+        "code": "35331200",
+        "label": "Shells",
+        "notices": 2
+      },
+      {
+        "code": "35331000",
+        "label": "Ammunition for firearms and warfare",
+        "notices": 1
+      },
+      {
+        "code": "24600000",
+        "label": "Explosives",
+        "notices": 1
+      },
+      {
+        "code": "35333100",
+        "label": "Bombs",
+        "notices": 1
+      },
+      {
+        "code": "24610000",
+        "label": "Prepared explosives",
+        "notices": 1
+      },
+      {
+        "code": "35330000",
+        "label": "Ammunition",
+        "notices": 1
+      }
+    ],
+    "top_counterparts": [
+      {
+        "name": "Jefatura de Asuntos Económicos del Mando de Apoyo Logístico",
+        "notices": 5
+      },
+      {
+        "name": "Dirección de Gestión Económica de la Jefatura de Apoyo Logístico de la Armada",
+        "notices": 1
+      },
+      {
+        "name": "Jefatura de Asuntos Económicos de la Guardia Civil",
+        "notices": 1
+      }
+    ],
+    "weapons_ammo_categories": {
+      "Ammunition": 5,
+      "Firearms": 0,
+      "Parts of firearms and ammunition": 0,
+      "Miscellaneous weapons": 0
+    },
+    "recent_notices": [
+      {
+        "notice_number": "736511-2026",
+        "published": "2026-10-23",
+        "notice_type": "can-standard",
+        "headline": "Spain – Shells – Adquisición de munición ACA de 105 MM",
+        "title": "Adquisición de munición ACA de 105 MM",
+        "description": "Munición ACA 105 mm (ocho lotes)",
+        "cpv_codes": [
+          "35331200"
+        ],
+        "value": "",
+        "currency": "",
+        "counterparts": [
+          "Jefatura de Asuntos Económicos del Mando de Apoyo Logístico"
+        ],
+        "ted_url": "https://ted.europa.eu/en/notice/-/detail/736511-2026"
+      },
+      {
+        "notice_number": "645534-2026",
+        "published": "2026-09-18",
+        "notice_type": "can-standard",
+        "headline": "Spain – Ammunition for firearms and warfare – Suministro de disparos 76/62 mm de ejercicio (E)",
+        "title": "Suministro de disparos 76/62 mm de ejercicio (E)",
+        "description": "Suministro de disparos 76/62 mm de ejercicio (E)",
+        "cpv_codes": [
+          "35331000"
+        ],
+        "value": "2205000",
+        "currency": "EUR",
+        "counterparts": [
+          "Dirección de Gestión Económica de la Jefatura de Apoyo Logístico de la Armada"
+        ],
+        "ted_url": "https://ted.europa.eu/en/notice/-/detail/645534-2026"
+      },
+      {
+        "notice_number": "482187-2026",
+        "published": "2026-07-13",
+        "notice_type": "can-standard",
+        "headline": "Spain – Shells – Adquisición de munición ACA de 155 mm",
+        "title": "Adquisición de munición ACA de 155 mm",
+        "description": "Adquisición de munición ACA de 155 mm",
+        "cpv_codes": [
+          "35331200"
+        ],
+        "value": "",
+        "currency": "",
+        "counterparts": [
+          "Jefatura de Asuntos Económicos del Mando de Apoyo Logístico"
+        ],
+        "ted_url": "https://ted.europa.eu/en/notice/-/detail/482187-2026"
+      },
+      {
+        "notice_number": "737868-2025",
+        "published": "2025-11-06",
+        "notice_type": "can-standard",
+        "headline": "Spain – Bombs – Adquisición de Cargas Conformadas Explosivas Especiales",
+        "title": "Adquisición de Cargas Conformadas Explosivas Especiales",
+        "description": "Adquisición de Cargas Conformadas Explosivas Especiales",
+        "cpv_codes": [
+          "35333100"
+        ],
+        "value": "305404.83",
+        "currency": "EUR",
+        "counterparts": [
+          "Jefatura de Asuntos Económicos del Mando de Apoyo Logístico"
+        ],
+        "ted_url": "https://ted.europa.eu/en/notice/-/detail/737868-2025"
+      },
+      {
+        "notice_number": "249707-2024",
+        "published": "2024-04-26",
+        "notice_type": "can-standard",
+        "headline": "Spain – Ammunition – Adquisición de munición de artillería de campaña 105 mm",
+        "title": "Adquisición de munición de artillería de campaña 105 mm",
+        "description": "Adquisición de munición de artillería de campaña 105 mm",
+        "cpv_codes": [
+          "35330000"
+        ],
+        "value": "22354680",
+        "currency": "EUR",
+        "counterparts": [
+          "Jefatura de Asuntos Económicos del Mando de Apoyo Logístico"
+        ],
+        "ted_url": "https://ted.europa.eu/en/notice/-/detail/249707-2024"
+      }
+    ]
+  },
+  {
+    "id": "supplier-pol-9482182612",
+    "role": "supply",
+    "name": "Fabryka Broni \"ŁUCZNIK\"-Radom Sp. z o.o.",
+    "country": "POL",
+    "city": "Radom",
+    "website": "",
+    "identifier": "9482182612",
+    "summary": "Polish state-group small-arms manufacturer in Radom (Łucznik), maker of the MSBS GROT rifle. On TED it mostly wins spare parts, service and repair kits, gauges, special tools, and UTM training-ammunition conversion kits for Polish Army small arms. It supplies these to Regional Logistics Bases 1 and 2, often as call-offs under framework agreement 19/W/2024. Platforms covered include the 5.56 mm MSBS GROT and the 9 mm PM-84P and PM-98 submachine guns.",
+    "company_size": "",
+    "ted_activity": {
+      "notices_total": 16,
+      "notices_analysed": 13,
+      "weapons_ammo_notices_analysed": 13,
+      "first_seen": "2024-07-01",
+      "last_seen": "2026-09-24",
+      "sole_winner_awarded_value": {
+        "PLN": 43261205.64
+      }
+    },
+    "top_cpv": [
+      {
+        "code": "35341000",
+        "label": "Parts of light firearms",
+        "notices": 11
+      },
+      {
+        "code": "35300000",
+        "label": "Weapons, ammunition and associated parts",
+        "notices": 11
+      },
+      {
+        "code": "35322100",
+        "label": "Anti-aircraft",
+        "notices": 2
+      },
+      {
+        "code": "35813000",
+        "label": "Military helmets",
+        "notices": 2
+      },
+      {
+        "code": "35340000",
+        "label": "Parts of firearms and ammunition",
+        "notices": 2
+      },
+      {
+        "code": "35322200",
+        "label": "Self-propelled artillery",
+        "notices": 1
+      },
+      {
+        "code": "38631000",
+        "label": "Binoculars",
+        "notices": 1
+      },
+      {
+        "code": "38636000",
+        "label": "Specialist optical instruments",
+        "notices": 1
+      }
+    ],
+    "top_counterparts": [
+      {
+        "name": "1 REGIONALNA BAZA LOGISTYCZNA",
+        "notices": 11
+      },
+      {
+        "name": "2. Regionalna Baza Logistyczna",
+        "notices": 2
+      }
+    ],
+    "weapons_ammo_categories": {
+      "Ammunition": 0,
+      "Firearms": 2,
+      "Parts of firearms and ammunition": 13,
+      "Miscellaneous weapons": 0
+    },
+    "recent_notices": [
+      {
+        "notice_number": "657152-2026",
+        "published": "2026-09-24",
+        "notice_type": "can-standard",
+        "headline": "Poland – Weapons, ammunition and associated parts – Dostawa technicznych środków materiałowych, zestawów konwersyjnych do nabojów UTM do broni strzeleckiej",
+        "title": "Dostawa technicznych środków materiałowych, zestawów konwersyjnych do nabojów UTM do broni strzeleckiej",
+        "description": "1. Przedmiotem zamówienia dostawa technicznych środków materiałowych, zestawów konwersyjnych do nabojów UTM do broni strzeleckiej wykonana zgodnie z dokumentami zamówienia. 2. Szczegóły dotyczące przedmiotu zamówienia i kryteriów oceny ofert zostaną zamieszczone w Specyfikacji Warunków Zamówienia, która wraz z opisem przedmiotu zamówienia zostanie przekazana Wykonawcom zaproszonym do składania ofert.",
+        "cpv_codes": [
+          "35300000",
+          "35341000"
+        ],
+        "value": "4724127.29",
+        "currency": "PLN",
+        "counterparts": [
+          "1 REGIONALNA BAZA LOGISTYCZNA"
+        ],
+        "ted_url": "https://ted.europa.eu/en/notice/-/detail/657152-2026"
+      },
+      {
+        "notice_number": "627236-2026",
+        "published": "2026-09-11",
+        "notice_type": "can-standard",
+        "headline": "Poland – Parts of firearms and ammunition – Dostawa technicznych środków materiałowych (tśm) do sprzętu wojskowego (SpW)",
+        "title": "Dostawa technicznych środków materiałowych (tśm) do sprzętu wojskowego (SpW)",
+        "description": "1. Przedmiotem zamówienia jest dostawa technicznych środków materiałowych do sprzętu wojskowego, z podziałem na 14 części (zadań). zadanie nr 1 - 9 mm pistolet maszynowy PM-84P, PM-98; zadanie nr 2 - 5,56 mm karabinek Beryl-C; MINI Beryl; zadanie nr 3 - 5,56 mm karabinek MSBS GROT; zadanie nr 4 - 9 mm pistolet samopowtarzalny VIS - 100; zadanie nr 5 – 7,62 mm karabin wyborowy BOR (ALEX); zadanie nr 6 – 12,7 mm karabin wyborowy TOR; zadanie nr 7 - 7,62 mm karabin maszynowy UKM; PK; zadanie nr 8 - 12,7 mm wielokalibrowy karabin maszynowy WKM-Bm; zadanie nr 9 - 122 mm samobieżna armatohaubica 2S1",
+        "cpv_codes": [
+          "35340000",
+          "35322200",
+          "35322100",
+          "38631000",
+          "35813000"
+        ],
+        "value": "10306545.8",
+        "currency": "PLN",
+        "counterparts": [
+          "2. Regionalna Baza Logistyczna"
+        ],
+        "ted_url": "https://ted.europa.eu/en/notice/-/detail/627236-2026"
+      },
+      {
+        "notice_number": "588491-2026",
+        "published": "2026-08-26",
+        "notice_type": "can-standard",
+        "headline": "Poland – Parts of firearms and ammunition – Dostawa technicznych środków materiałowych ( tśm) do sprzętu wojskowego",
+        "title": "Dostawa technicznych środków materiałowych ( tśm) do sprzętu wojskowego",
+        "description": "1. Przedmiotem zamówienia jest dostawa technicznych środków materiałowych ( tśm) do sprzętu wojskowegoz podziałem na 7 części (zadania): zadanie nr 1: 5,56 mm karabinek MSBS GROT zadanie nr 2: 7,62 mm karabin wyborowy BOR (Alex) zadanie nr 3 : 7,62 mm karabin maszynowy UKM;PK Zadanie nr 4: 23 mm armata przeciwlotnicza ZU-23-2 Zadanie nr 5 : Optoelektronika Zadanie nr 6 : Celowniki Zadanie nr 7 - Hełm kompozytowy wz.2005 2. Wymogi, ilości oraz szczegółowy opis przedmiotu zamówienia wyszczególniono w załączniku nr 1 do Specyfikacji Warunków Zamówienia, którą Zamawiający przekaże zaproszonym do s",
+        "cpv_codes": [
+          "35340000",
+          "35322100",
+          "38636000",
+          "35813000"
+        ],
+        "value": "6388243.86",
+        "currency": "PLN",
+        "counterparts": [
+          "2. Regionalna Baza Logistyczna"
+        ],
+        "ted_url": "https://ted.europa.eu/en/notice/-/detail/588491-2026"
+      },
+      {
+        "notice_number": "462081-2026",
+        "published": "2026-07-06",
+        "notice_type": "can-standard",
+        "headline": "Poland – Weapons, ammunition and associated parts – Udzielenie zamówienia realizacyjnego w 2026 r. w ramach zawartej umowy ramowej nr 19/W/2024 z 29.05.2024 r. w zakresie dostawy technicznych środków materiałowych, zestawów obsługowo-naprawczych, sprawdzianów i narzędzi specjalnych oraz zestawów konwersyjnych na naboje UTM do broni strzeleckiej.",
+        "title": "Udzielenie zamówienia realizacyjnego w 2026 r. w ramach zawartej umowy ramowej nr 19/W/2024 z 29.05.2024 r. w zakresie dostawy technicznych środków materiałowych, zestawów obsługowo-naprawczych, sprawdzianów i narzędzi specjalnych oraz zestawów konwersyjnych na naboje UTM do broni strzeleckiej.",
+        "description": "Przedmiotem Umowy realizacyjnej jest dostawa technicznych środków materiałowych, zestawów obsługowo-naprawczych, sprawdzianów i narzędzi specjalnych oraz zestawów konwersyjnych na naboje UTM do broni strzeleckiej, wykonanych zgodnie z aktualną dokumentacją techniczną wyrobu (DTW) lub dokumentacją do produkcji seryjnej (DTPS), bądź w oparciu o aktualną kartę katalogową wprowadzonego lub użytkowanego w Siłach Zbrojnych Sprzętu Wojskowego, zatwierdzoną przez właściwą komórkę organizacyjną MON tj.: 1)9 mm pistolet wojskowy P-83 – dokumentacja nr 1-566, zatwierdzona do produkcji seryjnej orzeczenie",
+        "cpv_codes": [
+          "35300000",
+          "35341000"
+        ],
+        "value": "14315378.18",
+        "currency": "PLN",
+        "counterparts": [
+          "1 REGIONALNA BAZA LOGISTYCZNA"
+        ],
+        "ted_url": "https://ted.europa.eu/en/notice/-/detail/462081-2026"
+      },
+      {
+        "notice_number": "60414-2026",
+        "published": "2026-01-27",
+        "notice_type": "can-standard",
+        "headline": "Poland – Weapons, ammunition and associated parts – Udzielenie zamówienia realizacyjnego w 2026 r. w ramach zawartej umowy ramowej nr 19/W/2024 z 29.05.2024 r. w zakresie dostawy technicznych środków materiałowych, zestawów obsługowo-naprawczych, sprawdzianów i narzędzi specjalnych oraz zestawów konwersyjnych na naboje UTM do broni strzeleckiej.",
+        "title": "Udzielenie zamówienia realizacyjnego w 2026 r. w ramach zawartej umowy ramowej nr 19/W/2024 z 29.05.2024 r. w zakresie dostawy technicznych środków materiałowych, zestawów obsługowo-naprawczych, sprawdzianów i narzędzi specjalnych oraz zestawów konwersyjnych na naboje UTM do broni strzeleckiej.",
+        "description": "Przedmiotem Umowy realizacyjnej jest dostawa technicznych środków materiałowych, zestawów obsługowo-naprawczych, sprawdzianów i narzędzi specjalnych oraz zestawów konwersyjnych na naboje UTM do broni strzeleckiej, wykonanych zgodnie z aktualną dokumentacją techniczną wyrobu (DTW) lub dokumentacją do produkcji seryjnej (DTPS), bądź w oparciu o aktualną kartę katalogową wprowadzonego lub użytkowanego w Siłach Zbrojnych Sprzętu Wojskowego, zatwierdzoną przez właściwą komórkę organizacyjną MON tj.: 1) 9 mm pistolet wojskowy P-83 – dokumentacja nr 1-566, zatwierdzona do produkcji seryjnej orzeczeni",
+        "cpv_codes": [
+          "35300000",
+          "35341000"
+        ],
+        "value": "555348.23",
+        "currency": "PLN",
+        "counterparts": [
+          "1 REGIONALNA BAZA LOGISTYCZNA"
+        ],
+        "ted_url": "https://ted.europa.eu/en/notice/-/detail/60414-2026"
+      },
+      {
+        "notice_number": "776374-2025",
+        "published": "2025-11-24",
+        "notice_type": "can-standard",
+        "headline": "Poland – Weapons, ammunition and associated parts – Udzielenie zamówienia realizacyjnego w 2025 r. w ramach zawartej umowy ramowej nr 19/W/2024 z 29.05.2024 r. w zakresie dostawy sprawdzianów i narzędzi specjalnych do broni strzeleckiej.",
+        "title": "Udzielenie zamówienia realizacyjnego w 2025 r. w ramach zawartej umowy ramowej nr 19/W/2024 z 29.05.2024 r. w zakresie dostawy sprawdzianów i narzędzi specjalnych do broni strzeleckiej.",
+        "description": "Przedmiotem Umowy realizacyjnej jest dostawa sprawdzianów i narzędzi specjalnych do broni strzeleckiej, wykonanych zgodnie z aktualną dokumentacją techniczną wyrobu (DTW) lub dokumentacją do produkcji seryjnej (DTPS), bądź w oparciu o aktualną kartę katalogową wprowadzonego lub użytkowanego w Siłach Zbrojnych Sprzętu Wojskowego, zatwierdzoną przez właściwą komórkę organizacyjną MON tj.: - Dokumentacja techniczna do Produkcji Seryjnej (DTPS) wyrobu 9 mm pistolet samopowtarzalny VIS 100 359-00-000-000 – wprowadzona do użytku na podstawie Orzeczenia Szefa Agencji Uzbrojenia nr AU-2620/24/SU z dni",
+        "cpv_codes": [
+          "35300000",
+          "35341000"
+        ],
+        "value": "1512654",
+        "currency": "PLN",
+        "counterparts": [
+          "1 REGIONALNA BAZA LOGISTYCZNA"
+        ],
+        "ted_url": "https://ted.europa.eu/en/notice/-/detail/776374-2025"
+      },
+      {
+        "notice_number": "634249-2025",
+        "published": "2025-09-29",
+        "notice_type": "can-standard",
+        "headline": "Poland – Weapons, ammunition and associated parts – Udzielenie zamówienia realizacyjnego w 2025 r. w ramach zawartej umowy ramowej nr 19/W/2024 z 29.05.2024 r. w zakresie dostawy zestawów konwersyjnych do nabojów UTM do broni strzeleckiej.",
+        "title": "Udzielenie zamówienia realizacyjnego w 2025 r. w ramach zawartej umowy ramowej nr 19/W/2024 z 29.05.2024 r. w zakresie dostawy zestawów konwersyjnych do nabojów UTM do broni strzeleckiej.",
+        "description": "Przedmiotem Umowy realizacyjnej jest dostawa zestawów konwersyjnych do nabojów UTM do broni strzeleckiej, wykonanych zgodnie z aktualną dokumentacją techniczną wyrobu (DTW) lub dokumentacją do produkcji seryjnej (DTPS), bądź w oparciu o aktualną kartę katalogową wprowadzonego lub użytkowanego w Siłach Zbrojnych Sprzętu Wojskowego, zatwierdzoną przez właściwą komórkę organizacyjną MON tj.: 1) Dokumentacja Techniczna Wyrobu: a) zespół zamka UTM prawy – DTW nr 323-20-000-000, b) zespół zamka UTM lewy – DTW nr 323-21-000-000, c) magazynek UTM M16/M4 – DTW nr 323-27-000-000.",
+        "cpv_codes": [
+          "35300000",
+          "35341000"
+        ],
+        "value": "998929.54",
+        "currency": "PLN",
+        "counterparts": [
+          "1 REGIONALNA BAZA LOGISTYCZNA"
+        ],
+        "ted_url": "https://ted.europa.eu/en/notice/-/detail/634249-2025"
+      },
+      {
+        "notice_number": "466930-2025",
+        "published": "2025-07-17",
+        "notice_type": "can-standard",
+        "headline": "Poland – Weapons, ammunition and associated parts – Udzielenie zamówienia realizacyjnego w 2025 r. w ramach zawartej umowy ramowej nr 19/W/2024 z 29.05.2024 r. w zakresie technicznych środków materiałowych, zestawów obsługowo-naprawczych, sprawdzianów i narzędzi specjalnych oraz zestawów konwersyjnych do nabojów UTM do broni strzeleckiej.",
+        "title": "Udzielenie zamówienia realizacyjnego w 2025 r. w ramach zawartej umowy ramowej nr 19/W/2024 z 29.05.2024 r. w zakresie technicznych środków materiałowych, zestawów obsługowo-naprawczych, sprawdzianów i narzędzi specjalnych oraz zestawów konwersyjnych do nabojów UTM do broni strzeleckiej.",
+        "description": "Przedmiotem Umowy realizacyjnej jest dostawa technicznych środków materiałowych, zestawów obsługowo – naprawczych, sprawdzianów i narzędzi specjalnych oraz zestawów konwersyjnych do nabojów UTM do broni strzeleckiej, wykonanych zgodnie z aktualną dokumentacją techniczną wyrobu (DTW) lub dokumentacją do produkcji seryjnej (DTPS), bądź w oparciu o aktualną kartę katalogową wprowadzonego lub użytkowanego w Siłach Zbrojnych Sprzętu Wojskowego, zatwierdzoną przez właściwą komórkę organizacyjną MON tj.: 1)Dokumentacja techniczna do Produkcji Seryjnej (DTPS) wyrobu 9 mm pistolet samopowtarzalny VIS 1",
+        "cpv_codes": [
+          "35300000",
+          "35341000"
+        ],
+        "value": "6264635.39",
+        "currency": "PLN",
+        "counterparts": [
+          "1 REGIONALNA BAZA LOGISTYCZNA"
+        ],
+        "ted_url": "https://ted.europa.eu/en/notice/-/detail/466930-2025"
+      },
+      {
+        "notice_number": "443857-2025",
+        "published": "2025-07-08",
+        "notice_type": "can-standard",
+        "headline": "Poland – Weapons, ammunition and associated parts – Udzielenie zamówienia realizacyjnego w 2025 r. w ramach zawartej umowy ramowej nr 19/W/2024 z 29.05.2024 r. w zakresie technicznych środków materiałowych, zestawów obsługowo-naprawczych, sprawdzianów i narzędzi specjalnych oraz zestawów konwersyjnych do nabojów UTM do broni strzeleckiej.",
+        "title": "Udzielenie zamówienia realizacyjnego w 2025 r. w ramach zawartej umowy ramowej nr 19/W/2024 z 29.05.2024 r. w zakresie technicznych środków materiałowych, zestawów obsługowo-naprawczych, sprawdzianów i narzędzi specjalnych oraz zestawów konwersyjnych do nabojów UTM do broni strzeleckiej.",
+        "description": "Przedmiotem Umowy realizacyjnej jest dostawa technicznych środków materiałowych, zestawów obsługowo – naprawczych, sprawdzianów i narzędzi specjalnych oraz zestawów konwersyjnych do nabojów UTM do broni strzeleckiej, wykonanych zgodnie z aktualną dokumentacją techniczną wyrobu (DTW) lub dokumentacją do produkcji seryjnej (DTPS), bądź w oparciu o aktualną kartę katalogową wprowadzonego lub użytkowanego w Siłach Zbrojnych Sprzętu Wojskowego, zatwierdzoną przez właściwą komórkę organizacyjną MON tj.: 1) Dokumentacja techniczna do Produkcji Seryjnej (DTPS) wyrobu 9 mm pistolet samopowtarzalny VIS ",
+        "cpv_codes": [
+          "35300000",
+          "35341000"
+        ],
+        "value": "3497462.27",
+        "currency": "PLN",
+        "counterparts": [
+          "1 REGIONALNA BAZA LOGISTYCZNA"
+        ],
+        "ted_url": "https://ted.europa.eu/en/notice/-/detail/443857-2025"
+      },
+      {
+        "notice_number": "274281-2025",
+        "published": "2025-04-29",
+        "notice_type": "can-standard",
+        "headline": "Poland – Weapons, ammunition and associated parts – Udzielenie zamówienia realizacyjnego w 2025 r. w ramach zawartej umowy ramowej nr 19/W/2024 z 29.05.2024 r. w zakresie technicznych środków materiałowych, zestawów obsługowo-naprawczych, sprawdzianów i narzędzi specjalnych oraz zestawów konwesyjnych do nabojów UTM do broni strzeleckiej.",
+        "title": "Udzielenie zamówienia realizacyjnego w 2025 r. w ramach zawartej umowy ramowej nr 19/W/2024 z 29.05.2024 r. w zakresie technicznych środków materiałowych, zestawów obsługowo-naprawczych, sprawdzianów i narzędzi specjalnych oraz zestawów konwesyjnych do nabojów UTM do broni strzeleckiej.",
+        "description": "Przedmiotem Umowy realizacyjnej jest dostawa technicznych środków materiałowych, zestawów obsługowo – naprawczych, sprawdzianów i narzędzi specjalnych oraz zestawów konwersyjnych do nabojów UTM do broni strzeleckiej, wykonanych zgodnie z aktualną dokumentacją techniczną do produkcji seryjnej, bądź w oparciu o aktualną kartę katalogową wprowadzonego lub użytkowanego w Siłach Zbrojnych Sprzętu Wojskowego, zatwierdzoną przez właściwą komórkę organizacyjną MON tj.: 1)9 mm pistolet wojskowy P-83 – dokumentacja nr 1-566, zatwierdzona do produkcji seryjnej orzeczeniem Departamentu Rozwoju i Wdrożeń M",
+        "cpv_codes": [
+          "35300000",
+          "35341000"
+        ],
+        "value": "424031.63",
+        "currency": "PLN",
+        "counterparts": [
+          "1 REGIONALNA BAZA LOGISTYCZNA"
+        ],
+        "ted_url": "https://ted.europa.eu/en/notice/-/detail/274281-2025"
+      }
+    ]
+  },
+  {
+    "id": "supplier-deu-de811125878",
+    "role": "supply",
+    "name": "Metallwerk Elisenhütte",
+    "country": "DEU",
+    "city": "Nassau",
+    "website": "",
+    "identifier": "DE811125878",
+    "summary": "Large German small-arms ammunition manufacturer in Nassau. It supplies BAAINBw/Bundeswehr, German customs and federal and state police forces (Bavaria, Hesse, Saxony-Anhalt), plus at least one award from the Dutch Ministry of Defence. Products are 5.56×45 mm (hard-core DM31, soft-core DM41A1, blank and manoeuvre rounds), 7.62×51 mm duty ammunition and 9×19 mm duty, training and frangible rounds, often under framework agreements. Its largest recent award was 5.56 mm blanks at about EUR 16.9M.",
+    "company_size": "large",
+    "ted_activity": {
+      "notices_total": 19,
+      "notices_analysed": 19,
+      "weapons_ammo_notices_analysed": 18,
+      "first_seen": "2023-10-27",
+      "last_seen": "2026-09-17",
+      "sole_winner_awarded_value": {
+        "EUR": 16916335.0
+      }
+    },
+    "top_cpv": [
+      {
+        "code": "35330000",
+        "label": "Ammunition",
+        "notices": 12
+      },
+      {
+        "code": "35331500",
+        "label": "Cartridges",
+        "notices": 10
+      },
+      {
+        "code": "35300000",
+        "label": "Weapons, ammunition and associated parts",
+        "notices": 6
+      },
+      {
+        "code": "35331000",
+        "label": "Ammunition for firearms and warfare",
+        "notices": 3
+      },
+      {
+        "code": "35000000",
+        "label": "Security, fire-fighting, police and defence equipment",
+        "notices": 1
+      }
+    ],
+    "top_counterparts": [
+      {
+        "name": "Bundesamt für Ausrüstung, Informationstechnik und Nutzung der Bundeswehr",
+        "notices": 7
+      },
+      {
+        "name": "Generalzolldirektion Zentrale Beschaffungsstelle der Bundesfinanzverwaltung",
+        "notices": 4
+      },
+      {
+        "name": "Präsidium der Bayer. Bereitschaftspolizei",
+        "notices": 2
+      },
+      {
+        "name": "Hessisches Polizeipräsidium für Technik",
+        "notices": 2
+      },
+      {
+        "name": "Ministerie van Defensie",
+        "notices": 1
+      },
+      {
+        "name": "Bundesrepublik Deutschland, vertreten durch das Bundesministerium des Innern und für Heimat, vertreten durch das Beschaffungsamt des BMI",
+        "notices": 1
+      },
+      {
+        "name": "Polizeiinspektion Zentrale Dienste Sachsen-Anhalt",
+        "notices": 1
+      },
+      {
+        "name": "Polizeiverwaltungsamt Logistikzentrum",
+        "notices": 1
+      }
+    ],
+    "weapons_ammo_categories": {
+      "Ammunition": 17,
+      "Firearms": 0,
+      "Parts of firearms and ammunition": 0,
+      "Miscellaneous weapons": 0
+    },
+    "recent_notices": [
+      {
+        "notice_number": "639742-2026",
+        "published": "2026-09-17",
+        "notice_type": "can-standard",
+        "headline": "Netherlands – Ammunition – Cartridges 5.56mm Blanks",
+        "title": "Cartridges 5.56mm Blanks",
+        "description": "Cartridges 5.56mm Blanks",
+        "cpv_codes": [
+          "35330000",
+          "35331500"
+        ],
+        "value": "16916335",
+        "currency": "EUR",
+        "counterparts": [
+          "Ministerie van Defensie"
+        ],
+        "ted_url": "https://ted.europa.eu/en/notice/-/detail/639742-2026"
+      },
+      {
+        "notice_number": "573266-2026",
+        "published": "2026-08-19",
+        "notice_type": "can-standard",
+        "headline": "Germany – Ammunition – Lieferung von Übungsmunition zur Schießaus- und -fortbildung im Kaliber 5,56mm x 45",
+        "title": "Lieferung von Übungsmunition zur Schießaus- und -fortbildung im Kaliber 5,56mm x 45",
+        "description": "Der Auftraggeber vergibt einen Auftrag zur Belieferung der Bayerischen Polizei mit Übungsmunition zur Schießaus- und –fortbildung im Kaliber 5,56 mm x 45.",
+        "cpv_codes": [
+          "35330000"
+        ],
+        "value": "",
+        "currency": "",
+        "counterparts": [
+          "Präsidium der Bayer. Bereitschaftspolizei"
+        ],
+        "ted_url": "https://ted.europa.eu/en/notice/-/detail/573266-2026"
+      },
+      {
+        "notice_number": "226734-2026",
+        "published": "2026-04-02",
+        "notice_type": "can-standard",
+        "headline": "Germany – Cartridges – Patrone 9mm x 19 Frangible",
+        "title": "Patrone 9mm x 19 Frangible",
+        "description": "Lieferung von Patronen 9mm x 19 Frangible",
+        "cpv_codes": [
+          "35331500"
+        ],
+        "value": "",
+        "currency": "",
+        "counterparts": [
+          "Bundesrepublik Deutschland, vertreten durch das Bundesministerium des Innern und für Heimat, vertreten durch das Beschaffungsamt des BMI"
+        ],
+        "ted_url": "https://ted.europa.eu/en/notice/-/detail/226734-2026"
+      },
+      {
+        "notice_number": "79046-2026",
+        "published": "2026-02-03",
+        "notice_type": "can-standard",
+        "headline": "Germany – Cartridges – Einsatzmunition Kal. 7,62mm x 51",
+        "title": "Einsatzmunition Kal. 7,62mm x 51",
+        "description": "Einsatzmunition Kal. 7,62 mm x 51 1) Kal. 7,62 mm x 51 Leuchtspur/Tracer - DM21 oder mindestens gleichwertig 2) Kal. 7,62 mm x 51 Weichkern/ FMJ /Ball - DM111/41 oder mindestens gleichwertig 3) Kal. 7,62 mm x 51 Hartkern/ HC, HPC - DM 151 oder mindestens gleichwertig 4) Kal. 7,62 mm x 51 gegurtet",
+        "cpv_codes": [
+          "35331500"
+        ],
+        "value": "",
+        "currency": "",
+        "counterparts": [
+          "Generalzolldirektion Zentrale Beschaffungsstelle der Bundesfinanzverwaltung"
+        ],
+        "ted_url": "https://ted.europa.eu/en/notice/-/detail/79046-2026"
+      },
+      {
+        "notice_number": "28370-2026",
+        "published": "2026-01-15",
+        "notice_type": "can-standard",
+        "headline": "Germany – Ammunition – Lieferung von Einsatz- und Übungsmunition im Kaliber 9mm x 19",
+        "title": "Lieferung von Einsatz- und Übungsmunition im Kaliber 9mm x 19",
+        "description": "Rahmenvereinbarung über die Lieferung von Einsatz- und Übungsmunition im Kaliber 9mm x 19 für die Bayerische Polizei",
+        "cpv_codes": [
+          "35330000"
+        ],
+        "value": "",
+        "currency": "",
+        "counterparts": [
+          "Präsidium der Bayer. Bereitschaftspolizei"
+        ],
+        "ted_url": "https://ted.europa.eu/en/notice/-/detail/28370-2026"
+      },
+      {
+        "notice_number": "776633-2025",
+        "published": "2025-11-24",
+        "notice_type": "can-standard",
+        "headline": "Germany – Weapons, ammunition and associated parts – Patronen 5,56mm x 45 Weichkern",
+        "title": "Patronen 5,56mm x 45 Weichkern",
+        "description": "Patronen 5,56mm x 45 Weichkern, DM41A1",
+        "cpv_codes": [
+          "35300000",
+          "35330000",
+          "35331500"
+        ],
+        "value": "",
+        "currency": "",
+        "counterparts": [
+          "Bundesamt für Ausrüstung, Informationstechnik und Nutzung der Bundeswehr"
+        ],
+        "ted_url": "https://ted.europa.eu/en/notice/-/detail/776633-2025"
+      },
+      {
+        "notice_number": "776531-2025",
+        "published": "2025-11-24",
+        "notice_type": "can-standard",
+        "headline": "Germany – Weapons, ammunition and associated parts – Patronen 5,56mm x 45 Manöver",
+        "title": "Patronen 5,56mm x 45 Manöver",
+        "description": "Patronen 5,56mm x 45 Manöver, DM18A1",
+        "cpv_codes": [
+          "35300000",
+          "35330000",
+          "35331500"
+        ],
+        "value": "",
+        "currency": "",
+        "counterparts": [
+          "Bundesamt für Ausrüstung, Informationstechnik und Nutzung der Bundeswehr"
+        ],
+        "ted_url": "https://ted.europa.eu/en/notice/-/detail/776531-2025"
+      },
+      {
+        "notice_number": "776356-2025",
+        "published": "2025-11-24",
+        "notice_type": "can-standard",
+        "headline": "Germany – Weapons, ammunition and associated parts – Patronen 5,56mm x 45 Hartkern, DM31",
+        "title": "Patronen 5,56mm x 45 Hartkern, DM31",
+        "description": "Herstellung und Lieferung Patronen 5,56mm x 45 Hartkern, DM31",
+        "cpv_codes": [
+          "35300000",
+          "35330000",
+          "35331000",
+          "35331500"
+        ],
+        "value": "",
+        "currency": "",
+        "counterparts": [
+          "Bundesamt für Ausrüstung, Informationstechnik und Nutzung der Bundeswehr"
+        ],
+        "ted_url": "https://ted.europa.eu/en/notice/-/detail/776356-2025"
+      },
+      {
+        "notice_number": "608729-2025",
+        "published": "2025-09-17",
+        "notice_type": "can-standard",
+        "headline": "Germany – Ammunition – RV Munition 5,56mm x 45",
+        "title": "RV Munition 5,56mm x 45",
+        "description": "Einsatz- und Trainingspatronen im Kaliber 5,56mm x 45",
+        "cpv_codes": [
+          "35330000"
+        ],
+        "value": "",
+        "currency": "",
+        "counterparts": [
+          "Hessisches Polizeipräsidium für Technik"
+        ],
+        "ted_url": "https://ted.europa.eu/en/notice/-/detail/608729-2025"
+      },
+      {
+        "notice_number": "566239-2025",
+        "published": "2025-08-29",
+        "notice_type": "can-standard",
+        "headline": "Germany – Ammunition – Lieferung von Pistolenpatronen 9mm x 19 SOLID, PTP 2.0",
+        "title": "Lieferung von Pistolenpatronen 9mm x 19 SOLID, PTP 2.0",
+        "description": "Abschluss eines Rahmenvertrages von Pistolenpatronen 9mm x19 SOLID und PTP 2.0 für die Polizei und Justiz des Landes Sachsen-Anhalt",
+        "cpv_codes": [
+          "35330000"
+        ],
+        "value": "",
+        "currency": "",
+        "counterparts": [
+          "Polizeiinspektion Zentrale Dienste Sachsen-Anhalt"
+        ],
+        "ted_url": "https://ted.europa.eu/en/notice/-/detail/566239-2025"
+      }
+    ]
+  },
+  {
+    "id": "supplier-rou-ro-15148839",
+    "role": "supply",
+    "name": "TRANSCARPAT SPORTOURS INTERNATIONAL",
+    "country": "ROU",
+    "city": "Bucuresti",
+    "website": "",
+    "identifier": "RO 15148839",
+    "summary": "Medium-sized Romanian defence and security trading company in Bucharest. It supplies the Romanian MoD (several military units), the Romanian Police, the Border Police, the Penitentiary Police and the emergency services (IGSU). Its core line is ammunition in many calibres (7.62×25, 7.65×17, 9×19, 12.7×99 mm, lethal and less-lethal) plus service firearms. It also sells specialist optical instruments, endoscopes, training simulators, military vehicle parts and sports equipment.",
+    "company_size": "medium",
+    "ted_activity": {
+      "notices_total": 35,
+      "notices_analysed": 34,
+      "weapons_ammo_notices_analysed": 15,
+      "first_seen": "2024-03-22",
+      "last_seen": "2026-10-01",
+      "sole_winner_awarded_value": {
+        "RON": 55778152.24
+      }
+    },
+    "top_cpv": [
+      {
+        "code": "38636000",
+        "label": "Specialist optical instruments",
+        "notices": 7
+      },
+      {
+        "code": "35331500",
+        "label": "Cartridges",
+        "notices": 7
+      },
+      {
+        "code": "33168100",
+        "label": "Endoscopes",
+        "notices": 5
+      },
+      {
+        "code": "35331000",
+        "label": "Ammunition for firearms and warfare",
+        "notices": 4
+      },
+      {
+        "code": "35420000",
+        "label": "Parts of military vehicles",
+        "notices": 3
+      },
+      {
+        "code": "35320000",
+        "label": "Firearms",
+        "notices": 2
+      },
+      {
+        "code": "37400000",
+        "label": "Sports goods and equipment",
+        "notices": 2
+      },
+      {
+        "code": "34152000",
+        "label": "Training simulators",
+        "notices": 2
+      },
+      {
+        "code": "24615000",
+        "label": "Fuses, caps, igniters and electric detonators",
+        "notices": 2
+      },
+      {
+        "code": "35330000",
+        "label": "Ammunition",
+        "notices": 1
+      }
+    ],
+    "top_counterparts": [
+      {
+        "name": "Ministerul Apararii - Unitatea Militara 02550 Bucuresti",
+        "notices": 7
+      },
+      {
+        "name": "INSPECTORATUL GENERAL AL POLITIEI ROMANE",
+        "notices": 5
+      },
+      {
+        "name": "UNITATEA MILITARA 01357 BUCURESTI",
+        "notices": 3
+      },
+      {
+        "name": "INSPECTORATUL GENERAL AL POLITIEI DE FRONTIERA",
+        "notices": 2
+      },
+      {
+        "name": "UM 0929 Bucuresti",
+        "notices": 2
+      },
+      {
+        "name": "UNITATEA MILITARA 0461 BUCURESTI",
+        "notices": 2
+      },
+      {
+        "name": "Inspectoratul General pentru Situatii de Urgenta",
+        "notices": 2
+      },
+      {
+        "name": "BAZA DE APROVIZIONARE, GOSPODARIRE SI REPARATII",
+        "notices": 2
+      },
+      {
+        "name": "Academia de Politie Alexandru Ioan Cuza Bucuresti",
+        "notices": 2
+      },
+      {
+        "name": "Unitatea de Logistică și Achiziții Centralizate a Poliției Penitenciare",
+        "notices": 1
+      }
+    ],
+    "weapons_ammo_categories": {
+      "Ammunition": 12,
+      "Firearms": 3,
+      "Parts of firearms and ammunition": 0,
+      "Miscellaneous weapons": 0
+    },
+    "recent_notices": [
+      {
+        "notice_number": "675339-2026",
+        "published": "2026-10-01",
+        "notice_type": "can-standard",
+        "headline": "Romania – Ammunition – Muniție letală și neletală pentru 24 luni (6 loturi)",
+        "title": "Muniție letală și neletală pentru 24 luni (6 loturi)",
+        "description": "Autoritatea contractantă organizatoare, Unitatea de Logistică și Achiziții Centralizate a Poliției Penitenciare, în calitate de unitate de achiziții centralizate, va încheia acordul-cadru pentru o perioadă de 24 luni, cu 1 (un) operator economic. Cantitățile și valorile acordului-cadru sunt cuprinse în Documentația de atribuire. Contractele subsecvente acordului-cadru vor fi încheiate, de regulă, trimestrial, de către Unitatea de Logistică și Achiziții Centralizate a Poliției Penitenciare, în funcție de necesități. Criteriul de atribuire utilizat pentru atribuirea acestui contract este „Prețul",
+        "cpv_codes": [
+          "35330000"
+        ],
+        "value": "5797559.38",
+        "currency": "RON",
+        "counterparts": [
+          "Unitatea de Logistică și Achiziții Centralizate a Poliției Penitenciare"
+        ],
+        "ted_url": "https://ted.europa.eu/en/notice/-/detail/675339-2026"
+      },
+      {
+        "notice_number": "492028-2026",
+        "published": "2026-07-16",
+        "notice_type": "can-standard",
+        "headline": "Romania – Cartridges – Furnizare cartuse diverse calibre",
+        "title": "Furnizare cartuse diverse calibre",
+        "description": "În cadrul acestei procedurii se doreşte achiziţionarea de Cartușe diverse calibre, împărţite în 2 loturi, cu specificaţiile tehnice minime prevăzute în Anexa nr. 1 la Caietul de sarcini și în cantităţile estimate prevăzute în Anexa nr. 2 la Caietul de sarcini. Operatorii economici vor oferta pentru toate reperele şi pentru întreaga cantitate (cantitatea maximă a acordului-cadru), aferentă fiecărui lot, prevăzută în anexa 2 la caietul de sarcini. Orice solicitare de clarificări trebuie transmisă în SEAP (https://e-licitatie.ro/pub). Orice posibil candidat/candidat selectat are dreptul de a soli",
+        "cpv_codes": [
+          "35331500"
+        ],
+        "value": "52407.57",
+        "currency": "EUR",
+        "counterparts": [
+          "UM 0929 Bucuresti",
+          "UNITATEA MILITARA 0461 BUCURESTI"
+        ],
+        "ted_url": "https://ted.europa.eu/en/notice/-/detail/492028-2026"
+      },
+      {
+        "notice_number": "467174-2026",
+        "published": "2026-07-07",
+        "notice_type": "can-standard",
+        "headline": "Romania – Cartridges – Furnizare cartuse diverse calibre",
+        "title": "Furnizare cartuse diverse calibre",
+        "description": "În cadrul acestei procedurii se doreşte achiziţionarea de Cartușe diverse calibre, împărţite în 2 loturi, cu specificaţiile tehnice minime prevăzute în Anexa nr. 1 la Caietul de sarcini și în cantităţile estimate prevăzute în Anexa nr. 2 la Caietul de sarcini. Operatorii economici vor oferta pentru toate reperele şi pentru întreaga cantitate (cantitatea maximă a acordului-cadru), aferentă fiecărui lot, prevăzută în anexa 2 la caietul de sarcini. Orice solicitare de clarificări trebuie transmisă în SEAP (https://e-licitatie.ro/pub). Orice posibil candidat/candidat selectat are dreptul de a soli",
+        "cpv_codes": [
+          "35331500"
+        ],
+        "value": "940800",
+        "currency": "EUR",
+        "counterparts": [
+          "UM 0929 Bucuresti",
+          "UNITATEA MILITARA 0461 BUCURESTI"
+        ],
+        "ted_url": "https://ted.europa.eu/en/notice/-/detail/467174-2026"
+      },
+      {
+        "notice_number": "192367-2026",
+        "published": "2026-03-19",
+        "notice_type": "can-standard",
+        "headline": "Romania – Cartridges – Lotul 1 - Cartuș 7,62x25 mm cu glonț obișnuit Lotul 2 - Cartuș 7,65x17 mm cu glonț obișnuit Lotul 3 - Cartuș 7,62x51 mm, pe bandă",
+        "title": "Lotul 1 - Cartuș 7,62x25 mm cu glonț obișnuit Lotul 2 - Cartuș 7,65x17 mm cu glonț obișnuit Lotul 3 - Cartuș 7,62x51 mm, pe bandă",
+        "description": "Estimarea valorii totale a achiziţiilor pentru întreaga durată a acordurilor-cadru (după caz; numai în cifre): Valoarea estimată fără T.V.A.: Lotul 1 - Cartuș 7,62x25 mm cu glonț obișnuit: 180.000,00 RON Lotul 2 - Cartuș 7,65x17 mm cu glonț obișnuit: 5.509.620,00 RON Lotul 3 - Cartuș 7,62x51 mm, pe bandă: 3.000.000,00 RON Frecvenţa şi valoarea contractelor care urmează să fie atribuite (dacă se cunosc): de regulă anual. Cantitatea estimată de produse care ar putea fi solicitată pe parcursul derulării acordului-cadru este: Lotul 1 - Cartuș 7,62x25 mm cu glonț obișnuit: cantitatea minimă –12.000",
+        "cpv_codes": [
+          "35331500"
+        ],
+        "value": "",
+        "currency": "",
+        "counterparts": [
+          "Ministerul Apararii - Unitatea Militara 02550 Bucuresti"
+        ],
+        "ted_url": "https://ted.europa.eu/en/notice/-/detail/192367-2026"
+      },
+      {
+        "notice_number": "475052-2025",
+        "published": "2025-07-21",
+        "notice_type": "can-standard",
+        "headline": "Romania – Cartridges – Acord cadru: Cartușe calibru 7,65x17mm",
+        "title": "Acord cadru: Cartușe calibru 7,65x17mm",
+        "description": "IGSU ca parte componentă a Sistemului Național de Ordine Publică și Siguranță Națională necesită o pregătire continuă specializată a personalului încadrat. O activitate importantă a pregătirii cadrelor militare este efectuarea tragerilor cu armamentul din dotare. Muniția necesară pentru executarea acestor trageri este o resursă consumabilă, ceea ce determină împrospătarea permanentă a stocurilor autorității contractante. Având în vedere obiectivele propuse de către Autoritatea Contractantă, achiziția de ”cartuș calibru 7,65x17mm” va conduce la menținerea pregătirii cadrelor militare la un nive",
+        "cpv_codes": [
+          "35331500"
+        ],
+        "value": "619040",
+        "currency": "RON",
+        "counterparts": [
+          "Inspectoratul General pentru Situatii de Urgenta"
+        ],
+        "ted_url": "https://ted.europa.eu/en/notice/-/detail/475052-2025"
+      },
+      {
+        "notice_number": "355559-2025",
+        "published": "2025-06-03",
+        "notice_type": "can-standard",
+        "headline": "Romania – Ammunition for firearms and warfare – Lot 1: Cartuș 12,7x99 mm, pe bandă Lot 2: Cartuș 9x19 mm cu glonț obișnuit Lot 3: Cartuș 9x19 mm de antrenament cu vopsea (cu marcarea colorată a țintei) Lot 4: Cartuș 7,62x51 mm de manevră pe bandă Lot 5: Cartuș 7,62x51 mm sau .308 Win cu glonț special de precizie",
+        "title": "Lot 1: Cartuș 12,7x99 mm, pe bandă Lot 2: Cartuș 9x19 mm cu glonț obișnuit Lot 3: Cartuș 9x19 mm de antrenament cu vopsea (cu marcarea colorată a țintei) Lot 4: Cartuș 7,62x51 mm de manevră pe bandă Lot 5: Cartuș 7,62x51 mm sau .308 Win cu glonț special de precizie",
+        "description": "Estimarea valorii totale a achiziţiilor pentru întreaga durată a acordului-cadru (după caz; numai în cifre): Valoarea estimată fără T.V.A.: Lot 1: Cartuș 12,7x99 mm, pe bandă – 19.297.692 RON Lot 2: Cartuș 9x19 mm cu glonț obișnuit – 7.221.052,36 RON Lot 3: Cartuș 9x19 mm de antrenament cu vopsea (cu marcarea colorată a țintei) – 198.800 RON Lot 4: Cartuș 7,62x51 mm de manevră pe bandă – 3.575.000 RON Lot 5: Cartuș 7,62x51 mm sau .308 Win cu glonț special de precizie – 1.401.400 RON Frecvenţa şi valoarea contractelor care urmează să fie atribuite (dacă se cunosc): de regulă anual. Cantitatea e",
+        "cpv_codes": [
+          "35331000"
+        ],
+        "value": "13087230.12",
+        "currency": "RON",
+        "counterparts": [
+          "Ministerul Apararii - Unitatea Militara 02550 Bucuresti"
+        ],
+        "ted_url": "https://ted.europa.eu/en/notice/-/detail/355559-2025"
+      },
+      {
+        "notice_number": "282926-2025",
+        "published": "2025-05-02",
+        "notice_type": "can-standard",
+        "headline": "Romania – Firearms – Armament pentru dotarea politiștilor de penitenciare",
+        "title": "Armament pentru dotarea politiștilor de penitenciare",
+        "description": "Autoritatea contractanta organizatoare Baza de Aprovizionare, Gospodarire si Reparatii în calitate de unitate de achizitii centralizata, va incheia acordul-cadru pentru o perioada de 24 luni, cu 3 operatori economici. Cantitatile si valorile acordului cadru si a contractelor subsecvente se regasesc in Anexa C Nota de calcul la caietul de sarcini. Contractele subsecvente acordului-cadru vor fi încheiate de regulă semestrial, de către BAGR in numele unitatilor penitenciare. Criteriul de atribuire utilizat pentru atribuirea acestui contract este „oferta cea mai avantajoasă din punct de vedere eco",
+        "cpv_codes": [
+          "35320000"
+        ],
+        "value": "30607.23",
+        "currency": "RON",
+        "counterparts": [
+          "BAZA DE APROVIZIONARE, GOSPODARIRE SI REPARATII"
+        ],
+        "ted_url": "https://ted.europa.eu/en/notice/-/detail/282926-2025"
+      },
+      {
+        "notice_number": "163065-2025",
+        "published": "2025-03-13",
+        "notice_type": "can-standard",
+        "headline": "Romania – Sports goods and equipment – Furnizare echipament si materiale sportive",
+        "title": "Furnizare echipament si materiale sportive",
+        "description": "Echipament si materiale sportive pe loturi Numar zile pana la care se pot solicita clarificari inainte de data limita de depunere a ofertelor: 18 zile. Autoritatea contractanta va raspunde tuturor solicitarilor de clarificari / informatiilor suplimentare in a 11-a zi inainte de sata limita de depunere a ofertelor.",
+        "cpv_codes": [
+          "37400000",
+          "33734000",
+          "35331500",
+          "37411100",
+          "44512910",
+          "35821000"
+        ],
+        "value": "698147",
+        "currency": "RON",
+        "counterparts": [
+          "FEDERATIA ROMANA DE SCHI BIATLON"
+        ],
+        "ted_url": "https://ted.europa.eu/en/notice/-/detail/163065-2025"
+      },
+      {
+        "notice_number": "71597-2025",
+        "published": "2025-02-03",
+        "notice_type": "can-standard",
+        "headline": "Romania – Firearms – Armament pentru dotarea politiștilor de penitenciare",
+        "title": "Armament pentru dotarea politiștilor de penitenciare",
+        "description": "Autoritatea contractanta organizatoare Baza de Aprovizionare, Gospodarire si Reparatii în calitate de unitate de achizitii centralizata, va incheia acordul-cadru pentru o perioada de 24 luni, cu 3 operatori economici. Cantitatile si valorile acordului cadru si a contractelor subsecvente se regasesc in Anexa C Nota de calcul la caietul de sarcini. Contractele subsecvente acordului-cadru vor fi încheiate de regulă semestrial, de către BAGR in numele unitatilor penitenciare. Criteriul de atribuire utilizat pentru atribuirea acestui contract este „oferta cea mai avantajoasă din punct de vedere eco",
+        "cpv_codes": [
+          "35320000"
+        ],
+        "value": "",
+        "currency": "",
+        "counterparts": [
+          "BAZA DE APROVIZIONARE, GOSPODARIRE SI REPARATII"
+        ],
+        "ted_url": "https://ted.europa.eu/en/notice/-/detail/71597-2025"
+      },
+      {
+        "notice_number": "15456-2025",
+        "published": "2025-01-10",
+        "notice_type": "can-standard",
+        "headline": "Romania – Cartridges – Acord cadru: Cartușe calibru 7,65x17mm",
+        "title": "Acord cadru: Cartușe calibru 7,65x17mm",
+        "description": "IGSU ca parte componentă a Sistemului Național de Ordine Publică și Siguranță Națională necesită o pregătire continuă specializată a personalului încadrat. O activitate importantă a pregătirii cadrelor militare este efectuarea tragerilor cu armamentul din dotare. Muniția necesară pentru executarea acestor trageri este o resursă consumabilă, ceea ce determină împrospătarea permanentă a stocurilor autorității contractante. Având în vedere obiectivele propuse de către Autoritatea Contractantă, achiziția de ”cartuș calibru 7,65x17mm” va conduce la menținerea pregătirii cadrelor militare la un nive",
+        "cpv_codes": [
+          "35331500"
+        ],
+        "value": "",
+        "currency": "",
+        "counterparts": [
+          "Inspectoratul General pentru Situatii de Urgenta"
+        ],
+        "ted_url": "https://ted.europa.eu/en/notice/-/detail/15456-2025"
+      }
+    ]
+  }
+]
