@@ -52,6 +52,7 @@ user or judge. If a fact is missing, say it is missing — do not invent it.
 - [22-kyc-and-deal-due-diligence.md](22-kyc-and-deal-due-diligence.md) — **KYC on onboarding (K1–K11), monitoring, per-deal checks (D1–D14 incl. licences, transport)**
 
 ### Execution
+- Diagrams (FigJam): https://www.figma.com/board/NjisKpwdfdBz797zpUDJeQ/Untitled — A solution logic, B autonomous deal flow, C KYC on joining vs per-deal due diligence (with K1–K11 / D1–D14 tables)
 - [16-demo-plan.md](16-demo-plan.md) — what we show on stage, build priorities
 - [17-glossary.md](17-glossary.md) — acronyms and terms
 - [18-open-questions.md](18-open-questions.md) — what we could not find or still need to check
