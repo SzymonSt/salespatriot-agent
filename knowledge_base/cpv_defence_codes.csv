@@ -1,0 +1,205 @@
+code,label,parent_code,division,level,category,root_code
+24600000,Explosives,24000000,24,2,materials,24600000
+24610000,Prepared explosives,24600000,24,3,materials,24600000
+24611000,Propellant powders,24610000,24,4,materials,24600000
+24611100,Propergol fuels,24611000,24,5,materials,24600000
+24612000,Miscellaneous explosives,24610000,24,4,materials,24600000
+24612100,Dynamite,24612000,24,5,materials,24600000
+24612200,TNT,24612000,24,5,materials,24600000
+24612300,Nitro-glycerine,24612000,24,5,materials,24600000
+24613000,"Signalling flares, rain rockets, fog signals and pyrotechnic articles",24610000,24,4,materials,24600000
+24613100,Bird-scaring cartridges,24613000,24,5,materials,24600000
+24613200,Fireworks,24613000,24,5,materials,24600000
+24615000,"Fuses, caps, igniters and electric detonators",24610000,24,4,materials,24600000
+35300000,"Weapons, ammunition and associated parts",35000000,35,2,equipment,35300000
+35310000,Miscellaneous weapons,35300000,35,3,equipment,35300000
+35311000,"Swords, cutlasses, bayonets and lances",35310000,35,4,equipment,35300000
+35311100,Swords,35311000,35,5,equipment,35300000
+35311200,Cutlasses,35311000,35,5,equipment,35300000
+35311300,Bayonets,35311000,35,5,equipment,35300000
+35311400,Lances,35311000,35,5,equipment,35300000
+35312000,Gas guns,35310000,35,4,equipment,35300000
+35320000,Firearms,35300000,35,3,equipment,35300000
+35321000,Light firearms,35320000,35,4,equipment,35300000
+35321100,Hand guns,35321000,35,5,equipment,35300000
+35321200,Rifles,35321000,35,5,equipment,35300000
+35321300,Machine guns,35321000,35,5,equipment,35300000
+35322000,Artillery,35320000,35,4,equipment,35300000
+35322100,Anti-aircraft,35322000,35,5,equipment,35300000
+35322200,Self-propelled artillery,35322000,35,5,equipment,35300000
+35322300,Towed artillery,35322000,35,5,equipment,35300000
+35322400,Mortars,35322000,35,5,equipment,35300000
+35322500,Howitzer,35322000,35,5,equipment,35300000
+35330000,Ammunition,35300000,35,3,equipment,35300000
+35331000,Ammunition for firearms and warfare,35330000,35,4,equipment,35300000
+35331100,Bullets,35331000,35,5,equipment,35300000
+35331200,Shells,35331000,35,5,equipment,35300000
+35331300,Grenades,35331000,35,5,equipment,35300000
+35331400,Land mines,35331000,35,5,equipment,35300000
+35331500,Cartridges,35331000,35,5,equipment,35300000
+35332000,Ammunition for naval warfare,35330000,35,4,equipment,35300000
+35332100,Torpedoes,35332000,35,5,equipment,35300000
+35332200,Sea mines,35332000,35,5,equipment,35300000
+35333000,Ammunition for aerial warfare,35330000,35,4,equipment,35300000
+35333100,Bombs,35333000,35,5,equipment,35300000
+35333200,Rockets,35333000,35,5,equipment,35300000
+35340000,Parts of firearms and ammunition,35300000,35,3,equipment,35300000
+35341000,Parts of light firearms,35340000,35,4,equipment,35300000
+35341100,Gunmetal pipe fittings,35341000,35,5,equipment,35300000
+35342000,Parts of rocket launchers,35340000,35,4,equipment,35300000
+35343000,Parts of mortars,35340000,35,4,equipment,35300000
+35400000,Military vehicles and associated parts,35000000,35,2,equipment,35400000
+35410000,Armoured military vehicles,35400000,35,3,equipment,35400000
+35411000,Battle tanks,35410000,35,4,equipment,35400000
+35411100,Main battle tanks,35411000,35,5,equipment,35400000
+35411200,Light battle tanks,35411000,35,5,equipment,35400000
+35412000,Armoured combat vehicles,35410000,35,4,equipment,35400000
+35412100,Infantry fighting vehicles,35412000,35,5,equipment,35400000
+35412200,Armoured personnel carriers,35412000,35,5,equipment,35400000
+35412300,Armoured weapon carriers,35412000,35,5,equipment,35400000
+35412400,Reconnaissance and patrol vehicles,35412000,35,5,equipment,35400000
+35412500,Command and liaison vehicles,35412000,35,5,equipment,35400000
+35420000,Parts of military vehicles,35400000,35,3,equipment,35400000
+35421000,Mechanical spare parts for military vehicles,35420000,35,4,equipment,35400000
+35421100,Engines and engine parts for military vehicles,35421000,35,5,equipment,35400000
+35422000,Electronic and electrical spare parts for military vehicles,35420000,35,4,equipment,35400000
+35500000,Warships and associated parts,35000000,35,2,equipment,35500000
+35510000,Warships,35500000,35,3,equipment,35500000
+35511000,Surface combatant,35510000,35,4,equipment,35500000
+35511100,Aircraft carriers,35511000,35,5,equipment,35500000
+35511200,Destroyers and frigates,35511000,35,5,equipment,35500000
+35511300,Corvettes and patrol boats,35511000,35,5,equipment,35500000
+35511400,Amphibious crafts and ships,35511000,35,5,equipment,35500000
+35512000,Submarines,35510000,35,4,equipment,35500000
+35512100,Strategic submarine nuclear fuelled,35512000,35,5,equipment,35500000
+35512200,Attack submarine nuclear fuelled,35512000,35,5,equipment,35500000
+35512300,Attack submarine diesel fuelled,35512000,35,5,equipment,35500000
+35512400,Unmanned underwater vehicles,35512000,35,5,equipment,35500000
+35513000,Mine warfare and auxiliary ships,35510000,35,4,equipment,35500000
+35513100,Mine hunter/minesweeper,35513000,35,5,equipment,35500000
+35513200,Auxiliary research vessel,35513000,35,5,equipment,35500000
+35513300,Auxiliary intelligence collection vessel,35513000,35,5,equipment,35500000
+35513400,Auxiliary hospital; cargo; tanker; ro-ro vessel,35513000,35,5,equipment,35500000
+35520000,Parts for warships,35500000,35,3,equipment,35500000
+35521000,Hull and mechanical spare parts for warships,35520000,35,4,equipment,35500000
+35521100,Engines and engine parts for warships,35521000,35,5,equipment,35500000
+35522000,Electronic and electrical spare parts for warships,35520000,35,4,equipment,35500000
+35600000,"Military aircrafts, missiles and spacecrafts",35000000,35,2,equipment,35600000
+35610000,Military aircrafts,35600000,35,3,equipment,35600000
+35611100,Fighter aircrafts,35610000,35,5,equipment,35600000
+35611200,Fighter-bomber/ground attack aircrafts,35610000,35,5,equipment,35600000
+35611300,Bomber aircrafts,35610000,35,5,equipment,35600000
+35611400,Military transport aircrafts,35610000,35,5,equipment,35600000
+35611500,Training aircrafts,35610000,35,5,equipment,35600000
+35611600,Maritime patrol aircrafts,35610000,35,5,equipment,35600000
+35611700,Tanker aircrafts,35610000,35,5,equipment,35600000
+35611800,Reconnaissance aircrafts,35610000,35,5,equipment,35600000
+35612100,Combat helicopters,35610000,35,5,equipment,35600000
+35612200,Anti submarine warfare helicopters,35610000,35,5,equipment,35600000
+35612300,Support helicopters,35610000,35,5,equipment,35600000
+35612400,Military transport helicopters,35610000,35,5,equipment,35600000
+35612500,Search and rescue helicopters,35610000,35,5,equipment,35600000
+35613000,Unmanned aerial vehicles,35610000,35,4,equipment,35600000
+35613100,Unmanned combat aerial vehicles,35613000,35,5,equipment,35600000
+35620000,Missiles,35600000,35,3,equipment,35600000
+35621000,Strategic missiles,35620000,35,4,equipment,35600000
+35621100,Strategic anti-ballistic missiles,35621000,35,5,equipment,35600000
+35621200,Inter continental ballistic missiles,35621000,35,5,equipment,35600000
+35621300,Submarine launched ballistic missiles,35621000,35,5,equipment,35600000
+35621400,Intermediate range ballistic missiles,35621000,35,5,equipment,35600000
+35622000,Tactical missiles,35620000,35,4,equipment,35600000
+35622100,Air-to-air missiles,35622000,35,5,equipment,35600000
+35622200,Air-to-ground missiles,35622000,35,5,equipment,35600000
+35622300,Anti-ship missiles,35622000,35,5,equipment,35600000
+35622400,Anti-submarines rockets,35622000,35,5,equipment,35600000
+35622500,Tactical anti-ballistic missiles,35622000,35,5,equipment,35600000
+35622600,Anti-tank guided missiles,35622000,35,5,equipment,35600000
+35622700,Surface-to-air missiles,35622000,35,5,equipment,35600000
+35623000,Cruise missiles,35620000,35,4,equipment,35600000
+35623100,Air/ground/sea launched cruise missiles,35623000,35,5,equipment,35600000
+35630000,Military spacecrafts,35600000,35,3,equipment,35600000
+35631000,Military satellites,35630000,35,4,equipment,35600000
+35631100,Communication satellites,35631000,35,5,equipment,35600000
+35631200,Observation satellites,35631000,35,5,equipment,35600000
+35631300,Navigation satellites,35631000,35,5,equipment,35600000
+35640000,Parts for military aerospace equipment,35600000,35,3,equipment,35600000
+35641000,Structure and mechanical spare parts for military aerospace equipment,35640000,35,4,equipment,35600000
+35641100,Engines and engine parts for military aerospace equipment,35641000,35,5,equipment,35600000
+35642000,Electronic and electrical spare parts for military aerospace equipment,35640000,35,4,equipment,35600000
+35700000,Military electronic systems,35000000,35,2,equipment,35700000
+35710000,"Command, control, communication and computer systems",35700000,35,3,equipment,35700000
+35711000,"Command, control, communication systems",35710000,35,4,equipment,35700000
+35712000,"Tactical command, control and communication systems",35710000,35,4,equipment,35700000
+35720000,"Intelligence, surveillance, target acquisition and reconnaissance",35700000,35,3,equipment,35700000
+35721000,Electronic intelligence system,35720000,35,4,equipment,35700000
+35722000,Radar,35720000,35,4,equipment,35700000
+35723000,Air defence radar,35720000,35,4,equipment,35700000
+35730000,Electronic warfare systems and counter measures,35700000,35,3,equipment,35700000
+35740000,Battle simulators,35700000,35,3,equipment,35700000
+35800000,Individual and support equipment,35000000,35,2,equipment,35800000
+35810000,Individual equipment,35800000,35,3,equipment,35800000
+35811100,Fire-brigade uniforms,35810000,35,5,equipment,35800000
+35811200,Police uniforms,35810000,35,5,equipment,35800000
+35811300,Military uniforms,35810000,35,5,equipment,35800000
+35812000,Combat uniforms,35810000,35,4,equipment,35800000
+35812100,Camouflage jackets,35812000,35,5,equipment,35800000
+35812200,Combat suits,35812000,35,5,equipment,35800000
+35812300,Combat gear,35812000,35,5,equipment,35800000
+35813000,Military helmets,35810000,35,4,equipment,35800000
+35813100,Helmet covers,35813000,35,5,equipment,35800000
+35814000,Gas masks,35810000,35,4,equipment,35800000
+35815000,Garments for anti-ballistic protection,35810000,35,4,equipment,35800000
+35815100,Bullet-proof vests,35815000,35,5,equipment,35800000
+35820000,Support equipment,35800000,35,3,equipment,35800000
+35821000,Flags,35820000,35,4,equipment,35800000
+35821100,Flagpole,35821000,35,5,equipment,35800000
+39522200,Camouflage covers,39522000,39,5,materials,39522200
+44430000,Armour plating,44400000,44,3,materials,44430000
+44431000,Cover plates,44430000,44,4,materials,44430000
+45111310,Dismantling works for military installations,45111300,45,6,works,45111310
+45216200,Construction work for military buildings and installations,45216000,45,5,works,45216200
+45216220,Military bunker construction work,45216200,45,6,works,45216200
+45216230,Military shelter construction work,45216200,45,6,works,45216200
+45216250,Trench defences construction work,45216200,45,6,works,45216200
+45222200,Engineering work for military installations,45222000,45,5,works,45222200
+50600000,Repair and maintenance services of security and defence materials,50000000,50,2,services,50600000
+50610000,Repair and maintenance services of security equipment,50600000,50,3,services,50600000
+50620000,Repair and maintenance services of firearms and ammunition,50600000,50,3,services,50600000
+50630000,Repair and maintenance services of military vehicles,50600000,50,3,services,50600000
+50640000,Repair and maintenance services of warships,50600000,50,3,services,50600000
+50650000,"Repair and maintenance services of military aircrafts, missiles and spacecrafts",50600000,50,3,services,50600000
+50660000,Repair and maintenance services of military electronic systems,50600000,50,3,services,50600000
+50840000,Repair and maintenance services of weapons and weapon systems,50800000,50,3,services,50840000
+50841000,Repair and maintenance services of weapons,50840000,50,4,services,50840000
+50842000,Repair and maintenance services of weapon systems,50840000,50,4,services,50840000
+51550000,Installation services of weapon systems,51500000,51,3,services,51550000
+72231000,Development of software for military applications,72230000,72,4,services,72231000
+73400000,Research and Development services on security and defence materials,73000000,73,2,services,73400000
+73410000,Military research and technology,73400000,73,3,services,73400000
+73420000,Pre-feasibility study and technological demonstration,73400000,73,3,services,73400000
+73421000,Development of security equipment,73420000,73,4,services,73400000
+73422000,Development of firearms and ammunition,73420000,73,4,services,73400000
+73423000,Development of military vehicles,73420000,73,4,services,73400000
+73424000,Development of warships,73420000,73,4,services,73400000
+73425000,"Development of military aircrafts, missiles and spacecrafts",73420000,73,4,services,73400000
+73426000,Development of military electronic systems,73420000,73,4,services,73400000
+73430000,Test and evaluation,73400000,73,3,services,73400000
+73431000,Test and evaluation of security equipment,73430000,73,4,services,73400000
+73432000,Test and evaluation of firearms and ammunition,73430000,73,4,services,73400000
+73433000,Test and evaluation of military vehicles,73430000,73,4,services,73400000
+73434000,Test and evaluation of warships,73430000,73,4,services,73400000
+73435000,"Test and evaluation of military aircrafts, missiles and spacecrafts",73430000,73,4,services,73400000
+73436000,Test and evaluation of military electronic systems,73430000,73,4,services,73400000
+75211300,Foreign military-aid-related services,75211000,75,5,services,75211300
+75220000,Defence services,75200000,75,3,services,75220000
+75221000,Military defence services,75220000,75,4,services,75220000
+75222000,Civil defence services,75220000,75,4,services,75220000
+80600000,Training services in defence and security materials,80000000,80,2,services,80600000
+80610000,Training and simulation in security equipment,80600000,80,3,services,80600000
+80620000,Training and simulation in firearms and ammunition,80600000,80,3,services,80600000
+80630000,Training and simulation in military vehicles,80600000,80,3,services,80600000
+80640000,Training and simulation in warships,80600000,80,3,services,80600000
+80650000,"Training and simulation in aircrafts, missiles and spacecrafts",80600000,80,3,services,80600000
+80660000,Training and simulation in military electronic systems,80600000,80,3,services,80600000
+90523100,Weapons and ammunition disposal services,90523000,90,5,services,90523100
+90523200,Bomb-disposal services,90523000,90,5,services,90523200
