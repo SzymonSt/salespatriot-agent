@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SalesPatriot A2A demo</title>
+    <style>
+      :root { color-scheme: light; font-family: system-ui, sans-serif; }
+      body { max-width: 900px; margin: 3rem auto; padding: 0 1.25rem; color: #17212b; }
+      h1 { margin-bottom: .4rem; }
+      .note { color: #526170; line-height: 1.5; }
+      button { margin: 1rem 0; padding: .7rem 1rem; border: 0; border-radius: .4rem; background: #126b51; color: white; font: inherit; cursor: pointer; }
+      button:disabled { opacity: .6; cursor: wait; }
+      pre { min-height: 12rem; overflow: auto; padding: 1rem; border-radius: .5rem; background: #101820; color: #e7f0f7; line-height: 1.45; white-space: pre-wrap; }
+      .warning { padding: .8rem 1rem; border-left: 4px solid #d59b22; background: #fff8e8; }
+    </style>
+  </head>
+  <body>
+    <h1>SalesPatriot A2A flow demo</h1>
+    <p class="note">Run a synthetic, non-controlled procurement flow through the ADK supplier and buyer agents. The demo also shows a simulated peer-buyer reference and deterministic quote comparison.</p>
+    <p class="warning">This makes three Gemini API calls and may incur usage charges. It uses synthetic data only: no real buyer or supplier is contacted, no offer is made, and nothing is saved to Supabase.</p>
+    <button id="run-demo">Run demo</button>
+    <p id="status" role="status" aria-live="polite"></p>
+    <pre id="result">The run timeline and agent messages will appear here.</pre>
+    <script>
+      const button = document.getElementById("run-demo");
+      const status = document.getElementById("status");
+      const output = document.getElementById("result");
+
+      button.addEventListener("click", async () => {
+        button.disabled = true;
+        status.textContent = "Running the ADK agents...";
+        output.textContent = "";
+        try {
+          const response = await fetch("/api/demo/run", { method: "POST" });
+          const result = await response.json();
+          if (!response.ok) {
+            throw new Error(result.detail || `Request failed (${response.status})`);
+          }
+          status.textContent = `Completed run ${result.run_id}`;
+          output.textContent = JSON.stringify(result, null, 2);
+        } catch (error) {
+          status.textContent = "Demo failed";
+          output.textContent = error.message;
+        } finally {
+          button.disabled = false;
+        }
+      });
+    </script>
+  </body>
+</html>
